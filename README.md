@@ -7,13 +7,22 @@ Si tiene problemas para levantar el ambiente pruebe instalar el npm install con 
 
 # Organización de equipos
 
-## Equipo 2
+## * Equipo 2
 > ### Integrantes:
 > Araujo Meza Francisco Javier
 > Pulido Osuna Angelica Maria
 > Ríos Gastelúm Cristo Eduardo
 > #### Trabajo:
 > Tiendas/Sucursales/Menú
-> ##### Día de revisión:
+> #### Día de revisión:
 > Viernes
 
+## * Equipo 4
+> ### Integrantes:
+> Robles Balderrama Mauricio Moisés 
+> Silverio Acosta Daniel Francisco
+> Zayas Olguín Jesús Daniel
+> #### Trabajo:
+> Reportes ventas/almacén/gastos fijos
+> #### Día de revisión:
+> Miercoles
