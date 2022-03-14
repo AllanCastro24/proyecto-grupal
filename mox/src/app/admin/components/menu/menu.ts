@@ -20,6 +20,8 @@ export const menuItems = [
     new Menu (100, 'ADMIN_NAV.FOLLOWERS', '/admin/followers', null, 'follow_the_signs', null, false, 0), 
     new Menu (110, 'ADMIN_NAV.SUPPORT', '/admin/support', null, 'support', null, false, 0), 
     new Menu (120, 'ADMIN_NAV.REVIEWS', '/admin/reviews', null, 'insert_comment', null, false, 0), 
+    new Menu (121, 'Gastos fijos', '/admin/fixed-costs', null, 'monetization_on', null, false, 0),
+    new Menu (122, 'Tipos de gastos fijos', '/admin/types-fixed-costs', null, 'monetization_on', null, false, 0),
     new Menu (140, 'Level 1', null, null, 'more_horiz', null, true, 0),
     new Menu (141, 'Level 2', null, null, 'folder_open', null, true, 140),
     new Menu (142, 'Level 3', null, null, 'folder_open', null, true, 141),
