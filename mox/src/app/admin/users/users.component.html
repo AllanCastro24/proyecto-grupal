@@ -31,7 +31,7 @@
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="!user.settings.isDeleted" class="user-name">{{user.profile.name}} {{user.profile.surname}}</h3> 
-                <h3 *ngIf="user.settings.isDeleted" class="user-name">User blocked</h3>
+                <h3 *ngIf="user.settings.isDeleted" class="user-name">Usuario bloqueado</h3>
                 <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
                     <mat-icon>more_vert</mat-icon>
                 </button>
@@ -40,11 +40,11 @@
                 <span (mouseleave)="menuTrigger.closeMenu()">
                     <button mat-menu-item (click)="openUserDialog(user)">
                         <mat-icon>mode_edit</mat-icon>
-                        <span>Edit</span>
+                        <span>Editar</span>
                     </button>
                     <button mat-menu-item (click)="deleteUser(user);">
                         <mat-icon>delete</mat-icon>
-                        <span>Delete</span>
+                        <span>Eliminar</span>
                     </button>
                 </span>
             </mat-menu>
@@ -91,7 +91,7 @@
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="!user.settings.isDeleted" class="user-name">{{user.profile.name}} {{user.profile.surname}}</h3> 
-                <h3 *ngIf="user.settings.isDeleted" class="user-name">User blocked</h3>
+                <h3 *ngIf="user.settings.isDeleted" class="user-name">Usuario bloqueado</h3>
                 <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
                     <mat-icon>more_vert</mat-icon>
                 </button>
@@ -100,11 +100,11 @@
                 <span (mouseleave)="menuTrigger.closeMenu()">
                     <button mat-menu-item (click)="openUserDialog(user);">
                         <mat-icon>mode_edit</mat-icon>
-                        <span>Edit</span>
+                        <span>Editar</span>
                     </button>
                     <button mat-menu-item (click)="deleteUser(user);">
                         <mat-icon>delete</mat-icon>
-                        <span>Delete</span>
+                        <span>Eliminar</span>
                     </button>
                 </span>
             </mat-menu>
