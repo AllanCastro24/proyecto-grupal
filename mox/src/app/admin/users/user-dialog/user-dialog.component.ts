@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { User, UserProfile, UserWork, UserContacts, UserSocial, UserSettings } from '../user.model';
+import { User, UserProfile, UserWork, UserContacts, UserSettings } from '../user.model';
 
 @Component({
   selector: 'app-user-dialog',
@@ -21,7 +21,6 @@ export class UserDialogComponent implements OnInit {
       profile: this.fb.group({
         name: null,
         surname: null,  
-        birthday: null,
         gender: null,
         image: null
       }),
@@ -34,11 +33,6 @@ export class UserDialogComponent implements OnInit {
         email: null,
         phone: null,
         address: null          
-      }),
-      social: this.fb.group({
-        facebook: null,
-        twitter: null,
-        google: null
       }),
       settings: this.fb.group({
         isActive: null,
@@ -58,7 +52,6 @@ export class UserDialogComponent implements OnInit {
       this.user.profile = new UserProfile();
       this.user.work = new UserWork();
       this.user.contacts = new UserContacts();
-      this.user.social = new UserSocial();
       this.user.settings = new UserSettings();
     } 
   }
