@@ -5,10 +5,10 @@
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Buscar por</mat-label>
                 <mat-select formControlName="time" required>
-                    <mat-option *ngFor="let hour of hours" [value]="hour">{{hour}}</mat-option>
-                    <mat-option [value]="Mensual">Mensual</mat-option>
-                    <mat-option [value]="Anual">Anual</mat-option>
-                    <mat-option [value]="Rango">Rango</mat-option>                                        
+                    <!-- <mat-option *ngFor="let hour of hours" [value]="hour">{{hour}}</mat-option> -->
+                    <mat-option value="Mensual">Mensual</mat-option>
+                    <mat-option value="Anual">Anual</mat-option>
+                    <mat-option value="Rango">Rango</mat-option>                                        
                 </mat-select>
                 <mat-icon matSuffix class="text-muted">schedule</mat-icon>
                 <mat-error *ngIf="form.controls.time.errors?.required">Seleccione una opcion</mat-error>
@@ -17,7 +17,7 @@
         <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3" ngClass.sm="mt-1" ngClass.xs="mt-1">
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Fecha</mat-label>
-                <input matInput placeholder="Pick a date" formControlName="date" required [matDatepicker]="datePicker"
+                <input matInput placeholder="Pick a date" formControlName="date1" required [matDatepicker]="datePicker"
                     appMaskDate>
                 <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                 <mat-datepicker #datePicker></mat-datepicker>
@@ -27,7 +27,7 @@
         <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3" ngClass.sm="mt-1" ngClass.xs="mt-1">
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Fecha</mat-label>
-                <input matInput placeholder="Pick a date" formControlName="date" required [matDatepicker]="datePicker"
+                <input matInput placeholder="Pick a date" formControlName="date2" required [matDatepicker]="datePicker"
                     appMaskDate>
                 <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                 <mat-datepicker #datePicker></mat-datepicker>
