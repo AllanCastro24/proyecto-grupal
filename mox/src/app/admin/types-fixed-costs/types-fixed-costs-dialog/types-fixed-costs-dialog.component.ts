@@ -17,7 +17,7 @@ export class TypesFixedCostsDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      id_tipo_gasto: 0, 
+      id_tipo: 0, 
       nombre: ['', Validators.required],            
       status: ['', Validators.required],      
      

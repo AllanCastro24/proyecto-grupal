@@ -1,6 +1,6 @@
 <div class="header bg-primary">
     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-        <h2 class="fw-500 secondary-font">{{(data?.customer) ? 'Editar' : 'Agregar'}} Gasto fijo</h2>
+        <h2 class="fw-700 secondary-font">{{(data?.customer) ? 'Editar' : 'Agregar'}} Gasto fijo</h2>
         <app-dialog-header-controls [dialogRef]="dialogRef"></app-dialog-header-controls> 
     </div>   
 </div>  
@@ -11,6 +11,18 @@
                 <div fxLayout="row wrap" class="mt-2">
                     <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
                         <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Tipo de gasto</mat-label>
+                            <mat-select formControlName="tipo_gasto">
+                                <mat-option [value]="">-</mat-option>
+                                <mat-option *ngFor="let store of data.stores" [value]="store.id">
+                                    <span>{{store.name}}</span>
+                                </mat-option>
+                            </mat-select> 
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                        <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Descripcion</mat-label>
                             <input matInput placeholder="Descripcion" formControlName="descripcion" required>
                             <mat-error *ngIf="form.controls.descripcion.errors?.required">Descripcion es obligatorio</mat-error>   
@@ -19,21 +31,44 @@
                    
                     <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Tipo de gasto</mat-label>
-                            <mat-select formControlName="tipoGasto">
-                                <mat-option [value]="">-</mat-option>
-                                <mat-option *ngFor="let store of data.stores" [value]="store.id">
-                                    <span>{{store.name}}</span>
-                                </mat-option>
-                            </mat-select> 
-                        </mat-form-field>
-                    </div>
-                    <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
-                        <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Cantidad ($)</mat-label>
                             <input matInput formControlName="cantidad">
                         </mat-form-field>
                     </div>
+
+                    <div fxFlex="100" fxFlex.gt-md="25" class="px-3"> 
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Fecha</mat-label>
+                            <input matInput [matDatepicker]="fecha" formControlName="fecha">
+                            <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+                            <mat-datepicker #fecha></mat-datepicker>
+                        </mat-form-field>
+                    </div> 
+
+                    <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Sucursal</mat-label>
+                            <mat-select formControlName="id_sucursal">
+                                <mat-option [value]="">-</mat-option>
+                                <mat-option [value]="1">
+                                    <span>Centro</span>
+                                </mat-option>
+                                <mat-option [value]="0">
+                                    <span>Sur</span>
+                                </mat-option>
+                            </mat-select> 
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-md="25" class="px-3"> 
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Periodicidad</mat-label>
+                            <input matInput [matDatepicker]="periodicidad" formControlName="periodicidad">
+                            <mat-datepicker-toggle matSuffix [for]="periodicidad"></mat-datepicker-toggle>
+                            <mat-datepicker #periodicidad></mat-datepicker>
+                        </mat-form-field>
+                    </div> 
+
                     <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Status</mat-label>
