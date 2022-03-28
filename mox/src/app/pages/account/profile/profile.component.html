@@ -25,11 +25,11 @@
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>Telefono</mat-label>
             <input matInput placeholder="Telefono" formControlName="phone" required onlyNumber>
-            <mat-error *ngIf="infoForm.controls.phone.errors?.required">Phone is required</mat-error>
+            <mat-error *ngIf="infoForm.controls.phone.errors?.required">Se requiere un numero de telefono</mat-error>
         </mat-form-field>  
         <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Organization</mat-label>
-            <input matInput placeholder="organization" formControlName="organization"> 
+            <mat-label>Organización</mat-label>
+            <input matInput placeholder="Organización" formControlName="organization"> 
         </mat-form-field>
     </div> 
     <div fxFlex="100" class="text-center mt-2">
