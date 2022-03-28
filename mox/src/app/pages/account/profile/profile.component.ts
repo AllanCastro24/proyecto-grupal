@@ -18,12 +18,7 @@ export class ProfileComponent implements OnInit {
       email: ['', Validators.compose([Validators.required, emailValidator])],
       phone: ['', Validators.required],
       image: null,      
-      organization: null,
-      facebook: null,
-      twitter: null,
-      linkedin: null,
-      instagram: null,
-      website: null
+      organization: null
     }); 
   }
 
@@ -40,6 +35,5 @@ export class ProfileComponent implements OnInit {
     else{
       this.infoForm.controls.image.patchValue(null); 
     }
-  } 
-
+  }
 }
