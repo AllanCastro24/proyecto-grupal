@@ -64,14 +64,14 @@ export class TypesFixedCostsComponent implements OnInit {
         const index: number = this.dataSource.data.findIndex(x => x.id == cus.id);
         if (index !== -1) {
           this.dataSource.data[index] = cus;
-          message = 'Tipo de gasto ' + cus.firstName + ' ' + cus.lastName + ' modificado exitosamente';
+          message = 'Tipo de gasto ' + cus.nombre  + ' modificado exitosamente';
         }
         else {
           let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
           cus.id = last_customer.id + 1;
           this.dataSource.data.push(cus);
           this.paginator.lastPage();
-          message = 'Nuevo tipo de gasto ' + cus.firstName + ' ' + cus.lastName + ' agregado exitosamente';
+          message = 'Nuevo tipo de gasto ' + cus.nombre + ' agregado exitosamente';
         }
         this.initDataSource(this.dataSource.data);
         this.snackBar.open(message, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });

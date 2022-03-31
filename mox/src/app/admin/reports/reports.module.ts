@@ -8,7 +8,7 @@ import {ReportsStockComponent} from './reports-stock/reports-stock.component';
 
 export const routes = [ 
   { path: '', redirectTo: 'reports-sale', pathMatch: 'full'},
-  { path: 'reports-sale', component: ReportsSalesComponent, data: { breadcrumb: 'Reports-sale' } },
+  { path: 'reports-sales', component: ReportsSalesComponent, data: { breadcrumb: 'Reports-sales' } },
   { path: 'reports-stock', component: ReportsStockComponent, data: { breadcrumb: 'Reports-stock' } } 
 ];
 
