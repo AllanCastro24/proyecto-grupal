@@ -25,9 +25,10 @@ export class FixedCostsService {
 
   }
 
-  BorrarGastoFijo(id:any):Observable<any>{
-    return this.clientHttp.get(this.API+"?borrarGastoFijo="+id);
+  BajaGastoFijo(id:any):Observable<any>{
+    return this.clientHttp.get(this.API+"?bajaGastoFijo="+id);
 
   }
+  
 
 }

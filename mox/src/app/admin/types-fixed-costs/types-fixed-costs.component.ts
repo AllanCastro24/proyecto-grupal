@@ -29,6 +29,10 @@ export class TypesFixedCostsComponent implements OnInit {
   ngOnInit(): void {
     this.countries = this.appService.getCountries();
     this.initDataSource(customers);
+    this.appService.ObtenerGastosFijos().subscribe(respuesta => {
+      this.initDataSource(respuesta);
+      // this.Equipos = respuesta;
+    });
   }
 
   public initDataSource(data: any) {
@@ -48,6 +52,13 @@ export class TypesFixedCostsComponent implements OnInit {
           this.initDataSource(this.dataSource.data);
         }
       });
+      this.appService.BajaGastoFijo(this.dataSource.data).subscribe(respuesta => {
+        // this.ruteador.navigateByUrl('/listar-torneo');
+        this.dataSource.data.splice(index, 1);
+        this.initDataSource(this.dataSource.data);
+
+
+      });
     }
   }
 
@@ -64,9 +75,24 @@ export class TypesFixedCostsComponent implements OnInit {
         const index: number = this.dataSource.data.findIndex(x => x.id == cus.id);
         if (index !== -1) {
           this.dataSource.data[index] = cus;
-          message = 'Tipo de gasto ' + cus.nombre  + ' modificado exitosamente';
+          message = 'Tipo de gasto ' + cus.nombre + ' modificado exitosamente';
+          // this.appService.EditarGastoFijo(cus.id,this.dataSource.data).subscribe(respuesta => {
+          //   // this.ruteador.navigateByUrl('/listar-torneo');
+          //   console.log(respuesta);
+          //   alert("Torneo agregado con exito ");
+          // message = 'Tipo de gasto ' + cus.nombre + ' modificado exitosamente';
+
+          // });
         }
         else {
+          // this.appService.InsertarGastoFijo(this.dataSource.data).subscribe(respuesta => {
+          //   // this.ruteador.navigateByUrl('/listar-torneo');
+          //   console.log(respuesta);
+          //   alert("Torneo agregado con exito ");
+          //   message = 'Nuevo gasto ' + cus.descripcion + ' ' + cus.cantidad + ' agregado exitosamente';
+          // message = 'Nuevo tipo de gasto ' + cus.nombre + ' agregado exitosamente';
+
+          // });
           let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
           cus.id = last_customer.id + 1;
           this.dataSource.data.push(cus);

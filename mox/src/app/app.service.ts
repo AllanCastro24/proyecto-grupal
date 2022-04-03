@@ -37,7 +37,8 @@ export class AppService {
   )  
   
   public url = environment.url + '/assets/data/'; 
-  
+  API:string='http://localhost/planb/';
+
   constructor(public http:HttpClient, 
               private datePipe:DatePipe,
               private bottomSheet: MatBottomSheet, 
@@ -742,6 +743,44 @@ export class AppService {
           }
         )
       )
-  } 
+  }
+  
+  ObtenerGastosFijos(){
+    return this.http.get(this.API);
+  }
+
+  InsertarGastoFijo(datosGasto:any):Observable<any>{
+    return this.http.post(this.API+"gastoFijo=1",datosGasto);
+
+  }
+
+  EditarGastoFijo(id:any,datosGasto:any):Observable<any>{
+    return this.http.post(this.API+"?modificarGasto="+id,datosGasto);
+
+  }
+
+  BajaGastoFijo(id:any):Observable<any>{
+    return this.http.get(this.API+"?bajaGastoFijo="+id);
+
+  }
+
+  ObtenerTiposGastosFijos(){
+    return this.http.get(this.API);
+  }
+
+  InsertarTipoGastoFijo(datosGasto:any):Observable<any>{
+    return this.http.post(this.API+"gastoFijo=1",datosGasto);
+
+  }
+
+  EditarTipoGastoFijo(id:any,datosGasto:any):Observable<any>{
+    return this.http.post(this.API+"?modificarGasto="+id,datosGasto);
+
+  }
+
+  BajaTipoGastoFijo(id:any):Observable<any>{
+    return this.http.get(this.API+"?bajaGastoFijo="+id);
+
+  }
 
 }

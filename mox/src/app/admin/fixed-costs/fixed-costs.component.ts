@@ -28,6 +28,10 @@ export class FixedCostsComponent implements OnInit {
   ngOnInit(): void {
     this.countries = this.appService.getCountries();
     this.initDataSource(customers);
+    this.appService.ObtenerGastosFijos().subscribe(respuesta => {      
+      this.initDataSource(respuesta);
+      // this.Equipos = respuesta;
+    });
   }
 
   public initDataSource(data: any) {
@@ -47,6 +51,13 @@ export class FixedCostsComponent implements OnInit {
           this.initDataSource(this.dataSource.data);
         }
       });
+      this.appService.BajaGastoFijo(this.dataSource.data).subscribe(respuesta => {
+        // this.ruteador.navigateByUrl('/listar-torneo');
+        this.dataSource.data.splice(index, 1);
+        this.initDataSource(this.dataSource.data);
+
+
+      });
     }
   }
 
@@ -64,8 +75,22 @@ export class FixedCostsComponent implements OnInit {
         if (index !== -1) {
           this.dataSource.data[index] = cus;
           message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
+          // this.appService.EditarGastoFijo(cus.id,this.dataSource.data).subscribe(respuesta => {
+          //   // this.ruteador.navigateByUrl('/listar-torneo');
+          //   console.log(respuesta);
+          //   alert("Torneo agregado con exito ");
+          //   message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
+
+          // });
         }
         else {
+          // this.appService.InsertarGastoFijo(this.dataSource.data).subscribe(respuesta => {
+          //   // this.ruteador.navigateByUrl('/listar-torneo');
+          //   console.log(respuesta);
+          //   alert("Torneo agregado con exito ");
+          //   message = 'Nuevo gasto ' + cus.descripcion + ' ' + cus.cantidad + ' agregado exitosamente';
+
+          // });
           let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
           cus.id = last_customer.id + 1;
           this.dataSource.data.push(cus);
