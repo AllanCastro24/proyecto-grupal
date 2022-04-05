@@ -88,8 +88,7 @@ export class TypesFixedCostsComponent implements OnInit {
           // this.appService.InsertarGastoFijo(this.dataSource.data).subscribe(respuesta => {
           //   // this.ruteador.navigateByUrl('/listar-torneo');
           //   console.log(respuesta);
-          //   alert("Torneo agregado con exito ");
-          //   message = 'Nuevo gasto ' + cus.descripcion + ' ' + cus.cantidad + ' agregado exitosamente';
+          //   alert("Torneo agregado con exito ");          
           // message = 'Nuevo tipo de gasto ' + cus.nombre + ' agregado exitosamente';
 
           // });
