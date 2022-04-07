@@ -27,9 +27,10 @@ export class FixedCostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.countries = this.appService.getCountries();
-    this.initDataSource(customers);
+    // this.initDataSource(customers);
     this.appService.ObtenerGastosFijos().subscribe(respuesta => {      
       this.initDataSource(respuesta);
+      console.log(respuesta);
       // this.Equipos = respuesta;
     });
   }
@@ -51,7 +52,7 @@ export class FixedCostsComponent implements OnInit {
           this.initDataSource(this.dataSource.data);
         }
       });
-      this.appService.BajaGastoFijo(this.dataSource.data).subscribe(respuesta => {
+      this.appService.BajaGastoFijo(customer.id_gasto,this.dataSource.data).subscribe(respuesta => {
         // this.ruteador.navigateByUrl('/listar-torneo');
         this.dataSource.data.splice(index, 1);
         this.initDataSource(this.dataSource.data);
@@ -73,29 +74,28 @@ export class FixedCostsComponent implements OnInit {
         let message = '';
         const index: number = this.dataSource.data.findIndex(x => x.id == cus.id);
         if (index !== -1) {
-          this.dataSource.data[index] = cus;
-          message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
-          // this.appService.EditarGastoFijo(cus.id,this.dataSource.data).subscribe(respuesta => {
-          //   // this.ruteador.navigateByUrl('/listar-torneo');
-          //   console.log(respuesta);
-          //   alert("Torneo agregado con exito ");
-          //   message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
+          // this.dataSource.data[index] = cus;
+          // message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
+          console.log("Id a editar: "+ cus.id_gasto);
+          this.appService.EditarGastoFijo(cus.id_gasto,this.dataSource.data).subscribe(respuesta => {
+            // this.ruteador.navigateByUrl('/listar-torneo');
+            console.log(respuesta);
+            message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
 
-          // });
+          });
         }
         else {
-          // this.appService.InsertarGastoFijo(this.dataSource.data).subscribe(respuesta => {
-          //   // this.ruteador.navigateByUrl('/listar-torneo');
-          //   console.log(respuesta);
-          //   alert("Torneo agregado con exito ");
-          //   message = 'Nuevo gasto ' + cus.descripcion + ' ' + cus.cantidad + ' agregado exitosamente';
+          console.log("Datos " + this.dataSource.data);
+          this.appService.InsertarGastoFijo(this.dataSource.data).subscribe(respuesta => {            
+            console.log(respuesta);                      
+            message = 'Nuevo gasto ' + cus.descripcion + ' ' + cus.cantidad + ' agregado exitosamente';
 
-          // });
-          let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
-          cus.id = last_customer.id + 1;
-          this.dataSource.data.push(cus);
-          this.paginator.lastPage();
-          message = 'Nuevo gasto ' + cus.descripcion + ' ' + cus.cantidad + ' agregado exitosamente';
+          });
+          // let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
+          // cus.id = last_customer.id + 1;
+          // this.dataSource.data.push(cus);
+          // this.paginator.lastPage();
+          // message = 'Nuevo gasto ' + cus.descripcion + ' ' + cus.cantidad + ' agregado exitosamente';
         }
         this.initDataSource(this.dataSource.data);
         this.snackBar.open(message, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });

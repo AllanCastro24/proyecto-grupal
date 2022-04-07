@@ -52,7 +52,7 @@ export class TypesFixedCostsComponent implements OnInit {
           this.initDataSource(this.dataSource.data);
         }
       });
-      this.appService.BajaGastoFijo(this.dataSource.data).subscribe(respuesta => {
+      this.appService.BajaGastoFijo(customer.id_tipo,this.dataSource.data).subscribe(respuesta => {
         // this.ruteador.navigateByUrl('/listar-torneo');
         this.dataSource.data.splice(index, 1);
         this.initDataSource(this.dataSource.data);
