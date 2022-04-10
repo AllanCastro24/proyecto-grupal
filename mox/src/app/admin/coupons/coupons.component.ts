@@ -82,6 +82,7 @@ export class CouponsComponent implements OnInit {
         let message = '';      
         const index: number = this.dataSource.data.findIndex(x => x.id == coup.id); 
         if(index !== -1){
+          console.log(coup);
           this.dataSource.data[index] = coup;
           message = 'Coupon '+coup.title+' updated successfully';
         } 

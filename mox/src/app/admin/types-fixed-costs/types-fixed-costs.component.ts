@@ -27,10 +27,11 @@ export class TypesFixedCostsComponent implements OnInit {
   constructor(public appService: AppService, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.countries = this.appService.getCountries();
-    this.initDataSource(customers);
-    this.appService.ObtenerGastosFijos().subscribe(respuesta => {
+    // this.countries = this.appService.getCountries();
+    // this.initDataSource(customers);
+    this.appService.ObtenerTiposGastosFijos().subscribe(respuesta => {
       this.initDataSource(respuesta);
+      console.log(respuesta);
       // this.Equipos = respuesta;
     });
   }
@@ -48,17 +49,18 @@ export class TypesFixedCostsComponent implements OnInit {
       let dialogRef = this.appService.openConfirmDialog('', message!);
       dialogRef.afterClosed().subscribe(dialogResult => {
         if (dialogResult) {
-          this.dataSource.data.splice(index, 1);
-          this.initDataSource(this.dataSource.data);
+          // this.dataSource.data.splice(index, 1);
+          // this.initDataSource(this.dataSource.data);
+          this.appService.BajaTipoGastoFijo(customer, this.dataSource.data).subscribe(respuesta => {
+            // this.ruteador.navigateByUrl('/listar-torneo');
+            this.dataSource.data.splice(index, 1);
+            this.initDataSource(this.dataSource.data);
+
+
+          });
         }
       });
-      this.appService.BajaGastoFijo(customer.id_tipo,this.dataSource.data).subscribe(respuesta => {
-        // this.ruteador.navigateByUrl('/listar-torneo');
-        this.dataSource.data.splice(index, 1);
-        this.initDataSource(this.dataSource.data);
 
-
-      });
     }
   }
 
@@ -73,18 +75,25 @@ export class TypesFixedCostsComponent implements OnInit {
       if (cus) {
         let message = '';
         const index: number = this.dataSource.data.findIndex(x => x.id == cus.id);
-        if (index !== -1) {
-          this.dataSource.data[index] = cus;
-          message = 'Tipo de gasto ' + cus.nombre + ' modificado exitosamente';
-          // this.appService.EditarGastoFijo(cus.id,this.dataSource.data).subscribe(respuesta => {
-          //   // this.ruteador.navigateByUrl('/listar-torneo');
-          //   console.log(respuesta);
-          //   alert("Torneo agregado con exito ");
+        if (cus.id_tipo !== 0) {
+          // this.dataSource.data[index] = cus;
           // message = 'Tipo de gasto ' + cus.nombre + ' modificado exitosamente';
+          console.log("Modificacion " + cus);
+          this.appService.EditarTipoGastoFijo(cus.id_tipo, cus).subscribe(respuesta => {
+            // this.ruteador.navigateByUrl('/listar-torneo');
+            console.log(respuesta);
+          });
+          message = 'Tipo de gasto ' + cus.nombre + ' modificado exitosamente';
 
-          // });
         }
         else {
+          console.log("Datos a registrar " + cus);
+          this.appService.InsertarTipoGastoFijo(cus).subscribe(respuesta => {
+            console.log(respuesta);
+            this.paginator.lastPage();
+            
+          });
+          message = 'Nuevo tipo de gasto ' + cus.nombre + ' agregado exitosamente';
           // this.appService.InsertarGastoFijo(this.dataSource.data).subscribe(respuesta => {
           //   // this.ruteador.navigateByUrl('/listar-torneo');
           //   console.log(respuesta);
@@ -92,11 +101,11 @@ export class TypesFixedCostsComponent implements OnInit {
           // message = 'Nuevo tipo de gasto ' + cus.nombre + ' agregado exitosamente';
 
           // });
-          let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
-          cus.id = last_customer.id + 1;
-          this.dataSource.data.push(cus);
-          this.paginator.lastPage();
-          message = 'Nuevo tipo de gasto ' + cus.nombre + ' agregado exitosamente';
+          // let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
+          // cus.id = last_customer.id + 1;
+          // this.dataSource.data.push(cus);
+          // this.paginator.lastPage();
+          // message = 'Nuevo tipo de gasto ' + cus.nombre + ' agregado exitosamente';
         }
         this.initDataSource(this.dataSource.data);
         this.snackBar.open(message, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });

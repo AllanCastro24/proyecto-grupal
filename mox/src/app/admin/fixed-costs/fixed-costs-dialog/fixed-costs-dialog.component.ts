@@ -10,12 +10,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class FixedCostsDialogComponent implements OnInit {
   public form!: FormGroup;
+  public form2!:FormGroup;
   constructor(public dialogRef: MatDialogRef<FixedCostsDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public fb: FormBuilder) { }
   
 
   ngOnInit(): void {
+    this.form2 = this.fb.group({
+      id_gasto: 0,            
+    }); 
     this.form = this.fb.group({
       id_gasto: 0, 
       descripcion: ['', Validators.required],      

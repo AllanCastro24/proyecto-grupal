@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AppService } from 'src/app/app.service';
 import { FixedCostsDialogComponent } from './fixed-costs-dialog/fixed-costs-dialog.component'
 import { customers } from './customers';
+// import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-fixed-costs',
@@ -17,6 +18,7 @@ export class FixedCostsComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  TiposGastos: any;
   public stores = [
     { id: 1, name: 'Agua' },
     { id: 2, name: 'Luz' }
@@ -28,8 +30,14 @@ export class FixedCostsComponent implements OnInit {
   ngOnInit(): void {
     this.countries = this.appService.getCountries();
     // this.initDataSource(customers);
-    this.appService.ObtenerGastosFijos().subscribe(respuesta => {      
+    this.appService.ObtenerGastosFijos().subscribe(respuesta => {
       this.initDataSource(respuesta);
+      console.log(respuesta);
+      // this.Equipos = respuesta;
+    });
+    this.appService.ObtenerTiposGastosFijos().subscribe(respuesta => {
+      // this.tipos_gastos=respuesta
+      this.TiposGastos = respuesta;
       console.log(respuesta);
       // this.Equipos = respuesta;
     });
@@ -43,22 +51,23 @@ export class FixedCostsComponent implements OnInit {
 
   public remove(customer: any) {
     const index: number = this.dataSource.data.indexOf(customer);
-    if (index !== -1) {
+    if (index !== 0) {
       const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE');
       let dialogRef = this.appService.openConfirmDialog('', message!);
       dialogRef.afterClosed().subscribe(dialogResult => {
         if (dialogResult) {
-          this.dataSource.data.splice(index, 1);
-          this.initDataSource(this.dataSource.data);
+          // this.dataSource.data.splice(index, 1);
+          // this.initDataSource(this.dataSource.data);
+          this.appService.BajaGastoFijo(customer, this.dataSource.data).subscribe(respuesta => {
+            // this.ruteador.navigateByUrl('/listar-torneo');
+            this.dataSource.data.splice(index, 1);
+            this.initDataSource(this.dataSource.data);
+
+
+          });
         }
       });
-      this.appService.BajaGastoFijo(customer.id_gasto,this.dataSource.data).subscribe(respuesta => {
-        // this.ruteador.navigateByUrl('/listar-torneo');
-        this.dataSource.data.splice(index, 1);
-        this.initDataSource(this.dataSource.data);
 
-
-      });
     }
   }
 
@@ -66,31 +75,42 @@ export class FixedCostsComponent implements OnInit {
     let data = {
       customer: customer,
       stores: this.stores,
-      countries: this.countries
+      // countries: this.countries
     };
     const dialogRef = this.appService.openDialog(FixedCostsDialogComponent, data, 'theme-dialog');
     dialogRef.afterClosed().subscribe(cus => {
       if (cus) {
         let message = '';
-        const index: number = this.dataSource.data.findIndex(x => x.id == cus.id);
-        if (index !== -1) {
-          // this.dataSource.data[index] = cus;
-          // message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
-          console.log("Id a editar: "+ cus.id_gasto);
-          this.appService.EditarGastoFijo(cus.id_gasto,this.dataSource.data).subscribe(respuesta => {
+        const index: number = this.dataSource.data.findIndex(x => x.id_gasto == cus.id_gasto);
+        console.log(cus);
+        // if (index !== 0) {
+        if (cus.id_gasto !== 0) {
+          // cus.splice(cus, 1);
+          console.log("Modificacion " + cus);
+          this.appService.EditarGastoFijo(cus.id_gasto, cus).subscribe(respuesta => {
             // this.ruteador.navigateByUrl('/listar-torneo');
             console.log(respuesta);
-            message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
-
           });
+          message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
+          // this.dataSource.data[index] = cus;
+          // message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
+          // console.log("Id a editar: "+ cus.id_gasto);
+          // console.log("Datos a editar " + cus);
+          // this.appService.EditarGastoFijo(cus.id_gasto,cus).subscribe(respuesta => {
+          //   // this.ruteador.navigateByUrl('/listar-torneo');
+          //   console.log(respuesta);
+          //   message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
+
+          // });
         }
         else {
-          console.log("Datos " + this.dataSource.data);
-          this.appService.InsertarGastoFijo(this.dataSource.data).subscribe(respuesta => {            
-            console.log(respuesta);                      
-            message = 'Nuevo gasto ' + cus.descripcion + ' ' + cus.cantidad + ' agregado exitosamente';
-
+          console.log("Datos a registrar " + cus);
+          this.appService.InsertarGastoFijo(cus).subscribe(respuesta => {
+            console.log(respuesta);
+            this.paginator.lastPage();
+            
           });
+          message = 'Nuevo gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' agregado exitosamente';
           // let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
           // cus.id = last_customer.id + 1;
           // this.dataSource.data.push(cus);

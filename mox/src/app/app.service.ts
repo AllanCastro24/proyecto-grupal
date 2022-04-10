@@ -750,17 +750,17 @@ export class AppService {
   }
 
   InsertarGastoFijo(datosGasto: any): Observable<any> {
-    return this.http.post(this.API + "api/costos_fijos/add", datosGasto);
+    return this.http.post(this.API + "?api/costos_fijos/add", datosGasto,{responseType: 'text'});
 
   }
 
   EditarGastoFijo(id: any, datosGasto: any): Observable<any> {
-    return this.http.put(this.API + "api/costos_fijos/update/" + id, datosGasto);
+    return this.http.put(this.API + "api/costos_fijos/update/" + id, datosGasto,{responseType: 'text'});
 
   }
 
   BajaGastoFijo(id: any,datos:any): Observable<any> {
-    return this.http.put(this.API + "api/costos_fijos/baja/" + id,datos);
+    return this.http.put(this.API + "api/costos_fijos/baja/" + id,datos,{responseType: 'text'});
 
   }
 
@@ -769,17 +769,17 @@ export class AppService {
   }
 
   InsertarTipoGastoFijo(datosGasto: any): Observable<any> {
-    return this.http.post(this.API + "api/tipo_gastos/add=1", datosGasto);
+    return this.http.post(this.API + "api/tipo_gastos/add", datosGasto,{responseType: 'text'});
 
   }
 
   EditarTipoGastoFijo(id: any, datosGasto: any): Observable<any> {
-    return this.http.put(this.API + "api/tipo_gastos/update/" + id, datosGasto);
+    return this.http.put(this.API + "api/tipo_gastos/update/" + id, datosGasto,{responseType: 'text'});
 
   }
 
   BajaTipoGastoFijo(id: any,datos:any): Observable<any> {
-    return this.http.put(this.API + "api/tipo_gastos/baja/" + id,datos);
+    return this.http.put(this.API + "api/tipo_gastos/baja/" + id,datos,{responseType: 'text'});
 
   }
 
