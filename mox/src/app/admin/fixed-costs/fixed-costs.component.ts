@@ -18,7 +18,7 @@ export class FixedCostsComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
-  TiposGastos: any;
+  public TiposGastos: any;
   public stores = [
     { id: 1, name: 'Agua' },
     { id: 2, name: 'Luz' }
@@ -38,7 +38,7 @@ export class FixedCostsComponent implements OnInit {
     this.appService.ObtenerTiposGastosFijos().subscribe(respuesta => {
       // this.tipos_gastos=respuesta
       this.TiposGastos = respuesta;
-      console.log(respuesta);
+      console.log(this.TiposGastos);
       // this.Equipos = respuesta;
     });
   }
@@ -74,7 +74,8 @@ export class FixedCostsComponent implements OnInit {
   public openFixedCostsDialog(customer: any) {
     let data = {
       customer: customer,
-      stores: this.stores,
+      TipoGastos: this.TiposGastos
+      // stores: this.stores,
       // countries: this.countries
     };
     const dialogRef = this.appService.openDialog(FixedCostsDialogComponent, data, 'theme-dialog');

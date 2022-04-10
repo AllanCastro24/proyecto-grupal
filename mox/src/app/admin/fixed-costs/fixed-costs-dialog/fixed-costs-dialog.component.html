@@ -14,8 +14,8 @@
                             <mat-label>Tipo de gasto</mat-label>
                             <mat-select formControlName="tipo_gasto">
                                 <mat-option [value]="">-</mat-option>
-                                <mat-option *ngFor="let store of data.stores" [value]="store.id">
-                                    <span>{{store.name}}</span>
+                                <mat-option *ngFor="let tipoGasto of data.TipoGastos" [value]="tipoGasto.id_tipo">
+                                    <span>{{tipoGasto.nombre}}</span>
                                 </mat-option>
                             </mat-select> 
                         </mat-form-field>
