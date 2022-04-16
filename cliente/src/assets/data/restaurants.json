@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1",
+    "name": "Celestial",
+    "description": "You are a being of the celestial sphere, a being whose body and mind are shaped by an eternal law of motion. You possess the ability to cast divine spells. You are a celestial.",
+    "image": "https://10619-2.s.cdn12.com/rests/small/w285/316_509950664.jpg",
+    "categories": [1, 3],
+    "delivery": {
+      "price": 600,
+      "time": 300
+    }
+  },
+  {
+    "id": "2",
+    "name": "Demonic",
+    "description": "You are a being of the demonic sphere, a being whose body and mind are shaped by an eternal law of motion. You possess the ability to cast demonic spells. You are a demon.",
+    "image": "https://10619-2.s.cdn12.com/rests/small/w285/316_509950665.jpg",
+    "categories": [2, 3],
+    "delivery": {
+      "price": 200,
+      "time": 100
+    }
+  },
+  {
+    "id": "3",
+    "name": "Elemental",
+    "description": "You are a being of the elemental sphere, a being whose body and mind are shaped by an eternal law of motion. You possess the ability to cast elemental spells. You are an elemental.",
+    "image": "https://10619-2.s.cdn12.com/rests/small/w285/316_509950666.jpg",
+    "categories": [3],
+    "delivery": {
+      "price": 300,
+      "time": 200
+    }
+  },
+  {
+    "id": "4",
+    "name": "Giant",
+    "description": "You are a being of the giant sphere, a being whose body and mind are shaped by an eternal law of motion. You possess the ability to cast giant spells. You are a giant.",
+    "image": "https://10619-2.s.cdn12.com/rests/small/w285/316_509950667.jpg",
+    "categories": [1, 2],
+    "delivery": {
+      "price": 400,
+      "time": 700
+    }
+  },
+  {
+    "id": "5",
+    "name": "Humanoid",
+    "description": "You are a being of the humanoid sphere, a being whose body and mind are shaped by an eternal law of motion. You possess the ability to cast humanoid spells. You are a humanoid.",
+    "image": "https://10619-2.s.cdn12.com/rests/small/w285/316_509950668.jpg",
+    "categories": [1],
+    "delivery": {
+      "price": 200,
+      "time": 400
+    }
+  }
+]

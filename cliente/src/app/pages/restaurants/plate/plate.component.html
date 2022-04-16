@@ -1,0 +1,18 @@
+<div class="header">
+  <div (click)="onReturn()">
+    <mat-icon class="back">arrow_back</mat-icon>
+  </div>
+</div>
+<div class="info">
+  <h1 class="title">Combo 4 (Sgt. Peppers)</h1>
+  <span class="price">$160.00</span>
+  <span class="ingredients">Boneless 125 gr + 2 dedos de queso + Papas sazonadas 125 gr + Beboda a escoger</span>
+</div>
+<div class="special-instructions">
+  <h2>Instrucciones especiales</h2>
+  <textarea placeholder="Sin cebolla"></textarea>
+</div>
+<div class="counter">
+  <app-quantity-counter [value]="1" [step]="1" [min]="1" [max]="1000" (onCounterChange)="counterChange($event)"></app-quantity-counter>
+</div>
+<div class="add-cart">Agregar {{ quantityCount }} al carrito <span>●</span> {{ price * quantityCount | currency }}</div>

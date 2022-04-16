@@ -1,0 +1,274 @@
+.head-top {
+  background-image: url(https://www.themarkethink.com/wp-content/uploads/2020/12/nfl-dipper-pizza.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  width: 100%;
+  height: 100px;
+}
+
+.head-top > div {
+  width: 10%;
+}
+
+.head-top div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.head-top div * {
+  position: relative;
+  bottom: 25px;
+}
+
+.head-top > div mat-icon {
+  background-color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+}
+
+.back {
+  left: 10px;
+}
+
+.favorite {
+  font-weight: bold;
+  right: 10px;
+}
+
+.title {
+  width: 80% !important;
+  justify-content: left !important;
+}
+
+.title h1 {
+  font-size: 20px;
+  font-weight: bold;
+  word-break: break-all;
+  position: absolute;
+  top: 7px;
+  left: 50px;
+  width: calc(100% - 90px);
+  height: fit-content;
+}
+
+img {
+  width: 70px;
+  height: 100%;
+}
+
+.head-bottom {
+  display: flex;
+  border-bottom: 4px solid #e2e2e2;
+  height: 50px;
+}
+
+.head-bottom mat-icon {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.head-bottom .menu {
+  position: relative;
+  top: 6px;
+  overflow-x: auto;
+  display: flex;
+  align-items: center;
+}
+
+.head-bottom .menu::-webkit-scrollbar {
+  display: none;
+}
+
+.search {
+  width: 70px;
+  font-size: 20px;
+}
+
+.head-bottom .menu * {
+  margin: 0 10px;
+  text-align: center;
+  white-space: nowrap;
+  height: 41px;
+  line-height: 30px;
+  text-transform: capitalize;
+  color: #000;
+  font-weight: 500;
+}
+
+.active {
+  line-height: 34px !important;
+  border-bottom: 4px solid;
+  border-bottom-color: #000;
+}
+
+.info,
+.restaurant-menu {
+  margin: 0 20px;
+}
+
+.info {
+  margin-top: 10px;
+}
+
+.info .title {
+  font-size: 25px;
+  line-height: 25px;
+  margin-bottom: 10px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.rating span {
+  line-height: 1em;
+  font-weight: bold;
+}
+
+.category {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.category span {
+  background-color: #000;
+  color: #fff;
+  border-radius: 12px;
+  padding: 0 5px;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.delivery-type {
+  margin: 15px 20px;
+  display: flex;
+  background-color: #efeef1;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  height: 60px;
+}
+
+.pickup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.delivery-type > div {
+  height: 50px;
+  width: calc(50% - 5px);
+}
+
+.delivery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.delivery-info span:nth-child(2) {
+  opacity: 0.5;
+  font-size: 10px;
+  margin: 0 5px;
+}
+
+.delivery-info {
+  display: flex;
+  align-items: center;
+}
+
+.delivery-type .active {
+  background-color: #fff;
+  border-radius: 25px;
+  border: none;
+  line-height: normal !important;
+}
+
+.more-info {
+  position: absolute;
+  right: 24px;
+  top: 230px;
+  font-size: 40px;
+}
+
+.head {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.head mat-icon {
+  font-weight: bold;
+}
+
+.head span {
+  font-size: 15px;
+}
+
+.content h1 {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.menu-item {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.menu-info {
+  width: 70%;
+}
+
+.menu-item img {
+  width: 30%;
+}
+
+.menu-info h2 {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.restaurant-menu {
+  margin-bottom: 60px;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.view-cart {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  font-size: 15px;
+  position: fixed;
+  width: calc(100% - 10px);
+  right: 5px;
+  left: 5px;
+  bottom: 10px;
+}

@@ -1,0 +1,91 @@
+<div class="search">
+  <mat-icon (click)="onReturn()" class="search-icon">{{ status }}</mat-icon>
+  <input #inputSearch (click)="onSearch()" (keydown)="onInput($event)" type="text" placeholder="Platillo, bebidas, etc" class="search-input" />
+  <mat-icon (click)="onClose()" class="close-icon" [class.show]="showClose">close</mat-icon>
+</div>
+<div *ngIf="showSuggestions" class="suggestions">
+  <div class="recent-searches">
+    <div class="title">
+      <span>Busquedas recientes</span>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+  </div>
+  <div class="top-categories">
+    <div class="title">
+      <span>Categorias populares</span>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+    <div class="item">
+      <mat-icon class="search-icon-item">search</mat-icon>
+      <p>cat 1</p>
+    </div>
+  </div>
+</div>

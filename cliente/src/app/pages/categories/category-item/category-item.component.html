@@ -1,0 +1,18 @@
+<mat-card [routerLink]="['/categories', category.id]" class="menu-item p-0" [fxLayout]="viewType == 'grid' ? 'column' : 'row'" [ngClass]="[viewType + '-item', 'column-' + column]">
+  <div fxFlex="100" [fxShrink]="viewType == 'grid' ? '3' : '2'" class="thumbnail-section">
+    <div *ngIf="lazyLoad">
+      <img [attr.data-src]="category.image" class="w-100 d-block swiper-lazy" />
+      <div class="swiper-lazy-preloader"></div>
+    </div>
+    <img *ngIf="!lazyLoad" [src]="category.image" class="w-100 d-block" />
+  </div>
+  <div fxFlex="100" class="p-3">
+    <div fxLayout="column" fxLayoutAlign="start stretch" class="h-100">
+      <mat-card-content class="mb-0">
+        <h1 class="title">
+          <a>{{ category.name }}</a>
+        </h1>
+      </mat-card-content>
+    </div>
+  </div>
+</mat-card>
