@@ -18,17 +18,15 @@ export class ReportsStockComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      time: [null, Validators.required],
-      date1: [null, Validators.required],
-      date2: [null, Validators.required],                              
+      "buscarPor": [null, Validators.required ], 
+      "fecha": null,
+      "fecha2" : null,
+      "dia":null,                            
     });
   }
 
-  public submit() {
+  public onSubmit(){
     console.log(this.form.value);
-    if (this.form.valid) {
-      this.onFormSubmit.emit(this.form);
-    }
-  }
+  }  
 
 }
