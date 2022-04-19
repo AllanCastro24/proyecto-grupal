@@ -5,7 +5,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { PipesModule } from '../../theme/pipes/pipes.module';
 import { MenuComponent } from './menu.component';
 import { MenuSingleComponent } from './menu-single/menu-single.component';
-import { AgmCoreModule } from '@agm/core';
 
 export const routes = [
   { path: '', component: MenuComponent, pathMatch: 'full' },
@@ -22,7 +21,6 @@ export const routes = [
     RouterModule.forChild(routes),
     SharedModule,
     PipesModule,
-    AgmCoreModule
   ]
 })
 export class MenuModule { }

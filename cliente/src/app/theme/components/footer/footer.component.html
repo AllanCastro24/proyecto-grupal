@@ -1,7 +1,7 @@
 <footer *ngIf="show">
   <mat-toolbar fxLayoutAlign="space-around center" fxLayout="row" class="menu">
     <div *ngFor="let menuItem of menuItems">
-      <button mat-button [routerLink]="[menuItem.routerLink]" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" (click)="onClick(menuItem.id)" [id]="'menu-item-' + menuItem.id">
+      <button mat-button [routerLink]="[menuItem.routerLink]" routerLinkActive="active-link" (click)="onClick(menuItem.id)" [id]="'menu-item-' + menuItem.id">
         <div fxLayout="column" fxLayoutAlign="center center">
           <mat-icon *ngIf="menuItem.id !== 4" class="mat-18">{{ menuItem.icon }}</mat-icon>
           <mat-icon *ngIf="menuItem.id === 4" [matBadge]="appService.Data.totalCartCount" [matBadgeHidden]="appService.Data.totalCartCount == 0" matBadgeSize="small" matBadgeColor="warn" class="mat-18">{{ menuItem.icon }}</mat-icon>

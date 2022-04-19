@@ -12,7 +12,7 @@
     <div fxFlex="100" class="p-3"> 
         <div fxLayout="column" fxLayoutAlign="start stretch" class="h-100">
             <mat-card-content class="mb-0">
-                <h1 class="title"><a [routerLink]="['/menu', menuItem.id]">{{menuItem.name}}</a></h1>   
+                <h1 class="title"><a [routerLink]="['/home', menuItem.id]">{{menuItem.name}}</a></h1>   
                 <div class="mt-2"> 
                     <p>{{menuItem.description}}</p> 
                     <div *ngIf="viewType == 'list'" fxShow="false" fxShow.gt-sm="true">

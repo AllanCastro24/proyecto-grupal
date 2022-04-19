@@ -82,11 +82,5 @@
         </mat-card>  
     </div> 
 </div>
- 
-<div class="contact-map">
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]="true" [fullscreenControl]="true" [styles]="(settings.theme == 'orange-dark') ? mapStyles : null">
-        <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="false"></agm-marker>
-    </agm-map>
-</div>  
 
 <app-get-app></app-get-app> 

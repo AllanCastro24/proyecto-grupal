@@ -6,7 +6,7 @@
         <div fxFlex="100" fxFlex.gt-sm="60" class="py-3" [ngClass.gt-sm]="(settings.rtl) ? 'pr-5' : 'pl-5'" ngClass.sm="px-3" ngClass.xs="px-3"> 
             <div class="today-menu"> 
                 <h1 class="title secondary-font">
-                    <a [routerLink]="['/menu', menuItem.id]" class="menu-item-name">{{menuItem.name}}</a>
+                    <a [routerLink]="['/home', menuItem.id]" class="menu-item-name">{{menuItem.name}}</a>
                 </h1> 
                 <div fxLayout="row" fxLayoutAlign="start center">
                     <app-rating [ratingsCount]="menuItem.ratingsCount" [ratingsValue]="menuItem.ratingsValue"></app-rating> 

@@ -6,7 +6,6 @@ import { DatePipe } from '@angular/common';
 
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
-import { AgmCoreModule } from '@agm/core';
 
 import { environment } from 'src/environments/environment';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -48,10 +47,6 @@ import { MenuService } from './theme/components/menu/menu.service';
     HttpClientModule,
     NgProgressModule,
     NgProgressHttpModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC5YQyu9ioVVB1HYtzMxRpQVObB_9X_iog',
-      libraries: ['places'],
-    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
