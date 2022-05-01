@@ -16,7 +16,11 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class ReportsSalesComponent implements OnInit {
   public form!: FormGroup;
-  displayedColumns: string[] = ['tipo_gasto', 'descripcion', 'cantidad', 'fecha', 'id_sucursal', 'periodicidad', 'status', 'actions'];
+  public form2!: FormGroup;
+  public form3!: FormGroup;
+  public form4!: FormGroup;
+  public optionValue = "";
+  displayedColumns: string[] = ['id_producto', 'cantidad', 'id_mesero', 'fecha', 'id_sucursal'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -27,16 +31,31 @@ export class ReportsSalesComponent implements OnInit {
   public today = new Date();
 
 
+
+
   constructor(public appService: AppService,
     public formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
+
+
   ngOnInit(): void {
-    this.appService.ObtenerGastosFijos().subscribe(respuesta => {
-      this.initDataSource(respuesta);
-      console.log(respuesta);
-      // this.Equipos = respuesta;
+    // this.appService.ObtenerGastosFijos().subscribe(respuesta => {
+    //   this.initDataSource(respuesta);
+    //   console.log(respuesta);
+    //   // this.Equipos = respuesta;
+    // });
+    this.form4 = this.formBuilder.group({
+      // "id": 0,
+      // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+      // "description": null,
+      // "buscarPor": [null, Validators.required],
+      "mes": null,
+      // "fecha": null,
+      // "fecha2": null,
+      // "dia": null,
+
     });
 
     this.form = this.formBuilder.group({
@@ -44,8 +63,26 @@ export class ReportsSalesComponent implements OnInit {
       // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
       // "description": null,
       "buscarPor": [null, Validators.required],
+      // "mes": null,
+      // "fecha": null,
+      // "fecha2": null,
+      // "dia": null,
+
+    });
+    this.form2 = this.formBuilder.group({
+      // "id": 0,
+      // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+      // "description": null,
+      // "buscarPor": [null, Validators.required],
       "fecha": null,
       "fecha2": null,
+
+    });
+    this.form3 = this.formBuilder.group({
+      // "id": 0,
+      // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+      // "description": null,
+
       "dia": null,
 
     });
@@ -83,7 +120,31 @@ export class ReportsSalesComponent implements OnInit {
 
 
   public onSubmit() {
-    console.log(this.form.value);
+    if (this.optionValue == "Mes") {
+      // alert("Mes");
+      console.log(this.form4.value);
+      this.appService.ObtenerVentasXMes(this.form4.value).subscribe(respuesta => {
+        this.initDataSource(respuesta);
+        console.log(respuesta);
+        // this.Equipos = respuesta;
+      });
+    } else if (this.optionValue == "Dia") {      
+      // alert("Dia");
+      console.log(this.form3.value);
+      this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
+        this.initDataSource(respuesta);
+        console.log(respuesta);
+        // this.Equipos = respuesta;
+      });
+    } else if (this.optionValue == "Rango") {
+      // alert("Rango");
+      console.log(this.form2.value);
+      this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
+        this.initDataSource(respuesta);
+        console.log(respuesta);
+        // this.Equipos = respuesta;
+      });
+    }
   }
 
 }

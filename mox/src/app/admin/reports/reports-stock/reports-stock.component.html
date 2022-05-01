@@ -7,38 +7,27 @@
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Buscar por:</mat-label>
-                                <mat-select formControlName="buscarPor" required>
+                                <mat-select formControlName="buscarPor" [(ngModel)]="optionValue" required>
                                     <!-- <mat-option *ngFor="let cat of appService.Data.categories" [value]="cat.id">
                                         <span>{{cat.name}}</span>
                                     </mat-option> -->
                                     <mat-option value="Mes">Mes</mat-option>
-                                    <mat-option value="año">Año</mat-option>
+                                    <mat-option value="Dia">Dia</mat-option>
                                     <mat-option value="Rango">Rango</mat-option>
                                 </mat-select>
                                 <mat-error *ngIf="form.controls.buscarPor.errors?.required">Debe seleccionar un tipo
                                 </mat-error>
                             </mat-form-field>
-                        </div>
-                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3" ngClass.sm="mt-1" ngClass.xs="mt-1">
-                            <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Fecha inicial</mat-label>
-                                <input matInput placeholder="Selecciona una fecha" formControlName="fecha"  [matDatepicker]="fecha"
-                                    appMaskDate>
-                                <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
-                                <mat-datepicker #fecha></mat-datepicker>
-                                <!-- <mat-error *ngIf="form.controls.fecha.errors?.required">Date is required</mat-error> -->
-                            </mat-form-field>
-                        </div> A
-                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3" ngClass.sm="mt-1" ngClass.xs="mt-1">
-                            <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Fecha final</mat-label>
-                                <input matInput placeholder="Selecciona una fecha" formControlName="fecha2"  [matDatepicker]="fecha2"
-                                    appMaskDate>
-                                <mat-datepicker-toggle matSuffix [for]="fecha2"></mat-datepicker-toggle>
-                                <mat-datepicker #fecha2></mat-datepicker>
-                                <!-- <mat-error *ngIf="form.controls.fecha.errors?.required">Date is required</mat-error> -->
-                            </mat-form-field>
-                        </div> 
+                        </div>  
+                                                                                                                                                           
+                        
+                    </div>
+                </div>
+            </form>
+            <form [formGroup]="form4" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Mes'" autocomplete="off" fxLayout="row wrap">               
+                <div fxFlex="60" class="px-2">
+                    <div fxLayout="row wrap">                        
+                        
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Mes</mat-label>
@@ -63,7 +52,49 @@
                                 <!-- <mat-error *ngIf="form.controls.categoryId.errors?.required">Debe seleccionar un tipo
                                 </mat-error> -->
                             </mat-form-field>
+                        </div>                                                                                                                                              
+                        <div fxFlex="100" class="mt-2 text-center w-100">
+                            <button mat-raised-button color="primary" type="submit" class="uppercase">Mostrar</button>
                         </div>
+                    </div>
+                </div>
+            </form>
+            <!-- Form 2 -->
+            <form [formGroup]="form2" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Rango'"  autocomplete="off" fxLayout="row wrap">               
+                <div fxFlex="60" class="px-2">
+                    <div fxLayout="row wrap">                        
+                        
+                        
+                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Fecha inicial</mat-label>
+                                <input matInput placeholder="Selecciona una fecha" formControlName="fecha"  [matDatepicker]="fecha"
+                                    appMaskDate>
+                                <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+                                <mat-datepicker #fecha></mat-datepicker>
+                                <!-- <mat-error *ngIf="form.controls.fecha.errors?.required">Date is required</mat-error> -->
+                            </mat-form-field>
+                        </div> -
+                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Fecha final</mat-label>
+                                <input matInput placeholder="Selecciona una fecha" formControlName="fecha2"  [matDatepicker]="fecha2"
+                                    appMaskDate>
+                                <mat-datepicker-toggle matSuffix [for]="fecha2"></mat-datepicker-toggle>
+                                <mat-datepicker #fecha2></mat-datepicker>
+                                <!-- <mat-error *ngIf="form.controls.fecha.errors?.required">Date is required</mat-error> -->
+                            </mat-form-field>
+                        </div>                                                                                                                                         
+                        <div fxFlex="100" class="mt-2 text-center w-100">
+                            <button mat-raised-button color="primary" type="submit" class="uppercase">Mostrar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- FORM 3 -->
+            <form [formGroup]="form3" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Dia'" autocomplete="off" fxLayout="row wrap">               
+                <div fxFlex="60" class="px-2">
+                    <div fxLayout="row wrap">                                                                                               
                         <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3" ngClass.sm="mt-1" ngClass.xs="mt-1">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Dia</mat-label>
@@ -73,13 +104,66 @@
                                 <mat-datepicker #dia></mat-datepicker>
                                 <!-- <mat-error *ngIf="form.controls.dia.errors?.required">Date is required</mat-error> -->
                             </mat-form-field>
-                        </div>                                                                         
+                        </div>                                                                                                 
                         <div fxFlex="100" class="mt-2 text-center w-100">
-                            <button mat-raised-button color="primary" type="submit" class="uppercase">Buscar</button>
+                            <button mat-raised-button color="primary" type="submit" class="uppercase">Mostrar</button>
                         </div>
                     </div>
                 </div>
             </form>
+            <div class="table-wrapper"> 
+                <table mat-table [dataSource]="dataSource" matSort class="w-100">
+                
+                    <!-- FullName Column -->
+                    <ng-container matColumnDef="id_producto">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Producto </th>
+                        <td mat-cell *matCellDef="let customer">{{customer.id_producto}}</td>
+                    </ng-container>  
+        
+                    <!-- Username Column -->
+                    <ng-container matColumnDef="cantidad">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+                        <td mat-cell *matCellDef="let customer">{{customer.cantidad | currency : 'USD' : 'symbol' : '1.2-2'}} </td>
+                    </ng-container> 
+            
+                    <!-- Email Column -->
+                    <ng-container matColumnDef="id_mesero">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Mesero </th>
+                        <td mat-cell *matCellDef="let customer">{{customer.id_mesero}}</td>
+                    </ng-container>  
+                    
+                    
+                    <!-- Wallet Balance Column -->
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                        <td mat-cell *matCellDef="let customer">{{customer.fecha}}</td>
+                    </ng-container> 
+                    
+                    <!-- Revenue Column -->
+                    <ng-container matColumnDef="id_sucursal">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
+                        <td mat-cell *matCellDef="let customer">{{customer.id_sucursal}} </td>
+                    </ng-container>  
+                   
+                    
+                    <!-- Actions Column -->
+                    <!-- <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td mat-cell *matCellDef="let customer"> 
+                            <button mat-icon-button color="primary" (click)="openFixedCostsDialog(customer)" matTooltip="Edit">
+                                <mat-icon>edit</mat-icon>
+                            </button> 
+                            <button mat-icon-button color="warn" (click)="remove(customer)" matTooltip="Remove">
+                                <mat-icon>delete</mat-icon>
+                            </button>  
+                        </td>
+                    </ng-container>  -->
+                
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let customer; columns: displayedColumns;"></tr>
+                </table> 
+                <p *ngIf="dataSource && dataSource.data.length === 0" class="py-5 mb-0 text-center">No data available</p> 
+            </div>
         </mat-card-content>
     </mat-card>
 </div>
