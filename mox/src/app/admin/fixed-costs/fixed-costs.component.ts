@@ -108,7 +108,7 @@ export class FixedCostsComponent implements OnInit {
           console.log("Datos a registrar " + cus);
           this.appService.InsertarGastoFijo(cus).subscribe(respuesta => {
             console.log(respuesta);
-            this.paginator.lastPage();
+            // this.paginator.lastPage();
             
           });
           message = 'Nuevo gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' agregado exitosamente';

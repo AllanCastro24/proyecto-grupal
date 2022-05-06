@@ -750,17 +750,17 @@ export class AppService {
   }
 
   InsertarGastoFijo(datosGasto: any): Observable<any> {
-    return this.http.post(this.API + "?api/costos_fijos/add", datosGasto,{responseType: 'text'});
+    return this.http.post(this.API + "?api/costos_fijos/add", datosGasto, { responseType: 'text' });
 
   }
 
   EditarGastoFijo(id: any, datosGasto: any): Observable<any> {
-    return this.http.put(this.API + "api/costos_fijos/update/" + id, datosGasto,{responseType: 'text'});
+    return this.http.put(this.API + "api/costos_fijos/update/" + id, datosGasto, { responseType: 'text' });
 
   }
 
-  BajaGastoFijo(id: any,datos:any): Observable<any> {
-    return this.http.put(this.API + "api/costos_fijos/baja/" + id,datos,{responseType: 'text'});
+  BajaGastoFijo(id: any, datos: any): Observable<any> {
+    return this.http.put(this.API + "api/costos_fijos/baja/" + id, datos, { responseType: 'text' });
 
   }
 
@@ -769,32 +769,33 @@ export class AppService {
   }
 
   InsertarTipoGastoFijo(datosGasto: any): Observable<any> {
-    return this.http.post(this.API + "api/tipo_gastos/add", datosGasto,{responseType: 'text'});
+    return this.http.post(this.API + "api/tipo_gastos/add", datosGasto, { responseType: 'text' });
 
   }
 
   EditarTipoGastoFijo(id: any, datosGasto: any): Observable<any> {
-    return this.http.put(this.API + "api/tipo_gastos/update/" + id, datosGasto,{responseType: 'text'});
+    return this.http.put(this.API + "api/tipo_gastos/update/" + id, datosGasto, { responseType: 'text' });
 
   }
 
-  BajaTipoGastoFijo(id: any,datos:any): Observable<any> {
-    return this.http.put(this.API + "api/tipo_gastos/baja/" + id,datos,{responseType: 'text'});
+  BajaTipoGastoFijo(id: any, datos: any): Observable<any> {
+    return this.http.put(this.API + "api/tipo_gastos/baja/" + id, datos, { responseType: 'text' });
 
   }
 
   ObtenerVentasXMes(mes: any): Observable<any> {
-    return this.http.get(this.API + "api/ventas/mes/"+ mes.mes[0]);
+    return this.http.get(this.API + "api/ventas/mes/" + mes.mes[0]);
 
   }
 
-  ObtenerVentasXDia(dia: any): Observable<any> {
-    return this.http.get(this.API + "api/ventas/day"+ dia.dia[0]);
+  ObtenerVentasXDia(fecha: any): Observable<any> {
+    return this.http.get(this.API + "api/ventas/day/" + fecha.dia);
 
   }
 
   ObtenerVentasXRango(rango: any): Observable<any> {
-    return this.http.get(this.API + "api/ventas/range/"+ rango.fecha[0] + "/" + rango.fecha2[0]);
+    return this.http.get(this.API + "api/ventas/range/" + rango.fecha + "/" + rango.fecha2);
+    console.log(this.API + "api/ventas/range/" + rango.fecha[0] + "/" + rango.fecha2[0]);
 
   }
 

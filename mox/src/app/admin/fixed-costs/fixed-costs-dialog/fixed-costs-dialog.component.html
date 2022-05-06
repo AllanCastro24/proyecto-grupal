@@ -1,13 +1,13 @@
 <div class="header bg-primary">
     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
         <h2 class="fw-700 secondary-font">{{(data?.customer) ? 'Editar' : 'Agregar'}} Gasto fijo</h2>
-        <app-dialog-header-controls [dialogRef]="dialogRef"></app-dialog-header-controls> 
-    </div>   
-</div>  
+        <app-dialog-header-controls [dialogRef]="dialogRef"></app-dialog-header-controls>
+    </div>
+</div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
-    <div mat-dialog-content> 
+    <div mat-dialog-content>
         <mat-tab-group class="tab-content-wrapped">
-            <mat-tab label="Gastos fijo"> 
+            <mat-tab label="Gastos fijo">
                 <div fxLayout="row wrap" class="mt-2">
                     <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
                         <mat-form-field appearance="outline" class="w-100">
@@ -17,7 +17,7 @@
                                 <mat-option *ngFor="let tipoGasto of data.TipoGastos" [value]="tipoGasto.id_tipo">
                                     <span>{{tipoGasto.nombre}}</span>
                                 </mat-option>
-                            </mat-select> 
+                            </mat-select>
                         </mat-form-field>
                     </div>
 
@@ -25,10 +25,11 @@
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Descripcion</mat-label>
                             <input matInput placeholder="Descripcion" formControlName="descripcion" required>
-                            <mat-error *ngIf="form.controls.descripcion.errors?.required">Descripcion es obligatorio</mat-error>   
+                            <mat-error *ngIf="form.controls.descripcion.errors?.required">Descripcion es obligatorio
+                            </mat-error>
                         </mat-form-field>
                     </div>
-                   
+
                     <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Cantidad ($)</mat-label>
@@ -36,14 +37,20 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="100" fxFlex.gt-md="25" class="px-3"> 
-                        <mat-form-field appearance="outline" class="w-100">
+                    <div fxFlex="100" fxFlex.gt-md="25" class="px-3">
+                        <!-- <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Fecha</mat-label>
                             <input matInput [matDatepicker]="fecha" formControlName="fecha">
                             <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
                             <mat-datepicker #fecha></mat-datepicker>
+                        </mat-form-field> -->
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Fecha</mat-label>
+                            <input matInput required type="date" formControlName="fecha" class="form-control" name=""
+                                id="" aria-describedby="helpId" placeholder="">
+                            <mat-icon matSuffix class="text-muted">date</mat-icon>
                         </mat-form-field>
-                    </div> 
+                    </div>
 
                     <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
                         <mat-form-field appearance="outline" class="w-100">
@@ -56,18 +63,24 @@
                                 <mat-option [value]="0">
                                     <span>Sur</span>
                                 </mat-option>
-                            </mat-select> 
+                            </mat-select>
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="100" fxFlex.gt-md="25" class="px-3"> 
-                        <mat-form-field appearance="outline" class="w-100">
+                    <div fxFlex="100" fxFlex.gt-md="25" class="px-3">
+                        <!-- <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Periodicidad</mat-label>
                             <input matInput [matDatepicker]="periodicidad" formControlName="periodicidad">
                             <mat-datepicker-toggle matSuffix [for]="periodicidad"></mat-datepicker-toggle>
                             <mat-datepicker #periodicidad></mat-datepicker>
+                        </mat-form-field> -->
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Fecha final</mat-label>
+                            <input matInput required type="date" formControlName="periodicidad" class="form-control" name=""
+                                id="" aria-describedby="helpId" placeholder="">
+                            <mat-icon matSuffix class="text-muted">date</mat-icon>                                                                
                         </mat-form-field>
-                    </div> 
+                    </div>
 
                     <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
                         <mat-form-field appearance="outline" class="w-100">
@@ -80,20 +93,19 @@
                                 <mat-option [value]="0">
                                     <span>Baja</span>
                                 </mat-option>
-                            </mat-select> 
+                            </mat-select>
                         </mat-form-field>
                     </div>
-                   
-                </div>  
+
+                </div>
             </mat-tab>
-            
-        </mat-tab-group> 
+
+        </mat-tab-group>
     </div>
     <div mat-dialog-actions>
-        <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100 px-1"> 
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100 px-1">
             <button mat-raised-button color="warn" type="button" mat-dialog-close>Cerrar</button>
             <button mat-raised-button color="primary" type="submit">Guardar</button>
-        </div> 
+        </div>
     </div>
 </form>
- 
