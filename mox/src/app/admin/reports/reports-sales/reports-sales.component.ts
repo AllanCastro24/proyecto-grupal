@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID,ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { MenuItem } from 'src/app/app.models';
@@ -8,6 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { isPlatformBrowser } from '@angular/common';
+import { analytics } from '..//dashboard.data';
+
 
 @Component({
   selector: 'app-reports-sales',
@@ -29,6 +31,24 @@ export class ReportsSalesComponent implements OnInit {
   public hours = ['1:00am', '2:00am', '3:00am', '4:00am', '5:00am', '6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00am',
     '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm', '9:00pm', '10:00pm', '11:00pm', '12:00pm'];
   public today = new Date();
+
+  //GRAFICA
+  public analytics: any[] = [];
+  public showXAxis = true;
+  public showYAxis = true;
+  public gradient = false;
+  public showLegend = false;
+  public showXAxisLabel = false;
+  public xAxisLabel = 'Year';
+  public showYAxisLabel = false;
+  public yAxisLabel = 'Profit';
+  public colorScheme:any = {
+    domain: ['#283593', '#039BE5', '#FF5252','#283593', '#039BE5']
+  }; 
+  public autoScale = true;
+  public roundDomains = true;
+  @ViewChild('resizedDiv') resizedDiv!:ElementRef;
+  public previousWidthOfResizedDiv:number = 0; 
 
 
 
@@ -96,6 +116,9 @@ export class ReportsSalesComponent implements OnInit {
     //     this.showImage = true;
     //   }
     // }); 
+
+    // this.analytics = analytics; 
+
   }
 
   ngOnDestroy() {
@@ -125,6 +148,11 @@ export class ReportsSalesComponent implements OnInit {
       console.log(this.form4.value);
       this.appService.ObtenerVentasXMes(this.form4.value).subscribe(respuesta => {
         this.initDataSource(respuesta);
+        // this.analytics=respuesta;
+        if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
+          this.analytics = [...analytics];
+        }
+        this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
         console.log(respuesta);
         // this.Equipos = respuesta;
       });
@@ -133,6 +161,7 @@ export class ReportsSalesComponent implements OnInit {
       console.log(this.form3.value);
       this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
         this.initDataSource(respuesta);
+        this.analytics=respuesta;
         console.log(respuesta);
         // this.Equipos = respuesta;
       });
@@ -141,10 +170,21 @@ export class ReportsSalesComponent implements OnInit {
       console.log(this.form2.value);
       this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
         this.initDataSource(respuesta);
+        this.analytics=respuesta;
         console.log(respuesta);
         // this.Equipos = respuesta;
       });
     }
+  }
+  onSelect(event:any) {
+    console.log(event);
+  }
+
+  ngAfterViewChecked() {    
+    if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
+      // this.analytics = [...analytics];
+    }
+    this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
   }
 
 }

@@ -78,9 +78,9 @@
                             </mat-form-field> -->
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Fecha inicial</mat-label>
-                                <input matInput required type="date" formControlName="fecha" class="form-control" name=""
-                                    id="" aria-describedby="helpId" placeholder="">
-                                <mat-icon matSuffix class="text-muted">date</mat-icon>                                                                
+                                <input matInput required type="date" formControlName="fecha" class="form-control"
+                                    name="" id="" aria-describedby="helpId" placeholder="">
+                                <mat-icon matSuffix class="text-muted">date</mat-icon>
                             </mat-form-field>
                         </div> -
                         <div fxFlex="200" fxFlex.gt-sm="33.3" class="px-3" ngClass.sm="mt-1" ngClass.xs="mt-1">
@@ -94,9 +94,9 @@
                             </mat-form-field> -->
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Fecha final</mat-label>
-                                <input matInput required type="date" formControlName="fecha2" class="form-control" name=""
-                                    id="" aria-describedby="helpId" placeholder="">
-                                <mat-icon matSuffix class="text-muted">date</mat-icon>                                                                
+                                <input matInput required type="date" formControlName="fecha2" class="form-control"
+                                    name="" id="" aria-describedby="helpId" placeholder="">
+                                <mat-icon matSuffix class="text-muted">date</mat-icon>
                             </mat-form-field>
                         </div>
                         <div fxFlex="100" class="mt-2 text-center w-100">
@@ -123,7 +123,7 @@
                                 <mat-label>Dia</mat-label>
                                 <input matInput required type="date" formControlName="dia" class="form-control" name=""
                                     id="" aria-describedby="helpId" placeholder="">
-                                <mat-icon matSuffix class="text-muted">date</mat-icon>                                                                
+                                <mat-icon matSuffix class="text-muted">date</mat-icon>
                             </mat-form-field>
 
                             <!-- <input matInput required type="date" formControlName="dia" class="form-control" name="" id=""
@@ -190,6 +190,23 @@
                 <p *ngIf="dataSource && dataSource.data.length === 0" class="py-5 mb-0 text-center">No data available
                 </p>
             </div>
+            <mat-card>
+                <mat-card-header fxLayoutAlign="center">
+                    <mat-card-subtitle>
+                        <h2>Grafica</h2>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="w-100 h-300p" #resizedDiv>
+                        <ngx-charts-line-chart [scheme]="colorScheme" [results]="analytics" [gradient]="gradient"
+                            [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+                            [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale"
+                            [roundDomains]="roundDomains" (select)="onSelect($event)">
+                        </ngx-charts-line-chart>                        
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </mat-card-content>
     </mat-card>
 </div>
