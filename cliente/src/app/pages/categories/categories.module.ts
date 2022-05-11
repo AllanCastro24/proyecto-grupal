@@ -18,7 +18,7 @@ export const routes = [
     CategoriesComponent, 
     CategoryItemComponent,
     CategorySearchComponent,
-    CategorySingleComponent
+    CategorySingleComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,10 @@
+{
+  "id": 2,
+  "username": "test34",
+  "password": "test34",
+  "profile": { "name": "Bruno", "surname": "Vespa", "birthday": "1992-12-20T06:00:00.000Z", "gender": "male", "image": "assets/images/profile/bruno.jpg" },
+  "work": { "company": "Dell EMC", "position": "Sale manager", "salary": 17000 },
+  "contacts": { "email": "bruno@dell.com", "phone": "(415) 231-0332", "address": "San Francisco" },
+  "social": { "facebook": "", "twitter": "", "google": "" },
+  "settings": { "isActive": false, "isDeleted": false, "registrationDate": "2011-01-05T08:45:23.511Z", "joinedDate": "2017-05-20T18:25:43.511Z" }
+}

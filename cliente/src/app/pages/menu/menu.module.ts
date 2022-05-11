@@ -5,6 +5,9 @@ import { SharedModule } from '../../shared/shared.module';
 import { PipesModule } from '../../theme/pipes/pipes.module';
 import { MenuComponent } from './menu.component';
 import { MenuSingleComponent } from './menu-single/menu-single.component';
+import { FrequentCategoriesComponent } from '../categories/frequent-categories/frequent-categories.component';
+import { FrequentRestaurantsComponent } from '../categories/frequent-restaurants/frequent-restaurants.component';
+import { FrequentPlatesComponent } from '../categories/frequent-plates/frequent-plates.component';
 
 export const routes = [
   { path: '', component: MenuComponent, pathMatch: 'full' },
@@ -14,7 +17,10 @@ export const routes = [
 @NgModule({
   declarations: [
     MenuComponent, 
-    MenuSingleComponent
+    MenuSingleComponent,
+    FrequentRestaurantsComponent,
+    FrequentCategoriesComponent,
+    FrequentPlatesComponent,
   ],
   imports: [
     CommonModule,

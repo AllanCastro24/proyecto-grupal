@@ -11,7 +11,8 @@
     "dev:ssr": "ng run food:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
     "build:ssr": "ng build --configuration production && ng run food:server:production",
-    "prerender": "ng run food:prerender"
+    "prerender": "ng run food:prerender",
+    "server": "node server"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +37,7 @@
     "@swimlane/ngx-charts": "19.1.0",
     "angular-in-memory-web-api": "0.11.0",
     "express": "4.17.1",
+    "mysql": "^2.18.1",
     "ngx-pagination": "5.1.1",
     "ngx-perfect-scrollbar": "10.1.1",
     "ngx-progressbar": "6.1.1",

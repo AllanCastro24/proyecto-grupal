@@ -26,6 +26,19 @@
               </mat-button-toggle>
             </mat-button-toggle-group>
           </div>
+
+          <div fxFlex="100" class="px-2 pb-2 pt-0">
+            <app-frequent-plates></app-frequent-plates>
+          </div>
+
+          <div fxFlex="100" class="px-2 pb-2 pt-0">
+            <app-frequent-restaurants></app-frequent-restaurants>
+          </div>
+
+          <div fxFlex="100" class="px-2 pb-2 pt-0">
+            <app-frequent-categories></app-frequent-categories>
+          </div>
+
           <div fxFlex="100" class="px-2 pb-2 pt-0">
             <app-menu-items-toolbar [showSidenavToggle]="showSidenavToggle" (onSidenavToggle)="sidenav.toggle()" (onChangeCount)="changeCount($event)" (onChangeSorting)="changeSorting($event)" (onChangeViewType)="changeViewType($event)">
             </app-menu-items-toolbar>
@@ -52,7 +65,3 @@
     </mat-sidenav-container>
   </div>
 </div>
-
-<!-- 
-<app-our-awards></app-our-awards> 
-<app-get-in-touch></app-get-in-touch> -->
