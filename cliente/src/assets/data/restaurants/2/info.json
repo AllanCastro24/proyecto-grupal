@@ -1,0 +1,55 @@
+{
+  "id": "2",
+  "categoryId": [2, 3],
+  "tagId": [1, 2, 3, 4, 5, 6],
+  "name": "Demonic",
+  "description": "You are a being of the demonic sphere, a being whose body and mind are shaped by an eternal law of motion. You possess the ability to cast demonic spells. You are a demon.",
+  "address": "Av. Independencia 44, México",
+  "latitude": "25.811785",
+  "longitude": "-108.9828345",
+  "schedule": {
+    "lunes": [
+      {
+        "start": "11:00",
+        "end": "13:00"
+      },
+      {
+        "start": "15:00",
+        "end": "18:00"
+      }
+    ],
+    "martes": [
+      {
+        "start": "11:00",
+        "end": "13:00"
+      },
+      {
+        "start": "15:00",
+        "end": "18:00"
+      }
+    ],
+    "miercoles": [
+      {
+        "start": "11:00",
+        "end": "13:00"
+      },
+      {
+        "start": "15:00",
+        "end": "18:00"
+      }
+    ]
+  },
+  "image": "https://10619-2.s.cdn12.com/rests/small/w285/316_509950665.jpg",
+  "rating": {
+    "average": 4.5,
+    "count": 190
+  },
+  "delivery": {
+    "price": 200,
+    "time": 100
+  },
+  "pickup": {
+    "price": 100,
+    "time": 50
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": 22,
+  "name": "Fried With Meat",
+  "description": "Dough, veal, fat tail, fresh greens.",
+  "price": 15.5,
+  "image": {
+    "small": "assets/images/foods/meat-courses/3/small.jpg",
+    "medium": "assets/images/foods/meat-courses/3/medium.jpg",
+    "big": "assets/images/foods/meat-courses/3/big.jpg"
+  },
+  "discount": 10,
+  "ratingsCount": 4,
+  "ratingsValue": 480,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 170,
+  "isVegetarian": false,
+  "menuId": 5,
+  "tagId": [1, 3, 5, 6]
+}

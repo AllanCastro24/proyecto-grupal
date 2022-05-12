@@ -1,10 +1,10 @@
 <div class="header">
-  <div class="head-top">
+  <div class="head-top" [style.background-image]="'url(' + restaurant?.image + ')'">
     <div (click)="onReturn()">
       <mat-icon class="back">arrow_back</mat-icon>
     </div>
     <div class="title hide">
-      <h1>Little Caesars (Las Fuentes)</h1>
+      <h1>{{ restaurant?.name }}</h1>
     </div>
     <div>
       <mat-icon class="favorite">favorite_border</mat-icon>
@@ -15,38 +15,34 @@
       <mat-icon>search</mat-icon>
     </div>
     <div class="menu">
-      <span>Super cheese</span>
-      <span class="active">especialidades</span>
-      <span>Complementos</span>
-      <span>Bebidas</span>
+      <span *ngFor="let item of menu" [class.active]="item.id == currentMenu" (click)="onClickMenu(item)">{{ item?.name }}</span>
     </div>
   </div>
 </div>
-<div [routerLink]="['/restaurants/info', 1]" class="info">
-  <h1 class="title">Little Caesars (Las Fuentes)</h1>
+<div [routerLink]="['/restaurants/info', restaurant?.id]" class="info">
+  <h1 class="title">{{ restaurant?.name }}</h1>
   <div class="rating">
     <mat-icon>star</mat-icon>
-    <span>4.7 (16 ratings)</span>
+    <span>{{ restaurant?.rating?.average }} ({{ restaurant?.rating?.count }} valoraciones)</span>
   </div>
   <div class="category">
-    <span>Pizza</span>
-    <span>Alitas</span>
+    <span *ngFor="let item of categories">{{ item.name }}</span>
   </div>
   <span>Presiona para más información</span>
   <mat-icon class="more-info">navigate_next</mat-icon>
 </div>
 <div class="delivery-type">
   <div class="delivery">
-    <span class="label">Delivery</span>
+    <span class="label">Envío</span>
     <div class="delivery-info">
-      <span class="time">35-45 min</span>
+      <span class="time">{{ (restaurant?.delivery?.time || 0) * 1000 | date: 'mm:ss' }} min</span>
       <span>●</span>
-      <span class="price">$5.00</span>
+      <span class="price">{{ restaurant?.delivery?.price | currency }}</span>
     </div>
   </div>
   <div class="pickup active">
-    <span class="label">Pickup</span>
-    <span class="time">30 min</span>
+    <span class="label">Recoger</span>
+    <span class="time">{{ (restaurant?.pickup?.time || 0) * 1000 | date: 'mm:ss' }} min</span>
   </div>
 </div>
 <div class="restaurant-menu">
@@ -55,42 +51,15 @@
     <mat-icon class="mat-18">search</mat-icon>
   </div>
   <div class="content">
-    <div class="menu-category">
-      <h1>Super cheese</h1>
-      <div [routerLink]="['/restaurants/plate', 1]" class="menu-item">
+    <div *ngFor="let item of menu" id="restaurant-menu-{{ item.id }}">
+      <h1>{{ item.name }}</h1>
+      <div *ngFor="let item of plates" [routerLink]="['/restaurants/' + restaurant?.id + '/plate', item.id]" class="menu-item">
         <div class="menu-info">
-          <h2>Pizza Super Cheese Pepperoni</h2>
-          <span class="price">$10.00</span>
-          <p class="description">Pizza grande de peperoni</p>
+          <h2>{{ item.name }}</h2>
+          <span class="price">{{ item.price | currency }}</span>
+          <p class="description">{{ item.description }}</p>
         </div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Eataly_Las_Vegas_-_Feb_2019_-_Sarah_Stierch_12.jpg" alt="" />
-      </div>
-      <div class="menu-item">
-        <div class="menu-info">
-          <h2>Pizza Super Cheese Pepperoni 2</h2>
-          <span class="price">$20.00</span>
-          <p class="description">Pizza grande de peperoni 2</p>
-        </div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Eataly_Las_Vegas_-_Feb_2019_-_Sarah_Stierch_12.jpg" alt="" />
-      </div>
-    </div>
-    <div class="menu-category">
-      <h1>Bebidas</h1>
-      <div class="menu-item">
-        <div class="menu-info">
-          <h2>Coca-cola</h2>
-          <span class="price">$10.00</span>
-          <p class="description">2 litros</p>
-        </div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Bouteille_de_Coca-Cola_d%27un_litre_cinq_001.jpg/220px-Bouteille_de_Coca-Cola_d%27un_litre_cinq_001.jpg" alt="" />
-      </div>
-      <div class="menu-item">
-        <div class="menu-info">
-          <h2>Pepsi</h2>
-          <span class="price">$20.00</span>
-          <p class="description">2 litros</p>
-        </div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Bouteille_de_Coca-Cola_d%27un_litre_cinq_001.jpg/220px-Bouteille_de_Coca-Cola_d%27un_litre_cinq_001.jpg" alt="" />
+        <img [src]="item.image.medium" alt="" />
       </div>
     </div>
   </div>

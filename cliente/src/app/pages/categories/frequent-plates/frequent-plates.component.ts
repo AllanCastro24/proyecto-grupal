@@ -18,9 +18,10 @@ export class FrequentPlatesComponent implements OnInit {
 
   public getPlates() {
     for (let i = 0; i < 10; i++) {
-      const rand = Math.floor(Math.random() * (34 - 1) + 1);
+      const randRestaurant = Math.floor(Math.random() * (2 - 1) + 1);
+      const randPlate = Math.floor(Math.random() * (34 - 1) + 1);
 
-      this.restaurantsService.getPlate(rand).subscribe((plate) => {
+      this.restaurantsService.getPlate(randRestaurant, randPlate).subscribe((plate) => {
         this.plates.push(plate);
       });
     }

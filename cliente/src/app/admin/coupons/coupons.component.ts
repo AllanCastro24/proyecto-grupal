@@ -30,7 +30,6 @@ export class CouponsComponent implements OnInit {
   constructor(public appService:AppService, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.getCategories();
     this.initDataSource(coupons);  
   }
 
@@ -46,14 +45,6 @@ export class CouponsComponent implements OnInit {
   getPropertyByPath(obj: Object, pathString: string) {
     return pathString.split('.').reduce((o:any, i:any) => o[i], obj);
   }
-
-  public getCategories(){
-    if(!this.appService.Data.categories.length){
-      this.appService.getCategories().subscribe(categories=>{ 
-        this.appService.Data.categories = categories;
-      });
-    } 
-  } 
 
   public remove(coupon:any) {
     const index: number = this.dataSource.data.indexOf(coupon);    

@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Settings, AppSettings } from '../app.settings';
 import { isPlatformBrowser } from '@angular/common';
 import { AppService } from '../app.service';
+import { CategoriesService } from './categories/categories.service';
 
 @Component({
   selector: 'app-pages',
@@ -16,13 +17,12 @@ export class PagesComponent implements OnInit {
   public headerFixed: boolean = false;
 
   public settings: Settings;
-  constructor(public appSettings: AppSettings, public router: Router, @Inject(PLATFORM_ID) private platformId: Object, public appService: AppService) {
+  constructor(public appSettings: AppSettings, public router: Router, @Inject(PLATFORM_ID) private platformId: Object, public appService: AppService, public categoriesService: CategoriesService) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit() {
     this.headerTypeOption = this.settings.header;
-    this.getCategories();
   }
 
   public changeTheme(theme: string) {
@@ -71,13 +71,5 @@ export class PagesComponent implements OnInit {
         });
       }
     });
-  }
-
-  public getCategories() {
-    if (this.appService.Data.categories.length == 0) {
-      this.appService.getCategories().subscribe((data) => {
-        this.appService.Data.categories = data;
-      });
-    }
   }
 }

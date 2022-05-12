@@ -3,3 +3,8 @@ export interface Category {
   name: string;
   image: string;
 }
+
+export interface Tag {
+  id: number;
+  name: string;
+}

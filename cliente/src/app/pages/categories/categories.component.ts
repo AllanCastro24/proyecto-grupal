@@ -10,7 +10,7 @@ import { CategoriesService } from './categories.service';
 export class CategoriesComponent implements OnInit {
   public viewType: string = 'grid';
   public viewCol: number = 50;
-  
+
   public categories!: Category[];
 
   constructor(public categoriesService: CategoriesService) {}

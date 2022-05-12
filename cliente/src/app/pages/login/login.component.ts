@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
     this.UsersService.isLoggedIn.subscribe((res) => {
       if (res) {
-        this.router.navigate(['./menu']);
+        this.router.navigate(['./home']);
       }
     });
   }
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
           this.menuService.toggleMenu(true);
 
-          this.router.navigate(['./menu']);
+          this.router.navigate(['./home']);
         } else {
           this.snackBar.open('Usuario y/o contraseña equivocados', '', this.snackBarDefault);
         }

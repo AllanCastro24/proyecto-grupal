@@ -1,5 +1,4 @@
 .header {
-  background-image: url(http://www.unileverfoodsolutions.com.mx/dam/global-ufs/mcos/NOLA/calcmenu/recipes/MX-recipes/general/sushi-empanizado/main-header.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -37,7 +36,7 @@
   border: 1px solid #e6e6e6;
 }
 
-.category {
+.tag {
   margin-top: 10px;
   display: flex;
   align-items: center;
@@ -76,7 +75,33 @@
   display: flex;
 }
 
-.category span:nth-child(2n) {
+.tag span:nth-child(2n) {
   font-size: 10px;
   margin: 0 5px;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px;
+}
+
+.day {
+  display: flex;
+  padding: 5px;
+  align-items: center;
+}
+
+.day > span,
+.day > div {
+  width: 50%;
+}
+
+.day > span {
+  text-transform: capitalize;
+}
+
+.day > div {
+  display: flex;
+  flex-direction: column;
 }

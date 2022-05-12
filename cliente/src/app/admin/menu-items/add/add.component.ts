@@ -34,7 +34,6 @@ export class AddComponent implements OnInit {
       "isVegetarian": false,
       "categoryId": [null, Validators.required ]   
     }); 
-    this.getCategories();
     this.sub = this.activatedRoute.params.subscribe(params => {  
       if(params['id']){
         this.id = params['id'];
@@ -48,14 +47,6 @@ export class AddComponent implements OnInit {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
-  } 
-
-  public getCategories(){
-    if(!this.appService.Data.categories.length){
-      this.appService.getCategories().subscribe(categories=>{ 
-        this.appService.Data.categories = categories;
-      });
-    } 
   } 
  
   public getMenuItemById(){

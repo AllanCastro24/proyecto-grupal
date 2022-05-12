@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "name": "Pizza"
+  },
+  {
+    "id": "2",
+    "name": "Mole"
+  },
+  {
+    "id": "3",
+    "name": "Tacos al pastor"
+  },
+  {
+    "id": "4",
+    "name": "Birria"
+  },
+  {
+    "id": "5",
+    "name": "Drink"
+  },
+  {
+    "id": "6",
+    "name": "Soup"
+  }
+]

@@ -11,7 +11,7 @@ import { RestaurantInfoComponent } from './restaurant-info/restaurant-info.compo
 export const routes = [
   { path: '', component: CategoriesComponent, pathMatch: 'full' },
   { path: ':id', component: RestaurantSingleComponent },
-  { path: 'plate/:id', component: PlateComponent },
+  { path: ':restaurantId/plate/:plateId', component: PlateComponent },
   { path: 'info/:id', component: RestaurantInfoComponent },
 ];
 

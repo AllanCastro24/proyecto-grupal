@@ -1,5 +1,4 @@
 .head-top {
-  background-image: url(https://www.themarkethink.com/wp-content/uploads/2020/12/nfl-dipper-pizza.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -142,7 +141,7 @@ img {
 
 .category {
   display: flex;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .category span {
@@ -247,6 +246,10 @@ img {
 .menu-info h2 {
   font-size: 17px;
   font-weight: 600;
+}
+
+.description {
+  margin-right: 5px;
 }
 
 .restaurant-menu {

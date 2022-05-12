@@ -7,6 +7,7 @@ import { filter, map } from 'rxjs/operators';
 import { MenuItem, Pagination } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { AppSettings, Settings } from 'src/app/app.settings';
+import { CategoriesService } from '../categories/categories.service';
 
 @Component({
   selector: 'app-menu',
@@ -40,7 +41,7 @@ export class MenuComponent implements OnInit {
   public lat = 51.678418;
   public lng = 7.809007;
 
-  constructor(public appSettings: AppSettings, public appService: AppService, public mediaObserver: MediaObserver) {
+  constructor(public appSettings: AppSettings, public appService: AppService, public mediaObserver: MediaObserver, public categoriesService: CategoriesService) {
     this.settings = this.appSettings.settings;
     this.watcher = mediaObserver
       .asObservable()
@@ -70,7 +71,6 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCategories();
     this.getMenuItems();
   }
 
@@ -78,12 +78,6 @@ export class MenuComponent implements OnInit {
     this.watcher.unsubscribe();
   }
 
-  public getCategories() {
-    this.appService.getCategories().subscribe((categories) => {
-      this.categories = categories;
-      this.appService.Data.categories = categories;
-    });
-  }
   public selectCategory(id: number) {
     this.selectedCategoryId = id;
     this.menuItems.length = 0;

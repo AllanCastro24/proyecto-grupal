@@ -3,10 +3,10 @@ export interface Plate {
   name: string;
   description: string;
   price: number;
-  image: plateImage;
-  discount: number;
-  ratingsCount: number;
-  ratingsValue: number;
+  image: Image;
+  // discount: number;
+  // ratingsCount: number;
+  // ratingsValue: number;
   availibilityCount: number;
   cartCount: number;
   weight: number;
@@ -14,7 +14,7 @@ export interface Plate {
   categoryId: number;
 }
 
-export interface plateImage {
+interface Image {
   small: string;
   medium: string;
   big: string;

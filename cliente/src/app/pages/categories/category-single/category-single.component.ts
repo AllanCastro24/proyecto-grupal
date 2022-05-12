@@ -42,7 +42,7 @@ export class CategorySingleComponent implements OnInit {
   public getRestaurantsByCategory(categoryId: number) {
     this.restaurantService.getRestaurants().subscribe((restaurants) => {
       this.restaurants = restaurants.filter((restaurant) => {
-        return restaurant.categories.includes(Number(categoryId));
+        return restaurant.categoryId.includes(Number(categoryId));
       });
 
       this.totalResults = this.restaurants.length;

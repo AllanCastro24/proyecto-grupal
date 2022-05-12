@@ -35,11 +35,11 @@ export class AppService {
   constructor(public http: HttpClient, private datePipe: DatePipe, private bottomSheet: MatBottomSheet, private snackBar: MatSnackBar, public dialog: MatDialog, public appSettings: AppSettings, public translateService: TranslateService) {}
 
   public getMenuItems(): Observable<MenuItem[]> {
-    return this.http.get<MenuItem[]>(this.url + 'menu-items.json');
+    return this.http.get<MenuItem[]>(this.url + 'tmp/plates/menu-items.json');
   }
 
   public getMenuItemById(id: number): Observable<MenuItem> {
-    return this.http.get<MenuItem>(this.url + 'menu-item-' + id + '.json');
+    return this.http.get<MenuItem>(this.url + 'tmp/plates/menu-item-' + id + '.json');
   }
 
   public getSpecialMenuItems(): Observable<MenuItem[]> {
@@ -48,10 +48,6 @@ export class AppService {
 
   public getBestMenuItems(): Observable<MenuItem[]> {
     return this.http.get<MenuItem[]>(this.url + 'best-menu-items.json');
-  }
-
-  public getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.url + 'categories.json');
   }
 
   public getHomeCarouselSlides() {

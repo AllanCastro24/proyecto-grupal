@@ -21,9 +21,6 @@ export class CategoriesComponent implements OnInit {
   constructor(public appService:AppService, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.appService.getCategories().subscribe((categories:Category[]) => {
-      this.initDataSource(categories); 
-    })
   }
 
   public initDataSource(data:any){

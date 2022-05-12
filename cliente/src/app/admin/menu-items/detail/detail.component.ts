@@ -14,7 +14,6 @@ export class DetailComponent implements OnInit {
   constructor(public appService: AppService, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.getCategories();
     this.sub = this.activatedRoute.params.subscribe((params) => {
       if (params['id']) {
         this.getMenuItemById(params['id']);
@@ -26,14 +25,6 @@ export class DetailComponent implements OnInit {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
-  }
-
-  public getCategories() {
-    if (!this.appService.Data.categories.length) {
-      this.appService.getCategories().subscribe((categories) => {
-        this.appService.Data.categories = categories;
-      });
-    }
   }
 
   public getMenuItemById(id: number) {
