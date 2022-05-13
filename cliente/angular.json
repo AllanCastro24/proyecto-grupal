@@ -48,18 +48,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss",
-              "src/assets/flaticon/flaticon.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss", "src/assets/flaticon/flaticon.css"],
             "scripts": [],
-            "allowedCommonJsDependencies": [ 
-              "clone-deep"
-            ],
+            "allowedCommonJsDependencies": ["clone-deep"],
             "vendorChunk": true,
             "extractLicenses": false,
             "buildOptimizer": false,
@@ -121,13 +113,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },
@@ -184,16 +171,23 @@
           "options": {
             "browserTarget": "food:build:production",
             "serverTarget": "food:server:production",
-            "routes": [
-              "/"
-            ]
+            "routes": ["/"]
           },
           "configurations": {
             "production": {}
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts"]
           }
         }
       }
     }
   },
-  "defaultProject": "food"
+  "defaultProject": "food",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

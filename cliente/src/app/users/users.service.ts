@@ -11,38 +11,28 @@ import { Data, Success, User } from './users';
 export class UsersService {
   private _isLoggedIn = new BehaviorSubject<boolean>(false);
   private readonly TOKEN_NAME = 'auth-token';
-  
+
   public isLoggedIn = this._isLoggedIn.asObservable();
   public user!: User;
 
-//   public url = environment.url + '/users/';
+  // public url = environment.url + '/users/';
   public url = 'http://localhost:3000/users/';
 
   constructor(private http: HttpClient) {
-    this._isLoggedIn.next(!!this.token);
-    
-    console.log(this.token);
+    this._isLoggedIn.next(Object.keys(this.getUser()).length !== 0);
 
-    this.user = this.getCurrentUser();
-  }
-
-  
-  get token(): any {
-    return localStorage.getItem(this.TOKEN_NAME);
+    console.log(this.getUser());
   }
 
   login(login: User): Observable<Data> {
-    return this.http
-      .post<Data>(this.url + 'login', login)
-      .pipe(
-        tap((res: Data) => {
-          if (res.success) {
-            this._isLoggedIn.next(true);
-            localStorage.setItem(this.TOKEN_NAME, JSON.stringify(res.data));
-            this.user = this.getCurrentUser();
-          }
-        })
-      );
+    return this.http.post<Data>(this.url + 'login', login).pipe(
+      tap((res: Data) => {
+        if (res.success) {
+          this._isLoggedIn.next(true);
+          this.setUser(res.data);
+        }
+      })
+    );
   }
 
   logout() {
@@ -56,11 +46,11 @@ export class UsersService {
     return this.http.post<Success>(this.url + 'add', user);
   }
 
-  getCurrentUser() {
-    return JSON.parse(this.token);
+  getUser(): User {
+    return JSON.parse(localStorage.getItem(this.TOKEN_NAME) || '{}');
   }
 
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(this.url + id);
+  setUser(user: User) {
+    localStorage.setItem(this.TOKEN_NAME, JSON.stringify(user));
   }
 }

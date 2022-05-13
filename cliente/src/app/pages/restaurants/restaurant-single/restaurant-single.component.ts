@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { CartOverviewComponent } from 'src/app/shared/cart-overview/cart-overview.component';
@@ -26,8 +26,24 @@ export class RestaurantSingleComponent implements OnInit {
   public categories: Category[] = [];
 
   public currentMenu: number = 1;
+  public menuFixed: boolean = false;
 
-  constructor(public appService: AppService, public menuService: MenuService, private _location: Location, private activatedRoute: ActivatedRoute, private restaurantService: RestaurantService, public categoriesService: CategoriesService) {}
+  public showSearch: boolean = false;
+  public showClear: boolean = false;
+
+  public searchResultsMenu: Menu[] = [];
+  public searchResultsPlate: Plate[] = [];
+
+  @ViewChild('inputSearch') inputSearch!: ElementRef;
+
+  constructor(
+    public appService: AppService,
+    public menuService: MenuService,
+    private _location: Location,
+    private activatedRoute: ActivatedRoute,
+    private restaurantService: RestaurantService,
+    public categoriesService: CategoriesService
+  ) {}
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
@@ -91,12 +107,80 @@ export class RestaurantSingleComponent implements OnInit {
     el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  public scroll(el: HTMLElement) {
-    el.scrollIntoView();
+  public openSearch() {
+    this.showSearch = !this.showSearch;
+  }
+
+  public closeSearchResults() {
+    this.showSearch = false;
+  }
+
+  public onInput(event: any) {
+    this.showClear = event.target.value.length > 0;
+
+    this.searchResultsMenu = [];
+    this.searchResultsPlate = [];
+
+    const value = this.inputSearch.nativeElement.value;
+
+    if (!value) {
+      return;
+    }
+
+    for (const plate of this.plates) {
+      const name = plate.name.toLowerCase();
+      const description = plate.description.toLowerCase();
+
+      if (name.includes(value) || description.includes(value)) {
+        const index = this.menu.findIndex((menu) => menu.id == plate.menuId);
+
+        if (index === -1) {
+          continue;
+        }
+
+        if (!this.searchResultsMenu.includes(this.menu[index])) {
+          this.searchResultsMenu.push(this.menu[index]);
+        }
+
+        this.searchResultsPlate.push(plate);
+      }
+    }
+  }
+
+  public onClear() {
+    this.showClear = false;
+
+    this.searchResultsMenu = [];
+    this.searchResultsPlate = [];
+
+    this.inputSearch.nativeElement.value = '';
+    this.inputSearch.nativeElement.focus();
   }
 
   public openCart() {
     this.appService.openCart(CartOverviewComponent);
+  }
+
+  @HostListener('window:scroll') onWindowScroll() {
+    const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
+
+    const topMenu = document.querySelector('.header');
+
+    if (!topMenu) {
+      return;
+    }
+
+    if (scrollTop >= topMenu.clientHeight) {
+      this.menuFixed = true;
+    } else {
+      if (!document.documentElement.classList.contains('cdk-global-scrollblock')) {
+        this.menuFixed = false;
+      }
+    }
+  }
+
+  public addToFavorites() {
+    this.restaurantService.addToFavorites(this.restaurant);
   }
 
   public onReturn() {

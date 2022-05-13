@@ -20,7 +20,12 @@ export class RestaurantInfoComponent implements OnInit {
   public restaurant!: Restaurant;
   public tags: Tag[] = [];
 
-  constructor(private _location: Location, private activatedRoute: ActivatedRoute, private restaurantService: RestaurantService, public categoriesService: CategoriesService) {}
+  constructor(
+    private _location: Location,
+    private activatedRoute: ActivatedRoute,
+    private restaurantService: RestaurantService,
+    public categoriesService: CategoriesService
+  ) {}
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
@@ -65,7 +70,9 @@ export class RestaurantInfoComponent implements OnInit {
   }
 
   public openAddress(latitude: number, longitude: number) {
-    Browser.open({ url: `https://www.google.com/maps/@${latitude},${longitude},20z` });
+    Browser.open({
+      url: `https://www.google.com/maps/@${latitude},${longitude},20z`,
+    });
   }
 
   public onReturn() {

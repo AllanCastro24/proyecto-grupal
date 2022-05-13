@@ -11,11 +11,31 @@ const users = (app, pool) => {
 
         const data = JSON.parse(JSON.stringify(result));
 
+        let user = null;
+
+        if (data.length > 0) {
+          const result = data[0];
+
+          user = {
+            id: result.id,
+            username: result.username,
+            profile: {
+              image: result.image,
+            },
+            work: {
+              position: result.rol_id,
+            },
+            contact: {
+              email: result.email,
+            },
+          };
+        }
+
         console.log(data);
 
         response.json({
           success: data.length > 0,
-          data: data.length > 0 ? data[0] : null,
+          data: user,
         });
       }
     );
@@ -25,15 +45,11 @@ const users = (app, pool) => {
   app.get('/users/:id', (request, response) => {
     const id = request.params.id;
 
-    pool.query(
-      'SELECT id, rol_id, username, email, image FROM users WHERE id = ?',
-      id,
-      (error, result) => {
-        if (error) throw error;
+    pool.query('SELECT id, rol_id, username, email, image FROM users WHERE id = ?', id, (error, result) => {
+      if (error) throw error;
 
-        response.json(result[0]);
-      }
-    );
+      response.json(result[0]);
+    });
   });
 
   // agregar un usuario
@@ -50,17 +66,13 @@ const users = (app, pool) => {
       return;
     }
 
-    pool.query(
-      `INSERT INTO users (username, password, email) VALUES (?, ?, ?)`,
-      [user.username, user.password, user.email],
-      (error, result) => {
-        if (error) throw error;
+    pool.query(`INSERT INTO users (username, password, email) VALUES (?, ?, ?)`, [user.username, user.password, user.email], (error, result) => {
+      if (error) throw error;
 
-        response.json({
-          success: !isNaN(result.insertId),
-        });
-      }
-    );
+      response.json({
+        success: !isNaN(result.insertId),
+      });
+    });
   });
 
   // actualizar un usuario

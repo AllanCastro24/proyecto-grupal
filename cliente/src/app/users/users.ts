@@ -1,3 +1,5 @@
+import { Restaurant } from '../pages/restaurants/restaurants';
+
 export class User {
   id?: number = 0;
   username: string = '';
@@ -7,6 +9,7 @@ export class User {
   contacts?: UserContacts;
   social?: UserSocial;
   settings?: UserSettings;
+  favoriteRestaurants?: Restaurant[];
 }
 
 export class UserProfile {
@@ -44,7 +47,7 @@ export class UserSettings {
 
 export interface Data {
   success: Success;
-  data: User | null;
+  data: User;
 }
 
 export interface Success {

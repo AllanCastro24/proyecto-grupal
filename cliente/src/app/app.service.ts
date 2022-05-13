@@ -14,7 +14,14 @@ import { AlertDialogComponent } from './shared/alert-dialog/alert-dialog.compone
 import { map } from 'rxjs/operators';
 
 export class Data {
-  constructor(public categories: Category[], public cartList: MenuItem[], public orderList: Order[], public favorites: MenuItem[], public totalPrice: number, public totalCartCount: number) {}
+  constructor(
+    public categories: Category[],
+    public cartList: MenuItem[],
+    public orderList: Order[],
+    public favorites: MenuItem[],
+    public totalPrice: number,
+    public totalCartCount: number
+  ) {}
 }
 
 @Injectable({
@@ -32,7 +39,15 @@ export class AppService {
 
   public url = environment.url + '/assets/data/';
 
-  constructor(public http: HttpClient, private datePipe: DatePipe, private bottomSheet: MatBottomSheet, private snackBar: MatSnackBar, public dialog: MatDialog, public appSettings: AppSettings, public translateService: TranslateService) {}
+  constructor(
+    public http: HttpClient,
+    private datePipe: DatePipe,
+    private bottomSheet: MatBottomSheet,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    public appSettings: AppSettings,
+    public translateService: TranslateService
+  ) {}
 
   public getMenuItems(): Observable<MenuItem[]> {
     return this.http.get<MenuItem[]>(this.url + 'tmp/plates/menu-items.json');
@@ -666,9 +681,21 @@ export class AppService {
 
   public getDeliveryMethods() {
     return [
-      { value: 'free', name: 'Free Delivery', desc: '$0.00 / Delivery in 7 to 14 business Days' },
-      { value: 'standard', name: 'Standard Delivery', desc: '$7.99 / Delivery in 5 to 7 business Days' },
-      { value: 'express', name: 'Express Delivery', desc: '$29.99 / Delivery in 1 business Days' },
+      {
+        value: 'free',
+        name: 'Free Delivery',
+        desc: '$0.00 / Delivery in 7 to 14 business Days',
+      },
+      {
+        value: 'standard',
+        name: 'Standard Delivery',
+        desc: '$7.99 / Delivery in 5 to 7 business Days',
+      },
+      {
+        value: 'express',
+        name: 'Express Delivery',
+        desc: '$29.99 / Delivery in 1 business Days',
+      },
     ];
   }
 

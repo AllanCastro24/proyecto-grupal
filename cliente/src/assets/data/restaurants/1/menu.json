@@ -1,18 +1,30 @@
 [
   {
     "id": 1,
-    "name": "Super Cheese"
+    "name": "Nachos"
   },
   {
     "id": 2,
-    "name": "Especialidades"
+    "name": "Alitas"
   },
   {
     "id": 3,
-    "name": "Complementos"
+    "name": "Boneless"
   },
   {
     "id": 4,
+    "name": "Hamburguesas"
+  },
+  {
+    "id": 5,
     "name": "Bebidas"
+  },
+  {
+    "id": 6,
+    "name": "Hielo"
+  },
+  {
+    "id": 7,
+    "name": "Postres"
   }
 ]
