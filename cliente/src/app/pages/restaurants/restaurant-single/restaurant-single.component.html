@@ -33,7 +33,7 @@
       <h1>{{ restaurant?.name }}</h1>
     </div>
     <div (click)="addToFavorites()">
-      <mat-icon class="favorite">favorite_border</mat-icon>
+      <mat-icon class="favorite">{{ favoriteIcon }}</mat-icon>
     </div>
   </div>
   <div class="head-bottom" [class.sticky]="menuFixed">

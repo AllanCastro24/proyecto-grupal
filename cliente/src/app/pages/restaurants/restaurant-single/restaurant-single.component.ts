@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { CartOverviewComponent } from 'src/app/shared/cart-overview/cart-overview.component';
 import { MenuService } from 'src/app/theme/components/menu/menu.service';
+import { UsersService } from 'src/app/users/users.service';
 import { Category } from '../../categories/categories';
 import { CategoriesService } from '../../categories/categories.service';
 import { Plate } from '../plates';
@@ -34,6 +35,8 @@ export class RestaurantSingleComponent implements OnInit {
   public searchResultsMenu: Menu[] = [];
   public searchResultsPlate: Plate[] = [];
 
+  public favoriteIcon: string = 'favorite_border';
+
   @ViewChild('inputSearch') inputSearch!: ElementRef;
 
   constructor(
@@ -42,20 +45,22 @@ export class RestaurantSingleComponent implements OnInit {
     private _location: Location,
     private activatedRoute: ActivatedRoute,
     private restaurantService: RestaurantService,
-    public categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private usersService: UsersService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
       this.restaurantId = params['id'];
     });
 
     this.menuService.toggleMenu(false);
 
-    this.getRestaurant();
+    await this.getRestaurant();
     this.getCategories();
     this.getPlates();
     this.getMenu();
+    this.checkFavorite();
   }
 
   ngOnDestroy() {
@@ -71,14 +76,18 @@ export class RestaurantSingleComponent implements OnInit {
   }
 
   public getRestaurant() {
-    this.restaurantService.getRestaurants().subscribe((restaurants) => {
-      for (const restaurant of restaurants) {
-        if (restaurant.id === this.restaurantId) {
-          this.restaurant = restaurant;
+    return new Promise((resolve, reject) => {
+      this.restaurantService.getRestaurants().subscribe((restaurants) => {
+        for (const restaurant of restaurants) {
+          if (restaurant.id === this.restaurantId) {
+            this.restaurant = restaurant;
 
-          console.log(this.restaurant);
+            console.log(this.restaurant);
+          }
         }
-      }
+
+        resolve(true);
+      });
     });
   }
 
@@ -157,6 +166,14 @@ export class RestaurantSingleComponent implements OnInit {
     this.inputSearch.nativeElement.focus();
   }
 
+  public checkFavorite() {
+    const favorites = this.usersService.getUser().favoriteRestaurants;
+    
+    if (favorites && favorites.find((restaurant) => restaurant.id === this.restaurant.id)) {
+      this.favoriteIcon = 'favorite';
+    }
+  }
+
   public openCart() {
     this.appService.openCart(CartOverviewComponent);
   }
@@ -180,7 +197,9 @@ export class RestaurantSingleComponent implements OnInit {
   }
 
   public addToFavorites() {
-    this.restaurantService.addToFavorites(this.restaurant);
+    const status = this.restaurantService.addToFavorites(this.restaurant);
+
+    this.favoriteIcon = status ? 'favorite' : 'favorite_border';
   }
 
   public onReturn() {

@@ -34,17 +34,28 @@ export class RestaurantService {
     return this.http.get<Menu[]>(`${this.url}restaurants/${id}/menu.json`);
   }
 
-  public addToFavorites(restaurant: Restaurant): void {
+  public addToFavorites(restaurant: Restaurant): boolean {
     const user = this.usersService.getUser();
 
     if (!user.favoriteRestaurants) {
       user.favoriteRestaurants = [];
     }
 
-    user.favoriteRestaurants.push(restaurant);
+    const index = user.favoriteRestaurants.findIndex((data) => data.id === restaurant.id);
+
+    let status = false;
+
+    if (index === -1) {
+      user.favoriteRestaurants.push(restaurant);
+      status = true;
+    } else {
+      user.favoriteRestaurants.splice(index, 1);
+    }
 
     this.usersService.setUser(user);
-    
+
     console.log(this.usersService.getUser(), restaurant);
+
+    return status;
   }
 }
