@@ -21,6 +21,7 @@ export class ReportsStockComponent implements OnInit {
   public form3!: FormGroup;
   public form4!: FormGroup;
   public optionValue = "";
+  years:number[]=[];
   displayedColumns: string[] = ['id_detalle_insumo', 'id_sucursal', 'Detalles', 'cantidad'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -62,6 +63,12 @@ export class ReportsStockComponent implements OnInit {
       //   console.log(respuesta);
       //   // this.Equipos = respuesta;
       // });
+      for ( let i=2000; i<2050; i++){
+      
+        this.years.push(i);
+        // this.anos.push(i);
+  
+      }
       this.form4 = this.formBuilder.group({
         // "id": 0,
         // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],

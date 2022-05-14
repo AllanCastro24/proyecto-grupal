@@ -57,6 +57,19 @@
                                 </mat-error> -->
                             </mat-form-field>
                         </div>
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Año</mat-label>
+                                <mat-select formControlName="ano">
+                                    <mat-option [value]="">-</mat-option>
+                                    <mat-option *ngFor="let year of years" [value]="year">
+                                        <span>{{year}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <!-- <mat-error *ngIf="form.controls.categoryId.errors?.required">Debe seleccionar un tipo
+                                </mat-error> -->
+                            </mat-form-field>
+                        </div>
                         <div fxFlex="100" class="mt-2 text-center w-100">
                             <button mat-raised-button color="primary" type="submit" class="uppercase">Mostrar</button>
                         </div>

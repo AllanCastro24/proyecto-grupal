@@ -21,7 +21,9 @@ export class ReportsSalesComponent implements OnInit {
   public form2!: FormGroup;
   public form3!: FormGroup;
   public form4!: FormGroup;
-  public optionValue = "";
+  public optionValue = "";  
+  years:number[]=[];
+  
   displayedColumns: string[] = ['id_producto', 'cantidad', 'id_mesero', 'fecha', 'id_sucursal'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -66,12 +68,19 @@ export class ReportsSalesComponent implements OnInit {
     //   console.log(respuesta);
     //   // this.Equipos = respuesta;
     // });
+    for ( let i=2000; i<2050; i++){
+      
+      this.years.push(i);
+      // this.anos.push(i);
+
+    }
     this.form4 = this.formBuilder.group({
       // "id": 0,
       // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
       // "description": null,
       // "buscarPor": [null, Validators.required],
       "mes": null,
+      "ano":null,
       // "fecha": null,
       // "fecha2": null,
       // "dia": null,
