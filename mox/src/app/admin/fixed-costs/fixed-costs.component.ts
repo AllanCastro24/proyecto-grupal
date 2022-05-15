@@ -19,6 +19,7 @@ export class FixedCostsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   public TiposGastos: any;
+  public Sucursales:any;
   public stores = [
     { id: 1, name: 'Agua' },
     { id: 2, name: 'Luz' }
@@ -41,6 +42,9 @@ export class FixedCostsComponent implements OnInit {
       console.log(this.TiposGastos);
       // this.Equipos = respuesta;
     });
+    this.appService.ObtenerSucursales().subscribe(respuesta =>{
+      this.Sucursales=respuesta;
+    })
   }
 
   public initDataSource(data: any) {

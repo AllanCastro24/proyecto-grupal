@@ -768,6 +768,10 @@ export class AppService {
     return this.http.get(this.API + "api/tipo_gastos/consultar");
   }
 
+  ObtenerSucursales() {
+    return this.http.get(this.API + "api/sucursales/consultar");
+  }
+
   InsertarTipoGastoFijo(datosGasto: any): Observable<any> {
     return this.http.post(this.API + "api/tipo_gastos/add", datosGasto, { responseType: 'text' });
 
