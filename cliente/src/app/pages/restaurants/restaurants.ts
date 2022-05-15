@@ -2,6 +2,7 @@ import { Plate } from "./plates";
 
 export interface Restaurant {
   id: number;
+  companyId: number;
   name: string;
   image: string;
   // description: string;
@@ -50,4 +51,15 @@ export interface Order {
 export interface OrderStatus {
   id: number;
   name: string;
+}
+
+export interface CartList {
+  id: number;
+  branchId: number;
+  companyId: number;
+  name: string;
+  image: string;
+  quantity?: number;
+  amount?: number;
+  items: Plate[];
 }

@@ -45,7 +45,7 @@
     </div>
   </div>
 </div>
-<div [routerLink]="['/restaurants/info', restaurant?.id]" class="info">
+<div [routerLink]="['/restaurants/info', restaurant?.id, restaurant?.companyId]" class="info">
   <h1 class="title">{{ restaurant?.name }}</h1>
   <div class="rating">
     <mat-icon>star</mat-icon>
@@ -94,12 +94,10 @@
     </div>
   </div>
 </div>
-<div *ngIf="restaurantService.cartList.length > 0" (click)="toggleCart()" class="view-cart">
-  Mirar carrito ({{ restaurantService.totalCartCount }})
-</div>
+<div *ngIf="cartItems.length" (click)="toggleCart()" class="view-cart">Mirar carrito ({{ restaurantService.totalCartCount }})</div>
 <div *ngIf="showCart" class="preview-cart">
   <div (click)="toggleCart()" class="hide-zone"></div>
-  <mat-list *ngIf="restaurantService.cartList.length" class="cart-items">
+  <mat-list *ngIf="cartItems.length" class="cart-items">
     <mat-list-item>
       <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 -3">
         <a routerLink="/cart" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none">Ver carrito</a>
@@ -116,7 +114,7 @@
     <mat-list-item>
       <div class="w-100 divider"></div>
     </mat-list-item>
-    <mat-list-item *ngFor="let menuItem of menuItems" (click)="editCartItem(menuItem)">
+    <mat-list-item *ngFor="let menuItem of cartItems" (click)="editCartItem(menuItem)">
       <img matListAvatar [src]="menuItem.image.medium" alt="image" />
       <h3 mat-line class="secondary-font fw-500 ml-2 title">
         <a>{{ menuItem.cartCount }} - {{ menuItem.name }}</a>
@@ -137,7 +135,7 @@
       </div>
     </mat-list-item>
   </mat-list>
-  <div *ngIf="!menuItems.length" class="empty-cart py-3 text-center">
+  <div *ngIf="!cartItems.length" class="empty-cart py-3 text-center">
     <p>No tiene nada en su carrito</p>
     <a routerLink="/cart" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none">Ver carrito</a>
   </div>
@@ -158,7 +156,7 @@
     <textarea [(ngModel)]="currentPlate.note" placeholder="Sin cebolla"></textarea>
   </div>
   <div class="counter">
-    <app-quantity-counter [value]="1" [step]="1" [min]="1" [max]="currentPlateTotal" (onCounterChange)="counterChange($event)"></app-quantity-counter>
+    <app-quantity-counter [value]="currentPlate.cartCount" [step]="1" [min]="1" [max]="currentPlate.availibilityCount" (onCounterChange)="counterChange($event)"></app-quantity-counter>
   </div>
   <div (click)="deleteItem()" class="remove">
     <div>
@@ -166,5 +164,5 @@
       <span>Eliminar</span>
     </div>
   </div>
-  <div (click)="updateCart()" class="add-cart">Actualizar carrito <span>●</span> {{ (currentPlate?.price || 0) * quantityCount | currency }}</div>
+  <div (click)="updateCart()" class="add-cart">Actualizar carrito <span>●</span> {{ (currentPlate?.price || 0) * currentPlate.cartCount | currency }}</div>
 </div>

@@ -10,13 +10,13 @@ import { RestaurantInfoComponent } from './restaurant-info/restaurant-info.compo
 
 export const routes = [
   { path: '', component: CategoriesComponent, pathMatch: 'full' },
-  { path: ':id', component: RestaurantSingleComponent },
-  { path: ':restaurantId/plate/:plateId', component: PlateComponent },
-  { path: 'info/:id', component: RestaurantInfoComponent },
+  { path: ':id/:companyId', component: RestaurantSingleComponent },
+  { path: ':id/:companyId/plate/:plateId', component: PlateComponent },
+  { path: 'info/:id/:companyId', component: RestaurantInfoComponent },
 ];
 
 @NgModule({
-  declarations: [RestaurantSingleComponent, PlateComponent, RestaurantInfoComponent,  ],
+  declarations: [RestaurantSingleComponent, PlateComponent, RestaurantInfoComponent],
   imports: [CommonModule, RouterModule.forChild(routes), SharedModule, PipesModule],
 })
 export class RestaurantsModule {}

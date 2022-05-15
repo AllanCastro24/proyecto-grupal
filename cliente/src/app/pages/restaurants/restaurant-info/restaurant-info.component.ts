@@ -16,6 +16,7 @@ export class RestaurantInfoComponent implements OnInit {
   private sub: any;
 
   public restaurantId!: number;
+  public companyId!: number;
 
   public restaurant!: Restaurant;
   public tags: Tag[] = [];
@@ -30,6 +31,7 @@ export class RestaurantInfoComponent implements OnInit {
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
       this.restaurantId = params['id'];
+      this.companyId = params['companyId'];
     });
 
     this.getRestaurant();
@@ -40,16 +42,8 @@ export class RestaurantInfoComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public getRestaurant() {
-    this.restaurantService.getRestaurants().subscribe((restaurants) => {
-      for (const restaurant of restaurants) {
-        if (restaurant.id === this.restaurantId) {
-          this.restaurant = restaurant;
-
-          console.log(this.restaurant);
-        }
-      }
-    });
+  public async getRestaurant() {
+    this.restaurant = await this.restaurantService.getRestaurant(this.restaurantId, this.companyId);
   }
 
   public async getTags() {

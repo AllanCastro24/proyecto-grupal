@@ -7,13 +7,13 @@
 }
 
 .search-icon {
-  width: 10%;
+  margin-left: 10px;
   display: flex;
   justify-content: right;
 }
 
 .search-input {
-  width: 80%;
+  width: 90%;
   background-color: #efefef;
   border: none;
   outline: none;
@@ -21,7 +21,7 @@
 }
 
 .close-icon {
-  width: 10%;
+  margin-right: 10px;
   display: flex;
   justify-content: left;
   visibility: hidden;
@@ -37,7 +37,7 @@
   z-index: 100;
   width: calc(100% - 1rem);
   top: 78px;
-  bottom: 56px;
+  bottom: 40px;
   overflow-y: scroll;
 }
 

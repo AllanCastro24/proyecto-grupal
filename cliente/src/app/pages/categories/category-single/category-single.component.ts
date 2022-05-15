@@ -12,6 +12,7 @@ import { CategoriesService } from '../categories.service';
 export class CategorySingleComponent implements OnInit {
   private sub: any;
 
+  public companyId: number = 1;
   public restaurants!: Restaurant[];
 
   public totalResults: number = 0;
@@ -40,7 +41,7 @@ export class CategorySingleComponent implements OnInit {
   }
 
   public getRestaurantsByCategory(categoryId: number) {
-    this.restaurantService.getRestaurants().subscribe((restaurants) => {
+    this.restaurantService.getRestaurants(this.companyId).subscribe((restaurants) => {
       this.restaurants = restaurants.filter((restaurant) => {
         return restaurant.categoryId.includes(Number(categoryId));
       });

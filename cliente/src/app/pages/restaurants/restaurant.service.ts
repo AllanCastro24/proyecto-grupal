@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { UsersService } from 'src/app/users/users.service';
 import { environment } from 'src/environments/environment';
 import { Plate } from './plates';
-import { Menu, Restaurant } from './restaurants';
+import { CartList, Menu, Restaurant } from './restaurants';
 
 @Injectable({
   providedIn: 'root',
@@ -18,24 +18,38 @@ export class RestaurantService {
 
   constructor(public http: HttpClient, public usersService: UsersService) {}
 
-  public getRestaurants(): Observable<Restaurant[]> {
-    return this.http.get<Restaurant[]>(this.url + 'restaurants/restaurants.json');
+  public async getRestaurant(companyId: number, id: number): Promise<Restaurant> {
+    return new Promise((resolve, reject) => {
+      this.getRestaurants(companyId).subscribe((restaurants) => {
+        for (const restaurant of restaurants) {
+          if (restaurant.id == id) {
+            resolve(restaurant);
+          }
+        }
+
+        resolve(<Restaurant>{});
+      });
+    });
+  }
+
+  public getRestaurants(companyId: number): Observable<Restaurant[]> {
+    return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
   }
 
   public getFrequentRestaurants(): Observable<Restaurant[]> {
     return this.http.get<Restaurant[]>(this.url + 'restaurants/restaurants.json');
   }
 
-  public getPlate(restaurantId: number, plateId: number): Observable<Plate> {
-    return this.http.get<Plate>(`${this.url}restaurants/${restaurantId}/plates/menu-item-${plateId}.json`);
+  public getPlate(companyId: number, restaurantId: number, id: number): Observable<Plate> {
+    return this.http.get<Plate>(`${this.url}restaurants/${companyId}/${restaurantId}/plates/menu-item-${id}.json`);
   }
 
-  public getPlates(id: number): Observable<Plate[]> {
-    return this.http.get<Plate[]>(`${this.url}restaurants/${id}/plates/menu-items.json`);
+  public getPlates(companyId: number, restaurantId: number): Observable<Plate[]> {
+    return this.http.get<Plate[]>(`${this.url}restaurants/${companyId}/${restaurantId}/plates/menu-items.json`);
   }
 
-  public getMenu(id: number): Observable<Menu[]> {
-    return this.http.get<Menu[]>(`${this.url}restaurants/${id}/menu.json`);
+  public getMenu(companyId: number, restaurantId: number): Observable<Menu[]> {
+    return this.http.get<Menu[]>(`${this.url}restaurants/${companyId}/${restaurantId}/menu.json`);
   }
 
   public addToFavorites(restaurant: Restaurant): boolean {
@@ -45,7 +59,7 @@ export class RestaurantService {
       user.favoriteRestaurants = [];
     }
 
-    const index = user.favoriteRestaurants.findIndex((data) => data.id === restaurant.id);
+    const index = user.favoriteRestaurants.findIndex((data) => data.companyId == restaurant.companyId && data.id == restaurant.id);
 
     let status = false;
 
@@ -63,45 +77,80 @@ export class RestaurantService {
     return status;
   }
 
-  get cartList(): Plate[] {
-    return this.usersService.getUser().cartList || [];
+  public getCartList(branchId: number, companyId: number): Plate[] {
+    const cartList = this.usersService.getUser().cartList || [];
+
+    const indexCartList = cartList.findIndex((cartList) => cartList.branchId == branchId && cartList.companyId == companyId);
+
+    if (indexCartList !== -1) {
+      return cartList[indexCartList].items;
+    }
+
+    return [];
   }
 
-  set cartList(value: Plate[]) {
+  public setCartList(branchId: number, companyId: number, items: Plate[]) {
     const user = this.usersService.getUser();
+    const cartList = user.cartList || [];
+    const indexCartList = cartList.findIndex((cartList) => cartList.branchId == branchId && cartList.companyId == companyId);
 
-    user.cartList = value;
+    if (indexCartList !== -1) {
+      cartList[indexCartList].items = items;
+    }
+
+    user.cartList = cartList;
 
     this.usersService.setUser(user);
   }
 
-  public addToCart(plate: Plate): void {
+  public async addToCart(plate: Plate) {
     const user = this.usersService.getUser();
 
     if (!user.cartList) {
       user.cartList = [];
     }
 
-    const index = user.cartList.findIndex((data) => data.id === plate.id);
+    const indexCartList = user.cartList.findIndex((cartList) => cartList.branchId == plate.branchId && cartList.companyId == plate.companyId);
 
-    if (index === -1) {
-      user.cartList.push(plate);
+    if (indexCartList === -1) {
+      const restaurant = await this.getRestaurant(plate.branchId, plate.companyId);
+
+      const cartList: CartList = {
+        id: user.cartList.length + 1,
+        name: restaurant.name,
+        image: plate.image.medium,
+        branchId: plate.branchId,
+        companyId: plate.companyId,
+        items: [plate],
+      };
+
+      user.cartList.push(cartList);
 
       this.usersService.setUser(user);
+    } else {
+      const index = user.cartList[indexCartList].items.findIndex((data) => data.id == plate.id);
 
-      this.calculateCartTotal();
+      if (index === -1) {
+        user.cartList[indexCartList].items.push(plate);
+
+        this.usersService.setUser(user);
+
+        this.calculateCartTotal(plate.branchId, plate.companyId);
+      }
     }
 
     console.log(this.usersService.getUser(), plate);
   }
 
-  public calculateCartTotal() {
+  public calculateCartTotal(branchId: number, companyId: number) {
     this.totalPrice = 0;
     this.totalCartCount = 0;
 
-    this.cartList.forEach((item) => {
+    const items = this.getCartList(branchId, companyId);
+
+    for (const item of items) {
       this.totalPrice += item.price * item.cartCount;
       this.totalCartCount += item.cartCount;
-    });
+    }
   }
 }

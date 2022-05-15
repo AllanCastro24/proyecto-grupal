@@ -8,6 +8,7 @@ import { RestaurantService } from '../../restaurants/restaurant.service';
   styleUrls: ['./frequent-plates.component.scss'],
 })
 export class FrequentPlatesComponent implements OnInit {
+  public companyId: number = 1;
   public plates: Plate[] = [];
 
   constructor(public restaurantsService: RestaurantService) {}
@@ -21,7 +22,7 @@ export class FrequentPlatesComponent implements OnInit {
       const randRestaurant = Math.floor(Math.random() * (2 - 1) + 1);
       const randPlate = Math.floor(Math.random() * (34 - 1) + 1);
 
-      this.restaurantsService.getPlate(randRestaurant, randPlate).subscribe((plate) => {
+      this.restaurantsService.getPlate(this.companyId, randRestaurant, randPlate).subscribe((plate) => {
         this.plates.push(plate);
       });
     }

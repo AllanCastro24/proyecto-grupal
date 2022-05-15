@@ -1,5 +1,6 @@
 {
   "id": "2",
+  "companyId": 1,
   "categoryId": [2, 3],
   "tagId": [1, 2, 3, 4, 5, 6],
   "name": "Demonic",

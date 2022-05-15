@@ -6,7 +6,7 @@
   <div class="results">
     <span>{{ totalResults }} resultados</span>
   </div>
-  <div [routerLink]="['/restaurants', restaurant.id]" class="item" *ngFor="let restaurant of restaurants">
+  <div [routerLink]="['/restaurants', restaurant.id, restaurant.companyId]" class="item" *ngFor="let restaurant of restaurants">
     <img [src]="restaurant.image" />
     <div class="info">
       <span class="title">{{ restaurant.name }}</span>

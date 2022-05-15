@@ -21,6 +21,7 @@ export class RestaurantSingleComponent implements OnInit {
   private sub: any;
 
   private restaurantId!: number;
+  private companyId!: number;
 
   public restaurant!: Restaurant;
   public menu!: Menu[];
@@ -39,7 +40,7 @@ export class RestaurantSingleComponent implements OnInit {
   public favoriteIcon: string = 'favorite_border';
 
   public showCart: boolean = false;
-  public menuItems: Plate[] = [];
+  public cartItems: Plate[] = [];
 
   public showEditCart: boolean = false;
   public currentPlate!: Plate;
@@ -63,6 +64,7 @@ export class RestaurantSingleComponent implements OnInit {
   async ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
       this.restaurantId = params['id'];
+      this.companyId = params['companyId'];
     });
 
     this.menuService.toggleMenu(false);
@@ -72,8 +74,7 @@ export class RestaurantSingleComponent implements OnInit {
     this.getPlates();
     this.getMenu();
     this.checkFavorite();
-
-    this.menuItems = this.restaurantService.cartList;
+    this.getCartList();
   }
 
   ngOnDestroy() {
@@ -81,7 +82,7 @@ export class RestaurantSingleComponent implements OnInit {
   }
 
   public getPlates() {
-    this.restaurantService.getPlates(this.restaurantId).subscribe((plates) => {
+    this.restaurantService.getPlates(this.companyId, this.restaurantId).subscribe((plates) => {
       this.plates = plates;
 
       console.log(this.plates);
@@ -89,18 +90,10 @@ export class RestaurantSingleComponent implements OnInit {
   }
 
   public getRestaurant() {
-    return new Promise((resolve, reject) => {
-      this.restaurantService.getRestaurants().subscribe((restaurants) => {
-        for (const restaurant of restaurants) {
-          if (restaurant.id === this.restaurantId) {
-            this.restaurant = restaurant;
+    return new Promise(async (resolve, reject) => {
+      this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
 
-            console.log(this.restaurant);
-          }
-        }
-
-        resolve(true);
-      });
+      resolve(true);
     });
   }
 
@@ -115,11 +108,15 @@ export class RestaurantSingleComponent implements OnInit {
   }
 
   public getMenu() {
-    this.restaurantService.getMenu(this.restaurantId).subscribe((menu) => {
+    this.restaurantService.getMenu(this.companyId, this.restaurantId).subscribe((menu) => {
       this.menu = menu;
 
       console.log(menu);
     });
+  }
+
+  public getCartList() {
+    this.cartItems = this.restaurantService.getCartList(this.restaurantId, this.companyId);
   }
 
   public onClickMenu(menu: Menu) {
@@ -233,16 +230,13 @@ export class RestaurantSingleComponent implements OnInit {
     this.showCart = !this.showCart;
   }
 
-  public removeCartItem(item: Plate, event: any) {}
-
   public clearCart() {
-    this.menuItems.length = 0;
+    this.cartItems.length = 0;
 
-    this.restaurantService.cartList = [];
-
+    this.restaurantService.setCartList(this.restaurantId, this.companyId, []);
     this.restaurantService.totalPrice = 0;
 
-    this.restaurantService.calculateCartTotal();
+    this.restaurantService.calculateCartTotal(this.restaurantId, this.companyId);
 
     this.toggleCart();
   }
@@ -256,11 +250,10 @@ export class RestaurantSingleComponent implements OnInit {
 
   public counterChange(count: number) {
     this.quantityCount = count;
+    this.currentPlate.cartCount = count;
   }
 
   public updateCart() {
-    this.currentPlate.cartCount = this.quantityCount;
-
     if (this.currentPlate.cartCount > this.currentPlate.availibilityCount) {
       this.quantityCount = 1;
 
@@ -272,42 +265,41 @@ export class RestaurantSingleComponent implements OnInit {
         panelClass: ['error'],
       });
     } else {
-      const index: number = this.restaurantService.cartList.findIndex((item) => item.id == this.currentPlate.id);
+      const items = this.restaurantService.getCartList(this.restaurantId, this.companyId);
+      const indexPlate = items.findIndex((data) => data.id == this.currentPlate.id);
 
-      if (index !== -1) {
-        const cartList = this.restaurantService.cartList;
+      if (indexPlate !== -1) {
+        items[indexPlate] = this.currentPlate;
 
-        cartList[index] = this.currentPlate;
+        this.restaurantService.setCartList(this.restaurantId, this.companyId, items);
+        this.cartItems = items;
 
-        this.restaurantService.cartList = cartList;
-        this.menuItems = cartList;
-
-        console.log(this.restaurantService.cartList, this.currentPlate);
-
-        this.restaurantService.calculateCartTotal();
+        this.restaurantService.calculateCartTotal(this.restaurantId, this.companyId);
 
         this.toggleAll();
       }
+
+      console.log(this.restaurantService.getCartList(this.restaurantId, this.companyId), this.currentPlate);
     }
   }
 
   public deleteItem() {
-    const index: number = this.restaurantService.cartList.findIndex((item) => item.id == this.currentPlate.id);
-    const cartList = this.restaurantService.cartList;
+    const items = this.restaurantService.getCartList(this.restaurantId, this.companyId);
+    const index = items.findIndex((data) => data.id == this.currentPlate.id);
 
-    cartList.splice(index, 1);
+    items.splice(index, 1);
 
-    this.restaurantService.cartList = cartList;
-    this.menuItems = cartList;
+    this.restaurantService.setCartList(this.restaurantId, this.companyId, items);
+    this.cartItems = items;
 
-    this.restaurantService.calculateCartTotal();
+    this.restaurantService.calculateCartTotal(this.restaurantId, this.companyId);
 
     this.toggleAll();
   }
 
   public toggleEditCart() {
     this.showEditCart = !this.showEditCart;
-    this.quantityCount = 1;
+    this.quantityCount = this.currentPlate.cartCount;
   }
 
   public toggleAll() {

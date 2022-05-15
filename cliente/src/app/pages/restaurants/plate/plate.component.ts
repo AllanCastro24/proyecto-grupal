@@ -15,6 +15,7 @@ export class PlateComponent implements OnInit {
   private sub: any;
 
   public restaurantId!: number;
+  public companyId!: number;
   public plateId!: number;
 
   public quantityCount: number = 1;
@@ -34,7 +35,8 @@ export class PlateComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
-      this.restaurantId = params['restaurantId'];
+      this.restaurantId = params['id'];
+      this.companyId = params['companyId'];
       this.plateId = params['plateId'];
     });
 
@@ -46,7 +48,7 @@ export class PlateComponent implements OnInit {
   }
 
   public getPlate() {
-    this.restaurantService.getPlate(this.restaurantId, this.plateId).subscribe((plate) => {
+    this.restaurantService.getPlate(this.companyId, this.restaurantId, this.plateId).subscribe((plate) => {
       this.plate = plate;
 
       console.log(this.plate);
@@ -59,15 +61,15 @@ export class PlateComponent implements OnInit {
     if (this.plate.cartCount <= this.plate.availibilityCount) {
       this.plate.note = this.note;
 
-      const index: number = this.restaurantService.cartList.findIndex((item) => item.id == this.plate.id);
+      const cartList = this.restaurantService.getCartList(this.plate.branchId, this.plate.companyId);
+
+      const index: number = cartList.findIndex((item) => item.id == this.plate.id);
 
       if (index !== -1) {
-        const cartList = this.restaurantService.cartList;
-
         cartList[index] = this.plate;
 
-        this.restaurantService.cartList = cartList;
-        this.restaurantService.calculateCartTotal();
+        this.restaurantService.setCartList(this.plate.branchId, this.plate.companyId, cartList);
+        this.restaurantService.calculateCartTotal(this.plate.branchId, this.plate.companyId);
       } else {
         this.restaurantService.addToCart(this.plate);
       }
