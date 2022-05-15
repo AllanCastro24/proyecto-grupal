@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from 'src/app/app.service';
 import { CartOverviewComponent } from 'src/app/shared/cart-overview/cart-overview.component';
 import { MenuService } from 'src/app/theme/components/menu/menu.service';
@@ -37,6 +38,14 @@ export class RestaurantSingleComponent implements OnInit {
 
   public favoriteIcon: string = 'favorite_border';
 
+  public showCart: boolean = false;
+  public menuItems: Plate[] = [];
+
+  public showEditCart: boolean = false;
+  public currentPlate!: Plate;
+  public currentPlateTotal: number = 0;
+  public quantityCount: number = 1;
+
   @ViewChild('inputSearch') inputSearch!: ElementRef;
 
   constructor(
@@ -44,9 +53,11 @@ export class RestaurantSingleComponent implements OnInit {
     public menuService: MenuService,
     private _location: Location,
     private activatedRoute: ActivatedRoute,
-    private restaurantService: RestaurantService,
+    public restaurantService: RestaurantService,
     private categoriesService: CategoriesService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    public router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   async ngOnInit() {
@@ -61,6 +72,8 @@ export class RestaurantSingleComponent implements OnInit {
     this.getPlates();
     this.getMenu();
     this.checkFavorite();
+
+    this.menuItems = this.restaurantService.cartList;
   }
 
   ngOnDestroy() {
@@ -168,7 +181,7 @@ export class RestaurantSingleComponent implements OnInit {
 
   public checkFavorite() {
     const favorites = this.usersService.getUser().favoriteRestaurants;
-    
+
     if (favorites && favorites.find((restaurant) => restaurant.id === this.restaurant.id)) {
       this.favoriteIcon = 'favorite';
     }
@@ -206,5 +219,100 @@ export class RestaurantSingleComponent implements OnInit {
     this.menuService.toggleMenu(true);
 
     this._location.back();
+  }
+
+  public toggleMenu() {
+    const menu: any = document.querySelectorAll('.header, .info, .delivery-type, .restaurant-menu, .view-cart');
+
+    for (const item of menu) {
+      item.style.display = item.style.display === 'none' ? '' : 'none';
+    }
+  }
+
+  public toggleCart() {
+    this.showCart = !this.showCart;
+  }
+
+  public removeCartItem(item: Plate, event: any) {}
+
+  public clearCart() {
+    this.menuItems.length = 0;
+
+    this.restaurantService.cartList = [];
+
+    this.restaurantService.totalPrice = 0;
+
+    this.restaurantService.calculateCartTotal();
+
+    this.toggleCart();
+  }
+
+  public editCartItem(item: Plate) {
+    this.currentPlate = item;
+    this.currentPlateTotal = item.availibilityCount;
+
+    this.toggleAll();
+  }
+
+  public counterChange(count: number) {
+    this.quantityCount = count;
+  }
+
+  public updateCart() {
+    this.currentPlate.cartCount = this.quantityCount;
+
+    if (this.currentPlate.cartCount > this.currentPlate.availibilityCount) {
+      this.quantityCount = 1;
+
+      this.currentPlate.cartCount = this.currentPlate.availibilityCount;
+
+      this.snackBar.open('No hay suficientes platillos, total: ' + this.currentPlate.availibilityCount, '', {
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: ['error'],
+      });
+    } else {
+      const index: number = this.restaurantService.cartList.findIndex((item) => item.id == this.currentPlate.id);
+
+      if (index !== -1) {
+        const cartList = this.restaurantService.cartList;
+
+        cartList[index] = this.currentPlate;
+
+        this.restaurantService.cartList = cartList;
+        this.menuItems = cartList;
+
+        console.log(this.restaurantService.cartList, this.currentPlate);
+
+        this.restaurantService.calculateCartTotal();
+
+        this.toggleAll();
+      }
+    }
+  }
+
+  public deleteItem() {
+    const index: number = this.restaurantService.cartList.findIndex((item) => item.id == this.currentPlate.id);
+    const cartList = this.restaurantService.cartList;
+
+    cartList.splice(index, 1);
+
+    this.restaurantService.cartList = cartList;
+    this.menuItems = cartList;
+
+    this.restaurantService.calculateCartTotal();
+
+    this.toggleAll();
+  }
+
+  public toggleEditCart() {
+    this.showEditCart = !this.showEditCart;
+    this.quantityCount = 1;
+  }
+
+  public toggleAll() {
+    this.toggleCart();
+    this.toggleMenu();
+    this.toggleEditCart();
   }
 }

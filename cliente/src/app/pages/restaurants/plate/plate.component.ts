@@ -1,6 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { UsersService } from 'src/app/users/users.service';
 import { Plate } from '../plates';
 import { RestaurantService } from '../restaurant.service';
 
@@ -20,7 +22,15 @@ export class PlateComponent implements OnInit {
 
   public plate!: Plate;
 
-  constructor(private _location: Location, private activatedRoute: ActivatedRoute, private restaurantService: RestaurantService) {}
+  public note: string = '';
+
+  constructor(
+    private _location: Location,
+    private activatedRoute: ActivatedRoute,
+    private restaurantService: RestaurantService,
+    private usersService: UsersService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
@@ -41,6 +51,37 @@ export class PlateComponent implements OnInit {
 
       console.log(this.plate);
     });
+  }
+
+  public addToCart() {
+    this.plate.cartCount = this.quantityCount;
+
+    if (this.plate.cartCount <= this.plate.availibilityCount) {
+      this.plate.note = this.note;
+
+      const index: number = this.restaurantService.cartList.findIndex((item) => item.id == this.plate.id);
+
+      if (index !== -1) {
+        const cartList = this.restaurantService.cartList;
+
+        cartList[index] = this.plate;
+
+        this.restaurantService.cartList = cartList;
+        this.restaurantService.calculateCartTotal();
+      } else {
+        this.restaurantService.addToCart(this.plate);
+      }
+
+      this.onReturn();
+    } else {
+      this.plate.cartCount = this.plate.availibilityCount;
+
+      this.snackBar.open('No hay suficientes platillos, total: ' + this.plate.availibilityCount, '', {
+        verticalPosition: 'top',
+        duration: 3000,
+        panelClass: ['error'],
+      });
+    }
   }
 
   public counterChange(count: number) {

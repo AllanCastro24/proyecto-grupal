@@ -11,7 +11,10 @@ export interface Plate {
   cartCount: number;
   weight: number;
   isVegetarian: boolean;
+  note?: string;
   menuId: number;
+  branchId: number;
+  companyId: number;
 }
 
 interface Image {

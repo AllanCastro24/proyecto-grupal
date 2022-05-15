@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { skipWhile } from 'rxjs/internal/operators/skipWhile';
-import { AppService } from 'src/app/app.service';
+import { RestaurantService } from 'src/app/pages/restaurants/restaurant.service';
 import { Menu } from '../menu/menu.model';
 import { MenuService } from '../menu/menu.service';
 
@@ -14,7 +13,7 @@ export class FooterComponent implements OnInit {
 
   public show: boolean = true;
 
-  constructor(public menuService: MenuService, public appService: AppService) {}
+  constructor(public menuService: MenuService, public restaurantService: RestaurantService) {}
 
   ngOnInit() {
     this.menuItems = this.menuService.getVerticalMenuItems();

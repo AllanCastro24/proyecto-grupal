@@ -16,6 +16,8 @@
     "cartCount": 0,
     "weight": 160,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 1
   },
   {
@@ -35,6 +37,8 @@
     "cartCount": 0,
     "weight": 180,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 1
   },
   {
@@ -54,6 +58,8 @@
     "cartCount": 0,
     "weight": 125,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 1
   },
   {
@@ -73,6 +79,8 @@
     "cartCount": 0,
     "weight": 110,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 1
   },
   {
@@ -92,6 +100,8 @@
     "cartCount": 0,
     "weight": 110,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 1
   },
   {
@@ -111,6 +121,8 @@
     "cartCount": 0,
     "weight": 170,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 1
   },
   {
@@ -130,6 +142,8 @@
     "cartCount": 0,
     "weight": 170,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 1
   },
   {
@@ -149,6 +163,8 @@
     "cartCount": 0,
     "weight": 170,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 2
   },
   {
@@ -168,6 +184,8 @@
     "cartCount": 0,
     "weight": 120,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 2
   },
   {
@@ -187,6 +205,8 @@
     "cartCount": 0,
     "weight": 145,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 2
   },
   {
@@ -206,6 +226,8 @@
     "cartCount": 0,
     "weight": 120,
     "isVegetarian": true,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 2
   },
   {
@@ -225,6 +247,8 @@
     "cartCount": 0,
     "weight": 120,
     "isVegetarian": true,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 2
   },
   {
@@ -244,6 +268,8 @@
     "cartCount": 0,
     "weight": 120,
     "isVegetarian": true,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 2
   },
   {
@@ -263,6 +289,8 @@
     "cartCount": 0,
     "weight": 120,
     "isVegetarian": true,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 3
   },
   {
@@ -282,6 +310,8 @@
     "cartCount": 0,
     "weight": 120,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 3
   },
   {
@@ -301,6 +331,8 @@
     "cartCount": 0,
     "weight": 130,
     "isVegetarian": true,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 3
   },
   {
@@ -320,6 +352,8 @@
     "cartCount": 0,
     "weight": 130,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 4
   },
   {
@@ -339,6 +373,8 @@
     "cartCount": 0,
     "weight": 180,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 4
   },
   {
@@ -358,6 +394,8 @@
     "cartCount": 0,
     "weight": 150,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 4
   },
   {
@@ -377,6 +415,8 @@
     "cartCount": 0,
     "weight": 220,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 5
   },
   {
@@ -396,6 +436,8 @@
     "cartCount": 0,
     "weight": 230,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 5
   },
   {
@@ -415,6 +457,8 @@
     "cartCount": 0,
     "weight": 170,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 5
   },
   {
@@ -434,6 +478,8 @@
     "cartCount": 0,
     "weight": 180,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 5
   },
   {
@@ -453,6 +499,8 @@
     "cartCount": 0,
     "weight": 150,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 6
   },
   {
@@ -472,6 +520,8 @@
     "cartCount": 0,
     "weight": 140,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 6
   },
   {
@@ -491,6 +541,8 @@
     "cartCount": 0,
     "weight": 230,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 6
   },
   {
@@ -510,6 +562,8 @@
     "cartCount": 0,
     "weight": 250,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 7
   },
   {
@@ -529,6 +583,8 @@
     "cartCount": 0,
     "weight": 150,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 7
   },
   {
@@ -548,6 +604,8 @@
     "cartCount": 0,
     "weight": 150,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 7
   },
   {
@@ -567,6 +625,8 @@
     "cartCount": 0,
     "weight": 150,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 7
   },
   {
@@ -586,6 +646,8 @@
     "cartCount": 0,
     "weight": 250,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 8
   },
   {
@@ -605,6 +667,8 @@
     "cartCount": 0,
     "weight": 170,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 8
   },
   {
@@ -624,6 +688,8 @@
     "cartCount": 0,
     "weight": 150,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 8
   },
   {
@@ -643,6 +709,8 @@
     "cartCount": 0,
     "weight": 150,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 8
   },
   {
@@ -662,6 +730,8 @@
     "cartCount": 0,
     "weight": 150,
     "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
     "menuId": 8
   }
 ]

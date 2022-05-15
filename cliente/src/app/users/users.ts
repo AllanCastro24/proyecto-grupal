@@ -1,4 +1,5 @@
-import { Restaurant } from '../pages/restaurants/restaurants';
+import { Plate } from '../pages/restaurants/plates';
+import { Order, Restaurant } from '../pages/restaurants/restaurants';
 
 export class User {
   id?: number = 0;
@@ -10,6 +11,8 @@ export class User {
   social?: UserSocial;
   settings?: UserSettings;
   favoriteRestaurants?: Restaurant[];
+  orderList?: Order[];
+  cartList?: Plate[];
 }
 
 export class UserProfile {

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { UsersService } from 'src/app/users/users.service';
 import { environment } from 'src/environments/environment';
@@ -10,6 +11,9 @@ import { Menu, Restaurant } from './restaurants';
   providedIn: 'root',
 })
 export class RestaurantService {
+  public totalPrice: number = 0;
+  public totalCartCount: number = 0;
+
   public url = environment.url + '/assets/data/';
 
   constructor(public http: HttpClient, public usersService: UsersService) {}
@@ -57,5 +61,47 @@ export class RestaurantService {
     console.log(this.usersService.getUser(), restaurant);
 
     return status;
+  }
+
+  get cartList(): Plate[] {
+    return this.usersService.getUser().cartList || [];
+  }
+
+  set cartList(value: Plate[]) {
+    const user = this.usersService.getUser();
+
+    user.cartList = value;
+
+    this.usersService.setUser(user);
+  }
+
+  public addToCart(plate: Plate): void {
+    const user = this.usersService.getUser();
+
+    if (!user.cartList) {
+      user.cartList = [];
+    }
+
+    const index = user.cartList.findIndex((data) => data.id === plate.id);
+
+    if (index === -1) {
+      user.cartList.push(plate);
+
+      this.usersService.setUser(user);
+
+      this.calculateCartTotal();
+    }
+
+    console.log(this.usersService.getUser(), plate);
+  }
+
+  public calculateCartTotal() {
+    this.totalPrice = 0;
+    this.totalCartCount = 0;
+
+    this.cartList.forEach((item) => {
+      this.totalPrice += item.price * item.cartCount;
+      this.totalCartCount += item.cartCount;
+    });
   }
 }

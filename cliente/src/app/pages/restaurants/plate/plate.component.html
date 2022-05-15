@@ -10,9 +10,9 @@
 </div>
 <div class="special-instructions">
   <h2>Instrucciones especiales</h2>
-  <textarea placeholder="Sin cebolla"></textarea>
+  <textarea [(ngModel)]="note" placeholder="Sin cebolla"></textarea>
 </div>
 <div class="counter">
   <app-quantity-counter [value]="1" [step]="1" [min]="1" [max]="1000" (onCounterChange)="counterChange($event)"></app-quantity-counter>
 </div>
-<div class="add-cart">Agregar {{ quantityCount }} al carrito <span>●</span> {{ price * quantityCount | currency }}</div>
+<div (click)="addToCart()" class="add-cart">Agregar {{ quantityCount }} al carrito <span>●</span> {{ (plate?.price || 0) * quantityCount | currency }}</div>

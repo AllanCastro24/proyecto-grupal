@@ -16,7 +16,7 @@ export const routes = [
 ];
 
 @NgModule({
-  declarations: [RestaurantSingleComponent, PlateComponent, RestaurantInfoComponent],
+  declarations: [RestaurantSingleComponent, PlateComponent, RestaurantInfoComponent,  ],
   imports: [CommonModule, RouterModule.forChild(routes), SharedModule, PipesModule],
 })
 export class RestaurantsModule {}

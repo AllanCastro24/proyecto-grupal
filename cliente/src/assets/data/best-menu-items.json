@@ -16,6 +16,8 @@
         "cartCount": 0,
         "weight": 220,
         "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
         "categoryId": 5
     },
     {
@@ -35,6 +37,8 @@
         "cartCount": 0,
         "weight": 230,
         "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
         "categoryId": 6
     }, 
     {
@@ -54,6 +58,8 @@
         "cartCount": 0,
         "weight": 140,
         "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
         "categoryId": 6
     },
     {
@@ -73,6 +79,8 @@
         "cartCount": 0,
         "weight": 120,
         "isVegetarian": true,
+  "branchId": 1,
+  "companyId":  1,
         "categoryId": 2
     },
     {
@@ -92,6 +100,8 @@
         "cartCount": 0,
         "weight": 120,
         "isVegetarian": true,
+  "branchId": 1,
+  "companyId":  1,
         "categoryId": 3
     },
     {
@@ -111,6 +121,8 @@
         "cartCount": 0,
         "weight": 180,
         "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
         "categoryId": 4
     }
 ]

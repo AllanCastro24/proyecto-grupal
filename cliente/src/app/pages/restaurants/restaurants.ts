@@ -1,3 +1,5 @@
+import { Plate } from "./plates";
+
 export interface Restaurant {
   id: number;
   name: string;
@@ -31,6 +33,21 @@ interface Pickup {
 }
 
 export interface Menu {
+  id: number;
+  name: string;
+}
+
+export interface Order {
+  id: number;
+  date: string;
+  items: Plate[];
+  quantity: number;
+  amount: number;
+  status: OrderStatus;
+}
+
+//Completed, Processing, On Hold, Refunded, Pending
+export interface OrderStatus {
   id: number;
   name: string;
 }
