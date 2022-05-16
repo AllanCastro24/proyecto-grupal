@@ -129,6 +129,50 @@ export class AddComponent implements OnInit {
       this.form.patchValue({ingrediente1: menuItem[0]['ingrediente1']});  
       this.form.patchValue({weight1: menuItem[0]['weight1']});  
       this.form.patchValue({peso1: menuItem[0]['peso1']});  
+
+      this.form.patchValue({ingrediente2: menuItem[0]['ingrediente2']});  
+      this.form.patchValue({weight2: menuItem[0]['weight2']});  
+      this.form.patchValue({peso2: menuItem[0]['peso2']});  
+
+      this.form.patchValue({ingrediente3: menuItem[0]['ingrediente3']});  
+      this.form.patchValue({weight3: menuItem[0]['weight3']});  
+      this.form.patchValue({peso3: menuItem[0]['peso3']}); 
+      
+      this.form.patchValue({ingrediente4: menuItem[0]['ingrediente4']});  
+      this.form.patchValue({weight4: menuItem[0]['weight4']});  
+      this.form.patchValue({peso4: menuItem[0]['peso4']});  
+
+      this.form.patchValue({ingrediente5: menuItem[0]['ingrediente5']});  
+      this.form.patchValue({weight5: menuItem[0]['weight5']});  
+      this.form.patchValue({peso5: menuItem[0]['peso5']});  
+      
+      this.form.patchValue({ingrediente6: menuItem[0]['ingrediente6']});  
+      this.form.patchValue({weight6: menuItem[0]['weight6']});  
+      this.form.patchValue({peso6: menuItem[0]['peso6']});  
+
+      this.form.patchValue({ingrediente7: menuItem[0]['ingrediente7']});  
+      this.form.patchValue({weight7: menuItem[0]['weight7']});  
+      this.form.patchValue({peso7: menuItem[0]['peso7']});  
+
+      this.form.patchValue({ingrediente8: menuItem[0]['ingrediente8']});  
+      this.form.patchValue({weight8: menuItem[0]['weight8']});  
+      this.form.patchValue({peso8: menuItem[0]['peso8']});  
+
+      this.form.patchValue({ingrediente9: menuItem[0]['ingrediente9']});  
+      this.form.patchValue({weight9: menuItem[0]['weight9']});  
+      this.form.patchValue({peso9: menuItem[0]['peso9']});  
+
+      this.form.patchValue({ingrediente10: menuItem[0]['ingrediente10']});  
+      this.form.patchValue({weight10: menuItem[0]['weight10']});  
+      this.form.patchValue({peso10: menuItem[0]['peso10']});  
+
+      this.form.patchValue({ingrediente11: menuItem[0]['ingrediente11']});  
+      this.form.patchValue({weight11: menuItem[0]['weight11']});  
+      this.form.patchValue({peso11: menuItem[0]['peso11']});  
+      
+      this.form.patchValue({ingrediente12: menuItem[0]['ingrediente12']});  
+      this.form.patchValue({weight12: menuItem[0]['weight12']});  
+      this.form.patchValue({peso12: menuItem[0]['peso12']});  
       //console.log(menuItem[0]['image']);
       console.log({categoryId: menuItem[0]['categoryId']});
       console.log({ingrediente1: menuItem[0]['ingrediente1']});

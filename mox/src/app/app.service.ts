@@ -762,7 +762,7 @@ export class AppService {
     return [
         //{ value: 'free', name: 'Free Delivery', desc: '$0.00 / Delivery in 7 to 14 business Days' },
         { value: 'Efectivo', name: 'Pago Efectivo', desc: 'Solicite pago en efectivo' },
-        { value: 'Tarjeta', name: 'Pago Con Trjeta', desc: 'Ingrese tarjeta' },
+        { value: 'Tarjeta', name: 'Pago Con Tarjeta', desc: 'Ingrese tarjeta' },
         //{ value: 'Rapdido', name: 'Envio Rapido', desc: '$29.99 / Delivery in 1 business Days' }
     ]
   }
