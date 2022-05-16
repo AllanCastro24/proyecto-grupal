@@ -6,5 +6,9 @@
     { "id":5, "name":"Meat Courses", "description": "Meat Courses category description" },
     { "id":6, "name":"Chicken Courses", "description": "Chicken Courses category description" }, 
     { "id":7, "name":"Desserts", "description": "Desserts category description" },
-    { "id":8, "name":"Drinks", "description": "Drinks category description" } 
+    { "id":8, "name":"Drinks", "description": "Drinks category description" }, 
+    { "id":9, "name":"Harina", "description": "Harina de trigo Rica Sinaloa presentacion 1 Kg" },
+    { "id":10, "name":"Aceite Comestible", "description": "Aceite vegetal Comestible Maceite presentacion 980 Ml" },
+    { "id":11, "name":"Sal", "description": "Sal de Mesa La Fina presentacion 1 Kg" }
 ]
+

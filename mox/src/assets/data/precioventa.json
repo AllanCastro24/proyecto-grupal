@@ -1,0 +1,6 @@
+[
+    { "id":1, "name":"Harina", "description": "Harina rica sinaloa 1 kg", "precio": "$ 17.00" },
+    { "id":2, "name":"Pan", "description": "Pan dulce de la Rosa", "precio": "$ 8.00" },
+    { "id":3, "name":"Aceite", "description": "Aceite comestible 990 ml", "precio": "$ 40.00" },
+    { "id":4, "name":"Frijol", "description": "Frijol azufrado costal 20 kg", "precio": "$ 520.00" }
+]

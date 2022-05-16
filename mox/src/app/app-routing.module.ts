@@ -4,10 +4,10 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { PagesComponent } from './pages/pages.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
-
 const routes: Routes = [
+  
   { 
-    path: '', 
+     path: '', 
     component: PagesComponent, children: [
         //{ path: '', redirectTo: '/landing', pathMatch: 'full' },
         { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
@@ -23,12 +23,15 @@ const routes: Routes = [
         { path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule) },
         { path: 'faq', loadChildren: () => import('./pages/faq/faq.module').then(m => m.FaqModule) },
         { path: 'terms-conditions', loadChildren: () => import('./pages/terms-conditions/terms-conditions.module').then(m => m.TermsConditionsModule) },
-    ]
+    ] 
   },
   { path: 'landing', loadChildren: () => import('./pages/landing/landing.module').then(m => m.LandingModule) },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: 'lock-screen', component: LockScreenComponent },
-  { path: '**', component: NotFoundComponent } 
+  { path: '**', component: NotFoundComponent },
+  /* { path: 'add', component: AgregarProductoComponent } */
+  
+
 ];
 
 @NgModule({

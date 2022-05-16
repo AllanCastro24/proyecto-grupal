@@ -2,6 +2,8 @@ import { Menu } from './menu.model';
 
 export const menuItems = [ 
     new Menu (10, 'ADMIN_NAV.DASHBOARD', '/admin', null, 'dashboard', null, false, 0),
+    new Menu (19, 'ALMACEN', null, null, 'storage', null, true, 0), //====================================PRODUCTOS
+    //new Menu (19, 'New', null, null, 'storage', null, true, 0), //====================================PRODUCTOS
     new Menu (20, 'ADMIN_NAV.MENU_ITEMS', null, null, 'grid_on', null, true, 0),  
     new Menu (21, 'ADMIN_NAV.CATEGORIES', '/admin/menu-items/categories', null, 'category', null, false, 20), 
     new Menu (22, 'ADMIN_NAV.MENU_ITEMS_LIST', '/admin/menu-items/list', null, 'list', null, false, 20), 
@@ -25,5 +27,18 @@ export const menuItems = [
     new Menu (142, 'Level 3', null, null, 'folder_open', null, true, 141),
     new Menu (143, 'Level 4', null, null, 'folder_open', null, true, 142),
     new Menu (144, 'Level 5', null, '/', 'link', null, false, 143),
-    new Menu (200, 'ADMIN_NAV.EXTERNAL_LINK', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 0)
+    new Menu (200, 'ADMIN_NAV.EXTERNAL_LINK', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 0),
+
+    //================================================PRODUCTOS====================================================================
+    
+    new Menu (302, 'Agregar Insumos', '/admin/products-items/add', null, 'add_circle_outline', null, false, 19), 
+    new Menu (303, 'Listar Insumos', '/admin/products-items/list', null, 'format_list_bulleted', null, false, 19),
+    new Menu (304, 'Categorias Insumos', '/admin/products-items/categorias-productos', null, 'category', null, false, 19),
+    new Menu (305, 'Unidad de Medida', '/admin/products-items/unidad-medida', null, 'straighten', null, false, 19),
+    new Menu (306, 'Tipo de Pago', '/admin/products-items/Tipo-Pago', null, 'payment', null, false, 19),
+    new Menu (307, 'Mermas', '/admin/products-items/Mermas', null, 'exit_to_app', null, false, 19),
+    new Menu (308, 'Agregar Proveedor', '/admin/products-items/Add-Proveedor', null, 'people', null, false, 19),
+    new Menu (308, 'Listar Proveedores', '/admin/products-items/Listar-Proveedores', null, 'list_alt', null, false, 19),
+    new Menu (308, 'Stock Minimo', '/admin/products-items/Stock-Min', null, 'info', null, false, 19),
+    
 ]
