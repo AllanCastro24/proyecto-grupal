@@ -63,14 +63,70 @@ export class ReservationStatus {
  
 
 export class Order {
-    constructor(public id: number,
-                public date: string,
-                public items: MenuItem[],
-                public quantity: number,
-                public amount: number,
-                public status: OrderStatus){}
-}  
+    constructor(//public id: number,
+                //public date: string,
+                //public items: MenuItem[],
+                //public quantity: number,
+                //public amount: number,
+                //public status: OrderStatus,
+                public id: number,
+                public idcli: number,
+                public name: string,
+                public description: MenuItem[],
+                public price: number,
+                public cartCount: number,
+                public estatus: string,
+                public image: string,
+                public firstName: string,
+                public lastName: string,
+                public email: string,
+                public phone: number,
+                public city: string,
+                public place: string,
+                public postalCode: string,
+                public address: string,
+                public descr: string,
+                public namee: string,
+                
+                public valuee: string,
+                public cardNumber: string,
+                public nameee: string,
+                public descri: string,
 
+
+                ){}
+}  
+export class Transaction {
+    constructor(//public id: number,
+                //public date: string,
+                //public items: MenuItem[],
+                //public quantity: number,
+                //public amount: number,
+                //public status: OrderStatus,
+                public id: number,
+                public idcli: number,
+                public name: string,
+                public description: MenuItem[],
+                public price: number,
+                public cartCount: number,
+                public estatus: string,
+                public image: string,
+                public firstName: string,
+                public lastName: string,
+                public email: string,
+                public phone: number,
+                public city: string,
+                public place: string,
+                public postalCode: string,
+                public address: string,
+                public descr: string,
+                public namee: string,
+                public valuee: string,
+                public cardNumber: string,
+
+
+                ){}
+}  
 //Completed, Processing, On Hold, Refunded, Pending
 export class OrderStatus {
     constructor(public id: number,
@@ -78,11 +134,13 @@ export class OrderStatus {
 }
 
 export class MenuItem {
-    constructor(public id: number,
+    constructor(public idtienda: number,
+        public idsuc: number,
+        public id: number,
                 public name: string,
                 public description: string,
                 public price: number,
-                public image: MenuItemImage,
+                public image: string,
                 public discount: number,
                 public ratingsCount: number,
                 public ratingsValue: number,
@@ -104,6 +162,12 @@ export class Category {
                 public name: string,
                 public description: string){ }
 }   
+
+export class Unidades {
+    constructor(public id: number,
+                public name: string,
+                ){ }
+}  
 
 export class Pagination {
     constructor(public page: number,

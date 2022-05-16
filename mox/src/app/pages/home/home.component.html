@@ -1,4 +1,4 @@
-<app-header-image *ngIf="settings.header == 'image'" 
+<!-- <app-header-image *ngIf="settings.header == 'image'" 
                 [backgroundImage]="'assets/images/others/homepage.jpg'"
                 [bgImageAnimate]="true"
                 [contentOffsetToTop]="true"
@@ -98,9 +98,70 @@
             </mat-card> 
         </div>
     </div>   
-</div>   
+</div>    -->
+<!-- <div id="register">
+    <div id="ticket">
+      <h1>Thank You!</h1>
+      <table>
+        
+        <tbody id="entries">
+          <a href="">HH</a>
+          
+          
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Total</th>
+            <th id="total">$0.00</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+   
+  </div> -->
+  <div style="text-align: center;">
+    <mat-grid-list cols="5"  >
+        <mat-grid-tile *ngFor="let datos of datosmpl; let iControl = index;">
+            <mat-card class="example-card" >
+                <mat-card-title> {{datos.Pseudonimo}}</mat-card-title>
+                <mat-card-subtitle>{{datos.Ubicacion}}</mat-card-subtitle>
+                <mat-card-content>
+                  <p></p>
+                
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button name="id"  [routerLink]="['/menu', datos.ID_sucursal, datos.ID_tienda]" class="uppercase">VER MENU</button>
+                  
+                </mat-card-actions>
+              </mat-card>
+        </mat-grid-tile>
+        
 
-<app-testimonials></app-testimonials>  
-<app-get-app></app-get-app>
-<app-our-awards></app-our-awards> 
-<app-get-in-touch></app-get-in-touch>
+        
+      </mat-grid-list>
+    
+  </div>
+  
+
+<!-- <div style="text-align: center;">
+    <div *ngFor="let datos of datosmpl; let iControl = index;">
+        <div>
+            <p>
+                {{datos.nombre}}
+            </p>
+           
+            <p>
+                {{datos.ubicacion}}
+            </p>
+        </div>
+      
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <a mat-raised-button name="id"  [routerLink]="['/menu', datos.id, datos.idtienda]" class="uppercase">Ver Menu</a>
+        </div> 
+    </div>
+</div> -->
+
+<!-- <app-testimonials></app-testimonials>   -->
+<!-- <app-get-app></app-get-app> -->
+<!-- <app-our-awards></app-our-awards>  -->
+<!-- <app-get-in-touch></app-get-in-touch> -->

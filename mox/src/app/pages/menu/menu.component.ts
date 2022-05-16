@@ -94,16 +94,20 @@ export class MenuComponent implements OnInit {
       // this.menuItems = this.appService.shuffleArray(data);
       // this.menuItems = data;
       let result = this.filterData(data); 
+      //console.log("ssad"+data);
       if(result.data.length == 0){
         this.menuItems.length = 0;
         this.pagination = new Pagination(1, this.count, null, 2, 0, 0);  
-        this.message = 'No Results Found'; 
+        this.message = 'SIN RESULTADOS'; 
+        //console.log("ssad"+data);
       } 
       else{
         this.menuItems = result.data; 
         this.pagination = result.pagination;
         this.message = null;
+        //console.log("ssad"+data);
       } 
+      console.log("ssad"+data);
     })
   }  
 

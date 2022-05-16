@@ -5,16 +5,22 @@ import { SharedModule } from '../../shared/shared.module';
 import { PipesModule } from '../../theme/pipes/pipes.module';
 import { MenuComponent } from './menu.component';
 import { MenuSingleComponent } from './menu-single/menu-single.component';
+import { MenuSucursalComponent } from './menu-single/menu-sucursal/menu-sucursal.component';
+
+
 
 export const routes = [
   { path: '', component: MenuComponent, pathMatch: 'full' },
-  { path: ':id', component: MenuSingleComponent }
+  { path: ':id/:idsuc', component: MenuSingleComponent },
+  //{ path: '/suc', component: MenuSucursalComponent },
+  { path: ':idsuc', component: MenuSucursalComponent }
 ];
 
 @NgModule({
   declarations: [
     MenuComponent, 
-    MenuSingleComponent
+    MenuSingleComponent,
+    
   ],
   imports: [
     CommonModule,

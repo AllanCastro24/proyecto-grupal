@@ -20,10 +20,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getSlides();
+    /* this.getSlides();
     this.getSpecialMenuItems();
     this.getBestMenuItems();
-    this.getTodayMenu();
+    this.getTodayMenu(); */
+    this.mostrartiesuc();
   }
 
   public getSlides(){
@@ -49,5 +50,22 @@ export class HomeComponent implements OnInit {
       this.todayMenu = data;  
     });
   }  
+
+  datosmpl = null as any;
+
+  mostrartiesuc(){
+    this.appService.mostrartiesuc().subscribe(result => this.datosmpl  = result)
+    console.log('holaaa'+ this.datosmpl);
+    //this.suma();
+    //this.insertarpla();
+  }
+  
+  hayregistropla(){
+    if(this.datosmpl == null){
+      return false;
+    } else{
+      return true;
+    }
+  }
 
 }

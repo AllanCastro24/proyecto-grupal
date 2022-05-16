@@ -3,7 +3,7 @@
         "id": 1,
         "name": "Snack Set", 
         "description": "Butter, cream, honey, salty cottage cheese, white cheese.",
-        "price": 8.20,
+        "price": 83.200,
         "image": {
             "small": "assets/images/foods/breakfast/1/small.jpg",
             "medium": "assets/images/foods/breakfast/1/medium.jpg",

@@ -17,27 +17,28 @@ export class QuantityCounterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.value = (this.value) ? this.value : 1;
+    this.value = (this.value) ? Number(this.value) : 1;
   }
 
   public increment(){
     if(this.value < this.max){
-      this.value = this.value + this.step; 
-      this.onCounterChange.emit(this.value);
+      //this.value = this.value; 
+      console.log(this.value);
+      this.onCounterChange.emit(Number(this.value) +1);
     }   
   }
 
   public decrement(){
     if(this.value > this.min){
-      this.value = this.value - this.step;  
-      this.onCounterChange.emit(this.value);
+      //this.value = this.value - this.step;  
+      this.onCounterChange.emit(Number(this.value) -1);
     }  
   }
 
   public onBlur(){
     console.log(this.value)  
     var reg = new RegExp(/^(|[1-9]\d*)$/); 
-    if(!reg.test(this.value)){ 
+    if(!reg.exec(this.value)){ 
       this.value = 1;
     }
     else{
@@ -52,7 +53,7 @@ export class QuantityCounterComponent implements OnInit {
       event.preventDefault(); 
       return false;
     } 
-    var verified = String.fromCharCode(event.which).match(/[^0-9]/g);
+    var verified = String.fromCharCode(event.which).match(/[^1-9]/g);
     if (verified) { 
       event.preventDefault(); 
       return false;

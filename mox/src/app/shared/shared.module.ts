@@ -77,7 +77,8 @@ import { SocialIconsComponent } from './social-icons/social-icons.component';
 import { TodayMenuComponent } from './today-menu/today-menu.component';
 import { LangComponent } from './lang/lang.component';
 import { OrderDetailsDialogComponent } from './order-details-dialog/order-details-dialog.component';
-import { HeaderVideoComponent } from './header-video/header-video.component'; 
+import { HeaderVideoComponent } from './header-video/header-video.component';
+import { OrderTicketDialogComponent } from './order-ticket-dialog/order-ticket-dialog.component'; 
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { HeaderVideoComponent } from './header-video/header-video.component';
     TodayMenuComponent,
     LangComponent,
     OrderDetailsDialogComponent,
-    HeaderVideoComponent
+    HeaderVideoComponent,
+    OrderTicketDialogComponent
   ],
   imports: [
     CommonModule,

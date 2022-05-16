@@ -16,12 +16,14 @@ export class CheckoutComponent implements OnInit {
   @ViewChild('sidenav') sidenav: any;
   public sidenavOpen:boolean = true; 
   public checkoutForm:FormGroup = new FormGroup({});
-  public countries:any[] = [];
+  //public countries:any[] = [];
   public deliveryMethods:any[] = [];
+  public paymentMethodss:any[] = [];
   public months:any[] = [];
   public years:any[] = []; 
   public step = 0;
   public deliveryMethodSubmitted:boolean = false;
+  public paymentMethodSubmitted:boolean = false;
   public orderCompleted:boolean = false;
   public orderEmail:string = '';
 
@@ -31,8 +33,9 @@ export class CheckoutComponent implements OnInit {
     if(window.innerWidth < 960){
       this.sidenavOpen = false;
     };  
-    this.countries = this.appService.getCountries();
+    //this.countries = this.appService.getCountries();
     this.deliveryMethods = this.appService.getDeliveryMethods();
+    this.paymentMethodss = this.appService.getpaymentmethods();
     this.months = this.appService.getMonths();
     this.years = this.appService.getYears(); 
     this.checkoutForm = this.fb.group({ 
@@ -40,10 +43,10 @@ export class CheckoutComponent implements OnInit {
         'firstName': [null, Validators.compose([Validators.required, maxWordsValidator(1)])],
         'lastName': [null, Validators.compose([Validators.required, maxWordsValidator(1)])],
         'middleName': [null, maxWordsValidator(1)], 
-        'company': '',
+        //'company': '',
         'email': [null, Validators.compose([Validators.required, emailValidator])],
         'phone': [null, Validators.required], 
-        'country': [null, Validators.required],
+        //'country': [null, Validators.required],
         'city': [null, Validators.required],
         'place': [null, Validators.required],
         'postalCode': [null, Validators.required],
@@ -52,12 +55,10 @@ export class CheckoutComponent implements OnInit {
       deliveryMethod: this.fb.group({
         'method': [null, Validators.required]
       }),
-      paymentMethod: this.fb.group({
-        'cardHolderName': [null, Validators.required],
-        'cardNumber': [null, Validators.required],
-        'expiredMonth': [null, Validators.required],
-        'expiredYear': [null, Validators.required],
-        'cvv': [null, Validators.compose([Validators.required, Validators.minLength(3)])]
+     
+      paymentMethods: this.fb.group({
+        'method': [null, Validators.required],
+        
       })
     }); 
 
@@ -90,15 +91,49 @@ export class CheckoutComponent implements OnInit {
   public placeOrder(){ 
     this.checkoutForm.updateValueAndValidity();
     this.checkoutForm.markAllAsTouched();
+    console.log(this.checkoutForm.value);
+    //console.log(this.appService.Data.cartList.values);
+    console.log(this.appService.Data.cartList);
+    console.log("sddd");
+    
+    
     if(this.checkoutForm.valid){
+      console.log(this.checkoutForm.value);
+      //console.log(this.checkoutForm.value);
+      this.appService.insertarpedido(this.checkoutForm.value  ).subscribe (
+        datos => {
+          console.log('hola'+ datos);
+          //this.ngOnInit();
+          //buscar como insertar array de datos mysql slim4 php
+        }
+      )
+      this.objcarrito();
+      
       this.step = 4;
       this.orderCompleted = true; 
       this.orderEmail = (this.checkoutForm.get('deliveryAddress') as any)['controls'].email.value; 
-      this.checkoutForm.reset();
+      //this.checkoutForm.reset();
       this.appService.Data.cartList.length = 0;    
       this.appService.Data.totalPrice = 0;
       this.appService.Data.totalCartCount = 0;
+
     }   
+    
   }
 
+  /**
+   * objcarrito
+   */
+  public objcarrito() {
+    for (let index = 0; index < this.appService.Data.cartList.length; index++) {
+      //const element = array[index];
+      this.appService.insertarpedidocomi(this.appService.Data.cartList[index] ).subscribe (
+        datos => {
+          console.log('hola'+ datos);
+          //this.ngOnInit();
+          //buscar como insertar array de datos mysql slim4 php
+        }
+      )
+  }
+  }
 }

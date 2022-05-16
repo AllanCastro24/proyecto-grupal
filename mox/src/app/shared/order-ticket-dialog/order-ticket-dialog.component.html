@@ -1,0 +1,32 @@
+<div class="header bg-primary">
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <h2 class="fw-500 secondary-font">Order #{{ transaction.idcli }}</h2>
+    <app-dialog-header-controls
+      [dialogRef]="dialogRef"
+    ></app-dialog-header-controls>
+  </div>
+</div>
+<div id="htmlData">
+    <div id="register">
+  <div id="ticket">
+    <h1>Thank You!</h1>
+    <table>
+      <tbody id="entries" >
+
+        <a >{{ transaction.name }} $C/U:{{transaction.price}} Pz:{{transaction.cartCount}}</a>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          <th id="total">$ {{transaction.price * transaction.cartCount }}</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+</div>
+
+<div class="col-md-4 text-right">
+    <button class="btn btn-success btn-block" (click)="openPDF()">Abrir Ticket</button>
+    <!-- <button class="btn btn-success btn-block" (click)="openPDF2()">Download PDF2</button> -->
+</div>
