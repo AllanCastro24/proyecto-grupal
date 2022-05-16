@@ -3,6 +3,7 @@ import { CategoriesService } from '../categories/categories.service';
 import { Restaurant } from '../restaurants/restaurants';
 import { RestaurantService } from '../restaurants/restaurant.service';
 import { Router } from '@angular/router';
+import { MenuService } from 'src/app/theme/components/menu/menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -15,9 +16,16 @@ export class MenuComponent implements OnInit {
   public restaurants: Restaurant[] = [];
   public favoritesRestaurants: Restaurant[] = [];
 
-  constructor(public categoriesService: CategoriesService, public restaurantService: RestaurantService, public router: Router) {}
+  constructor(
+    public categoriesService: CategoriesService,
+    public restaurantService: RestaurantService,
+    public router: Router,
+    public menuService: MenuService
+  ) {}
 
   ngOnInit(): void {
+    this.menuService.toggleMenu(true);
+
     this.getRestaurants();
     this.getFavorites();
   }

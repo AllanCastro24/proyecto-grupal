@@ -2,7 +2,7 @@
   <h3 class="title">Platillos frecuentes</h3>
   <div class="content">
     <div *ngFor="let plate of plates" class="item">
-      <mat-card [routerLink]="['/plates', plate?.id]" class="menu-item p-0">
+      <mat-card [routerLink]="['/restaurants', plate?.branchId, plate?.companyId, 'plate', plate.id]" class="menu-item p-0">
         <div class="thumbnail-section">
           <img [src]="plate?.image?.small" class="w-100 d-block" />
           <h1 class="title">

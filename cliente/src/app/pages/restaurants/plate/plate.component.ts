@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { MenuService } from 'src/app/theme/components/menu/menu.service';
 import { UsersService } from 'src/app/users/users.service';
 import { Plate } from '../plates';
 import { RestaurantService } from '../restaurant.service';
@@ -29,7 +30,7 @@ export class PlateComponent implements OnInit {
     private _location: Location,
     private activatedRoute: ActivatedRoute,
     private restaurantService: RestaurantService,
-    private usersService: UsersService,
+    public menuService: MenuService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -39,6 +40,8 @@ export class PlateComponent implements OnInit {
       this.companyId = params['companyId'];
       this.plateId = params['plateId'];
     });
+
+    this.menuService.toggleMenu(false);
 
     this.getPlate();
   }
