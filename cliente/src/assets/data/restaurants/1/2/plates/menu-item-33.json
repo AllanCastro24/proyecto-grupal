@@ -15,7 +15,7 @@
     "cartCount": 0,
     "weight": 150,
     "isVegetarian": false,
-  "branchId": 1,
+  "branchId": 2,
   "companyId":  1,
     "menuId": 8, 
   "tagId": [1, 3, 5, 6]

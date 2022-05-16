@@ -112,6 +112,20 @@ export class RestaurantService {
     this.usersService.setUser(user);
   }
 
+  public removeCartList(branchId: number, companyId: number) {
+    const user = this.usersService.getUser();
+    const cartList = user.cartList || [];
+    const indexCartList = cartList.findIndex((cartList) => cartList.branchId == branchId && cartList.companyId == companyId);
+
+    if (indexCartList !== -1) {
+      cartList.splice(indexCartList, 1);
+
+      user.cartList = cartList;
+
+      this.usersService.setUser(user);
+    }
+  }
+
   public async addToCart(plate: Plate) {
     const user = this.usersService.getUser();
 
@@ -122,7 +136,7 @@ export class RestaurantService {
     const indexCartList = user.cartList.findIndex((cartList) => cartList.branchId == plate.branchId && cartList.companyId == plate.companyId);
 
     if (indexCartList === -1) {
-      const restaurant = await this.getRestaurant(plate.branchId, plate.companyId);
+      const restaurant = await this.getRestaurant(plate.companyId, plate.branchId);
 
       const cartList: CartList = {
         id: user.cartList.length + 1,

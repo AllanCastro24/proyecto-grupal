@@ -43,7 +43,7 @@ export class RestaurantInfoComponent implements OnInit {
   }
 
   public async getRestaurant() {
-    this.restaurant = await this.restaurantService.getRestaurant(this.restaurantId, this.companyId);
+    this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
   }
 
   public async getTags() {

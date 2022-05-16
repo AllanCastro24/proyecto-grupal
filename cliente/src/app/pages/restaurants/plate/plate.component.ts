@@ -65,7 +65,6 @@ export class PlateComponent implements OnInit {
       this.plate.note = this.note;
 
       const cartList = this.restaurantService.getCartList(this.plate.branchId, this.plate.companyId);
-
       const index: number = cartList.findIndex((item) => item.id == this.plate.id);
 
       if (index !== -1) {

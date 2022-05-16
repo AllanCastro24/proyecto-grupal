@@ -10,15 +10,15 @@
   </div>
 </div>
 <div class="separator"></div>
-<div class="item location">
+<div (click)="openAddress(restaurant.latitude, restaurant.longitude)" class="item location">
   <div class="icon">
     <mat-icon>place</mat-icon>
   </div>
   <div>
-    <span (click)="openAddress(restaurant.latitude, restaurant.longitude)">{{ restaurant?.address }}</span>
-    <div class="action">
-      <mat-icon>navigate_next</mat-icon>
-    </div>
+    <span>{{ restaurant?.address }}</span>
+  </div>
+  <div class="action">
+    <mat-icon>navigate_next</mat-icon>
   </div>
 </div>
 <div class="separator"></div>

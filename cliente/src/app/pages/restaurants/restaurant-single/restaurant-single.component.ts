@@ -235,7 +235,7 @@ export class RestaurantSingleComponent implements OnInit {
   public clearCart() {
     this.cartItems.length = 0;
 
-    this.restaurantService.setCartList(this.restaurantId, this.companyId, []);
+    this.restaurantService.removeCartList(this.restaurantId, this.companyId);
     this.restaurantService.totalPrice = 0;
 
     this.restaurantService.calculateCartTotal(this.restaurantId, this.companyId);
@@ -290,6 +290,12 @@ export class RestaurantSingleComponent implements OnInit {
     const index = items.findIndex((data) => data.id == this.currentPlate.id);
 
     items.splice(index, 1);
+
+    if (items.length === 0) {
+      this.clearCart();
+      this.toggleAll();
+      return;
+    }
 
     this.restaurantService.setCartList(this.restaurantId, this.companyId, items);
     this.cartItems = items;
