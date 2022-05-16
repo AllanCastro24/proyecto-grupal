@@ -24,8 +24,8 @@
       </div>
     </div>
   </div>
-  <div *ngIf="showSearch && searchResultsRestaurants.length && searchResultsTag.length">
-    <div class="restaurants">
+  <div *ngIf="showSearch">
+    <div *ngIf="searchResultsRestaurants.length" class="restaurants">
       <div *ngFor="let restaurant of searchResultsRestaurants" (click)="openLink(['/restaurants', restaurant.id, restaurant.companyId])" class="item">
         <img [src]="restaurant.image" />
         <div class="info">
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="tags">
+    <div *ngIf="searchResultsTag.length" class="tags">
       <div class="title">
         <span>Etiquetas</span>
       </div>
