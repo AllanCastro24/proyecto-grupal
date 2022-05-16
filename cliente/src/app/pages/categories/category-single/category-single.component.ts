@@ -19,7 +19,12 @@ export class CategorySingleComponent implements OnInit {
 
   public currentCategory!: any;
 
-  constructor(public categoriesService: CategoriesService, public restaurantService: RestaurantService, private activatedRoute: ActivatedRoute, public router: Router) {}
+  constructor(
+    public categoriesService: CategoriesService,
+    public restaurantService: RestaurantService,
+    private activatedRoute: ActivatedRoute,
+    public router: Router
+  ) {}
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
@@ -35,13 +40,13 @@ export class CategorySingleComponent implements OnInit {
   public getCategory(categoryId: number) {
     this.categoriesService.getCategories().subscribe((categories) => {
       this.currentCategory = categories.find((category) => {
-        return category.id === (Number(categoryId));
+        return category.id === Number(categoryId);
       });
     });
   }
 
   public getRestaurantsByCategory(categoryId: number) {
-    this.restaurantService.getRestaurants(this.companyId).subscribe((restaurants) => {
+    this.restaurantService.getRestaurantsByCompany(this.companyId).subscribe((restaurants) => {
       this.restaurants = restaurants.filter((restaurant) => {
         return restaurant.categoryId.includes(Number(categoryId));
       });

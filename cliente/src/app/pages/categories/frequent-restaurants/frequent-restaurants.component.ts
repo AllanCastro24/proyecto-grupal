@@ -8,6 +8,7 @@ import { Restaurant } from '../../restaurants/restaurants';
   styleUrls: ['./frequent-restaurants.component.scss']
 })
 export class FrequentRestaurantsComponent implements OnInit {
+  public companyId: number = 1;
   public restaurants!: Restaurant[];
 
   constructor(public restaurantsService: RestaurantService) {}
@@ -17,7 +18,7 @@ export class FrequentRestaurantsComponent implements OnInit {
   }
 
   public getCategories() {
-    this.restaurantsService.getFrequentRestaurants().subscribe((restaurants) => {
+    this.restaurantsService.getFrequentRestaurants(this.companyId).subscribe((restaurants) => {
       this.restaurants = restaurants;
     });
   }

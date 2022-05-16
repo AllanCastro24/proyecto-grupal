@@ -52,3 +52,28 @@
     margin-left: 10px;
   }
 }
+
+.restaurants .item {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: flex-start;
+
+  img {
+    width: 70px;
+    height: 100%;
+  }
+
+  .info {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: 15px;
+    font-weight: bold;
+    word-break: break-all;
+    line-height: 12px;
+    padding-bottom: 5px;
+  }
+}

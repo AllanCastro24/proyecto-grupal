@@ -10,7 +10,7 @@
         <h1>{{ menuItem.name }}</h1>
         <ng-container *ngFor="let item of searchResultsPlate">
           <ng-template [ngIf]="item.menuId == menuItem.id">
-            <div [routerLink]="['/restaurants/' + restaurant?.id + '/plate', item.id]" class="menu-item">
+            <div [routerLink]="['/restaurants', restaurant?.id, restaurant?.companyId, 'plate', item.id]" class="menu-item">
               <div class="menu-info">
                 <h2>{{ item.name }}</h2>
                 <span class="price">{{ item.price | currency }}</span>
@@ -81,7 +81,7 @@
       <h1>{{ menuItem.name }}</h1>
       <ng-container *ngFor="let item of plates">
         <ng-template [ngIf]="item.menuId == menuItem.id">
-          <div [routerLink]="['/restaurants/' + restaurant?.id + '/plate', item.id]" class="menu-item">
+          <div [routerLink]="['/restaurants', restaurant?.id, restaurant?.companyId, 'plate', item.id]" class="menu-item">
             <div class="menu-info">
               <h2>{{ item.name }}</h2>
               <span class="price">{{ item.price | currency }}</span>
@@ -156,7 +156,13 @@
     <textarea [(ngModel)]="currentPlate.note" placeholder="Sin cebolla"></textarea>
   </div>
   <div class="counter">
-    <app-quantity-counter [value]="currentPlate.cartCount" [step]="1" [min]="1" [max]="currentPlate.availibilityCount" (onCounterChange)="counterChange($event)"></app-quantity-counter>
+    <app-quantity-counter
+      [value]="currentPlate.cartCount"
+      [step]="1"
+      [min]="1"
+      [max]="currentPlate.availibilityCount"
+      (onCounterChange)="counterChange($event)"
+    ></app-quantity-counter>
   </div>
   <div (click)="deleteItem()" class="remove">
     <div>
@@ -164,5 +170,7 @@
       <span>Eliminar</span>
     </div>
   </div>
-  <div (click)="updateCart()" class="add-cart">Actualizar carrito <span>●</span> {{ (currentPlate?.price || 0) * currentPlate.cartCount | currency }}</div>
+  <div (click)="updateCart()" class="add-cart">
+    Actualizar carrito <span>●</span> {{ (currentPlate?.price || 0) * currentPlate.cartCount | currency }}
+  </div>
 </div>

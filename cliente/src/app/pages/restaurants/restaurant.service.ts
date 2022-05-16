@@ -20,7 +20,7 @@ export class RestaurantService {
 
   public async getRestaurant(companyId: number, id: number): Promise<Restaurant> {
     return new Promise((resolve, reject) => {
-      this.getRestaurants(companyId).subscribe((restaurants) => {
+      this.getRestaurantsByCompany(companyId).subscribe((restaurants) => {
         for (const restaurant of restaurants) {
           if (restaurant.id == id) {
             resolve(restaurant);
@@ -36,8 +36,12 @@ export class RestaurantService {
     return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
   }
 
-  public getFrequentRestaurants(): Observable<Restaurant[]> {
-    return this.http.get<Restaurant[]>(this.url + 'restaurants/restaurants.json');
+  public getRestaurantsByCompany(companyId: number): Observable<Restaurant[]> {
+    return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
+  }
+
+  public getFrequentRestaurants(companyId: number): Observable<Restaurant[]> {
+    return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
   }
 
   public getPlate(companyId: number, restaurantId: number, id: number): Observable<Plate> {
