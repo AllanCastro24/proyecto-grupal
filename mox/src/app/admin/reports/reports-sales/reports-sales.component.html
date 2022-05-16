@@ -14,20 +14,24 @@
                                     <mat-option value="Mes">Mes</mat-option>
                                     <mat-option value="Dia">Dia</mat-option>
                                     <mat-option value="Rango">Rango</mat-option>
-                                    <!-- <mat-option value="Ventas por dia">Ventas por dia</mat-option>
-                                    <mat-option value="Productos mas vendidos en el mes">Productos mas vendidos en el mes</mat-option>
-                                    <mat-option value="Productos menos vendidos en el mes">Productos menos vendidos en el mes</mat-option> -->
+                                    <mat-option value="Productos mas vendidos en el mes">Productos mas vendidos en el
+                                        mes</mat-option>
+                                    <mat-option value="Productos menos vendidos en el mes">Productos menos vendidos en
+                                        el mes</mat-option>
+                                    <!-- <mat-option value="Ventas por dia">Ventas por dia</mat-option> -->
                                 </mat-select>
                                 <mat-error *ngIf="form.controls.buscarPor.errors?.required">Debe seleccionar un tipo
                                 </mat-error>
                             </mat-form-field>
                         </div>
-
+                        <!-- <div fxFlex="100" class="mt-2 text-center w-100" *ngIf="optionValue == 'Productos mas vendidos en el mes' || optionValue == 'Productos menos vendidos en el mes'">
+                            <button mat-raised-button color="primary" type="submit" class="uppercase">Mostrar</button>
+                        </div> -->
 
                     </div>
                 </div>
             </form>
-            <form [formGroup]="form4" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Mes'" autocomplete="off"
+            <form [formGroup]="form4" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Mes' || optionValue == 'Productos mas vendidos en el mes' || optionValue == 'Productos menos vendidos en el mes'" autocomplete="off"
                 fxLayout="row wrap">
                 <div fxFlex="60" class="px-2">
                     <div fxLayout="row wrap">
@@ -219,7 +223,30 @@
                             [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
                             [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale"
                             [roundDomains]="roundDomains" (select)="onSelect($event)">
-                        </ngx-charts-line-chart>                        
+                        </ngx-charts-line-chart>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-header fxLayoutAlign="center">                
+                    <mat-card-subtitle><h2>Montly Sales</h2></mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutAlign="space-around">
+                        <mat-checkbox color="primary" class="example-margin" [checked]="explodeSlices" (change)="explodeSlices = !explodeSlices">Explode Slices</mat-checkbox>
+                        <mat-checkbox color="primary" class="example-margin" [checked]="showLabels" (change)="showLabels = !showLabels">Show Labels</mat-checkbox>
+                    </div>
+                    <div class="w-100 h-300p" #resizedDiv>
+                        <ngx-charts-pie-chart
+                            [scheme]="colorScheme"
+                            [results]="data"
+                            [legend]="showLegend"
+                            [explodeSlices]="explodeSlices"
+                            [labels]="showLabels"
+                            [doughnut]="doughnut"
+                            [gradient]="gradient"
+                            (select)="onSelect($event)">
+                        </ngx-charts-pie-chart>   
                     </div>
                 </mat-card-content>
             </mat-card>

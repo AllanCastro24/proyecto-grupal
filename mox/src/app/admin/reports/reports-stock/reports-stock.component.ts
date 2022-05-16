@@ -174,6 +174,14 @@ export class ReportsStockComponent implements OnInit {
           console.log(respuesta);
           // this.Equipos = respuesta;
         });
+      }else if (this.optionValue == "Consultar") {
+        // alert("Rango");        
+        this.appService.ConsultarAlmacen().subscribe(respuesta => {
+          this.initDataSource(respuesta);
+          // this.analytics=respuesta;
+          console.log(respuesta);
+          // this.Equipos = respuesta;
+        });
       }
     }
     onSelect(event:any) {

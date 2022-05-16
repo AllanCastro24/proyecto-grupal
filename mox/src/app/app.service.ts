@@ -788,7 +788,17 @@ export class AppService {
   }
 
   ObtenerVentasXMes(mes: any): Observable<any> {
-    return this.http.get(this.API + "api/ventas/mes/" + mes.mes[0]);
+    return this.http.get(this.API + "api/ventas/mes/" + mes.mes + "/" + mes.ano);
+
+  }
+
+  ProductosMasVendidos(mes: any): Observable<any> {
+    return this.http.get(this.API + "api/producto/mas_vendido/mes/" + mes.mes);
+
+  }
+
+  ProductosMenosVendidos(mes: any): Observable<any> {
+    return this.http.get(this.API + "api/producto/menos_vendido/mes/" + mes.mes);
 
   }
 
@@ -801,6 +811,10 @@ export class AppService {
     return this.http.get(this.API + "api/ventas/range/" + rango.fecha + "/" + rango.fecha2);
     console.log(this.API + "api/ventas/range/" + rango.fecha[0] + "/" + rango.fecha2[0]);
 
+  }
+
+  ConsultarAlmacen() {
+    return this.http.get(this.API + "api/almacen/consultar");
   }
 
   ObtenerAlmacenXMes(mes: any): Observable<any> {

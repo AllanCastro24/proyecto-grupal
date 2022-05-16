@@ -78,7 +78,8 @@ export class FixedCostsComponent implements OnInit {
   public openFixedCostsDialog(customer: any) {
     let data = {
       customer: customer,
-      TipoGastos: this.TiposGastos
+      TipoGastos: this.TiposGastos,
+      Sucursales: this.Sucursales
       // stores: this.stores,
       // countries: this.countries
     };

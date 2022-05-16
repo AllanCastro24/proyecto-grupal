@@ -13,7 +13,7 @@
             <!-- FullName Column -->
             <ng-container matColumnDef="tipo_gasto">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de gasto </th>
-                <td mat-cell *matCellDef="let customer">{{customer.tipo_gasto}}</td>
+                <td mat-cell *matCellDef="let customer">{{customer.nombre}}</td>
             </ng-container>  
 
             <!-- Username Column -->
@@ -38,7 +38,7 @@
             <!-- Revenue Column -->
             <ng-container matColumnDef="id_sucursal">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
-                <td mat-cell *matCellDef="let customer">{{customer.id_sucursal}} </td>
+                <td mat-cell *matCellDef="let customer">{{customer.nom_sucursal}} </td>
             </ng-container>  
             <!-- Store Column -->
             <ng-container matColumnDef="periodicidad">

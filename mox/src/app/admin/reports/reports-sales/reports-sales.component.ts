@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID,ElementRef, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { MenuItem } from 'src/app/app.models';
@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { isPlatformBrowser } from '@angular/common';
 import { analytics } from '..//dashboard.data';
+import { montly_sales } from '../dashboard.data';
 
 
 @Component({
@@ -21,9 +22,9 @@ export class ReportsSalesComponent implements OnInit {
   public form2!: FormGroup;
   public form3!: FormGroup;
   public form4!: FormGroup;
-  public optionValue = "";  
-  years:number[]=[];
-  
+  public optionValue = "";
+  years: number[] = [];
+
   displayedColumns: string[] = ['id_producto', 'cantidad', 'id_mesero', 'fecha', 'id_sucursal'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -44,13 +45,24 @@ export class ReportsSalesComponent implements OnInit {
   public xAxisLabel = 'Year';
   public showYAxisLabel = false;
   public yAxisLabel = 'Profit';
-  public colorScheme:any = {
-    domain: ['#283593', '#039BE5', '#FF5252','#283593', '#039BE5']
-  }; 
+  // public colorScheme: any = {
+  //   domain: ['#283593', '#039BE5', '#FF5252']
+  // };
   public autoScale = true;
   public roundDomains = true;
-  @ViewChild('resizedDiv') resizedDiv!:ElementRef;
-  public previousWidthOfResizedDiv:number = 0; 
+  @ViewChild('resizedDiv') resizedDiv!: ElementRef;
+  public previousWidthOfResizedDiv: number = 0;
+
+  //GRAFICA PASTEL
+  public data: any[] = []; 
+  
+  
+  public colorScheme:any = {
+    domain: ['#2F3E9E', '#D22E2E', '#378D3B']
+  }; 
+  public showLabels = true;
+  public explodeSlices = true;
+  public doughnut = false; 
 
 
 
@@ -68,8 +80,8 @@ export class ReportsSalesComponent implements OnInit {
     //   console.log(respuesta);
     //   // this.Equipos = respuesta;
     // });
-    for ( let i=2000; i<2050; i++){
-      
+    for (let i = 2000; i < 2050; i++) {
+
       this.years.push(i);
       // this.anos.push(i);
 
@@ -80,7 +92,7 @@ export class ReportsSalesComponent implements OnInit {
       // "description": null,
       // "buscarPor": [null, Validators.required],
       "mes": null,
-      "ano":null,
+      "ano": null,
       // "fecha": null,
       // "fecha2": null,
       // "dia": null,
@@ -157,20 +169,20 @@ export class ReportsSalesComponent implements OnInit {
       console.log(this.form4.value);
       this.appService.ObtenerVentasXMes(this.form4.value).subscribe(respuesta => {
         this.initDataSource(respuesta);
-        // this.analytics=respuesta;
-        if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
+        this.analytics = respuesta;
+        if (this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth) {
           this.analytics = [...analytics];
         }
         this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
         console.log(respuesta);
         // this.Equipos = respuesta;
       });
-    } else if (this.optionValue == "Dia") {      
+    } else if (this.optionValue == "Dia") {
       // alert("Dia");
       console.log(this.form3.value);
       this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
         this.initDataSource(respuesta);
-        this.analytics=respuesta;
+        this.analytics = respuesta;
         console.log(respuesta);
         // this.Equipos = respuesta;
       });
@@ -179,19 +191,42 @@ export class ReportsSalesComponent implements OnInit {
       console.log(this.form2.value);
       this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
         this.initDataSource(respuesta);
-        this.analytics=respuesta;
+        this.analytics = respuesta;
+        console.log(respuesta);
+        // this.Equipos = respuesta;
+      });
+    } else if (this.optionValue == "Productos mas vendidos en el mes") {
+      console.log(this.form4.value);
+      this.appService.ProductosMasVendidos(this.form4.value).subscribe(respuesta => {
+        // this.initDataSource(respuesta);
+        this.analytics = [...respuesta];
+        this.data=respuesta;
         console.log(respuesta);
         // this.Equipos = respuesta;
       });
     }
+    else if (this.optionValue == "Productos menos vendidos en el mes") {
+      console.log(this.form4.value);
+      this.appService.ProductosMenosVendidos(this.form4.value).subscribe(respuesta => {
+        // this.initDataSource(respuesta);
+        this.analytics = respuesta;
+        this.data=respuesta;
+        console.log(respuesta);
+        // this.Equipos = respuesta;
+      });
+    }
+
   }
-  onSelect(event:any) {
+  onSelect(event: any) {
     console.log(event);
   }
 
-  ngAfterViewChecked() {    
-    if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
+  ngAfterViewChecked() {
+    if (this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth) {
       // this.analytics = [...analytics];
+    }
+    if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
+      // setTimeout(() => this.data = [...montly_sales] );
     }
     this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
   }

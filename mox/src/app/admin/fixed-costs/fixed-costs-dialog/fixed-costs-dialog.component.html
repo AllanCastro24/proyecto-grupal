@@ -57,11 +57,8 @@
                             <mat-label>Sucursal</mat-label>
                             <mat-select formControlName="id_sucursal">
                                 <mat-option [value]="">-</mat-option>
-                                <mat-option [value]="1">
-                                    <span>Centro</span>
-                                </mat-option>
-                                <mat-option [value]="0">
-                                    <span>Sur</span>
+                                <mat-option *ngFor="let sucursal of data.Sucursales" [value]="sucursal.id_sucursal">
+                                    <span>{{sucursal.nom_sucursal}}</span>
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -75,7 +72,7 @@
                             <mat-datepicker #periodicidad></mat-datepicker>
                         </mat-form-field> -->
                         <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Fecha final</mat-label>
+                            <mat-label>Periodicidad</mat-label>
                             <input matInput required type="date" formControlName="periodicidad" class="form-control" name=""
                                 id="" aria-describedby="helpId" placeholder="">
                             <mat-icon matSuffix class="text-muted">date</mat-icon>                                                                
