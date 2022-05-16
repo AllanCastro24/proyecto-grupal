@@ -57,6 +57,10 @@ export class RestaurantService {
     return this.http.get<Menu[]>(`${this.url}restaurants/${companyId}/${restaurantId}/menu.json`);
   }
 
+  public getFavorites(): Restaurant[] {
+    return this.usersService.getUser().favoriteRestaurants || [];
+  }
+
   public addToFavorites(restaurant: Restaurant): boolean {
     const user = this.usersService.getUser();
 

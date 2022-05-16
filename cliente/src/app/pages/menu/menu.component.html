@@ -1,43 +1,63 @@
-<div class="px-3">
-  <div class="theme-container">
-    <mat-sidenav-container class="all-menu-items mt-3">
-      <mat-sidenav-content [class.distance]="sidenavOpen">
-        <div fxLayout="row wrap" class="all-menu-items-wrapper mt-0">
-          <div fxFlex="100" class="px-2 pb-2 pt-0">
-            <app-frequent-plates></app-frequent-plates>
-          </div>
+<mat-sidenav-container class="all-menu-items mt-3 px-3">
+  <mat-sidenav-content>
+    <div fxLayout="row wrap" class="all-menu-items-wrapper mt-0">
+      <div fxFlex="100" class="px-2 pb-2 pt-0">
+        <app-frequent-plates></app-frequent-plates>
+      </div>
 
-          <div fxFlex="100" class="px-2 pb-2 pt-0">
-            <app-frequent-restaurants></app-frequent-restaurants>
-          </div>
+      <div fxFlex="100" class="px-2 pb-2 pt-0">
+        <app-frequent-restaurants></app-frequent-restaurants>
+      </div>
 
-          <div fxFlex="100" class="px-2 pb-2 pt-0">
-            <app-frequent-categories></app-frequent-categories>
-          </div>
-
-          <div fxFlex="100" class="px-2 pb-2 pt-0">
-            <app-menu-items-toolbar [showSidenavToggle]="showSidenavToggle" (onSidenavToggle)="sidenav.toggle()" (onChangeCount)="changeCount($event)" (onChangeSorting)="changeSorting($event)" (onChangeViewType)="changeViewType($event)">
-            </app-menu-items-toolbar>
-          </div>
-
-          <div *ngFor="let menuItem of menuItems" [fxFlex]="viewType == 'grid' ? viewCol : 100" class="item">
-            <app-menu-item [menuItem]="menuItem" [viewType]="viewType" [viewColChanged]="viewCol"></app-menu-item>
-          </div>
-
-          <div *ngIf="menuItems && menuItems.length == 0" fxFlex="100" fxLayoutAlign="center center" [style.min-height.px]="200">
-            <mat-spinner *ngIf="!message"></mat-spinner>
-            <mat-chip-list *ngIf="message">
-              <mat-chip selected disableRipple="true" color="warn" class="uppercase ws-nowrap">
-                {{ message }}
-              </mat-chip>
-            </mat-chip-list>
-          </div>
-
-          <div *ngIf="menuItems && menuItems.length > 0" fxFlex="100" fxLayoutAlign="center center" class="p-2">
-            <mat-paginator [length]="pagination?.total" [pageSize]="pagination?.perPage" (page)="onPageChange($event)" class="w-100 mat-elevation-z1"> </mat-paginator>
-          </div>
+      <div fxFlex="100" class="px-2 pb-2 pt-0">
+        <app-frequent-categories></app-frequent-categories>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<div *ngIf="favoritesRestaurants.length" class="restaurants px-3">
+  <h2>Restaurantes favoritos</h2>
+  <div *ngFor="let restaurant of favoritesRestaurants" class="item">
+    <div [style.background-image]="'url(' + restaurant.image + ')'" class="header">
+      <div (click)="addToFavorites(restaurant, $event)">
+        <mat-icon class="favorite">{{ isFavorite(restaurant) }}</mat-icon>
+      </div>
+    </div>
+    <div [routerLink]="['/restaurants', restaurant.id, restaurant.companyId]" class="content">
+      <div class="info">
+        <span>{{ restaurant.name }}</span>
+        <div>
+          <span class="delivery-price">{{ restaurant.delivery.price | currency }}</span>
+          <span class="separator">●</span>
+          <span class="time">{{ (restaurant.delivery.time || 0) * 1000 | date: 'mm:ss' }} min</span>
         </div>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
+      </div>
+      <div class="rating">
+        <span>{{ restaurant.rating.average }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="restaurants px-3">
+  <h2>Restaurantes</h2>
+  <div *ngFor="let restaurant of restaurants" class="item">
+    <div [style.background-image]="'url(' + restaurant.image + ')'" class="header">
+      <div (click)="addToFavorites(restaurant, $event)">
+        <mat-icon class="favorite">{{ isFavorite(restaurant) }}</mat-icon>
+      </div>
+    </div>
+    <div [routerLink]="['/restaurants', restaurant.id, restaurant.companyId]" class="content">
+      <div class="info">
+        <span>{{ restaurant.name }}</span>
+        <div>
+          <span class="delivery-price">{{ restaurant.delivery.price | currency }}</span>
+          <span class="separator">●</span>
+          <span class="time">{{ (restaurant.delivery.time || 0) * 1000 | date: 'mm:ss' }} min</span>
+        </div>
+      </div>
+      <div class="rating">
+        <span>{{ restaurant.rating.average }}</span>
+      </div>
+    </div>
   </div>
 </div>

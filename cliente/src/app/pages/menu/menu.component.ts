@@ -1,13 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
-import { MatPaginator } from '@angular/material/paginator';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { filter, map } from 'rxjs/operators';
-import { MenuItem, Pagination } from 'src/app/app.models';
-import { AppService } from 'src/app/app.service';
-import { AppSettings, Settings } from 'src/app/app.settings';
+import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../categories/categories.service';
+import { Restaurant } from '../restaurants/restaurants';
+import { RestaurantService } from '../restaurants/restaurant.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -15,130 +10,37 @@ import { CategoriesService } from '../categories/categories.service';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  @ViewChild('sidenav') sidenav: any;
+  public totalCompany: number = 1;
 
-  public sidenavOpen: boolean = false;
-  public showSidenavToggle: boolean = false;
+  public restaurants: Restaurant[] = [];
+  public favoritesRestaurants: Restaurant[] = [];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  public psConfig: PerfectScrollbarConfigInterface = {
-    wheelPropagation: true,
-  };
-
-  public menuItems: MenuItem[] = [];
-  public categories: any[] = [];
-  public viewType: string = 'grid';
-  public viewCol: number = 25;
-  public count: number = 12;
-  public sort: string = '';
-  public selectedCategoryId: number = 0;
-  public pagination: Pagination = new Pagination(1, this.count, null, 2, 0, 0);
-  public message: string | null = '';
-  public watcher: Subscription;
-  public settings: Settings;
-
-  public lat = 51.678418;
-  public lng = 7.809007;
-
-  constructor(public appSettings: AppSettings, public appService: AppService, public mediaObserver: MediaObserver, public categoriesService: CategoriesService) {
-    this.settings = this.appSettings.settings;
-    this.watcher = mediaObserver
-      .asObservable()
-      .pipe(
-        filter((changes: MediaChange[]) => changes.length > 0),
-        map((changes: MediaChange[]) => changes[0])
-      )
-      .subscribe((change: MediaChange) => {
-        if (change.mqAlias == 'xs') {
-          this.sidenavOpen = false;
-          this.showSidenavToggle = true;
-          this.viewCol = 100;
-        } else if (change.mqAlias == 'sm') {
-          this.sidenavOpen = false;
-          this.showSidenavToggle = true;
-          this.viewCol = 50;
-        } else if (change.mqAlias == 'md') {
-          this.sidenavOpen = false;
-          this.showSidenavToggle = false;
-          this.viewCol = 33.3;
-        } else {
-          this.sidenavOpen = false;
-          this.showSidenavToggle = false;
-          this.viewCol = 25;
-        }
-      });
-  }
+  constructor(public categoriesService: CategoriesService, public restaurantService: RestaurantService, public router: Router) {}
 
   ngOnInit(): void {
-    this.getMenuItems();
+    this.getRestaurants();
+    this.getFavorites();
   }
 
-  ngOnDestroy() {
-    this.watcher.unsubscribe();
-  }
+  public async getRestaurants() {
+    for (let i = 0; i < this.totalCompany; i++) {
+      const restaurant = (await this.restaurantService.getRestaurants(i + 1).toPromise()) || [];
 
-  public selectCategory(id: number) {
-    this.selectedCategoryId = id;
-    this.menuItems.length = 0;
-    this.resetPagination();
-    this.getMenuItems();
-    this.sidenav.close();
-  }
-  public onChangeCategory(event: any) {
-    this.selectCategory(event.value);
-  }
-
-  public getMenuItems() {
-    this.appService.getMenuItems().subscribe((data) => {
-      // this.menuItems = this.appService.shuffleArray(data);
-      // this.menuItems = data;
-      let result = this.filterData(data);
-      if (result.data.length == 0) {
-        this.menuItems.length = 0;
-        this.pagination = new Pagination(1, this.count, null, 2, 0, 0);
-        this.message = 'No Results Found';
-      } else {
-        this.menuItems = result.data;
-        this.pagination = result.pagination;
-        this.message = null;
-      }
-    });
-  }
-
-  public resetPagination() {
-    if (this.paginator) {
-      this.paginator.pageIndex = 0;
+      this.restaurants = [...this.restaurants, ...restaurant];
     }
-    this.pagination = new Pagination(1, this.count, null, null, this.pagination.total, this.pagination.totalPages);
   }
 
-  public filterData(data: any) {
-    return this.appService.filterData(data, this.selectedCategoryId, this.sort, this.pagination.page, this.pagination.perPage);
-  }
-  // public filterData(data){
-  //   return this.appService.filterData(data, this.searchFields, this.sort, this.pagination.page, this.pagination.perPage);
-  // }
-
-  public changeCount(count: number) {
-    this.count = count;
-    this.menuItems.length = 0;
-    this.resetPagination();
-    this.getMenuItems();
-  }
-  public changeSorting(sort: any) {
-    this.sort = sort;
-    this.menuItems.length = 0;
-    this.getMenuItems();
-  }
-  public changeViewType(obj: any) {
-    this.viewType = obj.viewType;
-    this.viewCol = obj.viewCol;
+  public getFavorites() {
+    this.favoritesRestaurants = this.restaurantService.getFavorites();
   }
 
-  public onPageChange(e: any) {
-    this.pagination.page = e.pageIndex + 1;
-    this.getMenuItems();
-    window.scrollTo(0, 0);
+  public isFavorite(restaurant: Restaurant) {
+    return this.favoritesRestaurants.find((fav) => fav.id == restaurant.id) ? 'favorite' : 'favorite_border';
+  }
+
+  public addToFavorites(restaurant: Restaurant, event: any) {
+    event.target.textContent = this.restaurantService.addToFavorites(restaurant) ? 'favorite' : 'favorite_border';
+
+    this.getFavorites();
   }
 }
