@@ -75,6 +75,8 @@ export class RestaurantSingleComponent implements OnInit {
     this.getMenu();
     this.checkFavorite();
     this.getCartList();
+
+    this.restaurantService.calculateCartTotal(this.restaurant.id, this.restaurant.companyId);
   }
 
   ngOnDestroy() {

@@ -4,7 +4,7 @@
       <button mat-button [routerLink]="[menuItem.routerLink]" routerLinkActive="active-link" (click)="onClick(menuItem.id)" [id]="'menu-item-' + menuItem.id">
         <div fxLayout="column" fxLayoutAlign="center center">
           <mat-icon *ngIf="menuItem.id !== 4" class="mat-18">{{ menuItem.icon }}</mat-icon>
-          <mat-icon *ngIf="menuItem.id === 4" [matBadge]="restaurantService.totalCartCount" [matBadgeHidden]="restaurantService.totalCartCount == 0" matBadgeSize="small" matBadgeColor="warn" class="mat-18">{{ menuItem.icon }}</mat-icon>
+          <mat-icon *ngIf="menuItem.id === 4" [matBadge]="restaurantService.totalCartList" [matBadgeHidden]="restaurantService.totalCartList == 0" matBadgeSize="small" matBadgeColor="warn" class="mat-18">{{ menuItem.icon }}</mat-icon>
           <span>{{ menuItem.title | translate }}</span>
         </div>
       </button>

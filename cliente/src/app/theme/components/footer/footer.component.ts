@@ -22,6 +22,8 @@ export class FooterComponent implements OnInit {
     this.menuService.callToggleMenu.subscribe((data) => {
       this.show = data;
     });
+
+    this.restaurantService.calculateCartListTotal();
   }
 
   onClick(menuId: number) {

@@ -13,6 +13,7 @@ import { CartList, Menu, Restaurant } from './restaurants';
 export class RestaurantService {
   public totalPrice: number = 0;
   public totalCartCount: number = 0;
+  public totalCartList: number = 0;
 
   public url = environment.url + '/assets/data/';
 
@@ -156,5 +157,12 @@ export class RestaurantService {
       this.totalPrice += item.price * item.cartCount;
       this.totalCartCount += item.cartCount;
     }
+
+    this.calculateCartListTotal();
+  }
+
+  public calculateCartListTotal() {
+    this.totalCartList = 0;
+    this.totalCartList = (this.usersService.getUser().cartList || []).length;
   }
 }
