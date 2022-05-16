@@ -4,6 +4,7 @@ import { MenuItem } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { MenuService } from 'src/app/theme/components/menu/menu.service';
 import { UsersService } from 'src/app/users/users.service';
+import { AccountService } from '../account/account.service';
 import { Plate } from '../restaurants/plates';
 import { RestaurantService } from '../restaurants/restaurant.service';
 import { CartList } from '../restaurants/restaurants';
@@ -31,7 +32,8 @@ export class CartComponent implements OnInit {
     public usersService: UsersService,
     public restaurantService: RestaurantService,
     public menuService: MenuService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +52,10 @@ export class CartComponent implements OnInit {
 
   public getTotalPrice(items: Plate[]): number {
     return items.reduce((prev, curr) => prev + curr.cartCount * curr.price, 0);
+  }
+
+  public getDefaultAddress() {
+    return this.accountService.getAddress(this.accountService.getDefaultAddress());
   }
 
   public counterChange(count: number) {

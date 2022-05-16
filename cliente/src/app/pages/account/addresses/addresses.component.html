@@ -11,10 +11,10 @@
 <mat-tab-group [selectedIndex]="selected" (selectedIndexChange)="onTabIndexChanged($event)" animationDuration="0">
   <mat-tab *ngFor="let address of addresses.controls; let i = index">
     <ng-template mat-tab-label>
-      <span *ngIf="i == 0">Dirección de facturación</span>
-      <span *ngIf="i > 0"
-        >Dirección de envío <br /><span *ngIf="i > 0 && addresses.controls.length > 2" class="mx-2">({{ i }})</span>
-      </span>
+      <div>
+        <span>Dirección de envío</span>
+        <span class="mx-2">({{ i + 1 }}) </span>
+      </div>
     </ng-template>
     <div class="o-hidden mt-4">
       <div [formGroup]="$any(address)" fxLayout="row wrap" class="flex-wrapper">

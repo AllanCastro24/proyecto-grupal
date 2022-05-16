@@ -11,25 +11,24 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderComponent } from './orders/order/order.component';
-
+import { PaymentsComponent } from './payments/payments.component';
 
 export const routes = [
-  { 
-    path: '', 
-    component: AccountComponent, children: [
+  {
+    path: '',
+    component: AccountComponent,
+    children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'password-change', component: PasswordChangeComponent },
       { path: 'addresses', component: AddressesComponent },
-      { path: 'favorites', component: FavoritesComponent },
-      { path: 'reservations', component: ReservationsComponent },
+      { path: 'payments', component: PaymentsComponent },
       { path: 'orders', component: OrdersComponent },
-      { path: 'orders/:id', component: OrderComponent } 
-    ]
-  }
+      { path: 'orders/:id', component: OrderComponent },
+    ],
+  },
 ];
-
 
 @NgModule({
   declarations: [
@@ -38,15 +37,12 @@ export const routes = [
     ProfileComponent,
     PasswordChangeComponent,
     AddressesComponent,
+    PaymentsComponent,
     FavoritesComponent,
     ReservationsComponent,
     OrdersComponent,
-    OrderComponent 
+    OrderComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    SharedModule,
-  ]
+  imports: [CommonModule, RouterModule.forChild(routes), SharedModule],
 })
-export class AccountModule { }
+export class AccountModule {}

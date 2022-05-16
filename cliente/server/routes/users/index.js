@@ -25,7 +25,7 @@ const users = (app, pool) => {
             work: {
               position: result.rol_id,
             },
-            contact: {
+            contacts: {
               email: result.email,
             },
           };

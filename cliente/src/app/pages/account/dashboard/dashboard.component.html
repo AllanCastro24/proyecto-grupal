@@ -7,8 +7,8 @@
       </div>
       <div class="divider"></div>
       <div class="pt-3">
-        <p>Emilio Verdines</p>
-        <p>emilio.verdines@gmail.com</p>
+        <p>{{ user.username }}</p>
+        <p>{{ user.contacts?.email }}</p>
         <p><a routerLink="/account/password-change" class="primary-color fw-500">Cambiar contraseña</a></p>
       </div>
     </div>
@@ -21,7 +21,6 @@
       </div>
       <div class="divider"></div>
       <div class="pt-3">
-        <p>Dirección de facturación</p>
         <p>Dirección de envío</p>
       </div>
     </div>

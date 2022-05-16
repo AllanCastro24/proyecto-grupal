@@ -5,7 +5,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { CheckoutComponent } from './checkout.component';
 
 export const routes = [
-  { path: '', component: CheckoutComponent, pathMatch: 'full' }
+  { path: ':id/:companyId', component: CheckoutComponent, pathMatch: 'full' }
 ];
 
 @NgModule({

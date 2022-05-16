@@ -7,11 +7,19 @@
             <mat-icon>close</mat-icon>
           </button>
           <mat-card-header fxLayoutAlign="start center">
-            <mat-card-title class="text-muted mb-0 secondary-font">Emilio Verdines</mat-card-title>
+            <mat-card-title class="text-muted mb-0 secondary-font">{{ user.username }}</mat-card-title>
           </mat-card-header>
           <div class="divider my-3"></div>
           <div *ngFor="let link of links">
-            <a matLine [routerLink]="link.href" routerLinkActive="horizontal-active-link" [routerLinkActiveOptions]="{ exact: true }" fxLayout="row" fxLayoutAlign="start center" class="p-3">
+            <a
+              matLine
+              [routerLink]="link.href"
+              routerLinkActive="horizontal-active-link"
+              [routerLinkActiveOptions]="{ exact: true }"
+              fxLayout="row"
+              fxLayoutAlign="start center"
+              class="p-3"
+            >
               <mat-icon class="text-muted">{{ link.icon }}</mat-icon>
               <span class="mx-2">{{ link.name }}</span>
             </a>

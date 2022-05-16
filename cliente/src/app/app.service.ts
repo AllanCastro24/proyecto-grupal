@@ -719,9 +719,11 @@ export class AppService {
   public getYears() {
     const startYear = new Date().getFullYear();
     let years = Array();
+
     for (let i = 0; i <= 10; i++) {
-      years.push(startYear + i);
+      years.push((startYear + i).toString());
     }
+
     return years;
   }
 

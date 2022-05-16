@@ -1,4 +1,4 @@
-import { Plate } from '../pages/restaurants/plates';
+import { Address, Payment } from '../pages/account/account';
 import { CartList, Order, Restaurant } from '../pages/restaurants/restaurants';
 
 export class User {
@@ -13,6 +13,8 @@ export class User {
   favoriteRestaurants?: Restaurant[];
   orderList?: Order[];
   cartList?: CartList[];
+  addressList?: Address[];
+  paymentList?: Payment[];
 }
 
 export class UserProfile {
@@ -32,7 +34,6 @@ export class UserWork {
 export class UserContacts {
   email: string = '';
   phone: string = '';
-  address: string = '';
 }
 
 export class UserSocial {
