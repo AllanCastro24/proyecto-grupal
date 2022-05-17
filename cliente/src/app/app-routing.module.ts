@@ -22,6 +22,7 @@ const routes: Routes = [
       { path: 'account', loadChildren: () => import('./pages/account/account.module').then((m) => m.AccountModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then((m) => m.CartModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'checkout', loadChildren: () => import('./pages/checkout/checkout.module').then((m) => m.CheckoutModule), canActivate: [IsAuthenticatedGuard] },
+      { path: 'orders', loadChildren: () => import('./pages/account/orders/orders.module').then((m) => m.OrdersModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'login', loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginModule) },
       { path: 'register', loadChildren: () => import('./pages/register/register.module').then((m) => m.RegisterModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'reset-password', loadChildren: () => import('./pages/reset-password/reset-password.module').then((m) => m.ResetPasswordModule), canActivate: [IsAuthenticatedGuard] },

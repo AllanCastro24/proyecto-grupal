@@ -9,7 +9,6 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
 import { AddressesComponent } from './addresses/addresses.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ReservationsComponent } from './reservations/reservations.component';
-import { OrdersComponent } from './orders/orders.component';
 import { OrderComponent } from './orders/order/order.component';
 import { PaymentsComponent } from './payments/payments.component';
 
@@ -24,7 +23,6 @@ export const routes = [
       { path: 'password-change', component: PasswordChangeComponent },
       { path: 'addresses', component: AddressesComponent },
       { path: 'payments', component: PaymentsComponent },
-      { path: 'orders', component: OrdersComponent },
       { path: 'orders/:id', component: OrderComponent },
     ],
   },
@@ -40,7 +38,6 @@ export const routes = [
     PaymentsComponent,
     FavoritesComponent,
     ReservationsComponent,
-    OrdersComponent,
     OrderComponent,
   ],
   imports: [CommonModule, RouterModule.forChild(routes), SharedModule],

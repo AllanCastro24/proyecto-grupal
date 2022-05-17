@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { UsersService } from 'src/app/users/users.service';
 import { environment } from 'src/environments/environment';
 import { Plate } from './plates';
-import { CartList, Menu, Restaurant } from './restaurants';
+import { CartList, Menu, Order, Restaurant } from './restaurants';
 
 @Injectable({
   providedIn: 'root',
@@ -182,5 +182,22 @@ export class RestaurantService {
   public calculateCartListTotal() {
     this.totalCartList = 0;
     this.totalCartList = (this.usersService.getUser().cartList || []).length;
+  }
+
+  public getOrders() {
+    return this.usersService.getUser().orderList || [];
+  }
+
+  public addOrder(order: Order) {
+    const user = this.usersService.getUser();
+
+    if (!user.orderList) {
+      user.orderList = [];
+    }
+
+    user.orderList.push(order);
+
+    this.usersService.setUser(user);
+    
   }
 }

@@ -1,47 +1,28 @@
-<div class="table-wrapper"> 
-    <table mat-table [dataSource]="dataSource" matSort class="w-100">
-    
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-            <td mat-cell *matCellDef="let order"> #{{order.id}} </td>
-        </ng-container>  
-  
-        <!-- Date Column -->
-        <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-            <td mat-cell *matCellDef="let order"> {{order.date}}</td>
-        </ng-container>  
-       
-
-        <!-- Status Column -->
-        <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-            <td mat-cell *matCellDef="let order"> {{order.status.name}}</td>
-        </ng-container> 
-
-         <!-- Table Number Column -->
-         <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
-            <td mat-cell *matCellDef="let order"> ${{order.amount}} for {{order.quantity}} items </td>
-        </ng-container> 
-  
-        <!-- Actions Column -->
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Remove </th>
-            <td mat-cell *matCellDef="let order"> 
-                <button mat-icon-button color="primary" (click)="view(order)" matTooltip="View">
-                    <mat-icon>visibility</mat-icon>
-                </button> 
-                <button mat-icon-button color="warn" (click)="remove(order)" matTooltip="Remove">
-                    <mat-icon>delete</mat-icon>
-                </button> 
-            </td>
-        </ng-container> 
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let order; columns: displayedColumns;"></tr>
-    </table> 
-    <p *ngIf="dataSource && dataSource.data.length === 0" class="py-5 mb-0 text-center">No data available</p> 
-</div>
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+<div class="ordersList px-3">
+    <div class="carts">
+      <h2 class="py-3">Ordenes</h2>
+      <div *ngFor="let order of ordersList" (click)="openOrder(order)" class="item">
+        <div class="image">
+          <img [src]="order.items[0].image.medium" />
+        </div>
+        <div class="content">
+          <div class="info">
+            <!-- <span class="title">{{ getRestaurant(order.items[0])?.name }}</span> -->
+            <div class="more-info">
+              <span class="totalItems">{{ getTotalItems(order.items) }} artículos</span>
+              <span class="separator">●</span>
+              <span class="totalPrice">{{ getTotalPrice(order.items) | currency }}</span>
+            </div>
+            <div class="stauts">{{ order.status.name }}</div>
+          </div>
+          <div class="view">
+            <mat-icon>navigate_next</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!ordersList.length" class="empty-cart py-3 text-center">
+    <p>No tiene nada en su carrito</p>
+    <a routerLink="/categories" mat-raised-button color="primary" class="transform-none">Ver categorías</a>
+  </div>

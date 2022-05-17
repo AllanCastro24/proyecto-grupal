@@ -1,4 +1,4 @@
-import { Plate } from "./plates";
+import { Plate } from './plates';
 
 export interface Restaurant {
   id: number;
@@ -40,10 +40,12 @@ export interface Menu {
 
 export interface Order {
   id: number;
+  accountId: number;
+  addressId: number;
+  addressTypeId: number;
+  paymentId: number;
   date: string;
   items: Plate[];
-  quantity: number;
-  amount: number;
   status: OrderStatus;
 }
 

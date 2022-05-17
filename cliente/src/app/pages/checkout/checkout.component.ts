@@ -8,7 +8,7 @@ import { DeliveryType, Payment } from '../account/account';
 import { AccountService } from '../account/account.service';
 import { Plate } from '../restaurants/plates';
 import { RestaurantService } from '../restaurants/restaurant.service';
-import { Restaurant } from '../restaurants/restaurants';
+import { Order, OrderStatus, Restaurant } from '../restaurants/restaurants';
 
 @Component({
   selector: 'app-checkout',
@@ -38,6 +38,21 @@ export class CheckoutComponent implements OnInit {
 
   public subtotal: number = 0;
   public total: number = 0;
+
+  public status: OrderStatus[] = [
+    {
+      id: 1,
+      name: 'Pendiente',
+    },
+    {
+      id: 2,
+      name: 'En camino',
+    },
+    {
+      id: 3,
+      name: 'Completo',
+    },
+  ];
 
   constructor(
     private _location: Location,
@@ -154,6 +169,26 @@ export class CheckoutComponent implements OnInit {
 
   public getCardNumber() {
     return this.payment.cardNumber.replace(/\d{4}$/, '****');
+  }
+
+  public placeOrder() {
+    const order: Order = {
+      id: this.restaurantService.getOrders().length + 1,
+      accountId: this.usersService.getUser().id || 0,
+      addressId: this.accountService.getDefaultAddress(),
+      addressTypeId: this.deliveryType,
+      paymentId: this.accountService.getDefaultPayment(),
+      date: Date.now().toString(),
+      items: this.cartItems,
+      status: this.status[0],
+    };
+
+    console.log(order);
+
+    this.restaurantService.addOrder(order);
+    this.restaurantService.removeCartList(this.restaurantId, this.companyId);
+
+    this.router.navigate(['/cart']);
   }
 
   public onReturn() {
