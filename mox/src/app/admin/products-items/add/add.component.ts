@@ -85,7 +85,7 @@ export class AddComponent implements OnInit {
 
 
   public getCategories(){
-      this.appService.GetCategoria().subscribe(categories=>{ 
+      this.appService.GetCategoriass().subscribe(categories=>{ 
         this.categories = categories;
       });
       this.appService.GetUnidad_Medida().subscribe(categories=>{ 
@@ -228,7 +228,7 @@ _handleReaderLoaded(readerEvent: any){
 
 upload(){
 
-  this.appService.subirarchivoimg(this.archivo).subscribe(
+  this.appService.subirarchivoimagen(this.archivo).subscribe(
     datos =>{
       console.log(this.archivo);
       alert('Imagen Modificada');

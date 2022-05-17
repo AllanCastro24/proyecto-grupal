@@ -37,8 +37,8 @@ export class AppService {
   )  
   
   public url = environment.url + '/assets/data/'; 
-  public url2 = environment.url + 'http://localhost:8888/'; 
-  public url3 = environment.url + 'http://localhost/api/';
+  public url3 = environment.url + 'http://localhost:8888/'; 
+  //public url3 = environment.url + 'http://localhost/api/';
 
   constructor(public http:HttpClient, 
               private datePipe:DatePipe,
@@ -51,66 +51,66 @@ export class AppService {
 
 //======================================= CATEGORIAS ==========================================
 
-GetCategoria() {
-  return this.http.get(this.url2 + 'GetCategoria');
+GetCategoriass() {
+  return this.http.get(this.url3 + 'GetCategoriass');
 }
 
 CreateCategoria(Categoria: any): Observable<any> {
   let params = JSON.stringify(Categoria);
   let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url2 + 'InsertarCategoria', params, { headers: headers });
+  return this.http.post(this.url3 + 'InsertarCategoria', params, { headers: headers });
 }
 
 UpdateCategoria(id: any, datosEvent: any): Observable<any> {
-  return this.http.put(this.url2 + "ActualizarCategoria/" + id, datosEvent);
+  return this.http.put(this.url3 + "ActualizarCategoria/" + id, datosEvent);
 }
 
 DeleteCategoria(id: any): Observable<any> {
   let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.delete(this.url2 + "DeleteCategoria/" + id, { headers: headers });
+  return this.http.delete(this.url3 + "DeleteCategoria/" + id, { headers: headers });
 }
 //=================================================================================
 
 //======================================= TIPO DE PAGO ==========================================
 GetTipo_Pago() {
-  return this.http.get(this.url2 + 'GetTipo_Pago');
+  return this.http.get(this.url3 + 'GetTipo_Pago');
 }
 
 InsertarTipo_Pago(pago: any): Observable<any> {
   let params = JSON.stringify(pago);
   let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url2 + 'InsertarTipo_Pago', params, { headers: headers });
+  return this.http.post(this.url3 + 'InsertarTipo_Pago', params, { headers: headers });
 }
 
 UpdateTipo_Pago(id: any, pago: any): Observable<any> {
-  return this.http.put(this.url2 + "ActualizarTipo_Pago/" + id, pago);
+  return this.http.put(this.url3 + "ActualizarTipo_Pago/" + id, pago);
 }
 
 DeleteTipo_Pago(id: any): Observable<any> {
   let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.delete(this.url2 + "DeleteTipo_Pago/" + id, { headers: headers });
+  return this.http.delete(this.url3 + "DeleteTipo_Pago/" + id, { headers: headers });
 }
 
 //===================================================================================================
 
 //======================================= UNIDAD DE MEDIDA ==========================================
 GetUnidad_Medida() {
-  return this.http.get(this.url2 + 'GetUnidad-Medida');
+  return this.http.get(this.url3 + 'GetUnidad-Medida');
 }
 
 InsertarUnidadMedida(UnidadMedida: any): Observable<any> {
   let params = JSON.stringify(UnidadMedida);
   let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url2 + 'Insertar-Unidad-Medida', params, { headers: headers });
+  return this.http.post(this.url3 + 'Insertar-Unidad-Medida', params, { headers: headers });
 }
 
 UpdateUnidadMedida(id: any, UnidadMedida: any): Observable<any> {
-  return this.http.put(this.url2 + "Actualizar-Unidad-Medida/" + id, UnidadMedida);
+  return this.http.put(this.url3 + "Actualizar-Unidad-Medida/" + id, UnidadMedida);
 }
 
 Delete_Unidad_Medida(id: any): Observable<any> {
   let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.delete(this.url2 + "Delete_Unidad_Medida/" + id, { headers: headers });
+  return this.http.delete(this.url3 + "Delete_Unidad_Medida/" + id, { headers: headers });
 }
 
 //===================================================================================================
@@ -119,85 +119,85 @@ Delete_Unidad_Medida(id: any): Observable<any> {
 InsertarProveedor(Proveedor: any): Observable<any> {
   let params = JSON.stringify(Proveedor);
   let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url2 + 'InsertarProveedor', params, { headers: headers });
+  return this.http.post(this.url3 + 'InsertarProveedor', params, { headers: headers });
 }
 ActualizarProveedor(id: any, Proveedor: any): Observable<any> {
-  return this.http.put(this.url2 + "ActualizarProveedor/" + id, Proveedor);
+  return this.http.put(this.url3 + "ActualizarProveedor/" + id, Proveedor);
 }
 GetProveedor() {
-  return this.http.get(this.url2 + 'GetProveedor');
+  return this.http.get(this.url3 + 'GetProveedor');
 }
 ActualizarEstatusProveedor(id: any, Proveedor: any): Observable<any> {
-  return this.http.put(this.url2 + "ActualizarEstatusProveedor/" + id, Proveedor);
+  return this.http.put(this.url3 + "ActualizarEstatusProveedor/" + id, Proveedor);
 }
 GetProveedorByID(id: any) {
-  return this.http.get(this.url2 + 'GetProveedor/'+ id);
+  return this.http.get(this.url3 + 'GetProveedor/'+ id);
 }
 
 
 GetLastInsumo() {
-  return this.http.get(this.url2 + 'GetLastInsumo');
+  return this.http.get(this.url3 + 'GetLastInsumo');
 }
 
 
 GetinsumosYDetalle() {
-  return this.http.get(this.url2 + 'GetinsumosYDetalle');
+  return this.http.get(this.url3 + 'GetinsumosYDetalle');
 }
 
 GetinsumosYDetalleID(id: any) {
-  return this.http.get(this.url2 + 'GetinsumosYDetalleID/'+ id);
+  return this.http.get(this.url3 + 'GetinsumosYDetalleID/'+ id);
 }
 
 
 InsertarInsumo(insumo: any): Observable<any> {
   let params = JSON.stringify(insumo);
   let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url2 + 'InsertarInsumo', params, { headers: headers });
+  return this.http.post(this.url3 + 'InsertarInsumo', params, { headers: headers });
 }
 
 InsertarDetalleInsumo(insumo: any): Observable<any> {
   let params = JSON.stringify(insumo);
   let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url2 + 'InsertarDetalleInsumo', params, { headers: headers });
+  return this.http.post(this.url3 + 'InsertarDetalleInsumo', params, { headers: headers });
 }
 
 ActualizarInsumo(id: any, insumo: any): Observable<any> {
-  return this.http.put(this.url2 + "ActualizarInsumo/" + id, insumo);
+  return this.http.put(this.url3 + "ActualizarInsumo/" + id, insumo);
 }
 
 ActualizarDetalleInsumo(id: any, insumo: any): Observable<any> {
-  return this.http.put(this.url2 + "ActualizarDetalleInsumo/" + id, insumo);
+  return this.http.put(this.url3 + "ActualizarDetalleInsumo/" + id, insumo);
 }
 
-subirarchivoimg(archivo: {}){ 
-  return this.http.post(this.url2 + 'subirimg',archivo);
+subirarchivoimagen(archivo: {}){ 
+  return this.http.post(this.url3 + 'subirimagen',archivo);
 }
 
 GetMermaCom() {
-  return this.http.get(this.url2 + 'GetMermaCom');
+  return this.http.get(this.url3 + 'GetMermaCom');
 }
 
 GetInsumoCompuesto() {
-  return this.http.get(this.url2 + 'GetInsumoCompuesto');
+  return this.http.get(this.url3 + 'GetInsumoCompuesto');
 }
 
 Get_Stock_Minimo() {
-  return this.http.get(this.url2 + 'Get_Stock_Minimo');
+  return this.http.get(this.url3 + 'Get_Stock_Minimo');
 }
 
 InsertarMerma(merma: any): Observable<any> {
   let params = JSON.stringify(merma);
   let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url2 + 'InsertarMerma', params, { headers: headers });
+  return this.http.post(this.url3 + 'InsertarMerma', params, { headers: headers });
 }
 
 
 ActualizarMerma(id: any, merma: any): Observable<any> {
-  return this.http.put(this.url2 + "ActualizarMerma/" + id, merma);
+  return this.http.put(this.url3 + "ActualizarMerma/" + id, merma);
 }
 
 ActualizarStockMinimo(id: any, sm: any): Observable<any> {
-  return this.http.put(this.url2 + "ActualizarStockMinimo/" + id, sm);
+  return this.http.put(this.url3 + "ActualizarStockMinimo/" + id, sm);
 }
 
 

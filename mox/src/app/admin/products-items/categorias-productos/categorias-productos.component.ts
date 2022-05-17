@@ -84,7 +84,7 @@ export class CategoriasProductosComponent implements OnInit {
 
 
   LoadChangesAllCat() {
-    this.appService.GetCategoria().subscribe(respuesta => {
+    this.appService.GetCategoriass().subscribe(respuesta => {
       console.log(respuesta)
       this.initDataSource(respuesta);
       //this.AllCategorias = respuesta;
