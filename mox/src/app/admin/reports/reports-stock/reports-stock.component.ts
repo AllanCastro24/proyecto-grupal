@@ -22,6 +22,7 @@ export class ReportsStockComponent implements OnInit {
   public form4!: FormGroup;
   public optionValue = "";
   years:number[]=[];
+  public anio:number=0;
   displayedColumns: string[] = ['id_detalle_insumo', 'id_sucursal', 'Detalles', 'cantidad'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -42,14 +43,24 @@ export class ReportsStockComponent implements OnInit {
   public xAxisLabel = 'Year';
   public showYAxisLabel = false;
   public yAxisLabel = 'Profit';
-  public colorScheme:any = {
-    domain: ['#283593', '#039BE5', '#FF5252','#283593', '#039BE5']
-  }; 
+  // public colorScheme:any = {
+  //   domain: ['#283593', '#039BE5', '#FF5252','#283593', '#039BE5']
+  // }; 
   public autoScale = true;
   public roundDomains = true;
   @ViewChild('resizedDiv') resizedDiv!:ElementRef;
   public previousWidthOfResizedDiv:number = 0; 
 
+  //GRAFICA PASTEL
+  public data: any[] = []; 
+  
+  
+  public colorScheme:any = {
+    domain: ['#2F3E9E', '#D22E2E', '#378D3B']
+  }; 
+  public showLabels = true;
+  public explodeSlices = true;
+  public doughnut = false; 
   
 
   constructor(public appService: AppService,
@@ -58,13 +69,14 @@ export class ReportsStockComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
     ngOnInit(): void {
+      this.anio=new Date().getFullYear();    
       // this.appService.ObtenerGastosFijos().subscribe(respuesta => {
       //   this.initDataSource(respuesta);
       //   console.log(respuesta);
       //   // this.Equipos = respuesta;
       // });
-      for ( let i=2000; i<2050; i++){
-      
+      for (let i = this.anio; i > 2000; i--) {
+
         this.years.push(i);
         // this.anos.push(i);
   
@@ -191,6 +203,9 @@ export class ReportsStockComponent implements OnInit {
     ngAfterViewChecked() {    
       if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
         // this.analytics = [...analytics];
+      }
+      if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
+        // setTimeout(() => this.data = [...montly_sales] );
       }
       this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
     }

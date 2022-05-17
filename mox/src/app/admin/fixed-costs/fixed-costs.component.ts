@@ -29,13 +29,13 @@ export class FixedCostsComponent implements OnInit {
   constructor(public appService: AppService, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.countries = this.appService.getCountries();
-    // this.initDataSource(customers);
     this.appService.ObtenerGastosFijos().subscribe(respuesta => {
       this.initDataSource(respuesta);
       console.log(respuesta);
-      // this.Equipos = respuesta;
+      
     });
+    this.countries = this.appService.getCountries();
+    // this.initDataSource(customers);
     this.appService.ObtenerTiposGastosFijos().subscribe(respuesta => {
       // this.tipos_gastos=respuesta
       this.TiposGastos = respuesta;
@@ -44,7 +44,7 @@ export class FixedCostsComponent implements OnInit {
     });
     this.appService.ObtenerSucursales().subscribe(respuesta =>{
       this.Sucursales=respuesta;
-    })
+    });
   }
 
   public initDataSource(data: any) {

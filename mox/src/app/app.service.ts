@@ -750,7 +750,7 @@ export class AppService {
   }
 
   InsertarGastoFijo(datosGasto: any): Observable<any> {
-    return this.http.post(this.API + "?api/costos_fijos/add", datosGasto, { responseType: 'text' });
+    return this.http.post(this.API + "api/costos_fijos/add", datosGasto, { responseType: 'text' });
 
   }
 
@@ -793,12 +793,12 @@ export class AppService {
   }
 
   ProductosMasVendidos(mes: any): Observable<any> {
-    return this.http.get(this.API + "api/producto/mas_vendido/mes/" + mes.mes);
+    return this.http.get(this.API + "api/producto/mas_vendido/mes/" + mes.mes + "/" + mes.ano);
 
   }
 
   ProductosMenosVendidos(mes: any): Observable<any> {
-    return this.http.get(this.API + "api/producto/menos_vendido/mes/" + mes.mes);
+    return this.http.get(this.API + "api/producto/menos_vendido/mes/" + mes.mes + "/" + mes.ano);
 
   }
 

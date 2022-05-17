@@ -210,31 +210,15 @@
                 <p *ngIf="dataSource && dataSource.data.length === 0" class="py-5 mb-0 text-center">No data available
                 </p>
             </div>
-            <mat-card>
-                <mat-card-header fxLayoutAlign="center">
-                    <mat-card-subtitle>
-                        <h2>Grafica</h2>
-                    </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <div class="w-100 h-300p" #resizedDiv>
-                        <ngx-charts-line-chart [scheme]="colorScheme" [results]="analytics" [gradient]="gradient"
-                            [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
-                            [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
-                            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale"
-                            [roundDomains]="roundDomains" (select)="onSelect($event)">
-                        </ngx-charts-line-chart>
-                    </div>
-                </mat-card-content>
-            </mat-card>
+
             <mat-card>
                 <mat-card-header fxLayoutAlign="center">                
-                    <mat-card-subtitle><h2>Montly Sales</h2></mat-card-subtitle>
+                    <mat-card-subtitle><h2>Ventas</h2></mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                     <div fxLayout="row" fxLayoutAlign="space-around">
-                        <mat-checkbox color="primary" class="example-margin" [checked]="explodeSlices" (change)="explodeSlices = !explodeSlices">Explode Slices</mat-checkbox>
-                        <mat-checkbox color="primary" class="example-margin" [checked]="showLabels" (change)="showLabels = !showLabels">Show Labels</mat-checkbox>
+                        <mat-checkbox color="primary" class="example-margin" [checked]="explodeSlices" (change)="explodeSlices = !explodeSlices">Explotar rebanadas</mat-checkbox>
+                        <mat-checkbox color="primary" class="example-margin" [checked]="showLabels" (change)="showLabels = !showLabels">Mostrar etiquetas</mat-checkbox>
                     </div>
                     <div class="w-100 h-300p" #resizedDiv>
                         <ngx-charts-pie-chart

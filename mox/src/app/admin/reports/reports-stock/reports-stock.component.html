@@ -167,7 +167,7 @@
                     <!-- Revenue Column -->
                     <ng-container matColumnDef="id_sucursal">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
-                        <td mat-cell *matCellDef="let customer">{{customer.id_sucursal}} </td>
+                        <td mat-cell *matCellDef="let customer">{{customer.nom_sucursal}} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="Detalles">
@@ -202,17 +202,21 @@
             <mat-card>
                 <mat-card-header fxLayoutAlign="center">
                     <mat-card-subtitle>
-                        <h2>Grafica</h2>
+                        <h2>Almacen</h2>
                     </mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
+                    <div fxLayout="row" fxLayoutAlign="space-around">
+                        <mat-checkbox color="primary" class="example-margin" [checked]="explodeSlices"
+                            (change)="explodeSlices = !explodeSlices">Explotar rebanadas</mat-checkbox>
+                        <mat-checkbox color="primary" class="example-margin" [checked]="showLabels"
+                            (change)="showLabels = !showLabels">Mostrar etiquetas</mat-checkbox>
+                    </div>
                     <div class="w-100 h-300p" #resizedDiv>
-                        <ngx-charts-line-chart [scheme]="colorScheme" [results]="analytics" [gradient]="gradient"
-                            [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
-                            [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
-                            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale"
-                            [roundDomains]="roundDomains" (select)="onSelect($event)">
-                        </ngx-charts-line-chart>
+                        <ngx-charts-pie-chart [scheme]="colorScheme" [results]="data" [legend]="showLegend"
+                            [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut"
+                            [gradient]="gradient" (select)="onSelect($event)">
+                        </ngx-charts-pie-chart>
                     </div>
                 </mat-card-content>
             </mat-card>

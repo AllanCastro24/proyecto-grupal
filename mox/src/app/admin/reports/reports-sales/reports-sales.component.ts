@@ -12,6 +12,8 @@ import { analytics } from '..//dashboard.data';
 import { montly_sales } from '../dashboard.data';
 
 
+
+
 @Component({
   selector: 'app-reports-sales',
   templateUrl: './reports-sales.component.html',
@@ -24,7 +26,7 @@ export class ReportsSalesComponent implements OnInit {
   public form4!: FormGroup;
   public optionValue = "";
   years: number[] = [];
-
+  public anio:number=0;
   displayedColumns: string[] = ['id_producto', 'cantidad', 'id_mesero', 'fecha', 'id_sucursal'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -74,13 +76,16 @@ export class ReportsSalesComponent implements OnInit {
 
 
 
+    
   ngOnInit(): void {
+        
+    this.anio=new Date().getFullYear();    
     // this.appService.ObtenerGastosFijos().subscribe(respuesta => {
     //   this.initDataSource(respuesta);
     //   console.log(respuesta);
     //   // this.Equipos = respuesta;
     // });
-    for (let i = 2000; i < 2050; i++) {
+    for (let i = this.anio; i > 2000; i--) {
 
       this.years.push(i);
       // this.anos.push(i);
