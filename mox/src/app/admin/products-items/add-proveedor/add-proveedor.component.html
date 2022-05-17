@@ -1,0 +1,86 @@
+<div class="p-2">
+    <mat-card>  
+        <mat-card-content>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" fxLayout="row wrap">
+                <!-- <div fxFlex="40" class="px-2" *ngIf="showImage">  
+                    <app-image-upload [base64]="form.controls.image.value"
+                                    [fileSize]="400"    
+                                    [acceptTypes]="'image/png, image/jpeg, image/jpg'"
+                                    (onFileChange)="fileChange($event)">
+                    </app-image-upload>  
+                </div> -->
+                <div fxFlex="100" class="px-2">
+                    <div fxLayout="row wrap">
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Nombre del Proveedor</mat-label>
+                                <input matInput formControlName="nombre_proveedor" required>
+                                <mat-error *ngIf="form.controls.nombre_proveedor.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.nombre_proveedor.hasError('minlength')">Name isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>RFC</mat-label>
+                                <input matInput formControlName="rfc_proveedor" required>
+                                <mat-error *ngIf="form.controls.rfc_proveedor.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.rfc_proveedor.hasError('minlength')">Name isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field>
+                        </div>  
+                        
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Telefono</mat-label>
+                                <input matInput formControlName="telefono_proveedor" required>
+                                <mat-error *ngIf="form.controls.telefono_proveedor.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.telefono_proveedor.hasError('minlength')">Name isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Telefono Alterno</mat-label>
+                                <input matInput formControlName="telefono_alterno_proveedor" required>
+                                <mat-error *ngIf="form.controls.telefono_alterno_proveedor.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.telefono_alterno_proveedor.hasError('minlength')">Name isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Correo</mat-label>
+                                <input type="email" matInput formControlName="correo_proveedor" required>
+                                <mat-error *ngIf="form.controls.correo_proveedor.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.correo_proveedor.hasError('minlength')">Name isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Web</mat-label>
+                                <input matInput formControlName="web" required>
+                                <mat-error *ngIf="form.controls.web.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.web.hasError('minlength')">Name isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <ng-container *ngIf="id">
+                            <div fxFlex="100" fxFlex.gt-sm="33.3" class="p-3">
+                                <mat-slide-toggle matInput formControlName="estatus"> Estatus </mat-slide-toggle>
+                            </div> 
+                        </ng-container>
+                       
+                        <div fxFlex="100" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Direccion</mat-label> 
+                                <textarea matInput formControlName="direccion_proveedor" rows="7"></textarea> 
+                            </mat-form-field> 
+                        </div>   
+                        <div fxFlex="100" class="mt-2 text-center w-100">
+                            <button mat-raised-button color="primary" type="submit" class="uppercase">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content> 
+    </mat-card>
+</div>
