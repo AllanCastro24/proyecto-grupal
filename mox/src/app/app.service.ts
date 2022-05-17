@@ -169,7 +169,7 @@ ActualizarDetalleInsumo(id: any, insumo: any): Observable<any> {
   return this.http.put(this.url3 + "ActualizarDetalleInsumo/" + id, insumo);
 }
 
-subirarchivoimagen(archivo: {}){ 
+subirarchivoimagenes(archivo: {}){ 
   return this.http.post(this.url3 + 'subirimagen',archivo);
 }
 

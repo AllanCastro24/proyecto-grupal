@@ -228,7 +228,7 @@ _handleReaderLoaded(readerEvent: any){
 
 upload(){
 
-  this.appService.subirarchivoimagen(this.archivo).subscribe(
+  this.appService.subirarchivoimagenes(this.archivo).subscribe(
     datos =>{
       console.log(this.archivo);
       alert('Imagen Modificada');
