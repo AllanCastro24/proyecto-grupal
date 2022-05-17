@@ -28,3 +28,8 @@ export interface Payment {
   expiryYear: string;
   cvv: string;
 }
+
+export enum DeliveryType {
+  Delivery = 1,
+  Pickup = 2
+}

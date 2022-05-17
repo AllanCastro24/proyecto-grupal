@@ -1,5 +1,5 @@
 .delivery-type {
-  margin: 15px 20px;
+  margin: 15px 0px;
   display: flex;
   background-color: #efeef1;
   justify-content: center;
@@ -24,7 +24,6 @@
   background-color: #fff;
   border-radius: 25px;
   border: none;
-  line-height: normal !important;
 }
 
 .delivery {
@@ -47,13 +46,6 @@
 .delivery-info {
   display: flex;
   align-items: center;
-}
-
-.delivery-type .active {
-  background-color: #fff;
-  border-radius: 25px;
-  border: none;
-  line-height: normal !important;
 }
 
 .btn-back {
@@ -92,8 +84,7 @@ h3 {
 }
 
 .separator {
-  margin: 0 5px;
-  font-size: 8px;
+  border-bottom: 1px solid #e1e1e1;
 }
 
 .more-info,
@@ -160,16 +151,32 @@ h3 {
   margin: 10px 0;
 }
 
-.payment .content span {
-  width: 100%;
+.payment {
+  margin-bottom: 10px;
+
+  .content span {
+    width: 100%;
+  }
+
+  .content {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
 }
 
-.payment .content {
-  padding-bottom: 0;
-  border-bottom: 0;
-}
-
-.payment > div {
+.place-order {
+  background-color: #000;
+  color: #fff;
   display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  height: 55px;
+  font-size: 15px;
+  margin: 1rem;
 }

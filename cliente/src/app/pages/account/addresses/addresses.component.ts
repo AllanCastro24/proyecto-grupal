@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
+import { MenuService } from 'src/app/theme/components/menu/menu.service';
 import { emailValidator, maxWordsValidator } from 'src/app/theme/utils/app-validators';
 import { AccountService } from '../account.service';
 
@@ -28,7 +29,12 @@ export class AddressesComponent implements OnInit {
     id: 1,
   };
 
-  constructor(public formBuilder: FormBuilder, public appService: AppService, public accountService: AccountService) {}
+  constructor(
+    public formBuilder: FormBuilder,
+    public appService: AppService,
+    public accountService: AccountService,
+    public menuService: MenuService
+  ) {}
 
   ngOnInit(): void {
     this.countries = this.appService.getCountries();
@@ -36,6 +42,8 @@ export class AddressesComponent implements OnInit {
     this.getAddresses();
     this.setDefaultAddress();
     this.setTestAddress();
+
+    this.menuService.toggleMenu(true);
   }
 
   public setTestAddress() {

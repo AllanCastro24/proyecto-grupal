@@ -142,7 +142,7 @@ export class RestaurantSingleComponent implements OnInit {
     this.searchResultsMenu = [];
     this.searchResultsPlate = [];
 
-    const value = this.inputSearch.nativeElement.value;
+    const value = this.inputSearch.nativeElement.value.toLowerCase();
 
     if (!value) {
       return;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
+import { MenuService } from 'src/app/theme/components/menu/menu.service';
 import { AccountService } from '../account.service';
 
 @Component({
@@ -22,15 +23,22 @@ export class PaymentsComponent implements OnInit {
     cvv: '123',
   };
 
-  constructor(public formBuilder: FormBuilder, public appService: AppService, public accountService: AccountService) {}
+  constructor(
+    public formBuilder: FormBuilder,
+    public appService: AppService,
+    public accountService: AccountService,
+    public menuService: MenuService
+  ) {}
 
   ngOnInit(): void {
     this.months = this.appService.getMonths();
     this.years = this.appService.getYears();
-    console.log(this.years, this.months);
+
     this.getPayments();
     this.setDefaultPayment();
     this.setTestPayment();
+
+    this.menuService.toggleMenu(true);
   }
 
   public setTestPayment() {
