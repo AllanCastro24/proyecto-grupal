@@ -154,9 +154,14 @@ export class AppService {
     return this.http.get<any[]>(this.url2 );
   }
 
-  public getOrderscomple(){
-    return this.http.get<any[]>(this.url2 + 'mostpedidoscomple');
+  public getOrderscomple(idtienda:any,idsucursal:any){
+    return this.http.get<any[]>(this.url2 + 'mostpedidoscomple/' + idtienda + '/' + idsucursal );
   }
+
+  public getOrderscomple2(idtienda:any,idsucursal:any,id:any){
+    return this.http.get<any[]>(this.url2 + 'mostpedidoscompletick/' + idtienda + '/' + idsucursal + '/' + id);
+  }
+
 
   
   public mostrartiesuc(){

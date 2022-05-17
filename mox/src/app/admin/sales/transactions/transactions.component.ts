@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Order, Transaction } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { OrderTicketDialogComponent } from 'src/app/shared/order-ticket-dialog/order-ticket-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
@@ -17,20 +18,24 @@ export class TransactionsComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
-  
-  constructor(public appService:AppService, public snackBar: MatSnackBar) { } 
+  public idtienda:any;
+  public idsucursal:any;
+  //public artists:  Transaction[];
+  constructor(public appService:AppService, public snackBar: MatSnackBar,private activatedRoute: ActivatedRoute) { } 
 
   ngOnInit(): void {
+    this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
+    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
     this.dataSource = new MatTableDataSource(transactions);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort; 
 
-    this.appService.getOrderscomple().subscribe((transaction:Transaction[]) => { 
+    this.appService.getOrderscomple(this.idtienda,this.idsucursal).subscribe((transaction:Transaction[]) => { 
       this.initDataSource(transaction);
       console.log(transaction);
     });  
   }
-
+//dato estoy en conexion local cambiar a en linea
   public initDataSource(data:any){
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator;
@@ -44,14 +49,56 @@ export class TransactionsComponent implements OnInit {
     return pathString.split('.').reduce((o:any, i) => o[i], obj);
   }
 
-  public view(transaction:any){  
+  public view(transaction:any, id:any){  
     const dialogRef = this.appService.openDialog(OrderTicketDialogComponent, transaction, 'theme-dialog');
     dialogRef.afterClosed().subscribe(data => {  
       if(data){ 
         console.log(data);
       } 
     }); 
+    //this.statee(id);
+    //this.mostrartiesuc(id);
   }
+
+  public activo: any;
+  public statee( id: any): void {
+
+    
+     
+    /* this.appService.bajaplato3(this.idtienda, this.idsucursal,id, proveedor).subscribe((menuItems) => {
+    }); */
+    //this.ngOnInit();
+   console.log(id);
+   console.log("tienda: " + this.idtienda);
+   console.log("suc: " + this.idsucursal);
+   this.appService.getOrderscomple2(this.idtienda,this.idsucursal,id).subscribe((transactions:any[]) => { 
+    //this.initDataSource(transaction);
+    console.log(transactions);
+  });  
+
+  
+   }
+
+   datosmpl = null as any;
+
+   mostrartiesuc( id: any){
+     this.appService.getOrderscomple2(this.idtienda,this.idsucursal,id).subscribe(result => this.datosmpl  = result)
+     console.log('holaaa'+ this.datosmpl);
+     console.log(id);
+   console.log("tienda: " + this.idtienda);
+   console.log("suc: " + this.idsucursal);
+     //this.suma();
+     //this.insertarpla();
+     //this.state();
+   }
+   
+   hayregistropla(){
+     if(this.datosmpl == null){
+       return false;
+     } else{
+       return true;
+     }
+   }
   
 
 }

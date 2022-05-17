@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+
 <div class="header bg-primary">
   <div fxLayout="row wrap" fxLayoutAlign="space-between center">
     <h2 class="fw-500 secondary-font">Order #{{ transaction.idcli }}</h2>
@@ -6,27 +8,35 @@
     ></app-dialog-header-controls>
   </div>
 </div>
-<div id="htmlData">
-    <div id="register">
-  <div id="ticket">
+<div id="htmlData" #htmlData >
+    <div id="register" >
+  <div id="ticket" *ngFor="let dat of datosmpl">
     <h1>Thank You!</h1>
-    <table>
+    <table >
       <tbody id="entries" >
 
-        <a >{{ transaction.name }} $C/U:{{transaction.price}} Pz:{{transaction.cartCount}}</a>
+        <a >Pz:{{dat.cartCount}} $C/U:{{dat.price}} {{ dat.name }}</a>
       </tbody>
       <tfoot>
         <tr>
           <th>Total</th>
-          <th id="total">$ {{transaction.price * transaction.cartCount }}</th>
+          <th id="total">$ {{dat.price * dat.cartCount }}</th>
         </tr>
       </tfoot>
     </table>
   </div>
 </div>
+
 </div>
+<!-- <div *ngFor="let dat of datosmpl">
+  {{dat.name}}
+  {{dat.price}}
+  {{dat.cartCount}}
+</div> -->
+
 
 <div class="col-md-4 text-right">
     <button class="btn btn-success btn-block" (click)="openPDF()">Abrir Ticket</button>
+    <button (load)="statee(transaction.idcli,transaction.idtienda,transaction.idsuc);"></button>
     <!-- <button class="btn btn-success btn-block" (click)="openPDF2()">Download PDF2</button> -->
 </div>

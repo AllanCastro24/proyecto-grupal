@@ -105,6 +105,8 @@ export class Transaction {
                 //public status: OrderStatus,
                 public id: number,
                 public idcli: number,
+                public idsuc: number,
+                public idtienda: number,
                 public name: string,
                 public description: MenuItem[],
                 public price: number,
