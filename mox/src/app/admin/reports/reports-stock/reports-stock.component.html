@@ -11,13 +11,18 @@
                                     <!-- <mat-option *ngFor="let cat of appService.Data.categories" [value]="cat.id">
                                         <span>{{cat.name}}</span>
                                     </mat-option> -->
-                                    <mat-option value="Consultar">Consultar</mat-option>
+                                    <!-- <mat-option value="Consultar">Consultar</mat-option>
                                     <mat-option value="Mes">Mes</mat-option>
                                     <mat-option value="Dia">Dia</mat-option>
-                                    <mat-option value="Rango">Rango</mat-option>
-                                    <!-- <mat-option value="Ventas por dia">Ventas por dia</mat-option>
-                                    <mat-option value="Productos mas vendidos en el mes">Productos mas vendidos en el mes</mat-option>
-                                    <mat-option value="Productos menos vendidos en el mes">Productos menos vendidos en el mes</mat-option> -->
+                                    <mat-option value="Rango">Rango</mat-option> -->
+                                    <mat-option value="Entradas en el dia">Entradas en el dia</mat-option>
+                                    <mat-option value="Entradas en el mes">Entradas en el mes</mat-option>
+                                    <mat-option value="Entradas en un rango">Entradas en un rango</mat-option>
+                                    <mat-option value="Salidas en el dia">Salidas en el dia</mat-option>
+                                    <mat-option value="Salidas en el mes">Salidas en el mes</mat-option>
+                                    <mat-option value="Salidas en un rango">Salidas en un rango</mat-option>
+                                    
+                                    
                                 </mat-select>
                                 <mat-error *ngIf="form.controls.buscarPor.errors?.required">Debe seleccionar un tipo
                                 </mat-error>
@@ -30,7 +35,7 @@
                     </div>
                 </div>
             </form>
-            <form [formGroup]="form4" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Mes'" autocomplete="off"
+            <form [formGroup]="form4" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Mes' || optionValue == 'Entradas en el mes' || optionValue == 'Salidas en el mes'" autocomplete="off"
                 fxLayout="row wrap">
                 <div fxFlex="60" class="px-2">
                     <div fxLayout="row wrap">
@@ -80,7 +85,7 @@
                 </div>
             </form>
             <!-- Form 2 -->
-            <form [formGroup]="form2" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Rango'" autocomplete="off"
+            <form [formGroup]="form2" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Rango' || optionValue == 'Entradas en un rango' || optionValue == 'Salidas en un rango'" autocomplete="off"
                 fxLayout="row wrap">
                 <div fxFlex="60" class="px-2">
                     <div fxLayout="row wrap">
@@ -125,7 +130,7 @@
                 </div>
             </form>
             <!-- FORM 3 -->
-            <form [formGroup]="form3" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Dia'" autocomplete="off"
+            <form [formGroup]="form3" (ngSubmit)="onSubmit()" *ngIf="optionValue == 'Dia' || optionValue == 'Entradas en el dia' || optionValue == 'Salidas en el dia'" autocomplete="off"
                 fxLayout="row wrap">
                 <div fxFlex="60" class="px-2">
                     <div fxLayout="row wrap">

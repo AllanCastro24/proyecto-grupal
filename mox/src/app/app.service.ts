@@ -832,4 +832,35 @@ export class AppService {
 
   }
 
+  EntradasAlmacenDia(fecha: any): Observable<any> {
+    // console.log(this.API + "api/almacen/movimientos/entradas/day/" + fecha.dia);
+    return this.http.get(this.API + "api/almacen/movimientos/entradas/day/" + fecha.dia);
+
+  }
+  EntradasAlmacenMes(fecha: any): Observable<any> {
+    // console.log(this.API + "api/almacen/movimientos/entradas/day/" + fecha.dia);
+    return this.http.get(this.API + "api/almacen/movimientos/entradas/mes/" + fecha.mes + "/" + fecha.ano);
+
+  }
+  EntradasAlmacenRango(rango: any): Observable<any> {
+    // console.log(this.API + "api/almacen/movimientos/entradas/day/" + fecha.dia);
+    return this.http.get(this.API + "api/almacen/movimientos/entradas/range/" + rango.fecha + "/" + rango.fecha2);
+
+  }
+  SalidasAlmacenDia(fecha: any): Observable<any> {
+    // console.log(this.API + "api/almacen/movimientos/entradas/day/" + fecha.dia);
+    return this.http.get(this.API + "api/almacen/movimientos/salidas/day/" + fecha.dia);
+
+  }
+  SalidasAlmacenMes(fecha: any): Observable<any> {
+    // console.log(this.API + "api/almacen/movimientos/entradas/day/" + fecha.dia);
+    return this.http.get(this.API + "api/almacen/movimientos/salidas/mes/" + fecha.mes + "/" + fecha.ano);
+
+  }
+  SalidasAlmacenRango(rango: any): Observable<any> {
+    // console.log(this.API + "api/almacen/movimientos/entradas/day/" + fecha.dia);
+    return this.http.get(this.API + "api/almacen/movimientos/salidas/range/" + rango.fecha + "/" + rango.fecha2);
+
+  }
+
 }

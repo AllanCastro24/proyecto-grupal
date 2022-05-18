@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID,ElementRef, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { MenuItem } from 'src/app/app.models';
@@ -21,8 +21,8 @@ export class ReportsStockComponent implements OnInit {
   public form3!: FormGroup;
   public form4!: FormGroup;
   public optionValue = "";
-  years:number[]=[];
-  public anio:number=0;
+  years: number[] = [];
+  public anio: number = 0;
   displayedColumns: string[] = ['id_detalle_insumo', 'id_sucursal', 'Detalles', 'cantidad'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -48,166 +48,205 @@ export class ReportsStockComponent implements OnInit {
   // }; 
   public autoScale = true;
   public roundDomains = true;
-  @ViewChild('resizedDiv') resizedDiv!:ElementRef;
-  public previousWidthOfResizedDiv:number = 0; 
+  @ViewChild('resizedDiv') resizedDiv!: ElementRef;
+  public previousWidthOfResizedDiv: number = 0;
 
   //GRAFICA PASTEL
-  public data: any[] = []; 
-  
-  
-  public colorScheme:any = {
-    domain: ['#2F3E9E', '#D22E2E', '#378D3B']
-  }; 
+  public data: any[] = [];
+
+
+  public colorScheme: any = {
+    domain: ['#2F3E9E', '#D22E2E', '#378D3B' , '#FF5252','#283593', '#039BE5']
+  };
   public showLabels = true;
   public explodeSlices = true;
-  public doughnut = false; 
-  
+  public doughnut = false;
+
 
   constructor(public appService: AppService,
     public formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
-    ngOnInit(): void {
-      this.anio=new Date().getFullYear();    
-      // this.appService.ObtenerGastosFijos().subscribe(respuesta => {
-      //   this.initDataSource(respuesta);
-      //   console.log(respuesta);
-      //   // this.Equipos = respuesta;
-      // });
-      for (let i = this.anio; i > 2000; i--) {
+  ngOnInit(): void {
+    this.anio = new Date().getFullYear();
+    // this.appService.ObtenerGastosFijos().subscribe(respuesta => {
+    //   this.initDataSource(respuesta);
+    //   console.log(respuesta);
+    //   // this.Equipos = respuesta;
+    // });
+    for (let i = this.anio; i > 2000; i--) {
 
-        this.years.push(i);
-        // this.anos.push(i);
-  
-      }
-      this.form4 = this.formBuilder.group({
-        // "id": 0,
-        // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
-        // "description": null,
-        // "buscarPor": [null, Validators.required],
-        "mes": null,
-        // "fecha": null,
-        // "fecha2": null,
-        // "dia": null,
-  
+      this.years.push(i);
+      // this.anos.push(i);
+
+    }
+    this.form4 = this.formBuilder.group({
+      // "id": 0,
+      // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+      // "description": null,
+      // "buscarPor": [null, Validators.required],
+      "mes": null,
+      "ano": null,
+      // "fecha": null,
+      // "fecha2": null,
+      // "dia": null,
+
+    });
+
+    this.form = this.formBuilder.group({
+      // "id": 0,
+      // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+      // "description": null,
+      "buscarPor": [null, Validators.required],
+      // "mes": null,
+      // "fecha": null,
+      // "fecha2": null,
+      // "dia": null,
+
+    });
+    this.form2 = this.formBuilder.group({
+      // "id": 0,
+      // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+      // "description": null,
+      // "buscarPor": [null, Validators.required],
+      "fecha": null,
+      "fecha2": null,
+
+    });
+    this.form3 = this.formBuilder.group({
+      // "id": 0,
+      // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+      // "description": null,
+
+      "dia": null,
+
+    });
+    // this.getCategories();
+    // this.sub = this.activatedRoute.params.subscribe(params => {  
+    //   if(params['id']){
+    //     this.id = params['id'];
+    //     this.getMenuItemById(); 
+    //   } 
+    //   else{
+    //     this.showImage = true;
+    //   }
+    // }); 
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+  public getCategories() {
+    if (!this.appService.Data.categories.length) {
+      this.appService.getCategories().subscribe(categories => {
+        this.appService.Data.categories = categories;
       });
-  
-      this.form = this.formBuilder.group({
-        // "id": 0,
-        // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
-        // "description": null,
-        "buscarPor": [null, Validators.required],
-        // "mes": null,
-        // "fecha": null,
-        // "fecha2": null,
-        // "dia": null,
-  
+    }
+  }
+
+  public initDataSource(data: any) {
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+
+
+
+  public onSubmit() {
+    if (this.optionValue == "Mes") {
+      // alert("Mes");
+      console.log(this.form4.value);
+      this.appService.ObtenerVentasXMes(this.form4.value).subscribe(respuesta => {
+        this.initDataSource(respuesta);
+        // this.analytics=respuesta;
+        if (this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth) {
+          this.analytics = [...analytics];
+        }
+        this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
+        console.log(respuesta);
+        // this.Equipos = respuesta;
       });
-      this.form2 = this.formBuilder.group({
-        // "id": 0,
-        // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
-        // "description": null,
-        // "buscarPor": [null, Validators.required],
-        "fecha": null,
-        "fecha2": null,
-  
+    } else if (this.optionValue == "Dia") {
+      // alert("Dia");
+      console.log(this.form3.value);
+      this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
+        this.initDataSource(respuesta);
+        this.analytics = respuesta;
+        console.log(respuesta);
+        // this.Equipos = respuesta;
       });
-      this.form3 = this.formBuilder.group({
-        // "id": 0,
-        // "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
-        // "description": null,
-  
-        "dia": null,
-  
+    } else if (this.optionValue == "Rango") {
+      // alert("Rango");
+      console.log(this.form2.value);
+      this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
+        this.initDataSource(respuesta);
+        this.analytics = respuesta;
+        console.log(respuesta);
+        // this.Equipos = respuesta;
       });
-      // this.getCategories();
-      // this.sub = this.activatedRoute.params.subscribe(params => {  
-      //   if(params['id']){
-      //     this.id = params['id'];
-      //     this.getMenuItemById(); 
-      //   } 
-      //   else{
-      //     this.showImage = true;
-      //   }
-      // }); 
+    } else if (this.optionValue == "Consultar") {
+      // alert("Rango");        
+      this.appService.ConsultarAlmacen().subscribe(respuesta => {
+        this.initDataSource(respuesta);
+        // this.analytics=respuesta;
+        console.log(respuesta);
+        // this.Equipos = respuesta;
+      });
+    } else if (this.optionValue == "Entradas en el dia") {
+      // alert("Rango");       
+      console.log(this.form3.value);
+      this.appService.EntradasAlmacenDia(this.form3.value).subscribe(respuesta => {
+        this.data = respuesta;
+        console.log(respuesta);
+
+      });
+    } else if (this.optionValue == "Entradas en el mes") {
+      this.appService.EntradasAlmacenMes(this.form4.value).subscribe(respuesta => {
+        this.data = respuesta;
+        console.log(respuesta);
+
+      });
+    } else if (this.optionValue == "Entradas en un rango") {
+      this.appService.EntradasAlmacenRango(this.form2.value).subscribe(respuesta => {
+        this.data = respuesta;
+        console.log(respuesta);
+
+      });
+    } else if (this.optionValue == "Salidas en el dia") {
+      this.appService.SalidasAlmacenDia(this.form3.value).subscribe(respuesta => {
+        this.data = respuesta;
+        console.log(respuesta);
+
+      });
+    } else if (this.optionValue == "Salidas en el mes") {
+      this.appService.SalidasAlmacenMes(this.form4.value).subscribe(respuesta => {
+        this.data = respuesta;
+        console.log(respuesta);
+
+      });
+    } else if (this.optionValue == "Salidas en un rango") {
+      this.appService.SalidasAlmacenRango(this.form2.value).subscribe(respuesta => {
+        this.data = respuesta;
+        console.log(respuesta);
+
+      });
     }
-  
-    ngOnDestroy() {
-      this.sub.unsubscribe();
+  }
+  onSelect(event: any) {
+    console.log(event);
+  }
+
+  ngAfterViewChecked() {
+    if (this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth) {
+      // this.analytics = [...analytics];
     }
-  
-    public getCategories() {
-      if (!this.appService.Data.categories.length) {
-        this.appService.getCategories().subscribe(categories => {
-          this.appService.Data.categories = categories;
-        });
-      }
+    if (this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth) {
+      // setTimeout(() => this.data = [...montly_sales] );
     }
-  
-    public initDataSource(data: any) {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }
-  
-  
-  
-  
-    public onSubmit() {
-      if (this.optionValue == "Mes") {
-        // alert("Mes");
-        console.log(this.form4.value);
-        this.appService.ObtenerVentasXMes(this.form4.value).subscribe(respuesta => {
-          this.initDataSource(respuesta);
-          // this.analytics=respuesta;
-          if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
-            this.analytics = [...analytics];
-          }
-          this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
-          console.log(respuesta);
-          // this.Equipos = respuesta;
-        });
-      } else if (this.optionValue == "Dia") {      
-        // alert("Dia");
-        console.log(this.form3.value);
-        this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
-          this.initDataSource(respuesta);
-          this.analytics=respuesta;
-          console.log(respuesta);
-          // this.Equipos = respuesta;
-        });
-      } else if (this.optionValue == "Rango") {
-        // alert("Rango");
-        console.log(this.form2.value);
-        this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
-          this.initDataSource(respuesta);
-          this.analytics=respuesta;
-          console.log(respuesta);
-          // this.Equipos = respuesta;
-        });
-      }else if (this.optionValue == "Consultar") {
-        // alert("Rango");        
-        this.appService.ConsultarAlmacen().subscribe(respuesta => {
-          this.initDataSource(respuesta);
-          // this.analytics=respuesta;
-          console.log(respuesta);
-          // this.Equipos = respuesta;
-        });
-      }
-    }
-    onSelect(event:any) {
-      console.log(event);
-    }
-  
-    ngAfterViewChecked() {    
-      if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
-        // this.analytics = [...analytics];
-      }
-      if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
-        // setTimeout(() => this.data = [...montly_sales] );
-      }
-      this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
-    }
-  
+    this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
+  }
+
 }
