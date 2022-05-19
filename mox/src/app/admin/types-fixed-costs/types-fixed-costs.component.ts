@@ -74,15 +74,18 @@ export class TypesFixedCostsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(cus => {
       if (cus) {
         let message = '';
-        const index: number = this.dataSource.data.findIndex(x => x.id == cus.id);
+        const index: number = this.dataSource.data.findIndex(x => x.id_tipo == cus.id_tipo);
+        // const index: number = cus.id;
+        console.log(index);
         if (cus.id_tipo !== 0) {
-          // this.dataSource.data[index] = cus;
+          this.dataSource.data[index] = cus;
           // message = 'Tipo de gasto ' + cus.nombre + ' modificado exitosamente';
           console.log("Modificacion " + cus);
           this.appService.EditarTipoGastoFijo(cus.id_tipo, cus).subscribe(respuesta => {
             // this.ruteador.navigateByUrl('/listar-torneo');
             console.log(respuesta);
           });
+          
           message = 'Tipo de gasto ' + cus.nombre + ' modificado exitosamente';
 
         }
@@ -103,14 +106,19 @@ export class TypesFixedCostsComponent implements OnInit {
           // });
           // let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
           // cus.id = last_customer.id + 1;
-          // this.dataSource.data.push(cus);
+          this.dataSource.data.push(cus);
           // this.paginator.lastPage();
           // message = 'Nuevo tipo de gasto ' + cus.nombre + ' agregado exitosamente';
         }
+
         this.initDataSource(this.dataSource.data);
+        // this.initDataSource(cus);
+        
+        
         this.snackBar.open(message, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
       }
     });
+    
   }
 
 }

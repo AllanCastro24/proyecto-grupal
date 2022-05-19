@@ -88,7 +88,7 @@ export class FixedCostsComponent implements OnInit {
       if (cus) {
         let message = '';
         const index: number = this.dataSource.data.findIndex(x => x.id_gasto == cus.id_gasto);
-        console.log(cus);
+        console.log(index);
         // if (index !== 0) {
         if (cus.id_gasto !== 0) {
           // cus.splice(cus, 1);
@@ -98,6 +98,7 @@ export class FixedCostsComponent implements OnInit {
             console.log(respuesta);
           });
           message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
+          this.dataSource.data[index] = cus;
           // this.dataSource.data[index] = cus;
           // message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
           // console.log("Id a editar: "+ cus.id_gasto);
@@ -119,7 +120,7 @@ export class FixedCostsComponent implements OnInit {
           message = 'Nuevo gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' agregado exitosamente';
           // let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
           // cus.id = last_customer.id + 1;
-          // this.dataSource.data.push(cus);
+          this.dataSource.data.push(cus);
           // this.paginator.lastPage();
           // message = 'Nuevo gasto ' + cus.descripcion + ' ' + cus.cantidad + ' agregado exitosamente';
         }

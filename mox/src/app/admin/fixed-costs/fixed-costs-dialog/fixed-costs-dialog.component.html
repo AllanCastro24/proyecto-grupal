@@ -57,8 +57,8 @@
                             <mat-label>Sucursal</mat-label>
                             <mat-select formControlName="id_sucursal">
                                 <mat-option [value]="">-</mat-option>
-                                <mat-option *ngFor="let sucursal of data.Sucursales" [value]="sucursal.id_sucursal">
-                                    <span>{{sucursal.nom_sucursal}}</span>
+                                <mat-option *ngFor="let sucursal of data.Sucursales" [value]="sucursal.ID_sucursal">
+                                    <span>{{sucursal.Pseudonimo}}</span>
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
