@@ -64,10 +64,8 @@
                     </mat-form-field>
                 </div>
             </mat-tab>
-            <mat-tab label="Configuración" formGroupName="settings">
+            <mat-tab label="Información" formGroupName="settings">
                 <div fxLayout="column" class="form-field-outer">
-                    <mat-checkbox formControlName="isActive">Activo</mat-checkbox>
-                    <mat-checkbox formControlName="isDeleted">Inactivo</mat-checkbox>
                     <p *ngIf="user.id"><span>Fecha de registro:</span> <i>{{user.settings.registrationDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
                     <p *ngIf="user.id"><span>Ultimo ingreso:</span> <i>{{user.settings.joinedDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
                 </div>
