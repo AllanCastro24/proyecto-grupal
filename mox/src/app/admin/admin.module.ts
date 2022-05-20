@@ -28,6 +28,7 @@ export const routes = [
       { path: 'reviews', loadChildren: () => import('./reviews/reviews.module').then(m => m.ReviewsModule), data: { breadcrumb: 'Reviews' } },
       { path: 'fixed-costs', loadChildren: () => import('./fixed-costs/fixed-costs.module').then(m => m.FixedCostsModule) },
       { path: 'types-fixed-costs', loadChildren: () => import('./types-fixed-costs/types-fixed-costs.module').then(m => m.TypesFixedCostsModule) },
+      { path: 'scheduled-fixed-expenses', loadChildren: () => import('./scheduled-fixed-expenses/scheduled-fixed-expenses.module').then(m => m.ScheduledFixedExpensesModule) },
       { path: 'reports', loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule) },
     ]
   }
