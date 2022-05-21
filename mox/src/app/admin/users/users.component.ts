@@ -40,7 +40,7 @@ export class UsersComponent implements OnInit {
         this.usersService.updateUser(user).subscribe(user => this.getUsers());
     }
     public deleteUser(user:User){
-       this.usersService.deleteUser(user.id).subscribe(user => this.getUsers());
+       this.usersService.deleteUser(user.ID_usuario).subscribe(user => this.getUsers());
     }
 
 
@@ -63,7 +63,7 @@ export class UsersComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(user => {
             if(user){
-                (user.id) ? this.updateUser(user) : this.addUser(user);
+                (user.ID_usuario) ? this.updateUser(user) : this.addUser(user);
             }
         });
     }

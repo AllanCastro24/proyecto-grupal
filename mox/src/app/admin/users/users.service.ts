@@ -5,11 +5,13 @@ import { User } from './user.model';
 
 @Injectable()
 export class UsersService {
-    public url = "api/users";
+    public url = "";
+    public api = "http://localhost:8888/proyecto-grupal-backend/public/";
+
     constructor(public http:HttpClient) { }
     
     getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(this.url);
+        return this.http.get<User[]>(this.api+"api/usuarios/consultar_empleado");
     }
 
     addUser(user:User){	    
@@ -23,4 +25,6 @@ export class UsersService {
     deleteUser(id: number) {
         return this.http.delete(this.url + "/" + id);
     } 
+
+    //Consumo de API's
 } 

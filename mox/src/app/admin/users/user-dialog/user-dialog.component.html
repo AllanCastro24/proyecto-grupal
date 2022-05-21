@@ -1,4 +1,4 @@
-<h1 mat-dialog-title><span *ngIf="!user.id">Agregar</span><span *ngIf="user.id">Editar</span> Usuario</h1>
+<h1 mat-dialog-title><span *ngIf="!user.ID_usuario">Agregar</span><span *ngIf="user.ID_usuario">Editar</span> Usuario</h1>
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">      
         <mat-tab-group class="vertical-tabs">
@@ -66,8 +66,8 @@
             </mat-tab>
             <mat-tab label="Información" formGroupName="settings">
                 <div fxLayout="column" class="form-field-outer">
-                    <p *ngIf="user.id"><span>Fecha de registro:</span> <i>{{user.settings.registrationDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
-                    <p *ngIf="user.id"><span>Ultimo ingreso:</span> <i>{{user.settings.joinedDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
+                    <p *ngIf="user.ID_usuario"><span>Fecha de registro:</span> <i>{{user.settings.Fecha_registro | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
+                    <p *ngIf="user.ID_usuario"><span>Ultimo ingreso:</span> <i>{{user.settings.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
                 </div>
             </mat-tab>
         </mat-tab-group>
@@ -76,7 +76,7 @@
 <div mat-dialog-actions>
     <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
         <button mat-raised-button color="warn" (click)="close()">Cerrar</button>
-        <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!user.id">Guardar</span><span *ngIf="user.id">Actualizar</span></button>
+        <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!user.ID_usuario">Guardar</span><span *ngIf="user.ID_usuario">Actualizar</span></button>
         
     </div> 
 </div>

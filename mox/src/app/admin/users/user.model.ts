@@ -1,4 +1,42 @@
 export class User {
+  ID_usuario: number = 0;
+  ID_empleado: number = 0;
+  Usuario: string = '';
+  pass: string = '';  
+  Nombre: string = '';
+  Apellidos: string = '';  
+  profile!: UserProfile;
+  work!: UserWork;
+  contacts!: UserContacts;
+  settings!: UserSettings;
+}
+
+export class UserProfile {  
+  Genero: string = '';
+  image: string = '';
+}
+
+export class UserWork {
+  ID_tienda: number = 0;
+  ID_tipo_pago: number = 0;
+  ID_puesto: number = 0;
+  Sueldo: number = 0;
+}
+
+export class UserContacts{
+  Correo: string = '';
+  Telefono: string = '';
+  Direccion: string = '';  
+}
+
+export class UserSettings{
+  Activo: string = '';
+  Fecha_registro!: Date;
+  Ultimo_ingreso!: Date;
+}
+
+//Asi estaba antes
+/**export class User {
   id: number = 0;
   username: string = '';
   password: string = '';  
@@ -32,4 +70,4 @@ export class UserSettings{
   isDeleted: boolean = false;
   registrationDate!: Date;
   joinedDate!: Date;
-}
+}**/
