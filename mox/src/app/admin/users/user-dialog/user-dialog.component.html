@@ -66,8 +66,8 @@
             </mat-tab>
             <mat-tab label="Información" formGroupName="settings">
                 <div fxLayout="column" class="form-field-outer">
-                    <p *ngIf="user.ID_usuario"><span>Fecha de registro:</span> <i>{{user.settings.Fecha_registro | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
-                    <p *ngIf="user.ID_usuario"><span>Ultimo ingreso:</span> <i>{{user.settings.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
+                    <p *ngIf="user.ID_usuario"><span>Fecha de registro:</span> <i>{{user.Fecha_registro | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
+                    <p *ngIf="user.ID_usuario"><span>Ultimo ingreso:</span> <i>{{user.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
                 </div>
             </mat-tab>
         </mat-tab-group>

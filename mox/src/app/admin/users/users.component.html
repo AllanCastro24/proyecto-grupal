@@ -30,8 +30,8 @@
     <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="p-2"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
-                <h3 *ngIf="user.settings.Activo == 'S'" class="user-name">{{user.Nombre}} {{user.Apellidos}}</h3> 
-                <h3 *ngIf="user.settings.Activo == 'N'" class="user-name">{{user.Nombre}} {{user.Apellidos}} (Bloqueado)</h3>
+                <h3 *ngIf="user.Activo == 'S'" class="user-name">{{user.Nombre}} {{user.Apellidos}}</h3> 
+                <h3 *ngIf="user.Activo == 'N'" class="user-name">{{user.Nombre}} {{user.Apellidos}} (Bloqueado)</h3>
                 <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
                     <mat-icon>more_vert</mat-icon>
                 </button>
@@ -51,34 +51,34 @@
             <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
                 <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
                     <div class="user-img">
-                        <img *ngIf="user.profile.image" [src]="user.profile.image" class="transition-2">
-                        <img *ngIf="!user.profile.image" src="assets/images/others/user.jpg" class="transition-2" >  
-                        <mat-icon *ngIf="user.settings.Activo == 'N'" color="warn">block</mat-icon>
+                        <img *ngIf="user.image" [src]="user.image" class="transition-2">
+                        <img *ngIf="!user.image" src="assets/images/others/user.jpg" class="transition-2" >  
+                        <mat-icon *ngIf="user.Activo == 'N'" color="warn">block</mat-icon>
                     </div>                                            
                     <div class="user-social">
-                        <mat-slide-toggle color="primary" (change)="user.settings.Activo == 'S'"></mat-slide-toggle>
+                        <mat-slide-toggle color="primary" (change)="user.Activo == 'S'"></mat-slide-toggle>
                     </div>
                 </div>
                 <div fxFlex="70" fxLayout="column" class="user-details transition-2">
                     <p fxLayout="row" fxLayoutAlign="start center">
                         <mat-icon class="text-muted">card_membership</mat-icon>
-                        <span>{{user.work.ID_puesto}}</span>
+                        <span>{{user.ID_puesto}}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center">
                         <mat-icon class="text-muted">mail_outline</mat-icon>
-                        <span>{{user.contacts.Correo}}</span>
+                        <span>{{user.Correo}}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center">
                         <mat-icon class="text-muted">call</mat-icon>
-                        <span>{{user.contacts.Telefono}}</span>
+                        <span>{{user.Telefono}}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center">
                         <mat-icon class="text-muted">location_on</mat-icon>
-                        <span>{{user.contacts.Direccion}}</span>
+                        <span>{{user.Direccion}}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center">
                         <mat-icon class="text-muted">date_range</mat-icon>
-                        <span>Joined {{user.settings.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
+                        <span>Joined {{user.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
                     </p>
                 </div>
             </div>
@@ -90,8 +90,8 @@
     <div *ngFor="let user of users | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" class="p-2"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
-                <h3 *ngIf="user.settings.Activo == 'S'" class="user-name">{{user.Nombre}} {{user.Apellidos}}</h3> 
-                <h3 *ngIf="user.settings.Activo == 'N'" class="user-name"> {{user.Nombre}} {{user.Apellidos}} (bloqueado)</h3>
+                <h3 *ngIf="user.Activo == 'S'" class="user-name">{{user.Nombre}} {{user.Apellidos}}</h3> 
+                <h3 *ngIf="user.Activo == 'N'" class="user-name"> {{user.Nombre}} {{user.Apellidos}} (bloqueado)</h3>
                 <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
                     <mat-icon>more_vert</mat-icon>
                 </button>
@@ -111,9 +111,9 @@
             <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
                 <div fxFlex="20" fxFlex.xs="30" fxLayout="column" fxLayoutAlign="center center">
                     <div class="user-img">
-                        <img *ngIf="user.profile.image" [src]="user.profile.image" class="transition-2"> 
-                        <img *ngIf="!user.profile.image" src="assets/img/users/default-user.jpg" class="transition-2">  
-                        <mat-icon *ngIf="user.settings.Activo == 'N'" color="warn">block</mat-icon>   
+                        <img *ngIf="user.image" [src]="user.image" class="transition-2"> 
+                        <img *ngIf="!user.image" src="assets/images/others/user.jpg" class="transition-2">  
+                        <mat-icon *ngIf="user.Activo == 'N'" color="warn">block</mat-icon>   
                     </div>                                            
                     <div class="user-social">
                         <!--mat-slide-toggle color="primary" [checked]="user.settings.isDeleted" (change)="user.settings.isDeleted = !user.settings.isDeleted"></mat-slide-toggle-->
@@ -123,44 +123,44 @@
                     <div fxFlex="30" fxFlex.xs="100" fxLayout="column">
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="text-muted">business</mat-icon>
-                            <span>{{user.work.ID_tienda}}</span>
+                            <span>{{user.ID_tienda}}</span>
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="text-muted">card_membership</mat-icon>
-                            <span>{{user.work.ID_puesto}}</span>
+                            <span>{{user.ID_puesto}}</span>
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="text-muted">attach_money</mat-icon>
-                            <span>{{user.work.Sueldo}}</span>
+                            <span>{{user.Sueldo}}</span>
                         </p>                                               
                     </div>
                     <div fxFlex="30" fxFlex.xs="100" fxLayout="column">
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="text-muted">mail_outline</mat-icon>
-                            <span>{{user.contacts.Correo}}</span>
+                            <span>{{user.Correo}}</span>
                         </p> 
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="text-muted">call</mat-icon>
-                            <span>{{user.contacts.Telefono}}</span>
+                            <span>{{user.Telefono}}</span>
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="text-muted">location_on</mat-icon>
-                            <span>{{user.contacts.Direccion}}</span>
+                            <span>{{user.Direccion}}</span>
                         </p>                        
                     </div>
                     <div fxFlex="40" fxFlex.xs="100" fxLayout="column">
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="text-muted">event_available</mat-icon>
-                            <span>Fecha de registro {{user.settings.Fecha_registro | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
+                            <span>Fecha de registro {{user.Fecha_registro | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="text-muted">date_range</mat-icon>
-                            <span>Ultimo ingreso {{user.settings.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
+                            <span>Ultimo ingreso {{user.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
                         </p> 
                         <p fxLayout="row" fxLayoutAlign="start center">
-                            <mat-icon *ngIf="user.settings.Activo == 'N'" class="text-muted">person_outline</mat-icon>
-                            <mat-icon *ngIf="user.settings.Activo == 'S'" class="text-muted">person</mat-icon>
-                            <!--span>{{ (user.settings.Activo) ? 'Bloqueado' : 'Active' }}</span-->
+                            <mat-icon *ngIf="user.Activo == 'N'" class="text-muted">person_outline</mat-icon>
+                            <mat-icon *ngIf="user.Activo == 'S'" class="text-muted">person</mat-icon>
+                            <!--span>{{ (user.Activo) ? 'Bloqueado' : 'Active' }}</span-->
                         </p>                       
                     </div>
                 </div>
@@ -177,6 +177,6 @@
     </div>
 </div>
 
-<div fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
+<!--div fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
     <mat-spinner color="primary"></mat-spinner>    
-</div>
+</div-->
