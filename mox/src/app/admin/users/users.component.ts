@@ -68,4 +68,12 @@ export class UsersComponent implements OnInit {
         });
     }
 
+    public validarActivo(){
+        
+        return true;
+    }
+    public ActivarDesactivar(){
+        
+        console.log('Cambiaste el valor');
+    }
 }

@@ -56,7 +56,7 @@
                         <mat-icon *ngIf="user.Activo == 'N'" color="warn">block</mat-icon>
                     </div>                                            
                     <div class="user-social">
-                        <mat-slide-toggle color="primary" (change)="user.Activo == 'S'"></mat-slide-toggle>
+                        <mat-slide-toggle color="primary" (change)="ActivarDesactivar()" [checked]="validarActivo()"></mat-slide-toggle>
                     </div>
                 </div>
                 <div fxFlex="70" fxLayout="column" class="user-details transition-2">
@@ -116,7 +116,7 @@
                         <mat-icon *ngIf="user.Activo == 'N'" color="warn">block</mat-icon>   
                     </div>                                            
                     <div class="user-social">
-                        <!--mat-slide-toggle color="primary" [checked]="user.settings.isDeleted" (change)="user.settings.isDeleted = !user.settings.isDeleted"></mat-slide-toggle-->
+                        <mat-slide-toggle color="primary" (change)="ActivarDesactivar()" [checked]="validarActivo()"></mat-slide-toggle>
                     </div>
                 </div>
                 <div fxFlex="80" fxFlex.xs="70" fxLayout="row" fxLayout.xs="column" class="user-details transition-2">
