@@ -22,7 +22,7 @@ export const menuItems = [
     new Menu (120, 'ADMIN_NAV.REVIEWS', '/admin/reviews', null, 'insert_comment', null, false, 0), 
     new Menu (119, 'Gastos fijos', null, null, 'monetization_on', null, true, 0),
     new Menu (121, 'Gastos fijos', '/admin/fixed-costs', null, 'monetization_on', null, false, 119),    
-    new Menu (123, 'Gastos fijos programados', '/admin/scheduled-fixed-expenses', null, 'monetization_on', null, false, 119),
+    new Menu (123, 'Programacion de gastos fijos', '/admin/scheduled-fixed-expenses', null, 'monetization_on', null, false, 119),
     new Menu (122, 'Tipos de gastos fijos', '/admin/types-fixed-costs', null, 'monetization_on', null, false, 119),
     new Menu (130, 'Reportes', null, null, 'multiline_chart', null, true, 0),  
     new Menu (131, 'Reportes ventas', '/admin/reports/reports-sales', null, 'list_alt', null, false, 130), 

@@ -166,7 +166,7 @@ export class ReportsStockComponent implements OnInit {
           this.analytics = [...analytics];
         }
         this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
-        console.log(respuesta);
+        // console.log(respuesta);
         // this.Equipos = respuesta;
       });
     } else if (this.optionValue == "Dia") {
@@ -175,7 +175,7 @@ export class ReportsStockComponent implements OnInit {
       this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
         this.initDataSource(respuesta);
         this.analytics = respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
         // this.Equipos = respuesta;
       });
     } else if (this.optionValue == "Rango") {
@@ -184,7 +184,7 @@ export class ReportsStockComponent implements OnInit {
       this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
         this.initDataSource(respuesta);
         this.analytics = respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
         // this.Equipos = respuesta;
       });
     } else if (this.optionValue == "Consultar") {
@@ -192,7 +192,7 @@ export class ReportsStockComponent implements OnInit {
       this.appService.ConsultarAlmacen().subscribe(respuesta => {
         this.initDataSource(respuesta);
         // this.analytics=respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
         // this.Equipos = respuesta;
       });
     } else if (this.optionValue == "Entradas en el dia") {
@@ -206,31 +206,31 @@ export class ReportsStockComponent implements OnInit {
     } else if (this.optionValue == "Entradas en el mes") {
       this.appService.EntradasAlmacenMes(this.form4.value).subscribe(respuesta => {
         this.data = respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
 
       });
     } else if (this.optionValue == "Entradas en un rango") {
       this.appService.EntradasAlmacenRango(this.form2.value).subscribe(respuesta => {
         this.data = respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
 
       });
     } else if (this.optionValue == "Salidas en el dia") {
       this.appService.SalidasAlmacenDia(this.form3.value).subscribe(respuesta => {
         this.data = respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
 
       });
     } else if (this.optionValue == "Salidas en el mes") {
       this.appService.SalidasAlmacenMes(this.form4.value).subscribe(respuesta => {
         this.data = respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
 
       });
     } else if (this.optionValue == "Salidas en un rango") {
       this.appService.SalidasAlmacenRango(this.form2.value).subscribe(respuesta => {
         this.data = respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
 
       });
     }

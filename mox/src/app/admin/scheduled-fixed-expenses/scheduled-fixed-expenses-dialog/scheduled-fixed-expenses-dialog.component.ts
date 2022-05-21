@@ -20,7 +20,7 @@ export class ScheduledFixedExpensesDialogComponent implements OnInit {
       id_gasto: 0,
     });
     this.form = this.fb.group({
-      id_gasto: 0,
+      id_gasto_fijo: 0,
       descripcion: ['', Validators.required],
       tipo_gasto: ['', Validators.required],
       cantidad: ['', Validators.required],

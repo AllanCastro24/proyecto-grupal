@@ -31,7 +31,7 @@ export class TypesFixedCostsComponent implements OnInit {
     // this.initDataSource(customers);
     this.appService.ObtenerTiposGastosFijos().subscribe(respuesta => {
       this.initDataSource(respuesta);
-      console.log(respuesta);
+      // console.log(respuesta);
       // this.Equipos = respuesta;
     });
   }
@@ -76,14 +76,14 @@ export class TypesFixedCostsComponent implements OnInit {
         let message = '';
         const index: number = this.dataSource.data.findIndex(x => x.id_tipo == cus.id_tipo);
         // const index: number = cus.id;
-        console.log(index);
+        // console.log(index);
         if (cus.id_tipo !== 0) {
           this.dataSource.data[index] = cus;
           // message = 'Tipo de gasto ' + cus.nombre + ' modificado exitosamente';
-          console.log("Modificacion " + cus);
+          // console.log("Modificacion " + cus);
           this.appService.EditarTipoGastoFijo(cus.id_tipo, cus).subscribe(respuesta => {
             // this.ruteador.navigateByUrl('/listar-torneo');
-            console.log(respuesta);
+            // console.log(respuesta);
           });
           
           message = 'Tipo de gasto ' + cus.nombre + ' modificado exitosamente';
@@ -92,7 +92,7 @@ export class TypesFixedCostsComponent implements OnInit {
         else {
           console.log("Datos a registrar " + cus);
           this.appService.InsertarTipoGastoFijo(cus).subscribe(respuesta => {
-            console.log(respuesta);
+            // console.log(respuesta);
             this.paginator.lastPage();
             
           });

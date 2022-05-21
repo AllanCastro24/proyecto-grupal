@@ -179,7 +179,7 @@ export class ReportsSalesComponent implements OnInit {
           this.analytics = [...analytics];
         }
         this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
-        console.log(respuesta);
+        // console.log(respuesta);
         // this.Equipos = respuesta;
       });
     } else if (this.optionValue == "Dia") {
@@ -188,7 +188,7 @@ export class ReportsSalesComponent implements OnInit {
       this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
         this.initDataSource(respuesta);
         this.analytics = respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
         // this.Equipos = respuesta;
       });
     } else if (this.optionValue == "Rango") {
@@ -197,7 +197,7 @@ export class ReportsSalesComponent implements OnInit {
       this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
         this.initDataSource(respuesta);
         this.analytics = respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
         // this.Equipos = respuesta;
       });
     } else if (this.optionValue == "Productos mas vendidos en el mes") {
@@ -206,7 +206,7 @@ export class ReportsSalesComponent implements OnInit {
         // this.initDataSource(respuesta);
         this.analytics = [...respuesta];
         this.data=respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
         // this.Equipos = respuesta;
       });
     }
@@ -216,7 +216,7 @@ export class ReportsSalesComponent implements OnInit {
         // this.initDataSource(respuesta);
         this.analytics = respuesta;
         this.data=respuesta;
-        console.log(respuesta);
+        // console.log(respuesta);
         // this.Equipos = respuesta;
       });
     }

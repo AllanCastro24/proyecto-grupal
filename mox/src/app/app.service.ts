@@ -763,6 +763,26 @@ export class AppService {
     return this.http.put(this.API + "api/costos_fijos/baja/" + id, datos, { responseType: 'text' });
 
   }
+  //GASTOS FIJOS PROGRAMADOS
+
+  ObtenerGastosFijosProgramados() {
+    return this.http.get(this.API + "api/costos_programados/consultar");
+  }
+
+  InsertarGastoFijoProgramado(datosGasto: any): Observable<any> {
+    return this.http.post(this.API + "api/costos_programados/add", datosGasto, { responseType: 'text' });
+
+  }
+
+  EditarGastoFijoProgramado(id: any, datosGasto: any): Observable<any> {
+    return this.http.put(this.API + "api/costos_programados/update/" + id, datosGasto, { responseType: 'text' });
+
+  }
+
+  BajaGastoFijoProgramado(id: any, datos: any): Observable<any> {
+    return this.http.put(this.API + "api/costos_programados/baja/" + id, datos, { responseType: 'text' });
+
+  }
 
   ObtenerTiposGastosFijos() {
     return this.http.get(this.API + "api/tipo_gastos/consultar");

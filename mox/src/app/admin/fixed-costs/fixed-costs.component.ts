@@ -31,7 +31,7 @@ export class FixedCostsComponent implements OnInit {
   ngOnInit(): void {
     this.appService.ObtenerGastosFijos().subscribe(respuesta => {
       this.initDataSource(respuesta);
-      console.log(respuesta);
+      // console.log(respuesta);
       
     });
     this.countries = this.appService.getCountries();
@@ -39,12 +39,13 @@ export class FixedCostsComponent implements OnInit {
     this.appService.ObtenerTiposGastosFijos().subscribe(respuesta => {
       // this.tipos_gastos=respuesta
       this.TiposGastos = respuesta;
-      console.log(this.TiposGastos);
+      // console.log(this.TiposGastos);
       // this.Equipos = respuesta;
     });
     this.appService.ObtenerSucursales().subscribe(respuesta =>{
       this.Sucursales=respuesta;
     });
+    
   }
 
   public initDataSource(data: any) {
@@ -92,10 +93,14 @@ export class FixedCostsComponent implements OnInit {
         // if (index !== 0) {
         if (cus.id_gasto !== 0) {
           // cus.splice(cus, 1);
-          console.log("Modificacion " + cus);
+          // console.log("Modificacion " + cus);
           this.appService.EditarGastoFijo(cus.id_gasto, cus).subscribe(respuesta => {
-            // this.ruteador.navigateByUrl('/listar-torneo');
-            console.log(respuesta);
+            this.appService.ObtenerGastosFijos().subscribe(respuesta => {
+              this.initDataSource(respuesta);
+              // console.log(respuesta);
+              
+            });
+            
           });
           message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
           this.dataSource.data[index] = cus;
@@ -113,7 +118,7 @@ export class FixedCostsComponent implements OnInit {
         else {
           console.log("Datos a registrar " + cus);
           this.appService.InsertarGastoFijo(cus).subscribe(respuesta => {
-            console.log(respuesta);
+            // console.log(respuesta);
             // this.paginator.lastPage();
             
           });

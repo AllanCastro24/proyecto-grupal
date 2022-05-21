@@ -28,7 +28,7 @@ export class ScheduledFixedExpensesComponent implements OnInit {
   constructor(public appService: AppService, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.appService.ObtenerGastosFijos().subscribe(respuesta => {
+    this.appService.ObtenerGastosFijosProgramados().subscribe(respuesta => {
       this.initDataSource(respuesta);
       console.log(respuesta);
       
@@ -38,7 +38,7 @@ export class ScheduledFixedExpensesComponent implements OnInit {
     this.appService.ObtenerTiposGastosFijos().subscribe(respuesta => {
       // this.tipos_gastos=respuesta
       this.TiposGastos = respuesta;
-      console.log(this.TiposGastos);
+      // console.log(this.TiposGastos);
       // this.Equipos = respuesta;
     });
     this.appService.ObtenerSucursales().subscribe(respuesta =>{
@@ -61,7 +61,7 @@ export class ScheduledFixedExpensesComponent implements OnInit {
         if (dialogResult) {
           // this.dataSource.data.splice(index, 1);
           // this.initDataSource(this.dataSource.data);
-          this.appService.BajaGastoFijo(customer, this.dataSource.data).subscribe(respuesta => {
+          this.appService.BajaGastoFijoProgramado(customer, this.dataSource.data).subscribe(respuesta => {
             // this.ruteador.navigateByUrl('/listar-torneo');
             this.dataSource.data.splice(index, 1);
             this.initDataSource(this.dataSource.data);
@@ -86,15 +86,20 @@ export class ScheduledFixedExpensesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(cus => {
       if (cus) {
         let message = '';
-        const index: number = this.dataSource.data.findIndex(x => x.id_gasto == cus.id_gasto);
+        const index: number = this.dataSource.data.findIndex(x => x.id_gasto_fijo == cus.id_gasto_fijo);
         console.log(index);
         // if (index !== 0) {
-        if (cus.id_gasto !== 0) {
+        if (cus.id_gasto_fijo !== 0) {
           // cus.splice(cus, 1);
-          console.log("Modificacion " + cus);
-          this.appService.EditarGastoFijo(cus.id_gasto, cus).subscribe(respuesta => {
-            // this.ruteador.navigateByUrl('/listar-torneo');
-            console.log(respuesta);
+          // console.log("Modificacion " + cus);
+          this.appService.EditarGastoFijoProgramado(cus.id_gasto_fijo, cus).subscribe(respuesta => {
+            this.appService.ObtenerGastosFijosProgramados().subscribe(respuesta => {
+              this.initDataSource(respuesta);
+              // console.log(respuesta);
+              
+            });
+            
+            // console.log(respuesta);
           });
           message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
           this.dataSource.data[index] = cus;
@@ -111,17 +116,18 @@ export class ScheduledFixedExpensesComponent implements OnInit {
         }
         else {
           console.log("Datos a registrar " + cus);
-          this.appService.InsertarGastoFijo(cus).subscribe(respuesta => {
-            console.log(respuesta);
-            // this.paginator.lastPage();
+          this.appService.InsertarGastoFijoProgramado(cus).subscribe(respuesta => {
+            // console.log(respuesta);
+            this.appService.ObtenerGastosFijosProgramados().subscribe(respuesta => {
+              this.initDataSource(respuesta);
+              // console.log(respuesta);
+              
+            });
+            this.paginator.lastPage();
             
           });
-          message = 'Nuevo gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' agregado exitosamente';
-          // let last_customer = this.dataSource.data[this.dataSource.data.length - 1];
-          // cus.id = last_customer.id + 1;
-          this.dataSource.data.push(cus);
-          // this.paginator.lastPage();
-          // message = 'Nuevo gasto ' + cus.descripcion + ' ' + cus.cantidad + ' agregado exitosamente';
+          message = 'Nuevo gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' agregado exitosamente';                  
+          // this.dataSource.data.push(cus);                    
         }
         this.initDataSource(this.dataSource.data);
         this.snackBar.open(message, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
