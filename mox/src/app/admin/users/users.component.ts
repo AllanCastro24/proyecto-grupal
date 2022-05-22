@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppSettings, Settings } from '../../app.settings';
-import { User } from './user.model';
+import { User, usuario } from './user.model';
 import { UsersService } from './users.service';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 
@@ -14,6 +14,7 @@ import { UserDialogComponent } from './user-dialog/user-dialog.component';
 })
 export class UsersComponent implements OnInit {
     public users: User[] = [];
+    public usuarios: usuario[] = [];
     public searchText: string = '';
     public page:any;
     public settings: Settings;
@@ -26,22 +27,29 @@ export class UsersComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getUsers();         
+        this.getUsers();//llamado a consulta de empleado
+        this.getUsuario();//llamado a consulta de usuarios
     }
-
+    //Llamado a la api de empleados
     public getUsers(): void {
         this.users = []; //for show spinner each time
         this.usersService.getUsers().subscribe(users => this.users = users);    
     }
+    //Llamado a la api de usuarios
+    public getUsuario(): void {
+        this.usuarios = []; //for show spinner each time
+        this.usersService.getUsuarios().subscribe(usuarios => this.usuarios = usuarios);    
+    }
+
     public addUser(user:User){
         this.usersService.addUser(user).subscribe(user => this.getUsers());
     }
     public updateUser(user:User){
         this.usersService.updateUser(user).subscribe(user => this.getUsers());
     }
-    public deleteUser(user:User){
-       this.usersService.deleteUser(user.ID_usuario).subscribe(user => this.getUsers());
-    }
+    //public deleteUser(user:User){
+    //   this.usersService.deleteUser(user.ID_usuario).subscribe(user => this.getUsers());
+    //}
 
 
     public onPageChanged(event:any){
@@ -68,12 +76,40 @@ export class UsersComponent implements OnInit {
         });
     }
 
-    public validarActivo(){
-        
-        return true;
+    public openUsuarioDialog(usuario:usuario | null){
+        let dialogRef = this.dialog.open(UserDialogComponent, {
+            data: usuario
+        });
+
+        dialogRef.afterClosed().subscribe(usuario => {
+            if(usuario){
+                (usuario.ID_usuario) ? this.updateUser(usuario) : this.addUser(usuario);
+            }
+        });
     }
-    public ActivarDesactivar(){
-        
-        console.log('Cambiaste el valor');
+
+    public validarActivo(user:User){
+        if(user.Activo == "S"){
+            return false;
+        }else{
+            return true;
+        }
     }
+
+    public validarUsuarioActivo(usuario:usuario){
+        if(usuario.Activo == "S"){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public ActivarDesactivar(activo:string){
+        if(activo == "S"){
+            //Desactivar
+        }else{
+            //Activar
+        }
+    }
+    //llamada a desactivar / activar
+    
 }

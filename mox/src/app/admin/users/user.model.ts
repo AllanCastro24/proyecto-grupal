@@ -1,3 +1,4 @@
+//Modelo de empleado
 export class User {
   ID_usuario: number = 0;
   ID_empleado: number = 0;
@@ -19,40 +20,14 @@ export class User {
   Ultimo_ingreso!: Date;
 }
 
-
-//Asi estaba antes
-/**export class User {
-  id: number = 0;
-  username: string = '';
-  password: string = '';  
-  profile!: UserProfile;
-  work!: UserWork;
-  contacts!: UserContacts;
-  settings!: UserSettings;
-}
-
-export class UserProfile {  
-  name: string = '';
-  surname: string = '';  
-  gender: string = '';
+//Modelo de usuario
+export class usuario{
+  ID_usuario: number = 0;
+  Usuario: string = '';
+  pass: string = '';
+  Activo: string = '';
+  Fecha_registro!: Date;
+  Ultimo_ingreso!: Date;
+  Correo: string = '';
   image: string = '';
 }
-
-export class UserWork {
-  company: string = '';
-  position: string = '';
-  salary: number = 0;
-}
-
-export class UserContacts{
-  email: string = '';
-  phone: string = '';
-  address: string = '';  
-}
-
-export class UserSettings{
-  isActive: boolean = false;
-  isDeleted: boolean = false;
-  registrationDate!: Date;
-  joinedDate!: Date;
-}**/

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from './user.model';
+import { User, usuario } from './user.model';
 
 @Injectable()
 export class UsersService {
@@ -9,10 +9,22 @@ export class UsersService {
     public api = "http://localhost:8888/proyecto-grupal-backend/public/";
 
     constructor(public http:HttpClient) { }
-    
+    //Consulta de empleados
     getUsers(): Observable<User[]> {
         return this.http.get<User[]>(this.api+"api/usuarios/consultar_empleado");
     }
+    //Consulta de usuarios
+    getUsuarios():Observable<usuario[]> {
+        return this.http.get<usuario[]>(this.api+"api/usuarios/consultar_usuarios");
+    }
+    
+    //Activar usuario
+    activarUser(id: number) {
+        return this.http.delete(this.api + "api/usuarios/activar/" + id);
+    }
+    desactivarUser(id: number) {
+        return this.http.delete(this.api + "/api/usuarios/desactivar" + id);
+    } 
 
     addUser(user:User){	    
         return this.http.post(this.url, user);
@@ -25,6 +37,4 @@ export class UsersService {
     deleteUser(id: number) {
         return this.http.delete(this.url + "/" + id);
     } 
-
-    //Consumo de API's
 } 
