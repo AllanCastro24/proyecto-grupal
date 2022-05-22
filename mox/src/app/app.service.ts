@@ -52,7 +52,7 @@ export class AppService {
 //======================================= CATEGORIAS ==========================================
 
 GetCategoriass() {
-  return this.http.get(this.url3 + 'GetCategoriass');
+  return this.http.get(this.url3 + 'GetCategoria');
 }
 
 CreateCategoria(Categoria: any): Observable<any> {
@@ -183,6 +183,9 @@ GetInsumoCompuesto() {
 
 Get_Stock_Minimo() {
   return this.http.get(this.url3 + 'Get_Stock_Minimo');
+}
+GetAlmacenCompuesto() {
+  return this.http.get(this.url3 + 'GetAlmacenCompuesto');
 }
 
 InsertarMerma(merma: any): Observable<any> {

@@ -16,10 +16,11 @@ import { AddProveedorComponent } from './add-proveedor/add-proveedor.component';
 import { ListarProveedoresComponent } from './listar-proveedores/listar-proveedores.component';
 import { StockMinComponent } from './stock-min/stock-min.component';
 import { ModalStockComponent } from './stock-min/modal-stock/modal-stock.component';
+import { ListStorageComponent } from './list-storage/list-storage.component';
 
 export const routes = [ 
-  { path: '', redirectTo: 'list', pathMatch: 'full'},
-  { path: 'list', component: ListComponent, data: { breadcrumb: 'Menu' } },
+  { path: '', redirectTo: 'list-storage', pathMatch: 'full'},
+  { path: 'list', component: ListComponent, data: { breadcrumb: 'Listar Insumos' } },
   { path: 'add', component: AddComponent, data: { breadcrumb: 'Add Insumos' } },
   { path: 'add/:id', component: AddComponent, data: { breadcrumb: 'Editar Productos' } }, 
   { path: 'unidad-medida', component: UnidadMedidaComponent, data: { breadcrumb: 'Unidad de Medida' } }, 
@@ -30,6 +31,8 @@ export const routes = [
   { path: 'Add-Proveedor/:id', component: AddProveedorComponent, data: { breadcrumb: 'Editar Proveedores' } },
   { path: 'Listar-Proveedores', component: ListarProveedoresComponent, data: { breadcrumb: 'Listar Proveedores' } },
   { path: 'Stock-Min', component: StockMinComponent, data: { breadcrumb: 'Stock Minimo' } },
+  { path: 'list-storage', component: ListStorageComponent, data: { breadcrumb: 'Almacen' } },
+  
 ];
 
 @NgModule({
@@ -38,7 +41,7 @@ export const routes = [
     AddComponent, CategoriasProductosComponent, UnidadMedidaComponent, 
     CategoriaDialogProductosComponent, CategoriaDialogMedidaComponent, 
     TipoPagoComponent, ModalTipoPagoComponent, MermasComponent, ModalMermasComponent, 
-    AddProveedorComponent, ListarProveedoresComponent, StockMinComponent, ModalStockComponent,
+    AddProveedorComponent, ListarProveedoresComponent, StockMinComponent, ModalStockComponent, ListStorageComponent,
   ],
   imports: [
     CommonModule,
