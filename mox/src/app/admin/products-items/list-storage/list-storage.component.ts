@@ -6,12 +6,12 @@ import { MenuItem } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: 'app-list-storage',
+  templateUrl: './list-storage.component.html',
+  styleUrls: ['./list-storage.component.scss']
 })
-export class ListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'image', 'nombre', 'descripcion', 'actions'];
+export class ListStorageComponent implements OnInit {
+  displayedColumns: string[] = ['id', 'image', 'codigo', 'nombre',  'tamano', 'UnidadMedida','cantidad'];
   dataSource!: MatTableDataSource<MenuItem>;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     //this.getCategories();
-    this.getdata(); 
+    this.load();
   }
 
   public initDataSource(data:any){
@@ -46,15 +46,22 @@ export class ListComponent implements OnInit {
 			dialogRef.afterClosed().subscribe(dialogResult => {
 				if(dialogResult){ 
           this.dataSource.data.splice(index,1);
-          this.getdata(); 
+          this.load(); 
 				}
 			});  
     } 
   }
 
-  getdata(){
-    this.appService.GetinsumosYDetalle().subscribe((menuItems) => {
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+}
+
+  load(){
+    this.appService.GetAlmacenCompuesto().subscribe((menuItems) => {
       this.initDataSource(menuItems); 
+      console.log(menuItems);
     });
   }
 }
+

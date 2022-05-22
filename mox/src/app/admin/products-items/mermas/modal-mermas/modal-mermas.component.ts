@@ -53,6 +53,7 @@ export class ModalMermasComponent implements OnInit {
       this.dialogRef.close(this.form.value);
       var fecha_alter = splitted[0];
       var desfecha = fecha_alter.split("/", 3);
+      
       if(desfecha[0] > 9){
         this.fecha = desfecha[2]+"-"+desfecha[0]+"-"+desfecha[1]
         console.log(this.fecha);
