@@ -32,7 +32,10 @@ export class UsersService {
     desactivarUsuario(usuario:usuario) {
         return this.http.put(this.api + "api/usuarios/desactivar/"+usuario.ID_usuario,usuario);
     } 
-
+    //Modificar empleado desde el admin
+    modificarEmpleado(user:User) {
+        return this.http.put(this.api + "api/empleado/modificar/"+user.ID_usuario,user);
+    } 
     addUser(user:User){	    
         return this.http.post(this.url, user);
     }

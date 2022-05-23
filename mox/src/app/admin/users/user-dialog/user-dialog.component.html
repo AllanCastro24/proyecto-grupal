@@ -2,69 +2,70 @@
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">      
         <mat-tab-group class="vertical-tabs">
-            <mat-tab label="Basico">
+            <!--mat-tab label="Basico">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
                         <mat-placeholder><mat-icon>person</mat-icon> Usuario</mat-placeholder>
-                        <input matInput formControlName="username" required>
-                        <mat-error *ngIf="form.controls.username.errors?.required">Se requiere un nombre de usuario</mat-error>
-                        <mat-error *ngIf="form.controls.username.hasError('minlength')">Nombre de usuario muy corto, se requieren minimo 6 caracteres</mat-error>
+                        <input matInput formControlName="Usuario" required>
+                        <mat-error *ngIf="form.controls.Usuario.errors?.required">Se requiere un nombre de usuario</mat-error>
+                        <mat-error *ngIf="form.controls.Usuario.hasError('minlength')">Nombre de usuario muy corto, se requieren minimo 6 caracteres</mat-error>
                     </mat-form-field>
                     <mat-form-field class="w-100">
                         <mat-placeholder><mat-icon>vpn_key</mat-icon> Contraseña</mat-placeholder>
-                        <input matInput formControlName="password" required [type]="passwordHide ? 'password' : 'text'">
+                        <input matInput formControlName="pass" required [type]="passwordHide ? 'password' : 'text'">
                         <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                        <mat-error *ngIf="form.controls.password.errors?.required">Se requiere contraseña</mat-error>
-                        <mat-error *ngIf="form.controls.password.hasError('minlength')">La contraseña es demasiado corta, se requiere minimo 6 caracteres</mat-error>
+                        <mat-error *ngIf="form.controls.pass.errors?.required">Se requiere contraseña</mat-error>
+                        <mat-error *ngIf="form.controls.pass.hasError('minlength')">La contraseña es demasiado corta, se requiere minimo 6 caracteres</mat-error>
                     </mat-form-field>
                 </div>
-            </mat-tab>
-            <mat-tab label="Información personal" formGroupName="profile">
+            </mat-tab-->
+            <mat-tab label="Información personal">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Nombre/s" formControlName="name">
+                        <input matInput placeholder="Nombre/s" formControlName="Nombre">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Apellido/s" formControlName="surname">
+                        <input matInput placeholder="Apellido/s" formControlName="Apellidos">
                     </mat-form-field>
-                    <mat-radio-group formControlName="gender">
-                        <mat-radio-button value="hombre" labelPosition="before">Hombre</mat-radio-button>
-                        <mat-radio-button value="mujer" labelPosition="before">Mujer</mat-radio-button>
-                    </mat-radio-group>
-                    <mat-form-field class="w-100">
+                    <mat-label>Genero</mat-label>
+                    <mat-select formControlName="Genero">
+                        <mat-option [value]="">Hombre</mat-option>
+                        <mat-option [value]="">Mujer</mat-option>
+                    </mat-select>
+                    <!--mat-form-field class="w-100">
                         <input matInput placeholder="Ruta imagen" formControlName="image">
-                    </mat-form-field>
+                    </mat-form-field-->
                 </div>
             </mat-tab>
-            <mat-tab label="Trabajo" formGroupName="work">
+            <mat-tab label="Trabajo">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Compañia" formControlName="company">
+                        <input matInput placeholder="Tienda" formControlName="ID_tienda">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Puesto" formControlName="position">
+                        <input matInput placeholder="Puesto" formControlName="ID_puesto">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Salario" formControlName="salary">
+                        <input matInput placeholder="Salario" formControlName="Sueldo">
                         <span matPrefix>$&nbsp;</span>
                         <span matSuffix>.00</span>
                     </mat-form-field>
                 </div>
             </mat-tab>
-            <mat-tab label="Contacto" formGroupName="contacts">
+            <mat-tab label="Contacto" >
                 <div fxLayout="column" class="form-field-outer">
+                    <!--mat-form-field class="w-100">
+                        <input matInput placeholder="Correo electronico" formControlName="Correo">
+                    </mat-form-field-->
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Correo electronico" formControlName="email">
+                        <input matInput placeholder="Telefono" formControlName="Telefono">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Telefono" formControlName="phone">
-                    </mat-form-field>
-                    <mat-form-field class="w-100">
-                        <input matInput placeholder="Dirección" formControlName="address">
+                        <input matInput placeholder="Dirección" formControlName="Direccion">
                     </mat-form-field>
                 </div>
             </mat-tab>
-            <mat-tab label="Información" formGroupName="settings">
+            <mat-tab label="Información" >
                 <div fxLayout="column" class="form-field-outer">
                     <p *ngIf="user.ID_usuario"><span>Fecha de registro:</span> <i>{{user.Fecha_registro | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
                     <p *ngIf="user.ID_usuario"><span>Ultimo ingreso:</span> <i>{{user.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
