@@ -14,17 +14,17 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.infoForm = this.formBuilder.group({
+      id: null,
       name: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       email: ['', Validators.compose([Validators.required, emailValidator])],
-      phone: ['', Validators.required],
-      image: null,      
-      organization: null
+      image: null
     }); 
   }
 
   public onInfoFormSubmit():void {
     if (this.infoForm.valid) { 
-      this.snackBar.open('Your account information updated successfully!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
+      console.log(this.infoForm.value)
+      this.snackBar.open('Se actualizó la información de la cuenta correctamente!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
     }
   } 
 

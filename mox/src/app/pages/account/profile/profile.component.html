@@ -9,9 +9,13 @@
                         (onFileChange)="fileChange($event)">
         </app-image-upload>  
     </div> 
-    <div fxFlex="100" fxFlex.gt-sm="60" class="px-3" ngClass.sm="mt-2" ngClass.xs="mt-2">  
+    <div fxFlex="100" fxFlex.gt-sm="60" class="px-3" ngClass.sm="mt-2" ngClass.xs="mt-2"> 
         <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Nombre</mat-label>
+            <mat-label>ID</mat-label>
+            <input matInput placeholder="ID" formControlName="id" readonly>
+        </mat-form-field> 
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nombre de usuario</mat-label>
             <input matInput placeholder="nombre" formControlName="name" required>
             <mat-error *ngIf="infoForm.controls.name.errors?.required">Se requiere un nombre</mat-error>
             <mat-error *ngIf="infoForm.controls.name.hasError('minlength')">El nombre requiere minimo 3 caracteres</mat-error>
@@ -21,15 +25,6 @@
             <input matInput placeholder="Correo" formControlName="email" required>
             <mat-error *ngIf="infoForm.controls.email.errors?.required">Se requiere una direcciónd de correo</mat-error>
             <mat-error *ngIf="infoForm.controls.email.hasError('invalidEmail')">Dirección invalida</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Telefono</mat-label>
-            <input matInput placeholder="Telefono" formControlName="phone" required onlyNumber>
-            <mat-error *ngIf="infoForm.controls.phone.errors?.required">Se requiere un numero de telefono</mat-error>
-        </mat-form-field>  
-        <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Organización</mat-label>
-            <input matInput placeholder="Organización" formControlName="organization"> 
         </mat-form-field>
     </div> 
     <div fxFlex="100" class="text-center mt-2">

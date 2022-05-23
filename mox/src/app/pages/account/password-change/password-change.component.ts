@@ -10,10 +10,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PasswordChangeComponent implements OnInit {
   public passwordForm!:FormGroup;
+  public hide = true; 
   constructor(public formBuilder: FormBuilder, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.passwordForm = this.formBuilder.group({
+      id: null,
       currentPassword: ['', Validators.required],
       newPassword: ['', Validators.required],
       confirmNewPassword: ['', Validators.required]
@@ -22,7 +24,8 @@ export class PasswordChangeComponent implements OnInit {
 
   public onPasswordFormSubmit():void {
     if (this.passwordForm.valid) {
-      this.snackBar.open('Your password changed successfully!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
+      console.log(this.passwordForm.value)
+      this.snackBar.open('La contraseña se actualizó con éxito!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
     }
   }
 

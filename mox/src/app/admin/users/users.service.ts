@@ -48,4 +48,8 @@ export class UsersService {
     modificarUser(user:any,id:number){	    
         return this.http.put(this.api + "api/usuarios/modificar/"+id, user);
     }
+    //Modificar contraseña de usuario
+    modificarPass(user:any,id:number){
+        return this.http.put(this.api + "api/usuarios/modificar/"+id, user);
+    }
 } 
