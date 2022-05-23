@@ -20,8 +20,8 @@ import { Menu, Restaurant } from '../restaurants';
 export class RestaurantSingleComponent implements OnInit {
   private sub: any;
 
-  private restaurantId!: number;
-  private companyId!: number;
+  public restaurantId!: number;
+  public companyId!: number;
 
   public restaurant!: Restaurant;
   public menu!: Menu[];

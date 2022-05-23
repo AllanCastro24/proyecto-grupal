@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
 import { OrdersComponent } from './orders.component';
+import { OrderComponent } from './order/order.component';
 
 export const routes = [
-  { path: '', component: OrdersComponent, pathMatch: 'full' }
+  { path: '', component: OrdersComponent, pathMatch: 'full' },
+  { path: ':id', component: OrderComponent }
 ];
 
 @NgModule({
@@ -15,7 +17,8 @@ export const routes = [
     SharedModule
   ],
   declarations: [
-    OrdersComponent
+    OrdersComponent,
+    OrderComponent
   ]
 })
 export class OrdersModule { }

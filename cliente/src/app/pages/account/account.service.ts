@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+
 import { UsersService } from 'src/app/users/users.service';
+import { Order } from '../restaurants/restaurants';
 import { Address, Payment } from './account';
 
 @Injectable({
@@ -142,5 +144,20 @@ export class AccountService {
     user.paymentList = payments;
 
     this.usersService.setUser(user);
+  }
+
+  public getOrder(index: number): Order {
+    const orders = this.usersService.getUser().orderList || [];
+    const orderIndex = orders.findIndex((order) => order.id == index);
+
+    if (orderIndex === -1) {
+      return <Order>{};
+    }
+
+    return orders[orderIndex];
+  }
+
+  public getOrders(): Order[] {
+    return this.usersService.getUser().orderList || [];
   }
 }

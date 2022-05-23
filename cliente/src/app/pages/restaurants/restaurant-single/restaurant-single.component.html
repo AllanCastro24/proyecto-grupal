@@ -125,7 +125,7 @@
     </mat-list-item>
     <mat-list-item>
       <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 pt-3 divider">
-        <a routerLink="/checkout" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none">Revisar</a>
+        <a [routerLink]="['/checkout', restaurantId, companyId]" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none">Revisar</a>
         <div fxLayout="row wrap" fxLayoutAlign="end center">
           <h2 class="fw-500 px-3">Total:</h2>
           <h2 class="primary-color price">

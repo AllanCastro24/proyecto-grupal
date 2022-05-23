@@ -4,6 +4,7 @@ import { UsersService } from 'src/app/users/users.service';
 import { Plate } from '../../restaurants/plates';
 import { RestaurantService } from '../../restaurants/restaurant.service';
 import { Order, Restaurant } from '../../restaurants/restaurants';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-orders',
@@ -16,14 +17,14 @@ export class OrdersComponent implements OnInit {
   public restaurantId!: number;
   public companyId!: number;
 
-  constructor(private usersService: UsersService, public restaurantService: RestaurantService) {}
+  constructor(private accountService: AccountService, public restaurantService: RestaurantService) {}
 
   ngOnInit(): void {
     this.getOrdersList();
   }
 
   public getOrdersList() {
-    this.ordersList = this.usersService.getUser().orderList || [];
+    this.ordersList = this.accountService.getOrders();
   }
 
   public getTotalItems(items: Plate[]): number {
@@ -33,8 +34,6 @@ export class OrdersComponent implements OnInit {
   public getTotalPrice(items: Plate[]): number {
     return items.reduce((prev, curr) => prev + curr.cartCount * curr.price, 0);
   }
-
-  public openOrder(order: Order) {}
 
   public async getRestaurant(plate: Plate): Promise<Restaurant> {
     return new Promise(async (resolve) => {

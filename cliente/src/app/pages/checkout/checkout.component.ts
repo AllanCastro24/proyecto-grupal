@@ -175,9 +175,9 @@ export class CheckoutComponent implements OnInit {
     const order: Order = {
       id: this.restaurantService.getOrders().length + 1,
       accountId: this.usersService.getUser().id || 0,
-      addressId: this.accountService.getDefaultAddress(),
-      addressTypeId: this.deliveryType,
-      paymentId: this.accountService.getDefaultPayment(),
+      address: this.accountService.getAddresses()[this.accountService.getDefaultAddress()],
+      deliveryTypeId: this.deliveryType,
+      payment: this.accountService.getPayments()[this.accountService.getDefaultPayment()],
       date: Date.now().toString(),
       items: this.cartItems,
       status: this.status[0],
@@ -187,6 +187,8 @@ export class CheckoutComponent implements OnInit {
 
     this.restaurantService.addOrder(order);
     this.restaurantService.removeCartList(this.restaurantId, this.companyId);
+
+    this.restaurantService.calculateCartListTotal();
 
     this.router.navigate(['/cart']);
   }

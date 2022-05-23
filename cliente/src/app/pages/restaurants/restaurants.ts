@@ -1,3 +1,4 @@
+import { Address, Payment } from '../account/account';
 import { Plate } from './plates';
 
 export interface Restaurant {
@@ -41,9 +42,9 @@ export interface Menu {
 export interface Order {
   id: number;
   accountId: number;
-  addressId: number;
-  addressTypeId: number;
-  paymentId: number;
+  address: Address;
+  payment: Payment;
+  deliveryTypeId: number;
   date: string;
   items: Plate[];
   status: OrderStatus;

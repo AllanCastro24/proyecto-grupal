@@ -180,7 +180,6 @@ export class RestaurantService {
   }
 
   public calculateCartListTotal() {
-    this.totalCartList = 0;
     this.totalCartList = (this.usersService.getUser().cartList || []).length;
   }
 
