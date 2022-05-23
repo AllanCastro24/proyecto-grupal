@@ -3,18 +3,20 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router'; 
 import { AppSettings, Settings } from 'src/app/app.settings';
+import { UsersService } from 'src/app/admin/users/users.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [ UsersService ]  
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   public hide = true;
   public bgImage:any;
   public settings: Settings;
-  constructor(public fb: FormBuilder, public router:Router, private sanitizer:DomSanitizer, public appSettings:AppSettings) { 
+  constructor(public fb: FormBuilder, public router:Router, private sanitizer:DomSanitizer, public appSettings:AppSettings, public usersService:UsersService) { 
     this.settings = this.appSettings.settings; 
   }
 

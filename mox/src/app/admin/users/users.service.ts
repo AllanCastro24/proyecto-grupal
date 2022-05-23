@@ -40,7 +40,8 @@ export class UsersService {
     agregarEmpleado(user:User) {
         return this.http.post(this.api + "api/empleado/add",user);
     }
-    addUser(user:User){	    
-        return this.http.post(this.url, user);
+    //Agregar usuario (Registro)
+    agregarUser(user:any){	    
+        return this.http.post(this.api + "api/usuarios/add", user);
     }
 } 
