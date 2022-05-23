@@ -46,6 +46,7 @@ export class UsersComponent implements OnInit {
         this.usersService.agregarEmpleado(user).subscribe(user => this.getUsers());
     }
     public actualizarEmpleado(user:User){
+        console.log(user);
         this.usersService.modificarEmpleado(user).subscribe(user => this.getUsers());
     }
     public onPageChanged(event:any){

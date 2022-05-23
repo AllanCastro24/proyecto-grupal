@@ -52,4 +52,8 @@ export class UsersService {
     modificarPass(user:any,id:number){
         return this.http.put(this.api + "api/usuarios/modificar/"+id, user);
     }
+    //Login
+    login(user:any){	    
+        return this.http.post(this.api + "api/usuarios/login", user);
+    }
 } 

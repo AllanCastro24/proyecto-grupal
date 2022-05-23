@@ -31,9 +31,13 @@ export class LoginComponent implements OnInit {
 
   public onLoginFormSubmit():void {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value)
+      console.log(this.loginForm.value);
+      this.login(this.loginForm.value);
       this.router.navigate(['/']);
     }
   }
 
+  public login(user:any){
+    this.usersService.login(user).subscribe();
+  }
 }

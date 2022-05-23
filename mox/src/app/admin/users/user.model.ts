@@ -11,6 +11,7 @@ export class User {
   ID_tienda: number = 0;
   ID_tipo_pago: number = 0;
   ID_puesto: number = 0;
+  ID_sucursal: number = 0;
   Sueldo: number = 0;
   Correo: string = '';
   Telefono: string = '';
