@@ -5,6 +5,9 @@
             <mat-tab label="Información personal">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
+                        <input matInput readonly placeholder="ID:" formControlName="ID_empleado">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
                         <input matInput placeholder="Nombre/s" formControlName="Nombre">
                     </mat-form-field>
                     <mat-form-field class="w-100">
@@ -12,8 +15,8 @@
                     </mat-form-field>
                     <mat-label>Genero</mat-label>
                     <mat-select formControlName="Genero">
-                        <mat-option [value]="">Hombre</mat-option>
-                        <mat-option [value]="">Mujer</mat-option>
+                        <mat-option [value]="'H'">Hombre</mat-option>
+                        <mat-option [value]="'M'">Mujer</mat-option>
                     </mat-select>
                 </div>
             </mat-tab>

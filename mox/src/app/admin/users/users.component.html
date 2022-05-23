@@ -37,7 +37,7 @@
             </div>
             <mat-menu #menu="matMenu" xPosition="before" overlapTrigger="true">
                 <span (mouseleave)="menuTrigger.closeMenu()">
-                    <button mat-menu-item (click)="openUserDialog(user);">
+                    <button mat-menu-item (click)="openUserDialog(user,0);">
                         <mat-icon>mode_edit</mat-icon>
                         <span>Editar</span>
                     </button>
@@ -93,7 +93,7 @@
             </div>
             <mat-menu #menu="matMenu" xPosition="before"  overlapTrigger="true">
                 <span (mouseleave)="menuTrigger.closeMenu()">
-                    <button mat-menu-item (click)="openUserDialog(user);">
+                    <button mat-menu-item (click)="openUserDialog(user,0);">
                         <mat-icon>mode_edit</mat-icon>
                         <span>Editar</span>
                     </button>
@@ -164,7 +164,7 @@
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="usuario.Activo == 'S'" class="user-name">{{usuario.Usuario}}</h3> 
                 <h3 *ngIf="usuario.Activo == 'N'" class="user-name">{{usuario.Usuario}} (Bloqueado)</h3>    
-                <mat-button-toggle value="add" (click)="openUserDialog(usuario)" class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-button-toggle value="add" (click)="openUserDialog(usuario,usuario.ID_usuario)" class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                     Contratar<mat-icon>person_add</mat-icon><!--Icono-->
                 </mat-button-toggle>
             </div>
@@ -205,7 +205,7 @@
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="usuario.Activo == 'S'" class="user-name">{{usuario.Usuario}}</h3> 
                 <h3 *ngIf="usuario.Activo == 'N'" class="user-name"> {{usuario.Usuario}} (bloqueado)</h3>
-                <mat-button-toggle value="add" (click)="openUserDialog(usuario)" class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-button-toggle value="add" (click)="openUserDialog(usuario,usuario.ID_usuario)" class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                     Contratar<mat-icon>person_add</mat-icon><!--Icono-->
                 </mat-button-toggle>
             </div>
