@@ -103,13 +103,42 @@ export class UsersComponent implements OnInit {
             return true;
         }
     }
-    public ActivarDesactivar(activo:string){
-        if(activo == "S"){
+
+    public ActivarDesactivar(user:User){
+        if(user.Activo == "S"){
             //Desactivar
+            console.log("Desactivando...")
+            this.desactivarUser(user);
         }else{
             //Activar
+            console.log("Activando...")
+            this.activarUser(user);
+        }
+    }
+
+    public ActivarDesactivarUsuario(usuario:usuario){
+        if(usuario.Activo == "S"){
+            //Desactivar
+            console.log("Desactivando...")
+            this.desactivarUsuario(usuario);
+        }else{
+            //Activar
+            console.log("Activando...")
+            this.activarUsuario(usuario);
         }
     }
     //llamada a desactivar / activar
-    
+    public desactivarUser(user:User){//Empleados
+        this.usersService.desactivarUser(user).subscribe(user => this.getUsers());
+    }
+    public activarUser(user:User){
+        this.usersService.activarUser(user).subscribe(user => this.getUsers());
+    }
+
+    public desactivarUsuario(usuario:usuario){
+        this.usersService.desactivarUsuario(usuario).subscribe(usuario => this.getUsuario());
+    }
+    public activarUsuario(usuario:usuario){
+        this.usersService.activarUsuario(usuario).subscribe(usuario => this.getUsuario());
+    }
 }

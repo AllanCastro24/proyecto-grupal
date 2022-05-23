@@ -18,12 +18,19 @@ export class UsersService {
         return this.http.get<usuario[]>(this.api+"api/usuarios/consultar_usuarios");
     }
     
-    //Activar usuario
-    activarUser(id: number) {
-        return this.http.delete(this.api + "api/usuarios/activar/" + id);
+    //Activar/desactivar usuario
+    activarUser(user:User){
+        return this.http.put(this.api + "api/usuarios/activar/"+user.ID_usuario,user);
     }
-    desactivarUser(id: number) {
-        return this.http.delete(this.api + "/api/usuarios/desactivar" + id);
+    desactivarUser(user:User) {
+        return this.http.put(this.api + "api/usuarios/desactivar/"+user.ID_usuario,user);
+    } 
+
+    activarUsuario(usuario:usuario){
+        return this.http.put(this.api + "api/usuarios/activar/"+usuario.ID_usuario,usuario);
+    }
+    desactivarUsuario(usuario:usuario) {
+        return this.http.put(this.api + "api/usuarios/desactivar/"+usuario.ID_usuario,usuario);
     } 
 
     addUser(user:User){	    
