@@ -759,8 +759,8 @@ export class AppService {
 
   }
 
-  BajaGastoFijo(id: any, datos: any): Observable<any> {
-    return this.http.put(this.API + "api/costos_fijos/baja/" + id, datos, { responseType: 'text' });
+  BajaGastoFijo(id: any, status: any): Observable<any> {
+    return this.http.put(this.API + "api/costos_fijos/baja/" + id + "/" + status, { responseType: 'text' });
 
   }
   //GASTOS FIJOS PROGRAMADOS
@@ -779,13 +779,17 @@ export class AppService {
 
   }
 
-  BajaGastoFijoProgramado(id: any, datos: any): Observable<any> {
-    return this.http.put(this.API + "api/costos_programados/baja/" + id, datos, { responseType: 'text' });
+  BajaGastoFijoProgramado(id: any, status: any): Observable<any> {
+    return this.http.put(this.API + "api/costos_programados/baja/" + id + "/" + status, { responseType: 'text' });
 
   }
 
   ObtenerTiposGastosFijos() {
     return this.http.get(this.API + "api/tipo_gastos/consultar");
+  }
+
+  ObtenerTiposGastosFijosActivos() {
+    return this.http.get(this.API + "api/tipo_gastos/select");
   }
 
   ObtenerSucursales() {
@@ -802,13 +806,15 @@ export class AppService {
 
   }
 
-  BajaTipoGastoFijo(id: any, datos: any): Observable<any> {
-    return this.http.put(this.API + "api/tipo_gastos/baja/" + id, datos, { responseType: 'text' });
+  BajaTipoGastoFijo(id: any, status: any): Observable<any> {
+    return this.http.put(this.API + "api/tipo_gastos/baja/" + id + "/" + status, { responseType: 'text' });
 
   }
+  
 
-  ObtenerVentasXMes(mes: any): Observable<any> {
-    return this.http.get(this.API + "api/ventas/mes/" + mes.mes + "/" + mes.ano);
+  ObtenerVentasXMes(mes: any): Observable<any> {    
+    // return this.http.get(this.API + "api/ventas/mes/" + mes.mes + "/" + mes.ano);
+    return this.http.get(this.API + "api/producto/mas_vendido/mes/" + mes.mes + "/" + mes.ano);
 
   }
 
@@ -823,12 +829,14 @@ export class AppService {
   }
 
   ObtenerVentasXDia(fecha: any): Observable<any> {
-    return this.http.get(this.API + "api/ventas/day/" + fecha.dia);
+    // return this.http.get(this.API + "api/ventas/day/" + fecha.dia);
+    return this.http.get(this.API + "api/producto/mas_vendido/day/" + fecha.dia);
 
   }
 
   ObtenerVentasXRango(rango: any): Observable<any> {
-    return this.http.get(this.API + "api/ventas/range/" + rango.fecha + "/" + rango.fecha2);
+    // return this.http.get(this.API + "api/ventas/range/" + rango.fecha + "/" + rango.fecha2);
+    return this.http.get(this.API + "api/producto/mas_vendido/range/" + rango.fecha + "/" + rango.fecha2);
     console.log(this.API + "api/ventas/range/" + rango.fecha[0] + "/" + rango.fecha2[0]);
 
   }

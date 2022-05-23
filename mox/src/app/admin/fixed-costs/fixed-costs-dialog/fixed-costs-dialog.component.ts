@@ -35,6 +35,8 @@ export class FixedCostsDialogComponent implements OnInit {
 
     if(this.data.customer){
       this.form.patchValue(this.data.customer); 
+      // this.form.value.id_gasto=this.data.customer;
+      console.log(this.form.value.id_gasto);
     };
   }
 

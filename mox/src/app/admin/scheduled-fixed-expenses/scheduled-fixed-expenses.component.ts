@@ -35,7 +35,7 @@ export class ScheduledFixedExpensesComponent implements OnInit {
     });
     this.countries = this.appService.getCountries();
     // this.initDataSource(customers);
-    this.appService.ObtenerTiposGastosFijos().subscribe(respuesta => {
+    this.appService.ObtenerTiposGastosFijosActivos().subscribe(respuesta => {
       // this.tipos_gastos=respuesta
       this.TiposGastos = respuesta;
       // console.log(this.TiposGastos);
@@ -55,16 +55,21 @@ export class ScheduledFixedExpensesComponent implements OnInit {
   public remove(customer: any) {
     const index: number = this.dataSource.data.indexOf(customer);
     if (index !== 0) {
-      const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE');
+      const message = this.appService.getTranslateValue('Seguro que quiere cambiar el status?');
       let dialogRef = this.appService.openConfirmDialog('', message!);
       dialogRef.afterClosed().subscribe(dialogResult => {
         if (dialogResult) {
           // this.dataSource.data.splice(index, 1);
           // this.initDataSource(this.dataSource.data);
-          this.appService.BajaGastoFijoProgramado(customer, this.dataSource.data).subscribe(respuesta => {
+          this.appService.BajaGastoFijoProgramado(customer.id_gasto_fijo, customer.status).subscribe(respuesta => {
+            this.appService.ObtenerGastosFijosProgramados().subscribe(respuesta => {
+              this.initDataSource(respuesta);
+              console.log(respuesta);
+              
+            });
             // this.ruteador.navigateByUrl('/listar-torneo');
-            this.dataSource.data.splice(index, 1);
-            this.initDataSource(this.dataSource.data);
+            // this.dataSource.data.splice(index, 1);
+            // this.initDataSource(this.dataSource.data);
 
 
           });
