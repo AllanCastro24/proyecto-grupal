@@ -35,7 +35,11 @@ export class UsersService {
     //Modificar empleado desde el admin
     modificarEmpleado(user:User) {
         return this.http.put(this.api + "api/empleado/modificar/"+user.ID_empleado,user);
-    } 
+    }
+    //Agregar empleado (contratación)
+    agregarEmpleado(user:User) {
+        return this.http.put(this.api + "api/empleado/add",user);
+    }
     addUser(user:User){	    
         return this.http.post(this.url, user);
     }

@@ -41,8 +41,8 @@ export class UsersComponent implements OnInit {
         this.usersService.getUsuarios().subscribe(usuarios => this.usuarios = usuarios);    
     }
 
-    public addUser(user:User){
-        this.usersService.addUser(user).subscribe(user => this.getUsers());
+    public agregarEmpleado(user:User){
+        this.usersService.agregarEmpleado(user).subscribe(user => this.getUsers());
     }
     public actualizarEmpleado(user:User){
         this.usersService.modificarEmpleado(user).subscribe(user => this.getUsers());
@@ -53,13 +53,13 @@ export class UsersComponent implements OnInit {
         window.scrollTo(0,0);
     }
 
-    public openUserDialog(user:User | null){
+    public openUserDialog(user:User | usuario){
         let dialogRef = this.dialog.open(UserDialogComponent, {
             data: user
         });
         dialogRef.afterClosed().subscribe(user => {
             if(user){
-                (user.ID_empleado) ? this.actualizarEmpleado(user) : this.addUser(user);
+                (user.ID_empleado) ? this.actualizarEmpleado(user) : this.agregarEmpleado(user);
             }
         });
     }

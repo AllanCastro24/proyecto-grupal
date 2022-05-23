@@ -1,9 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="p-2">
     <div fxLayout="row">
         <mat-button-toggle-group #controls="matButtonToggleGroup" appearance="legacy">            
-            <mat-button-toggle value="add" (click)="openUserDialog(null)">
-                <mat-icon>person_add</mat-icon><!--Icono-->
-            </mat-button-toggle>
             <mat-button-toggle value="search">
                 <mat-icon>search</mat-icon> <!--Icono-->
             </mat-button-toggle>           
@@ -167,6 +164,9 @@
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="usuario.Activo == 'S'" class="user-name">{{usuario.Usuario}}</h3> 
                 <h3 *ngIf="usuario.Activo == 'N'" class="user-name">{{usuario.Usuario}} (Bloqueado)</h3>    
+                <mat-button-toggle value="add" (click)="openUserDialog(usuario)" class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                    Contratar<mat-icon>person_add</mat-icon><!--Icono-->
+                </mat-button-toggle>
             </div>
             
             <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
@@ -205,7 +205,9 @@
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="usuario.Activo == 'S'" class="user-name">{{usuario.Usuario}}</h3> 
                 <h3 *ngIf="usuario.Activo == 'N'" class="user-name"> {{usuario.Usuario}} (bloqueado)</h3>
-                
+                <mat-button-toggle value="add" (click)="openUserDialog(usuario)" class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                    Contratar<mat-icon>person_add</mat-icon><!--Icono-->
+                </mat-button-toggle>
             </div>
             
             <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
