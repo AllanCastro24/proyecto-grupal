@@ -3,7 +3,7 @@
         <div></div>
         <button mat-raised-button color="primary" (click)="openCategoryDialog(null)">
             <mat-icon>add</mat-icon>
-            Añadir nueva categoria
+            Añadir nueva sucursal
         </button>
     </div>
     <mat-divider></mat-divider>
@@ -12,23 +12,30 @@
         <table mat-table [dataSource]="dataSource" matSort class="w-100">
         
             <!-- ID Column -->
-            <ng-container matColumnDef="id">
+            <ng-container matColumnDef="ID_sucursal">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                <td mat-cell *matCellDef="let category"> {{category.id}} </td>
+                <td mat-cell *matCellDef="let category"> {{category.ID_sucursal}} </td>
             </ng-container>   
 
             <!-- Name Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+            <ng-container matColumnDef="Pseudonimo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pseudonimo </th>
+                <td mat-cell *matCellDef="let category"> {{category.Pseudonimo}} </td>
             </ng-container> 
 
              <!-- Description Column -->
-             <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
-                <td mat-cell *matCellDef="let category"> {{category.description}} </td>
+             <ng-container matColumnDef="Ubicacion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ubicacion </th>
+                <td mat-cell *matCellDef="let category"> {{category.Ubicacion}} </td>
             </ng-container> 
 
+             <!-- Description Column -->
+             <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let category"> {{category.Status}} </td>
+            </ng-container> 
+
+           
             <!-- Edit Column -->
             <ng-container matColumnDef="edit">
                 <th mat-header-cell *matHeaderCellDef> Editar </th>
@@ -52,11 +59,11 @@
                     
                  
 <!-- solucionar no aparece status boton -->
-                    <ng-container *ngIf="category.estatus == false" >
-                        <mat-slide-toggle  [checked]= false  (change)='state($event, category.id )'></mat-slide-toggle>
+                    <ng-container *ngIf="category.Status == false" >
+                        <mat-slide-toggle  [checked]= false  (change)='state($event, category.ID_sucursal)'></mat-slide-toggle>
                     </ng-container>
-                    <ng-container *ngIf="category.estatus == true" >
-                        <mat-slide-toggle  [checked]= true  (change)='state($event, category.id )'></mat-slide-toggle>
+                    <ng-container *ngIf="category.Status == true" >
+                        <mat-slide-toggle  [checked]= true  (change)='state($event, category.ID_sucursal )'></mat-slide-toggle>
                     </ng-container>
                    
                 </td>

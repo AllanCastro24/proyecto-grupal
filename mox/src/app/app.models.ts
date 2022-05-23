@@ -161,9 +161,51 @@ export class MenuItemImage {
 
 export class Category {
     constructor(public id: number,
+                public idtienda: number,
+                public idsucursal: number,
                 public name: string,
-                public description: string){ }
+                public description: string,
+                public estatus: string){ }
 }   
+
+export class Tiendas {
+    constructor(public ID_tienda: number,
+                public Nombre: string,
+                public Telefono: string,
+                public Correo: string,
+                public Fecha: string){ }
+}   
+export class Horario {
+    constructor(
+        public ID_horario: number,
+        public InicioLunes: string,
+        public FinLunes: string,
+        public InicioMartes: string,
+        public FinMartes: string,
+        public InicioMiercoles: string,
+        public FinMiercoles: string,
+        public InicioJueves: string,
+        public FinJueves: string,
+        public InicioViernes: string,
+        public FinViernes: string,
+        public InicioSabado: string,
+        public FinSabado: string,
+        public InicioDomingo: string,
+        public FinDomingo: string,){ }
+} 
+
+export class Sucursales {
+    constructor(public ID_sucursal: number,
+                public Pseudonimo: string,
+                public Ubicacion: string,
+                public Fechaalta: string,
+                public Status: string,
+                public ID_zonasucursal: number,
+                public ID_empleado: number,
+                public ID_tienda: number,
+                public ID_horario: number,
+                ){ }
+}  
 
 export class Unidades {
     constructor(public id: number,

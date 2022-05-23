@@ -145,7 +145,7 @@ export class MenuSingleComponent implements OnInit {
      // this.id = this.getMenuItems(params['id']); 
     }); 
     //this.getMenuItems();
-    this.getCategories();
+    this.getCategories(this.idtienda,this.idsucursal);
    // this.getMenuItems();
   }
 
@@ -153,8 +153,8 @@ export class MenuSingleComponent implements OnInit {
     this.watcher.unsubscribe();
   }
 
-  public getCategories(){
-    this.appService.getCategories().subscribe(categories=>{
+  public getCategories(idtienda:any,idsucursal:any){
+    this.appService.getCategoriestiendasuc(idtienda,idsucursal).subscribe(categories=>{
       this.categories = categories;
       this.appService.Data.categories = categories;
     })

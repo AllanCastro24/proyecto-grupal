@@ -36,6 +36,7 @@
     "express": "4.17.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
+    "ngx-cookie-service": "^13.2.1",
     "ngx-pagination": "5.1.1",
     "ngx-perfect-scrollbar": "10.1.1",
     "ngx-progressbar": "6.1.1",

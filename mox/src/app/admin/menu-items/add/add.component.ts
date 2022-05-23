@@ -92,6 +92,8 @@ export class AddComponent implements OnInit {
       this.onSubmit(params['idtienda'],params['idsucursal']); 
      // this.id = this.getMenuItems(params['id']); 
     });  */
+    let today = new Date()
+    console.log("Date = " + today.toLocaleString().split('.')[0]);
   }
 
   ngOnDestroy() {
@@ -100,7 +102,7 @@ export class AddComponent implements OnInit {
 
   public getCategories(){
     if(!this.appService.Data.categories.length){
-      this.appService.getCategories().subscribe(categories=>{ 
+      this.appService.getCategoriestiendasuc(this.idtienda,this.idsucursal).subscribe(categories=>{ 
         this.appService.Data.categories = categories;
       });
     } 

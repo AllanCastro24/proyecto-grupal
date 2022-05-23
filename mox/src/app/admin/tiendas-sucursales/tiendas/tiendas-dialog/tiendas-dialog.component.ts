@@ -2,38 +2,44 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Category } from 'src/app/app.models';
+import { Category, Tiendas } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { CookieService } from 'ngx-cookie-service';
 @Component({
-  selector: 'app-category-dialog',
-  templateUrl: './category-dialog.component.html',
-  styleUrls: ['./category-dialog.component.scss']
+  selector: 'app-tiendas-dialog',
+  templateUrl: './tiendas-dialog.component.html',
+  styleUrls: ['./tiendas-dialog.component.scss']
 })
-export class CategoryDialogComponent implements OnInit {
+export class TiendasDialogComponent implements OnInit {
+
   public form!: FormGroup;
   public idtienda:any;
   public idsucursal:any;
   @Input() idtiendaaa:any = {};
-  constructor(public dialogRef: MatDialogRef<CategoryDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public category: Category,
+  constructor(public dialogRef: MatDialogRef<TiendasDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public tiendas: Tiendas,
               public fb: FormBuilder,public appService:AppService,private activatedRoute: ActivatedRoute,private cookieService: CookieService) { }
 
   ngOnInit(): void { 
     //this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
     //this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
     this.form = this.fb.group({
-      id: 0,
-      name: [null, Validators.required],
-      description: null,
-      estatus:null,
-      idtienda:null,
-      idsucursal:null, 
+      ID_tienda: 0,
+      Nombre: [null, Validators.required],
+      Telefono: [null, Validators.required],
+      Correo: [null, Validators.required],
+      
     }); 
 
-    if(this.category){
-      this.form.patchValue(this.category); 
-      console.log(this.category);
+    if(this.tiendas){
+      /* this.form.patchValue({
+        //id: this.form.value.id_almacen,
+        name: this.tiendas.Nombre ,
+        telefono: this.tiendas.Telefono,
+        correo: this.tiendas.Correo
+      }); */
+      this.form.patchValue(this.tiendas); 
+      console.log(this.tiendas);
     };
     
       this.idtienda = this.cookieService.get('idtienda');
@@ -49,7 +55,7 @@ export class CategoryDialogComponent implements OnInit {
       console.log(this.form.value);
       //this.addcategoriasmenu();
 
-      if (this.category) {
+      if (this.tiendas) {
         console.log('editar');
         this.editcategoriasmenu();
       }else{
@@ -62,7 +68,7 @@ export class CategoryDialogComponent implements OnInit {
   public addcategoriasmenu(){
     console.log(this.form.value);
     //this.idtienda, this.idsucursal,this.id,this.form.value
-    this.appService.insertarcateogoriasmenu(this.idtienda,this.idsucursal,this.form.value).subscribe (
+    this.appService.insertartienda(this.form.value).subscribe (
       datos => {
         console.log('hola'+ datos);
         //this.ngOnInit();
@@ -73,13 +79,14 @@ export class CategoryDialogComponent implements OnInit {
   }
   public editcategoriasmenu(){
     console.log(this.form.value);
-    console.log(this.category.id);
+    console.log(this.tiendas.ID_tienda);
     //this.idtienda, this.idsucursal,this.id,this.form.value
-    this.appService.editcateogoriasmenu(this.category.id,this.form.value).subscribe (
+    this.appService.edittienda(this.tiendas.ID_tienda,this.form.value).subscribe (
       datos => {
         console.log('hola'+ datos);
         //this.ngOnInit();
       }
     )
   }
+
 }

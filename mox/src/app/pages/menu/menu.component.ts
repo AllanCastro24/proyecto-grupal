@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MatPaginator } from '@angular/material/paginator';
+import { ActivatedRoute } from '@angular/router';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar'; 
 import { Subscription } from 'rxjs/internal/Subscription';
 import { filter, map } from 'rxjs/operators';
@@ -32,8 +33,9 @@ export class MenuComponent implements OnInit {
   public message:string | null = '';
   public watcher: Subscription;
   public settings: Settings;
-
-  constructor(public appSettings:AppSettings, public appService:AppService, public mediaObserver: MediaObserver) {
+  public idtienda:any;
+  public idsucursal:any;
+  constructor(public appSettings:AppSettings, public appService:AppService, public mediaObserver: MediaObserver,private activatedRoute: ActivatedRoute) {
     this.settings = this.appSettings.settings; 
     this.watcher = mediaObserver.asObservable()
     .pipe(filter((changes: MediaChange[]) => changes.length > 0), map((changes: MediaChange[]) => changes[0]))
@@ -64,7 +66,11 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCategories();
+    this.idtienda = this.activatedRoute.snapshot.paramMap.get('id');
+    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
+    console.log(this.idtienda);
+    console.log(this.idsucursal);
+    this.getCategories(this.idtienda,this.idsucursal);
     this.getMenuItems();
   }
 
@@ -72,8 +78,8 @@ export class MenuComponent implements OnInit {
     this.watcher.unsubscribe();
   }
 
-  public getCategories(){
-    this.appService.getCategories().subscribe(categories=>{
+  public getCategories(idtienda:any,idsucursal:any){
+    this.appService.getCategoriestiendasuc(idtienda,idsucursal).subscribe(categories=>{
       this.categories = categories;
       this.appService.Data.categories = categories;
     })

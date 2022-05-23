@@ -4,17 +4,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table'; 
 import { ActivatedRoute } from '@angular/router';
-import { Category } from 'src/app/app.models';
+import { Category, Sucursales, Tiendas } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
-import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
+import { SucursalesDialogComponent } from './sucursales-dialog/sucursales-dialog.component';
 import { CookieService } from 'ngx-cookie-service';
+
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  selector: 'app-sucursales',
+  templateUrl: './sucursales.component.html',
+  styleUrls: ['./sucursales.component.scss']
 })
-export class CategoriesComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'description', 'edit','remove'];
+export class SucursalesComponent implements OnInit {
+
+  displayedColumns: string[] = ['ID_sucursal', 'Pseudonimo', 'Ubicacion', 'Status','edit','remove' ];
   dataSource!: MatTableDataSource<Category>;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
@@ -28,7 +30,7 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
     this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
-    this.appService.getCategoriesab(this.idtienda,this.idsucursal).subscribe((categories:Category[]) => {
+    this.appService.getsucursales().subscribe((categories:Sucursales[]) => {
       this.initDataSource(categories); 
       console.log(categories);
       console.log(this.idtienda);
@@ -61,22 +63,22 @@ export class CategoriesComponent implements OnInit {
     } 
   }  
 
-  public openCategoryDialog(category:Category | null,){
-    const dialogRef = this.appService.openDialog(CategoryDialogComponent, category, 'theme-dialog');
+  public openCategoryDialog(category:Tiendas | null,){
+    const dialogRef = this.appService.openDialog(SucursalesDialogComponent, category, 'theme-dialog');
     dialogRef.afterClosed().subscribe(cat => {  
       if(cat){
         let message = '';      
         const index: number = this.dataSource.data.findIndex(x => x.id == cat.id); 
         if(index !== -1){
           this.dataSource.data[index] = cat;
-          message = 'Category '+cat.name+' updated successfully';
+          message = 'Sucursal '+cat.name+' actualizada con éxito';
         } 
         else{ 
           let last_category = this.dataSource.data[this.dataSource.data.length - 1]; 
           cat.id = last_category.id + 1; 
           this.dataSource.data.push(cat); 
           this.paginator.lastPage();
-          message = 'New category '+cat.name+' added successfully!'; 
+          message = 'Nueva sucursal '+cat.name+' ¡agregado exitosamente!'; 
         }  
         this.initDataSource(this.dataSource.data); 
         this.snackBar.open(message, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });          
@@ -98,12 +100,10 @@ export class CategoriesComponent implements OnInit {
        estatus: this.activo
      }
      
-     this.appService.bajaoaltacatmenu(id, this.idtienda,this.idsucursal, proveedor).subscribe(() => {
+     this.appService.bajaoaltasucursal(id, proveedor).subscribe(() => {
     });
     //this.ngOnInit();
    console.log(this.activo + id);
  
    }
-  
-
 }

@@ -78,11 +78,13 @@ export class OrdersComponent implements OnInit {
        
       }  
       // modificar estatus de la comida ya oedida ya sea a aceptada o rechazada con botonoes
-      for (let index = 0; index < this.dataSource.data.length; index++) {
+     // for (let index = 0; index < this.dataSource.data.length; index++) {
         //const element = array[index];
+        console.log(this.dataSource.data[index]);
         this.appService.updateespedi(this.dataSource.data[index]).subscribe (
           datos => {
             console.log('hola'+ datos);
+            console.log(this.dataSource.data[index]);
             //this.ngOnInit();
           }
         )
@@ -90,7 +92,7 @@ export class OrdersComponent implements OnInit {
           this.initDataSource(datos);
           console.log(datos);
         }); 
-    }
+   // }
     this.ngOnInit();
     }
     
@@ -98,7 +100,7 @@ export class OrdersComponent implements OnInit {
     //this.updatedatospedi(this.dataSource.data);
   }
 
-  public updatedatospedi(datos:any){
+  /* public updatedatospedi(datos:any){
     console.log(datos);
     this.appService.updateespedi(datos).subscribe (
       datos => {
@@ -106,7 +108,7 @@ export class OrdersComponent implements OnInit {
         //this.ngOnInit();
       }
     )
-  }
+  } */
 
   public view(order:Order){ 
     const dialogRef = this.appService.openDialog(OrderDetailsDialogComponent, order, 'theme-dialog');

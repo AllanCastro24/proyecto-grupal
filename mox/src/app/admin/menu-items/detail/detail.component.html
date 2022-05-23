@@ -1,4 +1,4 @@
-<mat-card class="menu-single m-2">
+<!-- <mat-card class="menu-single m-2">
     <div *ngIf="menuItem" fxLayout="row wrap" class="flex-wrapper">
         <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
             <mat-chip-list *ngIf="menuItem.discount">
@@ -19,13 +19,13 @@
                 <span class="text-muted old-price">{{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}</span> 
                 <span class="primary-color mx-2">{{ (menuItem.price - (menuItem.price * (menuItem.discount / 100))) | currency : 'USD' : 'symbol' : '1.2-2'}}</span>
             </h1>
-            <!-- <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="row" fxLayoutAlign="start center">
                 <app-quantity-counter [value]="menuItem.cartCount" [step]="1" [min]="1" [max]="1000" (onCounterChange)="counterChange($event)"></app-quantity-counter>
                 <button mat-raised-button color="primary" class="uppercase mx-3" (click)="addToCart()">Add To Cart</button> 
                 <button mat-icon-button (click)="addToFavorites()" class="text-muted" matTooltip="Add To Favorite">
                     <mat-icon class="mat-icon-lg">favorite_border</mat-icon>
                 </button>
-            </div>  -->
+            </div> 
             <div class="py-3"> 
                 <p fxLayout="row" fxLayoutAlign="start center" class="mb-1">
                     <mat-icon color="primary" class="mat-icon-sm">local_offer</mat-icon>
@@ -129,9 +129,78 @@
         </div> 
 
     </div>
-</mat-card>
- 
+</mat-card> -->
 
- 
- 
- 
+<div class="p-2">
+    <mat-card>  
+        <mat-card-content>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" fxLayout="row wrap">
+                
+                <div fxFlex="60" class="px-2">
+                    <div fxLayout="row wrap">
+
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput formControlName="name" required>
+                                <mat-error *ngIf="form.controls.name.errors?.required">Nombre es requerido</mat-error>
+                                <mat-error *ngIf="form.controls.name.hasError('minlength')">El nombre no es lo suficientemente largo, mínimo 4 caracteres</mat-error>
+                            </mat-form-field>
+                        </div> 
+                       <!--  <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Categoria</mat-label>
+                                <mat-select formControlName="categoryId" required>
+                                    <mat-option *ngFor="let cat of appService.Data.categories" [value]="cat.id">
+                                        <span>{{cat.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.categoryId.errors?.required">Categoria es requerida</mat-error>
+                            </mat-form-field>
+                        </div>  
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Precio</mat-label>
+                                <input matInput formControlName="price" required type="number">
+                                <mat-error *ngIf="form.controls.price.errors?.required">Precio es requerida</mat-error>
+                            </mat-form-field>
+                        </div>  -->
+                       <!--  <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Discount</mat-label>
+                                <input matInput formControlName="discount" type="number"> 
+                            </mat-form-field>
+                        </div>  -->
+                       <!--  <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Cantidad Disponible</mat-label>
+                                <input matInput formControlName="availibilityCount" type="number"> 
+                            </mat-form-field>
+                        </div>  
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Peso</mat-label>
+                                <input matInput formControlName="weight" type="number"> 
+                            </mat-form-field>
+                        </div>  -->
+
+                        <!-- <div fxFlex="100" fxFlex.gt-sm="33.3" class="p-3">
+                            <mat-checkbox matCheckbox formControlName="isVegetarian" color="primary">Is Vegetarian</mat-checkbox>
+                        </div>   -->
+                        <div fxFlex="100" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Descripcion</mat-label> 
+                                <textarea matInput formControlName="description" rows="7"></textarea> 
+                            </mat-form-field> 
+                        </div>   
+                        <div fxFlex="100" class="mt-2 text-center w-100">
+                            <button mat-raised-button color="primary" type="submit" class="uppercase">Agregar</button>
+                            <!-- <button mat-raised-button color="primary" type="button" class="uppercase" (click)="updatedatos()">Modificar</button> -->
+                            <!-- <button mat-raised-button color="primary" type="button" class="uppercase" (click)="bajaplato()">Eliminar</button> -->
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content> 
+    </mat-card>
+</div>

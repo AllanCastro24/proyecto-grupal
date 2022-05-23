@@ -37,7 +37,7 @@ import { HorizontalMenuComponent } from './theme/components/menu/horizontal-menu
 import { VerticalMenuComponent } from './theme/components/menu/vertical-menu/vertical-menu.component';
 import { FooterComponent } from './theme/components/footer/footer.component'; 
 import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
-
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,8 @@ import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
     DatePipe,
-    { provide: MatPaginatorIntl, useClass: MatPaginatorI18nService }
+    { provide: MatPaginatorIntl, useClass: MatPaginatorI18nService },
+    [CookieService]
   ],
   bootstrap: [AppComponent]
 })
