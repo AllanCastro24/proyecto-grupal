@@ -44,4 +44,8 @@ export class UsersService {
     agregarUser(user:any){	    
         return this.http.post(this.api + "api/usuarios/add", user);
     }
+    //Modificar usuario
+    modificarUser(user:any,id:number){	    
+        return this.http.put(this.api + "api/usuarios/modificar/"+id, user);
+    }
 } 
