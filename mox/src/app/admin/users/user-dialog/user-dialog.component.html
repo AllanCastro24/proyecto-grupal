@@ -1,24 +1,7 @@
-<h1 mat-dialog-title><span *ngIf="user.ID_usuario">Editar</span> Usuario</h1>
+<h1 mat-dialog-title><span *ngIf="user.ID_empleado">Editar</span> Empleado</h1>
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">      
         <mat-tab-group class="vertical-tabs">
-            <!--mat-tab label="Basico">
-                <div fxLayout="column" class="form-field-outer">
-                    <mat-form-field class="w-100">
-                        <mat-placeholder><mat-icon>person</mat-icon> Usuario</mat-placeholder>
-                        <input matInput formControlName="Usuario" required>
-                        <mat-error *ngIf="form.controls.Usuario.errors?.required">Se requiere un nombre de usuario</mat-error>
-                        <mat-error *ngIf="form.controls.Usuario.hasError('minlength')">Nombre de usuario muy corto, se requieren minimo 6 caracteres</mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="w-100">
-                        <mat-placeholder><mat-icon>vpn_key</mat-icon> Contraseña</mat-placeholder>
-                        <input matInput formControlName="pass" required [type]="passwordHide ? 'password' : 'text'">
-                        <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                        <mat-error *ngIf="form.controls.pass.errors?.required">Se requiere contraseña</mat-error>
-                        <mat-error *ngIf="form.controls.pass.hasError('minlength')">La contraseña es demasiado corta, se requiere minimo 6 caracteres</mat-error>
-                    </mat-form-field>
-                </div>
-            </mat-tab-->
             <mat-tab label="Información personal">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
@@ -32,9 +15,6 @@
                         <mat-option [value]="">Hombre</mat-option>
                         <mat-option [value]="">Mujer</mat-option>
                     </mat-select>
-                    <!--mat-form-field class="w-100">
-                        <input matInput placeholder="Ruta imagen" formControlName="image">
-                    </mat-form-field-->
                 </div>
             </mat-tab>
             <mat-tab label="Trabajo">
@@ -67,8 +47,8 @@
             </mat-tab>
             <mat-tab label="Información" >
                 <div fxLayout="column" class="form-field-outer">
-                    <p *ngIf="user.ID_usuario"><span>Fecha de registro:</span> <i>{{user.Fecha_registro | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
-                    <p *ngIf="user.ID_usuario"><span>Ultimo ingreso:</span> <i>{{user.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
+                    <p *ngIf="user.ID_empleado"><span>Fecha de registro:</span> <i>{{user.Fecha_registro | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
+                    <p *ngIf="user.ID_empleado"><span>Ultimo ingreso:</span> <i>{{user.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
                 </div>
             </mat-tab>
         </mat-tab-group>
@@ -77,7 +57,7 @@
 <div mat-dialog-actions>
     <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
         <button mat-raised-button color="warn" (click)="close()">Cerrar</button>
-        <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!user.ID_usuario">Guardar</span><span *ngIf="user.ID_usuario">Actualizar</span></button>
+        <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!user.ID_empleado">Guardar</span><span *ngIf="user.ID_empleado">Actualizar</span></button>
         
     </div> 
 </div>

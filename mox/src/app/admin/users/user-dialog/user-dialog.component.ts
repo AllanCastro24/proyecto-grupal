@@ -15,23 +15,18 @@ export class UserDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public user: User,
               public fb: FormBuilder) {
     this.form = this.fb.group({
-      ID_usuario: null,
-      Usuario: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
-      pass: [null, Validators.compose([Validators.required, Validators.minLength(6)])],       
-      Nombre: null,
-      Apellidos: null,  
-      Genero: null,
-      image: null,
-      ID_tienda: null,
-      ID_tipo_pago: null,
-      ID_puesto: null,
-      Sueldo: null,
-      Correo: null,
-      Telefono: null,
-      Direccion: null,    
-      Activo: null,
-      Fecha_registro: null,
-      Ultimo_ingreso: null
+      ID_empleado: this.user.ID_empleado,
+      Nombre: this.user.Nombre,
+      Apellidos: this.user.Apellidos,  
+      Genero: this.user.Genero,
+      ID_tienda: this.user.ID_tienda,
+      ID_tipo_pago: this.user.ID_tipo_pago,
+      ID_puesto: this.user.ID_puesto,
+      Sueldo: this.user.Sueldo,
+      Telefono: this.user.Telefono,
+      Direccion: this.user.Direccion,    
+      Fecha_registro: this.user.Fecha_registro,
+      Ultimo_ingreso: this.user.Ultimo_ingreso,
     });
   }
 

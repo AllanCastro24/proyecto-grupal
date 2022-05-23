@@ -40,14 +40,10 @@
             </div>
             <mat-menu #menu="matMenu" xPosition="before" overlapTrigger="true">
                 <span (mouseleave)="menuTrigger.closeMenu()">
-                    <button mat-menu-item (click)="openUserDialog(user)">
+                    <button mat-menu-item (click)="openUserDialog(user);">
                         <mat-icon>mode_edit</mat-icon>
                         <span>Editar</span>
                     </button>
-                    <!--button mat-menu-item (click)="deleteUser(user);">
-                        <mat-icon>delete</mat-icon>
-                        <span>Eliminar</span>
-                    </button-->
                 </span>
             </mat-menu>
             <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
@@ -58,7 +54,7 @@
                         <mat-icon *ngIf="user.Activo == 'N'" color="warn">block</mat-icon>
                     </div>                                            
                     <div class="user-social">
-                        <mat-slide-toggle color="primary" (change)="ActivarDesactivar(user)" [checked]="validarActivo(user)"></mat-slide-toggle>
+                        <mat-slide-toggle color="primary" (change)="ActivarDesactivar(user)" [checked]="validarActivo(user)">Inactivo</mat-slide-toggle>
                     </div>
                 </div>
                 <div fxFlex="70" fxLayout="column" class="user-details transition-2">
@@ -104,10 +100,6 @@
                         <mat-icon>mode_edit</mat-icon>
                         <span>Editar</span>
                     </button>
-                    <!--button mat-menu-item (click)="deleteUser(user);">
-                        <mat-icon>delete</mat-icon>
-                        <span>Eliminar</span>
-                    </button-->
                 </span>
             </mat-menu>
             <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
@@ -118,7 +110,7 @@
                         <mat-icon *ngIf="user.Activo == 'N'" color="warn">block</mat-icon>   
                     </div>                                            
                     <div class="user-social">
-                        <mat-slide-toggle color="primary" (change)="ActivarDesactivar(user)" [checked]="validarActivo(user)"></mat-slide-toggle>
+                        <mat-slide-toggle color="primary" (change)="ActivarDesactivar(user)" [checked]="validarActivo(user)">Inactivo</mat-slide-toggle>
                     </div>
                 </div>
                 <div fxFlex="80" fxFlex.xs="70" fxLayout="row" fxLayout.xs="column" class="user-details transition-2">
@@ -185,7 +177,7 @@
                         <mat-icon *ngIf="usuario.Activo == 'N'" color="warn">block</mat-icon>
                     </div>                                            
                     <div class="user-social">
-                        <mat-slide-toggle color="primary" (change)="ActivarDesactivarUsuario(usuario)" [checked]="validarUsuarioActivo(usuario)"></mat-slide-toggle>
+                        <mat-slide-toggle color="primary" (change)="ActivarDesactivarUsuario(usuario)" [checked]="validarUsuarioActivo(usuario)">Inactivo</mat-slide-toggle>
                     </div>
                 </div>
                 <div fxFlex="70" fxLayout="column" class="user-details transition-2">
@@ -224,7 +216,7 @@
                         <mat-icon *ngIf="usuario.Activo == 'N'" color="warn">block</mat-icon>   
                     </div>                                            
                     <div class="user-social">
-                        <mat-slide-toggle color="primary" (change)="ActivarDesactivarUsuario(usuario)" [checked]="validarUsuarioActivo(usuario)"></mat-slide-toggle>
+                        <mat-slide-toggle color="primary" (change)="ActivarDesactivarUsuario(usuario)" [checked]="validarUsuarioActivo(usuario)">Inactivo</mat-slide-toggle>
                     </div>
                 </div>
                 <div fxFlex="80" fxFlex.xs="70" fxLayout="row" fxLayout.xs="column" class="user-details transition-2">

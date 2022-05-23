@@ -44,50 +44,26 @@ export class UsersComponent implements OnInit {
     public addUser(user:User){
         this.usersService.addUser(user).subscribe(user => this.getUsers());
     }
-    public updateUser(user:User){
-        this.usersService.updateUser(user).subscribe(user => this.getUsers());
+    public actualizarEmpleado(user:User){
+        this.usersService.modificarEmpleado(user).subscribe(user => this.getUsers());
     }
-    //public deleteUser(user:User){
-    //   this.usersService.deleteUser(user.ID_usuario).subscribe(user => this.getUsers());
-    //}
-
-
     public onPageChanged(event:any){
         this.page = event;
         this.getUsers();
         window.scrollTo(0,0);
-        // if(this.settings.fixedHeader){      
-        //     document.getElementById('main-content').scrollTop = 0;
-        // }
-        // else{
-        //     document.getElementsByClassName('mat-drawer-content')[0].scrollTop = 0;
-        // }
     }
 
     public openUserDialog(user:User | null){
         let dialogRef = this.dialog.open(UserDialogComponent, {
             data: user
         });
-
         dialogRef.afterClosed().subscribe(user => {
             if(user){
-                (user.ID_usuario) ? this.updateUser(user) : this.addUser(user);
+                (user.ID_empleado) ? this.actualizarEmpleado(user) : this.addUser(user);
             }
         });
     }
-
-    public openUsuarioDialog(usuario:usuario | null){
-        let dialogRef = this.dialog.open(UserDialogComponent, {
-            data: usuario
-        });
-
-        dialogRef.afterClosed().subscribe(usuario => {
-            if(usuario){
-                (usuario.ID_usuario) ? this.updateUser(usuario) : this.addUser(usuario);
-            }
-        });
-    }
-
+    //Validación de campos 
     public validarActivo(user:User){
         if(user.Activo == "S"){
             return false;
