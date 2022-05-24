@@ -74,7 +74,7 @@ export class AddComponent implements OnInit {
       "isVegetarian": false,
       "categoryId": [null, Validators.required ]   
     }); 
-    this.getCategories();
+    
     this.getUnidadespla();
     this.sub = this.activatedRoute.params.subscribe(params => {  
       if(params['id']){
@@ -94,6 +94,9 @@ export class AddComponent implements OnInit {
     });  */
     let today = new Date()
     console.log("Date = " + today.toLocaleString().split('.')[0]);
+    console.log(this.idtienda);
+    console.log(this.idsucursal);
+    this.getCategories();
   }
 
   ngOnDestroy() {
