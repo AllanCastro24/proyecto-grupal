@@ -26,7 +26,7 @@
 <h1>Empleados</h1>
 
 <div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">    
-    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="p-2"> 
+    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="p-2"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="user.Activo == 'S'" class="user-name">{{user.Nombre}} {{user.Apellidos}}</h3> 
@@ -82,7 +82,7 @@
 </div>
 
 <div *ngIf="viewType.value == 'list'" fxLayout="row wrap">
-    <div *ngFor="let user of users | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" class="p-2"> 
+    <div *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" class="p-2"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="user.Activo == 'S'" class="user-name">{{user.Nombre}} {{user.Apellidos}}</h3> 
@@ -159,7 +159,7 @@
 <h1>Usuarios</h1>
 
 <div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">    
-    <div *ngFor="let usuario of usuarios | UserSearchPipe : searchText | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="p-2"> 
+    <div *ngFor="let usuario of usuarios | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="p-2"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="usuario.Activo == 'S'" class="user-name">{{usuario.Usuario}}</h3> 
@@ -200,7 +200,7 @@
 </div>
 
 <div *ngIf="viewType.value == 'list'" fxLayout="row wrap">
-    <div *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" class="p-2"> 
+    <div *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" class="p-2"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="usuario.Activo == 'S'" class="user-name">{{usuario.Usuario}}</h3> 

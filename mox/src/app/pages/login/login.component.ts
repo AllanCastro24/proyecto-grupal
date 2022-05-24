@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router'; 
@@ -33,11 +33,19 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
       this.login(this.loginForm.value);
-      this.router.navigate(['/']);
+      
     }
   }
 
   public login(user:any){
-    this.usersService.login(user).subscribe();
+    this.usersService.login(user).subscribe(l =>{
+      console.log(l);
+      if(l){
+        this.router.navigate(['/']);
+      }else{
+        alert('Su contraseña es incorrecta');
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }
