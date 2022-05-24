@@ -23,7 +23,7 @@ export class Settings {
 export class AppSettings {
     public settings = new Settings(
         'Mox',    // theme name
-        'orange-dark',       // red, green, blue, pink, purple, grey, orange-dark, custom
+        'red',       // red, green, blue, pink, purple, grey, orange-dark, custom
         1,           // 1   
         true,        // true = sticky, false = not sticky
         'image',     // default, image, carousel
