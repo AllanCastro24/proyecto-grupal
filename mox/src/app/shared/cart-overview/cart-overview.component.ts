@@ -54,7 +54,7 @@ export class CartOverviewComponent implements OnInit {
     }
     else{
       menuItem.cartCount = menuItem.availibilityCount;
-      this.snackBar.open('You can not add more items than available. In stock ' + menuItem.availibilityCount + ' items and you already added ' + menuItem.cartCount + ' item to your cart', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
+      this.snackBar.open('No se pueden añadir más artículos de los disponibles. En stock tienes ' + menuItem.availibilityCount + ' artículos y ya agregaste ' + menuItem.cartCount + ' artículos a tu carrito, los quieres o no?', '×', { panelClass: 'error', verticalPosition: 'top', duration: 5000 });
     } 
   }
  

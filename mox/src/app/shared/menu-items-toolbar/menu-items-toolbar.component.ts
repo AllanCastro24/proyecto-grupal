@@ -15,7 +15,7 @@ export class MenuItemsToolbarComponent implements OnInit {
   public viewCol: number = 25;
   public counts = [8, 12, 16, 24, 36];
   public count:any;
-  public sortings = ['Sort by Default', 'Popular', 'Price (Low to High)', 'Price (High to Low)'];
+  public sortings = ['Default', 'Popular', 'Precio (Bajo a Alto)', 'Precio (Alto a Bajo)'];
   public sort:any;
 
   constructor() { }

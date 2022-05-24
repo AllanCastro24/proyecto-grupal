@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';  
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table'; 
+import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 
@@ -11,17 +12,24 @@ import { AppService } from 'src/app/app.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit { 
-  displayedColumns: string[] = ['id', 'image', 'categoryId', 'name', 'price', 'discount', 'availibilityCount', 'isVegetarian', 'actions'];
+  public idtienda:any;
+  public idsucursal:any;
+  public activo:any;
+  displayedColumns: string[] = ['id', 'image', 'categoryId', 'name', 'price', 'availibilityCount', 'actions'];
   dataSource!: MatTableDataSource<MenuItem>;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
 
-  constructor(public appService:AppService) { }
+  constructor(public appService:AppService,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
+    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
+    
     this.getCategories();
-    this.appService.getMenuItems().subscribe((menuItems:MenuItem[]) => {
+    this.appService.getMenuItemssuc(this.idtienda, this.idsucursal).subscribe((menuItems:MenuItem[]) => {
       this.initDataSource(menuItems); 
+      console.log(menuItems);
     })
   }
 
@@ -29,6 +37,7 @@ export class ListComponent implements OnInit {
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;  
+    console.log(data);
   }  
 
   public getCategories(){
@@ -49,10 +58,33 @@ export class ListComponent implements OnInit {
 				if(dialogResult){ 
           this.dataSource.data.splice(index,1);
           this.initDataSource(this.dataSource.data); 
+          console.log(this.dataSource.data.splice(index,1));
 				}
 			});  
     } 
+    console.log(index);
   }
+
+  public state(event: any, id: any): void {
+
+    this.activo = false;
+ 
+     if (event.checked) {
+       this.activo = true;
+     } else {
+       this.activo = false;
+     }
+ 
+     let proveedor = {
+       estatus: this.activo
+     }
+     
+    this.appService.bajaplato3(this.idtienda, this.idsucursal,id, proveedor).subscribe((menuItems) => {
+    });
+    //this.ngOnInit();
+   //console.log(this.activo + id);
+ 
+   }
   
 
 }

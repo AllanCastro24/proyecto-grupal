@@ -1,0 +1,93 @@
+<div class="p-2">
+    <mat-card>  
+        <mat-card-content>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" fxLayout="row wrap">
+                <div fxFlex="40" class="px-2" *ngIf="showImage">  
+                    <app-image-upload [base64]="form.controls.image.value"
+                                    [fileSize]="2048"    
+                                    [acceptTypes]="'image/png, image/jpeg, image/jpg'"
+                                    (onFileChange)="fileChange($event)">
+                    </app-image-upload>  
+                </div>
+                <div fxFlex="60" class="px-2">
+                    <div fxLayout="row wrap">
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput formControlName="nombre" required>
+                                <mat-error *ngIf="form.controls.nombre.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.nombre.hasError('minlength')">Nombre isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field>
+                        </div> 
+
+
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Categoria</mat-label>
+                                <mat-select formControlName="id_categoria_insumos" required>
+                                    <mat-option *ngFor="let uni of categories" [value]="uni.id_categoria_insumos">
+                                        {{uni.categoria}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.id_categoria_insumos.errors?.required">Category is required</mat-error>
+                            </mat-form-field>
+                        </div>  
+                        
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad de Medida</mat-label>
+                                <mat-select formControlName="id_unidad_de_medida" required>
+                                    <mat-option *ngFor="let uni of unidadMedida" [value]="uni.id_unidad_de_medida">
+                                        {{uni.unidad}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.id_unidad_de_medida.errors?.required">Category is required</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Tamaño</mat-label>
+                                <input matInput formControlName="tamano" required>
+                                <mat-error *ngIf="form.controls.tamano.errors?.required">Name is required</mat-error>
+                                <!-- <mat-error *ngIf="form.controls.tamano.hasError('minlength')">Tamaño isn't long enough, minimum of 4 characters</mat-error> -->
+                            </mat-form-field>
+                        </div>  
+
+                        <div fxFlex="100" fxFlex.gt-sm="28" class="p-3">
+                            <mat-slide-toggle matInput formControlName="producto"> Producto </mat-slide-toggle>
+                        </div> 
+                    
+                        <ng-container *ngIf="id">
+                            <div fxFlex="100" fxFlex.gt-sm="25" class="p-3">
+                                <mat-slide-toggle matInput formControlName="estatus"> Estatus </mat-slide-toggle>
+                            </div> 
+                        </ng-container>
+                        
+                         
+                        <div fxFlex="100" fxFlex.gt-sm="45" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Codigo</mat-label>
+                                <input matInput formControlName="codigo" required>
+                                <mat-error *ngIf="form.controls.codigo.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.codigo.hasError('minlength')">Codigo isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field>
+                        </div>
+                       
+                        <div fxFlex="100" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Presentacion</mat-label> 
+                                <textarea matInput formControlName="presentacion" rows="7"></textarea> 
+                                <mat-error *ngIf="form.controls.presentacion.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.presentacion.hasError('minlength')">Codigo isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field> 
+                        </div>   
+                        <div fxFlex="100" class="mt-2 text-center w-100">
+                            <button mat-raised-button color="primary" type="submit" class="uppercase">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content> 
+    </mat-card>
+</div>

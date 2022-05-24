@@ -1,31 +1,46 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator'; 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table'; 
+import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'description', 'edit', 'remove'];
+  displayedColumns: string[] = ['id', 'name', 'description', 'edit','remove'];
   dataSource!: MatTableDataSource<Category>;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
 
-  constructor(public appService:AppService, public snackBar: MatSnackBar) { }
+  public activo:any;
+  public idtienda:any;
+  public idsucursal:any;
+  
+  constructor(public appService:AppService, public snackBar: MatSnackBar,private activatedRoute: ActivatedRoute,private cookieService: CookieService) { }
 
   ngOnInit(): void {
-    this.appService.getCategories().subscribe((categories:Category[]) => {
+    this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
+    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
+    this.appService.getCategoriesab(this.idtienda,this.idsucursal).subscribe((categories:Category[]) => {
       this.initDataSource(categories); 
+      console.log(categories);
+      console.log(this.idtienda);
+      console.log(this.idsucursal);
+      this.cookieService.delete('idtienda');
+      this.cookieService.delete('idsucursal');
+      this.cookieService.set('idtienda', this.idtienda);
+      this.cookieService.set('idsucursal', this.idsucursal);
+       
     })
   }
-
+  
   public initDataSource(data:any){
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator;
@@ -46,7 +61,7 @@ export class CategoriesComponent implements OnInit {
     } 
   }  
 
-  public openCategoryDialog(category:Category | null){
+  public openCategoryDialog(category:Category | null,){
     const dialogRef = this.appService.openDialog(CategoryDialogComponent, category, 'theme-dialog');
     dialogRef.afterClosed().subscribe(cat => {  
       if(cat){
@@ -68,5 +83,27 @@ export class CategoriesComponent implements OnInit {
       }
     });  
   }
+
+  public state(event: any, id: any): void {
+
+    this.activo = false;
+ 
+     if (event.checked) {
+       this.activo = true;
+     } else {
+       this.activo = false;
+     }
+ 
+     let proveedor = {
+       estatus: this.activo
+     }
+     
+     this.appService.bajaoaltacatmenu(id, this.idtienda,this.idsucursal, proveedor).subscribe(() => {
+    });
+    //this.ngOnInit();
+   console.log(this.activo + id);
+ 
+   }
+  
 
 }

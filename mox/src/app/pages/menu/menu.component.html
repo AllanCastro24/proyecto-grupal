@@ -1,9 +1,9 @@
-<app-header-image [backgroundImage]="'assets/images/others/menu.jpg'" 
+<!-- <app-header-image [backgroundImage]="'assets/images/others/menu.jpg'" 
                   [bgImageAnimate]="true" 
                   [contentOffsetToTop]="false" 
                   [title]="'Menu'"
                   [desc]="'“If more of us valued food and cheer and song above hoarded gold, it would be a merrier world.” – J.R.R. Tolkien'">
-</app-header-image> 
+</app-header-image>  -->
 
 <div class="px-3">  
     <div class="theme-container"> 
@@ -15,7 +15,7 @@
                     </button>
 
                     <div class="p-3">
-                        <button mat-raised-button color="primary" class="uppercase w-100" (click)="selectCategory(0)">All categories</button>
+                        <button mat-raised-button color="primary" class="uppercase w-100" (click)="selectCategory(0)">TODAS LAS CATEGORIAS</button>
                     </div>
                     <div *ngFor="let category of categories" class="p-3">
                         <button mat-raised-button color="primary" class="uppercase w-100" (click)="selectCategory(category.id)">{{category.name}}</button>
@@ -29,7 +29,7 @@
                     <div fxFlex="100" fxLayoutAlign="center center" fxShow="false" fxShow.gt-sm class="px-2 mb-3">
                         <mat-button-toggle-group #group="matButtonToggleGroup" appearance="legacy" [value]="selectedCategoryId" class="categories-toogle-group mt-2" (change)="onChangeCategory($event)">
                             <mat-button-toggle [value]="0" class="letter">
-                                All Categories
+                                TODAS LAS CATEGORIAS
                             </mat-button-toggle>
                             <mat-button-toggle *ngFor="let category of categories" [value]="category.id" class="letter">
                                 {{category.name}}
@@ -73,5 +73,5 @@
 </div>
 
 
-<app-our-awards></app-our-awards> 
-<app-get-in-touch></app-get-in-touch>
+<!-- <app-our-awards></app-our-awards> 
+<app-get-in-touch></app-get-in-touch> -->

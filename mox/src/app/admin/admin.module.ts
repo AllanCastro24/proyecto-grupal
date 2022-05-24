@@ -15,6 +15,7 @@ export const routes = [
     component: AdminComponent, children: [
       { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'menu-items', loadChildren: () => import('./menu-items/menu-items.module').then(m => m.MenuItemsModule) },
+      { path: 'products-items', loadChildren: () => import('./products-items/products-items.module').then(m => m.ProductsItemsModule) },
       { path: 'sales', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule) },
       { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), data: { breadcrumb: 'Users' } },
       { path: 'reservations', loadChildren: () => import('./reservations/reservations.module').then(m => m.ReservationsModule), data: { breadcrumb: 'Reservations' } },
@@ -30,6 +31,7 @@ export const routes = [
       { path: 'types-fixed-costs', loadChildren: () => import('./types-fixed-costs/types-fixed-costs.module').then(m => m.TypesFixedCostsModule) },
       { path: 'scheduled-fixed-expenses', loadChildren: () => import('./scheduled-fixed-expenses/scheduled-fixed-expenses.module').then(m => m.ScheduledFixedExpensesModule) },
       { path: 'reports', loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule) },
+      { path: 'tiendas-sucursales', loadChildren: () => import('./tiendas-sucursales/tiendas-sucursales.module').then(m => m.TiendasSucursalesModule) },
     ]
   }
 ];

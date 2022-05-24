@@ -1,4 +1,4 @@
-<div class="px-3">     
+<!-- <div class="px-3">     
     <div class="theme-container"> 
         <mat-card class="menu-single my-5">
             <div *ngIf="menuItem" fxLayout="row wrap" class="flex-wrapper">
@@ -6,7 +6,9 @@
                     <mat-chip-list *ngIf="menuItem.discount">
                         <mat-chip color="warn" selected="true">{{menuItem.discount}}% OFF</mat-chip>
                     </mat-chip-list>
-                    <img [src]="menuItem.image.medium" class="w-100">
+                    <img [src]="menuItem.image" class="w-100">
+                    
+                    
                 </div>
                 <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
                     <h1 class="secondary-font">{{menuItem.name}}</h1> 
@@ -15,7 +17,7 @@
                         <span class="mx-2 text-muted">({{menuItem.ratingsCount}} Customer Reviews)</span>
                     </div> 
                     <h1 *ngIf="!menuItem.discount" class="primary-color py-3"> 
-                        {{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}  
+                        {{menuItem.price | currency : 'MXN' : 'symbol' : '1.2-2'}}  
                     </h1> 
                     <h1 *ngIf="menuItem.discount" class="py-3">  
                         <span class="text-muted old-price">{{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}</span> 
@@ -48,7 +50,7 @@
                                 </span> 
                                 <span class="px-1">Weight:</span>
                             </span>    
-                            <span class="fw-500">{{ menuItem.weight }} g</span>
+                            <span class="fw-500">{{ menuItem.weight }} gras</span>
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center" class="mb-1">
                             <span fxLayout="row" fxLayoutAlign="start center"> 
@@ -134,16 +136,94 @@
         </mat-card>
     </div>
 </div>
+ -->
+<!-- <app-header-image [backgroundImage]="'assets/images/others/menu.jpg'" 
+                  [bgImageAnimate]="true" 
+                  [contentOffsetToTop]="false" 
+                  [title]="'Menu'"
+                  [desc]="'“If more of us valued food and cheer and song above hoarded gold, it would be a merrier world.” – J.R.R. Tolkien'">
+</app-header-image>  -->
+
+<div class="px-3">  
+    <div class="theme-container"> 
+        <mat-sidenav-container class="all-menu-items mt-3">
+            <mat-sidenav #sidenav [autoFocus]="false" [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over'" class="search-sidenav">         
+                <mat-card [perfectScrollbar]="psConfig"> 
+                    <button fxHide="false" fxHide.gt-xs mat-icon-button (click)="sidenav.toggle()">
+                        <mat-icon color="accent">close</mat-icon>
+                    </button>
+
+                    <div class="p-3">
+                        <button mat-raised-button color="primary" class="uppercase w-100" (click)="selectCategory(0)">TODAS LAS CATEGORIAS</button>
+                    </div>
+                    <div *ngFor="let category of categories" class="p-3">
+                        <button mat-raised-button color="primary" class="uppercase w-100" (click)="selectCategory(category.id)">{{category.name}}</button>
+                    </div> 
+
+                </mat-card> 
+            </mat-sidenav>
+
+            <mat-sidenav-content [class.distance]="sidenavOpen">
+                <div fxLayout="row wrap" class="all-menu-items-wrapper mt-0">
+                    <div fxFlex="100" fxLayoutAlign="center center" fxShow="false" fxShow.gt-sm class="px-2 mb-3">
+                        <mat-button-toggle-group #group="matButtonToggleGroup" appearance="legacy" [value]="selectedCategoryId" class="categories-toogle-group mt-2" (change)="onChangeCategory($event)">
+                            <mat-button-toggle [value]="0" class="letter">
+                                TODAS LAS CATEGORIAS
+                            </mat-button-toggle>
+                            <mat-button-toggle *ngFor="let category of categories" [value]="category.id" class="letter">
+                                {{category.name}}
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div fxFlex="100" class="px-2 pb-2 pt-0">   
+                        <app-menu-items-toolbar [showSidenavToggle]="showSidenavToggle"
+                                                (onSidenavToggle)="sidenav.toggle()"
+                                                (onChangeCount)="changeCount($event)"
+                                                (onChangeSorting)="changeSorting($event)"
+                                                (onChangeViewType)="changeViewType($event)"> 
+                        </app-menu-items-toolbar> 
+                    </div>
+
+                    <div *ngFor="let menuItem of menuItems" [fxFlex]="(viewType=='grid') ? viewCol : 100"  class="item">  
+                        <app-menu-item [menuItem]="menuItem" [viewType]="viewType" [viewColChanged]="viewCol"></app-menu-item>  
+                    </div>
+        
+                    <div *ngIf="menuItems && menuItems.length == 0" fxFlex="100" fxLayoutAlign="center center" [style.min-height.px]="200">                
+                        <mat-spinner *ngIf="!message"></mat-spinner>
+                        <mat-chip-list *ngIf="message">
+                            <mat-chip selected disableRipple="true" color="warn" class="uppercase ws-nowrap">
+                                {{message}}
+                            </mat-chip> 
+                        </mat-chip-list> 
+                    </div>            
+        
+                    <div *ngIf="menuItems && menuItems.length > 0" fxFlex="100" fxLayoutAlign="center center" class="p-2">
+                        <mat-paginator [length]="pagination?.total"
+                                      [pageSize]="pagination?.perPage"
+                                      (page)="onPageChange($event)"
+                                      class="w-100 mat-elevation-z1">
+                        </mat-paginator>
+                    </div>        
+
+                </div>
+            </mat-sidenav-content>
+        </mat-sidenav-container> 
+    </div>
+</div>
 
 
-<div class="section mt-3">
+<!-- <app-our-awards></app-our-awards> 
+<app-get-in-touch></app-get-in-touch> -->
+<!-- <div class="section mt-3">
     <div class="px-3">
         <div class="theme-container">
             <h1 class="section-title">Related Products</h1>
             <p class="section-desc text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> 
-            <app-menu-items-carousel [menuItems]="relatedMenuItems"></app-menu-items-carousel>
+            <app-menu-items-carousel  [menuItems]="relatedMenuItems"></app-menu-items-carousel>
         </div>
     </div>   
 </div> 
+
+
  
-<app-get-in-touch></app-get-in-touch>
+<app-get-in-touch></app-get-in-touch> -->

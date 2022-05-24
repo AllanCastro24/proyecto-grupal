@@ -1,7 +1,7 @@
 <mat-list *ngIf="appService.Data.cartList.length" class="cart-items">
     <mat-list-item>
         <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 -3">
-            <a routerLink="/cart" (click)="hideSheet(true)" mat-raised-button color="primary" class="transform-none">View Cart</a>  
+            <a routerLink="/cart" (click)="hideSheet(true)" mat-raised-button color="primary" class="transform-none">Ver carrito</a>  
             <div fxLayout="row" fxLayoutAlign="end center">
                 <button mat-icon-button (click)="hideSheet(false)" matTooltip="Hide">
                     <mat-icon color="primary" class="mat-icon-lg">arrow_drop_down_circle</mat-icon> 
@@ -16,13 +16,13 @@
         <div class="w-100 divider"></div> 
     </mat-list-item>
     <mat-list-item *ngFor="let menuItem of appService.Data.cartList">
-        <img matListAvatar [src]="menuItem.image.medium" alt="image" fxShow="false" fxShow.gt-xs="true">
-        <h3 mat-line class="secondary-font fw-500 title"><a [routerLink]="['/menu', menuItem.id]" (click)="hideSheet(true)">{{menuItem.name}}</a></h3>  
+        <img matListAvatar [src]="'http://localhost/Slim/public/img/'+menuItem.image" alt="image" fxShow="false" fxShow.gt-xs="true">
+        <h3 mat-line class="secondary-font fw-500 title">{{menuItem.name}}</h3>  
         <span *ngIf="!menuItem.discount" class="primary-color fw-500 mx-3"> 
             {{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}  
         </span> 
         <span *ngIf="menuItem.discount" class="fw-500 mx-3">  
-            <span class="text-muted old-price">{{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}</span> 
+            <!-- <span class="text-muted old-price">{{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}</span>  -->
             <span class="primary-color mx-2">{{ (menuItem.price - (menuItem.price * (menuItem.discount / 100))) | currency : 'USD' : 'symbol' : '1.2-2'}}</span>
         </span> 
         <div class="px-2" fxShow="false" fxShow.gt-xs="true">
@@ -34,7 +34,7 @@
     </mat-list-item>
     <mat-list-item>
         <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 pt-3 divider">
-            <a routerLink="/checkout" (click)="hideSheet(true)" mat-raised-button color="primary" class="transform-none">Checkout</a>  
+            <a routerLink="/checkout" (click)="hideSheet(true)" mat-raised-button color="primary" class="transform-none">Comprar</a>  
             <div fxLayout="row wrap" fxLayoutAlign="end center">
                 <h2 class="fw-500 px-3">Total:</h2>
                 <h2 class="primary-color price"> 
@@ -45,6 +45,6 @@
     </mat-list-item>
 </mat-list>
 <div *ngIf="!menuItems.length" class="py-3 text-center">
-    <p>You have no items in your shopping cart.</p> 
-    <a routerLink="/cart" (click)="hideSheet(true)" mat-raised-button color="primary" class="transform-none">View Cart</a> 
+    <p>No tiene artículos en su carrito de compras.</p> 
+    <a routerLink="/cart" (click)="hideSheet(true)" mat-raised-button color="primary" class="transform-none">Ver carrito</a> 
 </div>

@@ -4,37 +4,37 @@
         
             <!-- OrderId Column -->
             <ng-container matColumnDef="orderId">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> OrderId </th>
-                <td mat-cell *matCellDef="let transaction">#{{transaction.orderId}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                <td mat-cell *matCellDef="let transaction">#{{transaction.idcli}} </td>
             </ng-container>  
 
             <!-- TransactionId Column -->
             <ng-container matColumnDef="transactionId">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> TransactionId </th>
-                <td mat-cell *matCellDef="let transaction">#{{transaction.transactionId}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <td mat-cell *matCellDef="let transaction">#{{transaction.name}} </td>
             </ng-container> 
     
             <!-- Date Column -->
             <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-                <td mat-cell *matCellDef="let transaction">{{transaction.date}}</td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                <td mat-cell *matCellDef="let transaction">{{transaction.estatus}}</td>
             </ng-container>  
             
             <!-- Payment Method Column -->
             <ng-container matColumnDef="paymentMethod">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Payment Method </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Método de pago </th>
                 <td mat-cell *matCellDef="let transaction">{{transaction.paymentMethod}}</td>
             </ng-container>   
 
             <!-- Status Column -->
             <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                <td mat-cell *matCellDef="let transaction">{{transaction.status}}</td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> precio </th>
+                <td mat-cell *matCellDef="let transaction">${{transaction.price  }} C/U {{transaction.price * transaction.cartCount }} por {{transaction.cartCount}} artículos </td>
             </ng-container> 
 
             <!-- Amount -->
             <ng-container matColumnDef="amount">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Monto </th>
                 <td mat-cell *matCellDef="let transaction">{{transaction.amount}}</td>
             </ng-container>  
     
@@ -42,7 +42,7 @@
             <ng-container matColumnDef="view">
                 <th mat-header-cell *matHeaderCellDef> View </th>
                 <td mat-cell *matCellDef="let transaction"> 
-                    <button mat-icon-button color="primary" (click)="view(transaction)" matTooltip="View">
+                    <button mat-icon-button color="primary" (click)="view(transaction, transaction.idcli)" matTooltip="View">
                         <mat-icon>visibility</mat-icon>
                     </button>  
                 </td>
@@ -51,7 +51,8 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let transaction; columns: displayedColumns;"></tr>
         </table> 
-        <p *ngIf="dataSource && dataSource.data.length === 0" class="py-5 mb-0 text-center">No data available</p> 
+        <p *ngIf="dataSource && dataSource.data.length === 0" class="py-5 mb-0 text-center">Datos no disponibles</p> 
     </div>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
 </mat-card>
+

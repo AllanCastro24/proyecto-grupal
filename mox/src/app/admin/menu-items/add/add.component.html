@@ -3,69 +3,369 @@
         <mat-card-content>
             <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" fxLayout="row wrap">
                 <div fxFlex="40" class="px-2" *ngIf="showImage">  
-                    <app-image-upload [base64]="form.controls.image.value"
-                                    [fileSize]="400"    
+                    <app-image-upload [base64]="'http://localhost/Slim/public/img/'+form.controls.image.value"
+                                    [fileSize]="50000"    
                                     [acceptTypes]="'image/png, image/jpeg, image/jpg'"
                                     (onFileChange)="fileChange($event)">
                     </app-image-upload>  
                 </div>
                 <div fxFlex="60" class="px-2">
                     <div fxLayout="row wrap">
+                        <!-- <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>id</mat-label>
+                                <input matInput formControlName="id" required>
+                                <mat-error *ngIf="form.controls.id.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.id.hasError('minlength')">Name isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field>
+                        </div>  -->
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Name</mat-label>
+                                <mat-label>Nombre</mat-label>
                                 <input matInput formControlName="name" required>
-                                <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>
-                                <mat-error *ngIf="form.controls.name.hasError('minlength')">Name isn't long enough, minimum of 4 characters</mat-error>
+                                <mat-error *ngIf="form.controls.name.errors?.required">Nombre es requerido</mat-error>
+                                <mat-error *ngIf="form.controls.name.hasError('minlength')">El nombre no es lo suficientemente largo, mínimo 4 caracteres</mat-error>
                             </mat-form-field>
                         </div> 
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Category</mat-label>
+                                <mat-label>Categoria</mat-label>
                                 <mat-select formControlName="categoryId" required>
                                     <mat-option *ngFor="let cat of appService.Data.categories" [value]="cat.id">
                                         <span>{{cat.name}}</span>
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="form.controls.categoryId.errors?.required">Category is required</mat-error>
+                                <mat-error *ngIf="form.controls.categoryId.errors?.required">Categoria es requerida</mat-error>
                             </mat-form-field>
                         </div>  
                         <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Price</mat-label>
-                                <input matInput formControlName="price" required>
-                                <mat-error *ngIf="form.controls.price.errors?.required">Price is required</mat-error>
+                                <mat-label>Precio</mat-label>
+                                <input matInput formControlName="price" required type="number">
+                                <mat-error *ngIf="form.controls.price.errors?.required">Precio es requerida</mat-error>
                             </mat-form-field>
                         </div> 
-                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                       <!--  <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
                                 <mat-label>Discount</mat-label>
                                 <input matInput formControlName="discount" type="number"> 
                             </mat-form-field>
-                        </div> 
+                        </div>  -->
                         <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Availibility Count</mat-label>
+                                <mat-label>Cantidad Disponible</mat-label>
                                 <input matInput formControlName="availibilityCount" type="number"> 
                             </mat-form-field>
                         </div>  
-                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                        <div fxFlex="100" fxFlex.gt-sm="100" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Weight</mat-label>
+                                <mat-label>Peso</mat-label>
                                 <input matInput formControlName="weight" type="number"> 
                             </mat-form-field>
                         </div> 
-                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="p-3">
-                            <mat-checkbox matCheckbox formControlName="isVegetarian" color="primary">Is Vegetarian</mat-checkbox>
+                        
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 1</mat-label>
+                                <input matInput formControlName="ingrediente1" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight1" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso1" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso1.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
                         </div>  
+
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 2</mat-label>
+                                <input matInput formControlName="ingrediente2" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight2" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso2" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso2.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div>  
+
+
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 3</mat-label>
+                                <input matInput formControlName="ingrediente3" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight3" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso3" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso3.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div>  
+
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 4</mat-label>
+                                <input matInput formControlName="ingrediente4" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight4" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso4" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso4.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div>  
+                        
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 5</mat-label>
+                                <input matInput formControlName="ingrediente5" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight5" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso5" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso5.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div> 
+                        
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 6</mat-label>
+                                <input matInput formControlName="ingrediente6" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight6" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso6" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso6.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div> 
+                        
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 7</mat-label>
+                                <input matInput formControlName="ingrediente7" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight7" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso7" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso7.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div>  
+
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 8</mat-label>
+                                <input matInput formControlName="ingrediente8" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight8" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso8" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso8.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div>  
+
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 9</mat-label>
+                                <input matInput formControlName="ingrediente9" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight9" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso9" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso9.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 10</mat-label>
+                                <input matInput formControlName="ingrediente10" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight10" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso10" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso10.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div>  
+
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 11</mat-label>
+                                <input matInput formControlName="ingrediente11" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight11" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso11" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso11.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div>  
+
+                        <div fxFlex="100" fxFlex.gt-sm="45.3" class="px-3" >
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Ingrediente 12</mat-label>
+                                <input matInput formControlName="ingrediente12" type="text"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="30.3" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight12" type="number"> 
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="20" class="px-3">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Unidad</mat-label>
+                                <mat-select formControlName="peso12" required>
+                                    <mat-option *ngFor="let uni of appService.Data.unidades" [value]="uni.name">
+                                        <span>{{uni.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.peso12.errors?.required">Peso is required</mat-error>
+                            </mat-form-field>
+                        </div>  
+
+                        <!-- <div fxFlex="100" fxFlex.gt-sm="33.3" class="p-3">
+                            <mat-checkbox matCheckbox formControlName="isVegetarian" color="primary">Is Vegetarian</mat-checkbox>
+                        </div>   -->
                         <div fxFlex="100" class="px-3">
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Description</mat-label> 
+                                <mat-label>Descripcion</mat-label> 
                                 <textarea matInput formControlName="description" rows="7"></textarea> 
                             </mat-form-field> 
                         </div>   
                         <div fxFlex="100" class="mt-2 text-center w-100">
-                            <button mat-raised-button color="primary" type="submit" class="uppercase">Submit</button>
+                            <button mat-raised-button color="primary" type="submit" class="uppercase">Agregar</button>
+                            <button mat-raised-button color="primary" type="button" class="uppercase" (click)="updatedatos()">Modificar</button>
+                            <!-- <button mat-raised-button color="primary" type="button" class="uppercase" (click)="bajaplato()">Eliminar</button> -->
                         </div>
                     </div>
                 </div>

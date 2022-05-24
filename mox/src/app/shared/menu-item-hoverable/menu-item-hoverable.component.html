@@ -1,8 +1,8 @@
 <div class="hoverable-image">
     <h1 *ngIf="!onlyImage" class="title"><a [routerLink]="['/menu', menuItem.id]">{{menuItem.name}}</a></h1>   
-    <img *ngIf="!onlyImage" [src]="menuItem.image.medium" [alt]="menuItem.name"> 
+    <img *ngIf="!onlyImage" [src]="menuItem.image" [alt]="menuItem.name"> 
     <a *ngIf="onlyImage" [routerLink]="['/menu', menuItem.id]">
-        <img [src]="menuItem.image.medium" [alt]="menuItem.name"> 
+        <img [src]="menuItem.image" [alt]="menuItem.name"> 
     </a>
     <div *ngIf="!onlyImage" fxLayout="row" fxLayoutAlign="space-between center" class="bottom-section">  
         <h2 *ngIf="!menuItem.discount"> 
