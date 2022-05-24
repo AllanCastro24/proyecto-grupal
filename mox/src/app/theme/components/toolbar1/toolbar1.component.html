@@ -22,15 +22,15 @@
         <app-horizontal-menu [menuParentId]="0"></app-horizontal-menu>
     </div> 
     <div fxLayout="row" fxLayoutAlign="start center">
-      <button (click)="reservation()" mat-icon-button [matTooltip]="'RESERVATION' | translate" fxShow="false" fxShow.gt-xs="true">
+      <!-- <button (click)="reservation()" mat-icon-button [matTooltip]="'RESERVATION' | translate" fxShow="false" fxShow.gt-xs="true">
         <mat-icon>event</mat-icon>
-      </button> 
-      <a routerLink="/account/favorites" mat-icon-button matTooltip="Favorites" class="mx-2"  fxShow="false" fxShow.gt-xs="true">
+      </button>  -->
+     <!--  <a routerLink="/account/favorites" mat-icon-button matTooltip="Favorites" class="mx-2"  fxShow="false" fxShow.gt-xs="true">
           <mat-icon [matBadge]="appService.Data.favorites.length" 
                     [matBadgeHidden]="appService.Data.favorites.length == 0" 
                     matBadgeSize="small" 
                     matBadgeColor="warn">favorite_border</mat-icon>
-      </a> 
+      </a> --> 
       <button (click)="openCart()" mat-icon-button matTooltip="Cart list">
         <mat-icon [matBadge]="appService.Data.totalCartCount" 
                   [matBadgeHidden]="appService.Data.totalCartCount == 0" 

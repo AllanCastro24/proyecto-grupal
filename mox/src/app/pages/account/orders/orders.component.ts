@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { Order } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { OrderDetailsDialogComponent } from 'src/app/shared/order-details-dialog/order-details-dialog.component';
@@ -12,14 +13,18 @@ import { OrderDetailsDialogComponent } from 'src/app/shared/order-details-dialog
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
+  public idtienda:any;
+  public idsucursal:any;
   displayedColumns: string[] = ['id', 'date', 'status', 'total', 'actions'];
   dataSource!: MatTableDataSource<Order>;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort ) sort!: MatSort;
-  constructor(public appService:AppService) { }
+  constructor(public appService:AppService,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.appService.getOrders().subscribe((res:Order[]) => { 
+    this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
+    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
+    this.appService.getOrderss(this.idtienda,this.idsucursal).subscribe((res:Order[]) => { 
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

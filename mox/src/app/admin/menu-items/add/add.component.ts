@@ -14,6 +14,8 @@ export class AddComponent implements OnInit {
   public form!: FormGroup;
   private sub: any;
   public id:any;
+  public idtienda:any;
+  public idsucursal:any;
   public showImage:boolean = false;
 
   constructor(public appService:AppService, 
@@ -23,7 +25,9 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {  
     this.form = this.formBuilder.group({ 
-      "id": 0,
+      "id": null,
+      "idtienda": null,
+      "idsuc": null,
       "name": [null, Validators.compose([Validators.required, Validators.minLength(4)])],
       "description": null,
       "price": [null, Validators.required ], 
@@ -31,19 +35,65 @@ export class AddComponent implements OnInit {
       "discount": null, 
       "availibilityCount": null, 
       "weight": null,
+      "ingrediente1": null,
+      "weight1": null,
+      "peso1": null,
+      "ingrediente2": null,
+      "weight2": null,
+      "peso2": null,
+      "ingrediente3": null,
+      "weight3": null,
+      "peso3": null,
+      "ingrediente4": null,
+      "weight4": null,
+      "peso4": null,
+      "ingrediente5": null,
+      "weight5": null,
+      "peso5": null,
+      "ingrediente6": null,
+      "weight6": null,
+      "peso6": null,
+      "ingrediente7": null,
+      "weight7": null,
+      "peso7": null,
+      "ingrediente8": null,
+      "weight8": null,
+      "peso8": null,
+      "ingrediente9": null,
+      "weight9": null,
+      "peso9": null,
+      "ingrediente10": null,
+      "weight10": null,
+      "peso10": null,
+      "ingrediente11": null,
+      "weight11": null,
+      "peso11": null,
+      "ingrediente12": null,
+      "weight12": null,
+      "peso12": null,
       "isVegetarian": false,
       "categoryId": [null, Validators.required ]   
     }); 
     this.getCategories();
+    this.getUnidadespla();
     this.sub = this.activatedRoute.params.subscribe(params => {  
       if(params['id']){
         this.id = params['id'];
+        
         this.getMenuItemById(); 
       } 
       else{
         this.showImage = true;
       }
     }); 
+    this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
+    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
+    /* this.activatedRoute.params.subscribe(params => {  
+      this.onSubmit(params['idtienda'],params['idsucursal']); 
+     // this.id = this.getMenuItems(params['id']); 
+    });  */
+    let today = new Date()
+    console.log("Date = " + today.toLocaleString().split('.')[0]);
   }
 
   ngOnDestroy() {
@@ -52,36 +102,181 @@ export class AddComponent implements OnInit {
 
   public getCategories(){
     if(!this.appService.Data.categories.length){
-      this.appService.getCategories().subscribe(categories=>{ 
+      this.appService.getCategoriestiendasuc(this.idtienda,this.idsucursal).subscribe(categories=>{ 
         this.appService.Data.categories = categories;
+      });
+    } 
+  } 
+
+  public getUnidadespla(){
+    if(!this.appService.Data.unidades.length){
+      this.appService.getUnidadespla().subscribe(unidades=>{ 
+        this.appService.Data.unidades = unidades;
       });
     } 
   } 
  
   public getMenuItemById(){
-    this.appService.getMenuItemById(this.id).subscribe((menuItem:MenuItem)=>{ 
-      this.form.patchValue(menuItem); 
-      if (isPlatformBrowser(this.platformId)) {
-        this.appService.convertImgToBase64(menuItem.image.medium, (dataUrl:string) => { 
+    this.appService.getMenuItemById(this.id).subscribe((menuItem:any)=>{ 
+      this.form.patchValue({id: menuItem[0]['id']});
+      this.form.patchValue({name: menuItem[0]['name']});
+      
+      this.form.patchValue({price: menuItem[0]['price']});
+      this.form.patchValue({description: menuItem[0]['description']}); 
+      this.form.patchValue({availibilityCount: menuItem[0]['availibilityCount']}); 
+      this.form.patchValue({weight: menuItem[0]['weight']});
+      this.form.patchValue({categoryId: menuItem[0]['categoryId']});
+      this.form.patchValue({image: menuItem[0]['image']});
+      
+      this.form.patchValue({ingrediente1: menuItem[0]['ingrediente1']});  
+      this.form.patchValue({weight1: menuItem[0]['weight1']});  
+      this.form.patchValue({peso1: menuItem[0]['peso1']});  
+
+      this.form.patchValue({ingrediente2: menuItem[0]['ingrediente2']});  
+      this.form.patchValue({weight2: menuItem[0]['weight2']});  
+      this.form.patchValue({peso2: menuItem[0]['peso2']});  
+
+      this.form.patchValue({ingrediente3: menuItem[0]['ingrediente3']});  
+      this.form.patchValue({weight3: menuItem[0]['weight3']});  
+      this.form.patchValue({peso3: menuItem[0]['peso3']}); 
+      
+      this.form.patchValue({ingrediente4: menuItem[0]['ingrediente4']});  
+      this.form.patchValue({weight4: menuItem[0]['weight4']});  
+      this.form.patchValue({peso4: menuItem[0]['peso4']});  
+
+      this.form.patchValue({ingrediente5: menuItem[0]['ingrediente5']});  
+      this.form.patchValue({weight5: menuItem[0]['weight5']});  
+      this.form.patchValue({peso5: menuItem[0]['peso5']});  
+      
+      this.form.patchValue({ingrediente6: menuItem[0]['ingrediente6']});  
+      this.form.patchValue({weight6: menuItem[0]['weight6']});  
+      this.form.patchValue({peso6: menuItem[0]['peso6']});  
+
+      this.form.patchValue({ingrediente7: menuItem[0]['ingrediente7']});  
+      this.form.patchValue({weight7: menuItem[0]['weight7']});  
+      this.form.patchValue({peso7: menuItem[0]['peso7']});  
+
+      this.form.patchValue({ingrediente8: menuItem[0]['ingrediente8']});  
+      this.form.patchValue({weight8: menuItem[0]['weight8']});  
+      this.form.patchValue({peso8: menuItem[0]['peso8']});  
+
+      this.form.patchValue({ingrediente9: menuItem[0]['ingrediente9']});  
+      this.form.patchValue({weight9: menuItem[0]['weight9']});  
+      this.form.patchValue({peso9: menuItem[0]['peso9']});  
+
+      this.form.patchValue({ingrediente10: menuItem[0]['ingrediente10']});  
+      this.form.patchValue({weight10: menuItem[0]['weight10']});  
+      this.form.patchValue({peso10: menuItem[0]['peso10']});  
+
+      this.form.patchValue({ingrediente11: menuItem[0]['ingrediente11']});  
+      this.form.patchValue({weight11: menuItem[0]['weight11']});  
+      this.form.patchValue({peso11: menuItem[0]['peso11']});  
+      
+      this.form.patchValue({ingrediente12: menuItem[0]['ingrediente12']});  
+      this.form.patchValue({weight12: menuItem[0]['weight12']});  
+      this.form.patchValue({peso12: menuItem[0]['peso12']});  
+      //console.log(menuItem[0]['image']);
+      console.log({categoryId: menuItem[0]['categoryId']});
+      console.log({ingrediente1: menuItem[0]['ingrediente1']});
+      this.showImage = true;
+      //this.form.controls.image.patchValue({image: menuItem[0]['image']});
+       /* if (isPlatformBrowser(this.platformId)) {
+        this.appService.convertImgToBase64(menuItem.image, (dataUrl:string) => { 
           this.showImage = true;
           this.form.controls.image.patchValue(dataUrl.toString());
         }) 
-      }  
+      }   */
     });
   }
 
+  imgnombre  :any;
+  dataimg  :any;
+  filess :any;
   public fileChange(files:any){ 
     console.log(files)
     if(files.length){
-      this.form.controls.image.patchValue(files[0].content); 
+     this.form.controls.image.patchValue(files[0].name); 
+     //console.log( this.form.controls.image.patchValue(files[0].name));
+     //this.archivo.base64textString =( this.form.controls.image.patchValue(files[0].content));
+     console.log(this.archivo.nombreArchivo= files[0].name);
+     console.log(this.archivo.base64textString= files[0].content);
     } 
     else{
       this.form.controls.image.patchValue(null); 
     }
+    
   } 
+  
+  archivo = {
+    //nombre: null,
+    nombreArchivo: null as any,
+    base64textString: null as any,
+    //descripcion2: null as any,
+    //precio2: null as any,
+    //idproducto2: null as any,
+  }
+
+  subirarchivo(event: any){
+    var files = event.target.files;
+    var file = files[0];
+    this.archivo.nombreArchivo = file.name;
+  console.log(file);
+    if(files && file){
+      var reader = new FileReader();
+      reader.onload = this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+    }
+  }
+  _handleReaderLoaded(readerEvent: any){
+    var binaryString = readerEvent.target.result;
+    this.archivo.base64textString = btoa(binaryString);
+  }
+
+  upload(){
+    
+    this.appService.subirarchivoimg(this.archivo).subscribe(
+      datos =>{
+        console.log(this.archivo);
+        alert('Imagen Modificada');
+      }
+    );
+  }
+  
 
   public onSubmit(){
     console.log(this.form.value);
+    console.log(this.idtienda);
+    console.log(this.idsucursal);
+      this.appService.insertarplatos(this.idtienda, this.idsucursal, this.form?.value).subscribe (
+        datos => {
+          console.log('hola'+ datos);
+          //this.ngOnInit();
+        }
+      )
+      this.upload();
+    
   }  
+
+  public updatedatos(){
+    console.log(this.form.value);
+    this.appService.update(this.idtienda, this.idsucursal,this.id,this.form.value).subscribe (
+      datos => {
+        console.log('hola'+ datos);
+        //this.ngOnInit();
+      }
+    )
+  }
+  
+  public bajaplato(){
+    console.log(this.form.value);
+    this.appService.bajaplato(this.idtienda, this.idsucursal,this.id,this.form.value).subscribe (
+      datos => {
+        console.log('hola'+ datos);
+        //this.ngOnInit();
+      }
+    )
+  }
+
+  
 
 } 

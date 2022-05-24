@@ -6,7 +6,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
-import { MenuItem, Order, Category } from 'src/app/app.models'; 
+import { MenuItem, Order, Category, Unidades, Tiendas, Sucursales, Horario } from 'src/app/app.models'; 
 import { AppSettings } from 'src/app/app.settings'; 
 import { environment } from 'src/environments/environment';   
 import { ConfirmDialogComponent, ConfirmDialogModel } from './shared/confirm-dialog/confirm-dialog.component';
@@ -17,9 +17,13 @@ export class Data {
   constructor(public categories: Category[], 
               public cartList: MenuItem[],
               public orderList: Order[],
-              public favorites: MenuItem[], 
+              public favorites: MenuItem[],
+              public unidades: Unidades[],  
+              public horario: Horario[],
+              public tiendas:Tiendas[],
               public totalPrice: number,
-              public totalCartCount: number
+              public totalCartCount: number,
+              
               ) { }
 }
 
@@ -31,12 +35,19 @@ export class AppService {
     [],  // categories 
     [],  // cartList
     [],  // orderList
-    [],  // favorites 
+    [],// favorites 
+    [],  //unidades
+    [],  //tiendas
+    [],  //Horario
     0, // totalPrice
     0 //totalCartCount
   )  
   
   public url = environment.url + '/assets/data/'; 
+  public url2 = environment.url + 'http://localhost/Slim/'; 
+  //public url3 = environment.url + 'http://localhost/Slim/slim2/'; 
+  public URL = "http://localhost/Angular/";
+  
   public url3 = environment.url + 'http://localhost:8888/'; 
   //public url3 = environment.url + 'http://localhost/api/';
 
@@ -209,8 +220,58 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
 
 
   public getMenuItems(): Observable<MenuItem[]>{
-    return this.http.get<MenuItem[]>(this.url + 'menu-items.json');
+    return this.http.get<MenuItem[]>(this.url2 + 'cus');
   } 
+  public getMenuItemssuc(id:any, idsuc:any): Observable<MenuItem[]>{
+    return this.http.get<MenuItem[]>(this.url2 + 'suc/' + id + '/' + idsuc );
+  } 
+  public getMenuItemssucalta(id:any, idsuc:any): Observable<MenuItem[]>{
+    return this.http.get<MenuItem[]>(this.url2 + 'succ/' + id + '/' + idsuc );
+  } 
+  
+  insertarplatos(idtienda:any,idsucursal:any,datoss: any) {
+    return this.http.post(this.url2 + 'addplatillos/' +idtienda + '/' + idsucursal , datoss);
+  }
+  update(idtienda:any,idsucursal:any,id:number,datoss: any) {
+    return this.http.put(this.url2 + 'mod/' +idtienda + '/' + idsucursal + '/' + id, datoss);
+  }
+  updateespedi(datoss: any) {
+    return this.http.put(this.url2 + 'modpedido' , datoss);
+  }
+  bajaplato(idtienda:any,idsucursal:any,id:number,datoss: any) {
+    return this.http.put(this.url2 + 'baja/' +idtienda + '/' + idsucursal + '/' + id, datoss);
+  }
+  bajaplato2(idtienda:any,idsucursal:any,id:any,datoss: any) {
+    return this.http.put(this.url2 + 'baja/' +idtienda + '/' + idsucursal + '/' + id, datoss);
+  }
+  bajaplato3(idtienda:any,idsucursal:any,id: any, Proveedor: any): Observable<any> {
+    return this.http.put(this.url2 + 'baja/' +idtienda + '/' + idsucursal + '/' + id, Proveedor);
+  }
+  bajaoaltacatmenu(idtienda:any,idsucursal:any,id:any, catmenu: any): Observable<any> {
+    return this.http.put(this.url2 + 'bajacatmenu/' + id + '/' + idtienda + '/' + idsucursal, catmenu);
+  }
+
+  bajaoaltasucursal(id:any, catmenu: any): Observable<any> {
+    return this.http.put(this.url2 + 'bajasucursal/'  + id , catmenu);
+  }
+  insertarpedido(datoss: any) {
+    return this.http.post(this.url2 + 'addpedidos',datoss);
+  }
+  insertarpedidocomi(datoss: any) {
+    return this.http.post(this.url2 + 'addpedidoscomi',datoss);
+  }
+  subirarchivoimg(archivo: {}){ 
+    return this.http.post(this.url2 + 'subirimg',archivo);
+  }
+
+  enviarcorreo(archivo: any){ 
+    return this.http.post(this.url2 + 'enviar',archivo);
+  }
+
+  editUser(user: any): Observable<any>{
+    return this.http.post(this.url2 + 'cuse/', user);
+  }
+  
 
   public getProveedores(): Observable<MenuItem[]>{
     return this.http.get<MenuItem[]>(this.url + 'proveedores.json');
@@ -221,19 +282,73 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
   }
  
   public getMenuItemById(id:number): Observable<MenuItem>{
-    return this.http.get<MenuItem>(this.url + 'menu-item-' + id + '.json');
+    return this.http.get<MenuItem>(this.url2 + 'cuse/' + id );
   }
  
   public getSpecialMenuItems(): Observable<MenuItem[]>{
     return this.http.get<MenuItem[]>(this.url + 'special-menu-items.json');
   } 
 
+  
   public getBestMenuItems(): Observable<MenuItem[]>{
     return this.http.get<MenuItem[]>(this.url + 'best-menu-items.json');
   } 
+  
+  public gettiendas(): Observable<Tiendas[]>{
+    return this.http.get<Tiendas[]>(this.url2 + 'tiendasaltabaja');
+  } 
+
+  public gethorarios(): Observable<Horario[]>{
+    return this.http.get<Horario[]>(this.url2 + 'horariossuc');
+  } 
+
+  public getsucursales(): Observable<Sucursales[]>{
+    return this.http.get<Sucursales[]>(this.url2 + 'sucursalaltabaja');
+  } 
 
   public getCategories(): Observable<Category[]>{
-    return this.http.get<Category[]>(this.url + 'categories.json');
+    return this.http.get<Category[]>(this.url2 + 'categoriasmenu');
+  } 
+
+  public getCategoriestiendasuc(idtienda:any,idsucursal:any): Observable<Category[]>{
+    return this.http.get<Category[]>(this.url2 + 'categoriasmenusuctienda/'+ idtienda + '/' + idsucursal);
+  } 
+
+  public getiendas(): Observable<Tiendas[]>{
+    return this.http.get<Tiendas[]>(this.url2 + 'tiendasaltabaja');
+  } 
+
+  public getCategoriesab(idtienda:any,idsucursal:any): Observable<Category[]>{
+    return this.http.get<Category[]>(this.url2 + 'categoriasmenualtabaja/' + idtienda + '/' + idsucursal);
+  } 
+
+  insertartienda(datoss: any) {
+    return this.http.post(this.url2 + 'addtienda' ,datoss);
+  }
+
+  insertarsucursal(datoss: any) {
+    return this.http.post(this.url2 + 'addsucursal' ,datoss);
+  }
+
+  insertarcateogoriasmenu(idtienda:any,idsucursal:any,datoss: any) {
+    return this.http.post(this.url2 + 'addcategoriasmenu/' + idtienda + '/' + idsucursal,datoss);
+  }
+
+  editcateogoriasmenu(id:number,datoss: any) {
+    return this.http.put(this.url2 + 'editcategoriasmenu/'+ id,datoss);
+  }
+
+  edittienda(id:number,datoss: any) {
+    return this.http.put(this.url2 + 'edittiendas/'+ id,datoss);
+  }
+
+  editsucursal(idtienda:number,idsucursal:number,datoss: any) {
+    return this.http.put(this.url2 + 'editsucursal/'+ idtienda + '/' + idsucursal,datoss);
+  }
+  
+
+  public getUnidadespla(): Observable<Unidades[]>{
+    return this.http.get<Unidades[]>(this.url + 'unidades.json');
   }
   public getCategoriesProductos(): Observable<Category[]>{
     return this.http.get<Category[]>(this.url + 'categoriesProductos.json');
@@ -263,10 +378,28 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
     return this.http.get<any[]>(this.url + 'reservations.json');
   }
 
-  public getOrders(){
-    return this.http.get<any[]>(this.url + 'orders.json');
+
+  public getOrderss(idtienda:any,idsucursal:any){
+    return this.http.get<any[]>(this.url2 + 'mostpedidos/'+ idtienda + '/' + idsucursal);
   }
 
+  public getOrders(){
+    return this.http.get<any[]>(this.url2 );
+  }
+
+  public getOrderscomple(idtienda:any,idsucursal:any){
+    return this.http.get<any[]>(this.url2 + 'mostpedidoscomple/' + idtienda + '/' + idsucursal );
+  }
+
+  public getOrderscomple2(idtienda:any,idsucursal:any,id:any){
+    return this.http.get<any[]>(this.url2 + 'mostpedidoscompletick/' + idtienda + '/' + idsucursal + '/' + id);
+  }
+
+
+  
+  public mostrartiesuc(){
+    return this.http.get<any[]>(this.url2 + 'mostrartiesuc');
+  }
   public getGUID(){
     let guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
@@ -340,6 +473,15 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
   }
 
   public openDialog(component:any, data:any, panelClass:any){ 
+    return this.dialog.open(component, {
+      data: data, 
+      panelClass: panelClass,
+      autoFocus: false,
+      direction: (this.appSettings.settings.rtl) ? 'rtl':'ltr'
+    });  
+  }
+
+  public openDialog2(component:any, data:any, panelClass:any,idtienda:any,idsucursal:any){ 
     return this.dialog.open(component, {
       data: data, 
       panelClass: panelClass,
@@ -857,26 +999,35 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
 
   public getDeliveryMethods(){
     return [
-        { value: 'free', name: 'Free Delivery', desc: '$0.00 / Delivery in 7 to 14 business Days' },
-        { value: 'standard', name: 'Standard Delivery', desc: '$7.99 / Delivery in 5 to 7 business Days' },
-        { value: 'express', name: 'Express Delivery', desc: '$29.99 / Delivery in 1 business Days' }
+        
+        { value: 'Normal', name: 'Envio Normal', desc: '$20 / Envio Normal' },
+       
+    ]
+  }
+
+  public getpaymentmethods(){
+    return [
+        
+        { value: 'Efectivo', name: 'Pago Efectivo', desc: 'Solicite pago en efectivo' },
+        { value: 'Tarjeta', name: 'Pago Con Tarjeta', desc: 'Ingrese tarjeta' },
+        
     ]
   }
 
   public getMonths(){
     return [
-      { value: '01', name: 'January' },
-      { value: '02', name: 'February' },
-      { value: '03', name: 'March' },
-      { value: '04', name: 'April' },
-      { value: '05', name: 'May' },
-      { value: '06', name: 'June' },
-      { value: '07', name: 'July' },
-      { value: '08', name: 'August' },
-      { value: '09', name: 'September' },
-      { value: '10', name: 'October' },
-      { value: '11', name: 'November' },
-      { value: '12', name: 'December' }
+      { value: '01', name: 'Enero' },
+      { value: '02', name: 'Febrero' },
+      { value: '03', name: 'Marzo' },
+      { value: '04', name: 'Abril' },
+      { value: '05', name: 'Mayo' },
+      { value: '06', name: 'Junio' },
+      { value: '07', name: 'Julio' },
+      { value: '08', name: 'Agosto' },
+      { value: '09', name: 'Septiembre' },
+      { value: '10', name: 'Octubre' },
+      { value: '11', name: 'Noviembre' },
+      { value: '12', name: 'Diciembre' }
     ]
   }
 
