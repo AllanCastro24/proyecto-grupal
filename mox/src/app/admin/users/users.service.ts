@@ -6,7 +6,7 @@ import { User, usuario } from './user.model';
 @Injectable()
 export class UsersService {
     public url = "";
-    public api = "http://localhost:8888/proyecto-grupal-backend/public/";
+    public api = "http://localhost:8888/";
 
     constructor(public http:HttpClient) { }
     //Consulta de empleados
