@@ -16,7 +16,7 @@
         <div class="w-100 divider"></div> 
     </mat-list-item>
     <mat-list-item *ngFor="let menuItem of appService.Data.cartList">
-        <img matListAvatar [src]="'http://localhost/Slim/public/img/'+menuItem.image" alt="image" fxShow="false" fxShow.gt-xs="true">
+        <img matListAvatar [src]="'http://localhost:8888/img/'+menuItem.image" alt="image" fxShow="false" fxShow.gt-xs="true">
         <h3 mat-line class="secondary-font fw-500 title">{{menuItem.name}}</h3>  
         <span *ngIf="!menuItem.discount" class="primary-color fw-500 mx-3"> 
             {{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}  

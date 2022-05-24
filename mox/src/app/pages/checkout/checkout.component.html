@@ -300,7 +300,7 @@
                                         <div class="mat-header-cell total">Total</div> 
                                     </div> 
                                     <div *ngFor="let item of appService.Data.cartList" class="mat-row">
-                                        <div class="mat-cell image"><img [src]="'http://localhost/Slim/public/img/'+item.image" alt="item"></div>
+                                        <div class="mat-cell image"><img [src]="'http://localhost:8888/img/'+item.image" alt="item"></div>
                                         <div class="mat-cell"><a [routerLink]="['/menu', item.id]" class="menu-item-name">{{item.name}}</a></div>
                                         <div class="mat-cell price">  
                                             <span *ngIf="!item.discount" class="primary-color py-3"> 
@@ -389,7 +389,7 @@
                     <div class="divider my-3"></div>
                     <div *ngFor="let menuItem of appService.Data.cartList" fxLayout="row" fxLayoutAlign="space-between start" class="mb-3">
                         <div fxLayout="row" fxLayoutAlign="start start">
-                            <img [src]="'http://localhost/Slim/public/img/'+menuItem.image" width="60" alt="item"> 
+                            <img [src]="'http://localhost:8888/img/'+menuItem.image" width="60" alt="item"> 
                             <a [routerLink]="['/menu', menuItem.id]" class="menu-item-name px-2">{{menuItem.name}}</a>
                         </div>
                         <div fxLayout="column" fxLayoutAlign="end end">

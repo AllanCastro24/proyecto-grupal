@@ -44,7 +44,7 @@ export class AppService {
   )  
   
   public url = environment.url + '/assets/data/'; 
-  public url2 = environment.url + 'http://localhost/Slim/'; 
+  public url2 = environment.url + 'http://localhost:8888/'; 
   //public url3 = environment.url + 'http://localhost/Slim/slim2/'; 
   public URL = "http://localhost/Angular/";
   

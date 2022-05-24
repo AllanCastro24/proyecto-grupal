@@ -4,7 +4,7 @@
             <mat-chip-list *ngIf="menuItem.discount">
                 <mat-chip color="warn" selected="true">{{menuItem.discount}}% OFF</mat-chip>
             </mat-chip-list>
-            <img [src]="'http://localhost/Slim/public/img/'+menuItem.image" class="w-100">
+            <img [src]="'http://localhost:8888/img/'+menuItem.image" class="w-100">
         </div>
         <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
             <h1 class="secondary-font">{{menuItem.name}}</h1> 
