@@ -160,6 +160,7 @@ export class MenuItemImage {
 }
 
 export class Category {
+    [x: string]: any;
     constructor(public id: number,
                 public idtienda: number,
                 public idsucursal: number,

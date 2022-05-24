@@ -1,0 +1,4 @@
+[
+    { "id":1, "name":"Perecederos", "description": "son aquellos que tienen una duración corta y se descomponen rápidamente" },
+    { "id":2, "name":"No perecederos", "description": "son aquellos alimentos que tienen una larga vida útil" }
+]

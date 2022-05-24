@@ -7,7 +7,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { FullScreenComponent } from './components/fullscreen/fullscreen.component'; 
 import { MessagesComponent } from './components/messages/messages.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component'; 
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 export const routes = [ 
   { 
@@ -15,6 +15,7 @@ export const routes = [
     component: AdminComponent, children: [
       { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }, 
       { path: 'menu-items', loadChildren: () => import('./menu-items/menu-items.module').then(m => m.MenuItemsModule) },
+      { path: 'products-items', loadChildren: () => import('./products-items/products-items.module').then(m => m.ProductsItemsModule) },
       { path: 'sales', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule) },
       { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule), data: { breadcrumb: 'Users' } },
       { path: 'reservations', loadChildren: () => import('./reservations/reservations.module').then(m => m.ReservationsModule), data: { breadcrumb: 'Reservations' } },
@@ -39,7 +40,7 @@ export const routes = [
     UserMenuComponent,
     FullScreenComponent,
     MessagesComponent,
-    BreadcrumbComponent 
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,

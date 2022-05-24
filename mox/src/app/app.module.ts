@@ -38,6 +38,9 @@ import { VerticalMenuComponent } from './theme/components/menu/vertical-menu/ver
 import { FooterComponent } from './theme/components/footer/footer.component'; 
 import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
 import { CookieService } from 'ngx-cookie-service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,7 @@ import { CookieService } from 'ngx-cookie-service';
       }
     }),
     AppRoutingModule,
-    SharedModule    
+    SharedModule
   ],
   providers: [ 
     AppSettings,
@@ -78,7 +81,8 @@ import { CookieService } from 'ngx-cookie-service';
     { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true },
     DatePipe,
     { provide: MatPaginatorIntl, useClass: MatPaginatorI18nService },
-    [CookieService]
+    [CookieService],
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
   bootstrap: [AppComponent]
 })

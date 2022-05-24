@@ -1,0 +1,1389 @@
+---
+# Press Shift + Alt + P
+openapi: 3.0.1
+info:
+  title: API de Almacen/Storage.
+  description: Esta api se encaga de todo el apartado de almacen, proveedores, unidad de medida, tipos de insumos, etc...
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/AbrahamCamargo/Storage/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: http://localhost:8888
+tags:
+- name: Proveedores
+  description: Maneja la información de los proveedores.
+- name: Compra
+  description: Maneja la información de las compras realizadas.
+- name: Mermas
+  description: Maneja el control de mermas.
+- name: Tipo de pago
+  description: Maneja la información de los tipos de pago.
+- name: Unidad de Medida
+  description: Maneja la información de las unidades de medida.
+- name: Almacen
+  description: Maneja la información del almacen.
+
+paths:
+
+#====INSERTAR PROVEEDOR=====================================================================================     
+  /InsertarProveedor:
+    post:
+      tags:
+      - Proveedores
+      summary: Agrega un nuevo proveedor en la base de datos
+      parameters:
+      - name: nombre_proveedor
+        in: path
+        description: Nombre del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: rfc_proveedor
+        in: path
+        description: RFC del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          minLength: 12
+          maxLength: 13
+      - name: telefono_proveedor
+        in: path
+        description: Telefono del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          minLength: 10
+          maxLength: 10
+      - name: correo_proveedor
+        in: path
+        description: Correo del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: email
+      - name: direccion_proveedor
+        in: path
+        description: Direccion del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: telefono_alterno_proveedor
+        in: path
+        description: Telefono Alterno del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          minLength: 10
+          maxLength: 10
+      - name: web
+        in: path
+        description:  Web del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: estatus
+        in: path
+        description: Estatus del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: boolean
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedoresPost'
+        required: true
+      responses:
+        "200":
+          description: (OK) La información del Proveedor se guardo correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+
+  #===OBTENER PROVEEDOR======================================================================================     
+  /GetProveedor:
+    get:
+      tags:
+      - Proveedores
+      summary: Obtiene la infomación de todos los proveedores registrados en la base de datos.
+      responses:
+        "200":
+          description: (OK) La información del Proveedor se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  
+  #===OBTENER PROVEEDOR POR ID======================================================================================     
+  /GetProveedor/{id_proveedor}:
+    get:
+      tags:
+      - Proveedores
+      summary: Obtiene la infomación de la base de datos de un Proveedor.
+      parameters:
+      - name: id_proveedor
+        in: path
+        description: Identificador del Proveedor a obtener
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      
+      responses:
+        "200":
+          description: (OK) La información del Proveedor se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+
+#===ACTUALIZAR PROVEEDOR====================================================================================     
+  /ActualizarProveedor/{id_proveedor}:
+    put:
+      tags:
+      - Proveedores
+      summary: Actualiza la informacion de un Proveedor en la base de datos.
+      parameters:
+      - name: id_proveedor
+        in: path
+        description: Identificador del Proveedor a obtener
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: nombre_proveedor
+        in: path
+        description: Nombre del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: rfc_proveedor
+        in: path
+        description: RFC del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: telefono_proveedor
+        in: path
+        description: Telefono del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: correo_proveedor
+        in: path
+        description: Correo del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: direccion_proveedor
+        in: path
+        description: Direccion del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: telefono_alterno_proveedor
+        in: path
+        description: Telefono Alterno del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: web
+        in: path
+        description:  Web del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: estatus
+        in: path
+        description: Estatus del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedorPut'
+      responses:
+        "200":
+          description: (OK) La información del proveedor se a actualizado correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+
+  #===INSERTAR COMPRA=============================================================================   
+  /InsertarCompra:
+    post:
+      tags:
+      - Compra
+      summary: Agrega una nueva compra a la base de datos
+      parameters:
+      - name: id_proveedor
+        in: path
+        description: Id del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: cantidad
+        in: path
+        description: Cantidad de productos a comprar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: precio_unitario
+        in: path
+        description: Precio unitario del producto a comprar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: precio_total
+        in: path
+        description: Precio total de la compra a realizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: fecha
+        in: path
+        description: Fecha en que se realiza la compra
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 20
+      - name: id_tipo_pago
+        in: path
+        description: Id del tipo de pago a realizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: id_detalle_insumo
+        in: path
+        description:  Id del detalle de insumo
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+     
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedoresPost'
+        required: true
+      responses:
+        "200":
+          description: (OK) La información de compras se guardo correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+#===OBTENER COMPRAS======================================================================================     
+  /GetCompra:
+    get:
+      tags:
+      - Compra
+      summary: Obtiene la infomación de todas las compras registrados en la base de datos.
+      responses:
+        "200":
+          description: (OK) La información del apartado de compras se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+#===OBTENER COMPRA POR ID======================================================================================     
+  /GetCompra/{id_compra}:
+    get:
+      tags:
+      - Compra
+      summary: Obtiene la infomación de una compra en especifico.
+      parameters:
+      - name: id_compra
+        in: path
+        description: Identificador de la Compra a obtener
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      
+      responses:
+        "200":
+          description: (OK) La información del apartado de compras se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+
+  #===ACTUALIZAR COMPRA====================================================================================     
+  /ActualizarCompra/{id_compra}:
+    put:
+      tags:
+      - Compra
+      summary: Actualiza la informacion de las compras en la base de datos.
+      parameters:
+      - name: id_compra
+        in: path
+        description: Identificador de la compra a actualizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: id_proveedor
+        in: path
+        description: Id del Proveedor
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: cantidad
+        in: path
+        description: Cantidad de productos
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: precio_unitario
+        in: path
+        description: Precio unitario del producto a comprar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: precio_total
+        in: path
+        description: Precio total de la compra a realizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: fecha
+        in: path
+        description: Fecha en que se realiza la compra
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 20
+      - name: id_tipo_pago
+        in: path
+        description: Id del tipo de pago a realizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: id_detalle_insumo
+        in: path
+        description:  Id del detalle de insumo
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedorPut'
+      responses:
+        "200":
+          description: (OK) La información de la compra se a actualizado correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+
+
+  #===INSERTAR MERMAS=============================================================================   
+  /InsertarMerma:
+    post:
+      tags:
+      - Mermas
+      summary: Agrega una nueva merma a la base de datos
+      parameters:
+      - name: id_detalle_insumo
+        in: path
+        description: Id del detalle insumo
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: fecha
+        in: path
+        description: Fecha en que se registra la merma
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          minLength: 3
+          maxLength: 20
+      - name: detalles
+        in: path
+        description: Detalles que presenta el producto
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedoresPost'
+        required: true
+      responses:
+        "200":
+          description: (OK) La información de compras se guardo correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  #===OBTENER MERMAS======================================================================================     
+  /GetMerma:
+    get:
+      tags:
+      - Mermas
+      summary: Obtiene la infomación de todas las mermas registrados en la base de datos.
+      responses:
+        "200":
+          description: (OK) La información del apartado de mermas se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  #===OBTENER MERMAS POR ID======================================================================================     
+  /GetMerma/{id_merma}:
+    get:
+      tags:
+      - Mermas
+      summary: Obtiene la infomación de una merma en especifico.
+      parameters:
+      - name: id_merma
+        in: path
+        description: Identificador de la Merma a obtener
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      
+      responses:
+        "200":
+          description: (OK) La información del apartado de mermas se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  #===ACTUALIZAR MERMA====================================================================================     
+  /ActualizarMerma/{id_merma}:
+    put:
+      tags:
+      - Mermas
+      summary: Actualiza la informacion de las mermas en la base de datos.
+      parameters:
+      - name: id_merma
+        in: path
+        description: Identificador de la merma a actualizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: id_detalle_insumo
+        in: path
+        description: Id del del detalle insumo
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: cantidad
+        in: path
+        description: Cantidad de productos
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: precio_unitario
+        in: path
+        description: Precio unitario del producto a comprar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: precio_total
+        in: path
+        description: Precio total de la compra a realizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: fecha
+        in: path
+        description: Fecha en que se realiza la compra
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          minLength: 3
+          maxLength: 20
+      - name: id_tipo_pago
+        in: path
+        description: Id del tipo de pago a realizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: id_detalle_insumo
+        in: path
+        description:  Id del detalle de insumo
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedorPut'
+      responses:
+        "200":
+          description: (OK) La información de la compra se a actualizado correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+
+  #===INSERTAR TIPO DE PAGO=============================================================================   
+  /InsertarTipo_Pago:
+    post:
+      tags:
+      - Tipo de pago
+      summary: Agrega un nuevo tipo de pago a la base de datos
+      parameters:
+      - name: descripcion
+        in: path
+        description: descripcion del tipo de pago a ingresar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+     
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedoresPost'
+        required: true
+      responses:
+        "200":
+          description: (OK) La información de tipo de pago se guardo correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+   #===OBTENER TIPOS DE PAGO======================================================================================     
+  /GetTipo_Pago:
+    get:
+      tags:
+      - Tipo de pago
+      summary: Obtiene la infomación de todos los tipos de pagos registrados en la base de datos.
+      responses:
+        "200":
+          description: (OK) La información del apartado tipo de pago se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  #===OBTENER TIPO DE PAGO POR ID======================================================================================     
+  /GetTipo_Pago/{id_merma}:
+    get:
+      tags:
+      - Tipo de pago
+      summary: Obtiene la infomación de un tipo de pago en especifico.
+      parameters:
+      - name: id_tipo_pago
+        in: path
+        description: Identificador del tipo de pago a obtener
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      
+      responses:
+        "200":
+          description: (OK) La información del apartado tipo de pago se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  #===ACTUALIZAR TIPO DE PAGO====================================================================================     
+  /ActualizarTipo_Pago/{id_tipo_pago}:
+    put:
+      tags:
+      - Tipo de pago
+      summary: Actualiza la informacion del tipo de pago en la base de datos.
+      parameters:
+      - name: id_tipo_pago
+        in: path
+        description: Identificador del tipo de pago a actualizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: descripcion
+        in: path
+        description: descripcion del tipo de pago
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+     
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedorPut'
+      responses:
+        "200":
+          description: (OK) La información del tipo de pago se a actualizado correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  #===INSERTAR UNIDAD DE MEDIDA=============================================================================   
+  /InsertarUnidad_Medida:
+    post:
+      tags:
+      - Unidad de Medida
+      summary: Agrega una nueva unidad de medida a la base de datos
+      parameters:
+      - name: unidad
+        in: path
+        description: Describe el nombre de la unidad de medida a ingresar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: descripcion
+        in: path
+        description: Describe la unidad de medida a ingresar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+     
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedoresPost'
+        required: true
+      responses:
+        "200":
+          description: (OK) La información de unidad de medida se guardo correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  #===OBTENER UNIDAD DE MEDIDA======================================================================================     
+  /GetUnidad_Medida:
+    get:
+      tags:
+      -  Unidad de Medida
+      summary: Obtiene la infomación de unidad de medida registrados en la base de datos.
+      responses:
+        "200":
+          description: (OK) La información del apartado unidad de medida se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  #===OBTENER UNIDAD DE MEDIDA POR ID======================================================================================     
+  /GetUnidad_Medida/{id_unidad_de_medida}:
+    get:
+      tags:
+      - Unidad de Medida
+      summary: Obtiene la infomación de una unidad de medida en especifico.
+      parameters:
+      - name: id_unidad_de_medida
+        in: path
+        description: Identificador de la unidad de medida a obtener
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      
+      responses:
+        "200":
+          description: (OK) La información del apartado unidad de medida se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+#===ACTUALIZAR UNIDAD DE MEDIDA====================================================================================     
+  /ActualizarUnidad_Medida/{id_unidad_de_medida}:
+    put:
+      tags:
+      - Unidad de Medida
+      summary: Actualiza la informacion de Unidad de Medida en la base de datos.
+      parameters:
+      - name: id_unidad_de_medida
+        in: path
+        description: Identificador de la Unidad de Medida a actualizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: unidad
+        in: path
+        description: Describe el nombre de la Unidad de Medida a ingresar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: descripcion
+        in: path
+        description: Describe la Unidad de Medida a ingresar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+     
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedorPut'
+      responses:
+        "200":
+          description: (OK) La información de la unidad de medida se a actualizado correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontro información
+        "500":
+          description: Error en servidor
+
+  #===INSERTAR ALMACEN=============================================================================   
+  /InsertarAlmacen:
+    post:
+      tags:
+      - Almacen
+      summary: Agrega un nuevo producto al almacen en la base de datos
+      parameters:
+      - name: id_detalle_insumo
+        in: path
+        description: Id del detalle insumo
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: detalles
+        in: path
+        description: Describe el detalle del producto
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: cantidad
+        in: path
+        description: Describe la cantidad de productos que ingresaran al almacen
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: stock_minimo
+        in: path
+        description: Describe el stock minimo a considerar en almacen
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+     
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedoresPost'
+        required: true
+      responses:
+        "200":
+          description: (OK) La información de almacen se guardo correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  #===OBTENER ALMACEN======================================================================================     
+  /GetAlmacen:
+    get:
+      tags:
+      -  Almacen
+      summary: Obtiene la infomación del almacen registrados en la base de datos.
+      responses:
+        "200":
+          description: (OK) La información del apartado almacen se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+  #===OBTENER ALMACEN POR ID======================================================================================     
+  /GetAlmacen/{id_almacen}:
+    get:
+      tags:
+      - Almacen
+      summary: Obtiene la infomación del almacen en especifico.
+      parameters:
+      - name: id_almacen
+        in: path
+        description: Identificador del almacen a obtener
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      
+      
+      responses:
+        "200":
+          description: (OK) La información del apartado almacen se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProveedorGet'
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontrar información
+        "500":
+          description: Error en servidor
+#===ACTUALIZAR ALMACEN====================================================================================     
+  /ActualizarAlmacen/{id_almacen}:
+    put:
+      tags:
+      - Almacen
+      summary: Actualiza la informacion del almacen en la base de datos.
+      parameters:
+      - name: id_almacen
+        in: path
+        description: Identificador del almacen a actualizar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: id_detalle_insumo
+        in: path
+        description: Id del detalle insumo
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: detalles
+        in: path
+        description: Describe el detalle del producto
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: cantidad
+        in: path
+        description: Describe la cantidad de productos que ingresaran al almacen
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+      - name: stock_minimo
+        in: path
+        description: Describe el stock minimo a considerar en almacen
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+     
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProveedorPut'
+      responses:
+        "200":
+          description: (OK) La información del almacen se a actualizado correctamente
+          
+        "400":
+          description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+        "401":
+          description: (Unauthorized) No hay autorización para llamar al servicio
+        "404":
+          description: (NotFound) No se encontro información
+        "500":
+          description: Error en servidor
+  #================================================ELIMINAR=========================================     
+ #/elimina/{idCliente}:
+  #  delete:
+  #    tags:
+  #    - Usuarios
+  #    summary: Elimina logicamente a un cliente.
+  #    parameters:
+  #    - name: token
+  #      in: header
+  #      description: Token de autenticación en API.
+  #      required: true
+  #      style: simple
+  #      explode: false
+  #      schema:
+  #        type: string
+  #    - name: idCliente
+  #      in: path
+  #      description: Identificador del proveedor a obtener
+  #      required: true
+  #      style: simple
+  #      explode: false
+  #      schema:
+  #        type: string
+  #    responses:
+  #      "200":
+  #        description: (OK) El proveedor se eliminÃ³ correctamente
+  #        content:
+  #          application/json:
+  #            schema:
+  #              $ref: '#/components/schemas/ExitoProveedoresPost'
+  #      "400":
+  #        description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+  #      "401":
+  #        description: (Unauthorized) No hay autorización para llamar al servicio
+  #      "404":
+  #        description: (NotFound) No se encontrar información
+  #      "500":
+  #        description: Error en servidor
+
+
+components:
+  schemas:
+
+    BodyProveedorPost:
+      type: object
+      properties:
+        id_proveedor:
+          type: integer
+          description: Id del proveedor
+
+    BodyProveedoresPost:
+      type: object
+      properties:
+        id_proveedor:
+          type: integer
+          description: Id del proveedor
+        nombre_proveedor:
+          type: string
+          description: Nombre del proveedor
+        rfc_proveedor:
+          type: string
+          description: RFC del proveedor
+        telefono_proveedor:
+          type: string
+          description: Telefono del proveedor
+        correo_proveedor:
+          type: string
+          description: Correo del proveedor
+        telefono_alterno_proveedor:
+          type: string
+          description: telefono alterno del proveedor
+        web:
+          type: string
+          description: web del proveedor
+        estatus:
+          type: boolean
+          description: Estatus del proveedor
+
+    ExitoProveedoresPost:
+      type: object
+      properties:
+        id_proveedor:
+          type: integer
+          description: Id correspondiente al Proveedor
+          enum:
+          - 233
+        nombre_proveedor:
+          type: string
+          description: Nombre del Proveedor
+          enum:
+          - Perez
+        rfc_proveedor:
+          type: string
+          description: RFC del Proveedor
+          enum:
+          - AWSEDREQ23
+        telefono_proveedor:
+          type: string
+          description: Telefono del Proveedor
+          enum:
+          - "6668889995"
+        correo_proveedor:
+          type: string
+          description: Correo del Proveedor
+          enum:
+          - perez@gmail.com
+        direccion_proveedor:
+          type: string
+          description: Direccion del Proveedor
+          enum:
+          - Zona Centro Los Mochis
+        telefono_alterno_proveedor:
+          type: string
+          description: Telefono alterno del Proveedor
+          enum:
+          - "8888888888"
+        web:
+          type: string
+          description: Web del Proveedor
+          enum:
+          - refrescos_perez.com
+        estatus:
+          type: boolean
+          description: Estatus del Proveedor
+          enum:
+          - true
+    ExitoProveedorGet:
+      type: object
+      properties:
+        id_proveedor:
+          type: integer
+          description: Id correspondiente al Proveedor
+          enum:
+          - 233
+        nombre_proveedor:
+          type: string
+          description: Nombre del Proveedor
+          enum:
+          - Perez
+        rfc_proveedor:
+          type: string
+          description: RFC del Proveedor
+          enum:
+          - AWSEDREQ23
+        telefono_proveedor:
+          type: string
+          description: Telefono del Proveedor
+          enum:
+          - "6668889995"
+        correo_proveedor:
+          type: string
+          description: Correo del Proveedor
+          enum:
+          - perez@gmail.com
+        direccion_proveedor:
+          type: string
+          description: Direccion del Proveedor
+          enum:
+          - Zona Centro Los Mochis
+        telefono_alterno_proveedor:
+          type: string
+          description: Telefono alterno del Proveedor
+          enum:
+          - "8888888888"
+        web:
+          type: string
+          description: Web del Proveedor
+          enum:
+          - refrescos_perez.com
+        estatus:
+          type: boolean
+          description: Estatus del Proveedor
+          enum:
+          - true
+    BodyProveedorPut:
+      type: object
+      properties:
+        id_proveedor:
+          type: integer
+          description: Id correspondiente al Proveedor
+          enum:
+          - 233
+        nombre_proveedor:
+          type: string
+          description: Nombre del Proveedor
+          enum:
+          - Perez
+        rfc_proveedor:
+          type: string
+          description: RFC del Proveedor
+          enum:
+          - AWSEDREQ23
+        telefono_proveedor:
+          type: string
+          description: Telefono del Proveedor
+          enum:
+          - "6668889995"
+        correo_proveedor:
+          type: string
+          description: Correo del Proveedor
+          enum:
+          - perez@gmail.com
+        direccion_proveedor:
+          type: string
+          description: Direccion del Proveedor
+          enum:
+          - Zona Centro Los Mochis
+        telefono_alterno_proveedor:
+          type: string
+          description: Telefono alterno del Proveedor
+          enum:
+          - "8888888888"
+        web:
+          type: string
+          description: Web del Proveedor
+          enum:
+          - refrescos_perez.com
+        estatus:
+          type: boolean
+          description: Estatus del Proveedor
+  responses:
+    Unauthorized:
+      description: (Unauthorized) No hay autorización para llamar al servicio
+    NotFound:
+      description: (NotFound) No se encontrar información
+    BadRequest:
+      description: (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados
+    ServerError:
+      description: Error en servidor
+  parameters:
+
+
+    token:
+      name: token
+      in: header
+      description: Token de autenticación en API.
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string

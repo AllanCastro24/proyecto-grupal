@@ -1,0 +1,6 @@
+[
+    { "id":1, "description": "Tarjeta Credito" },
+    { "id":2, "description": "Tarjeta de Debito"},
+    { "id":3, "description": "Efectivo"},
+    { "id":4, "description": "Cheque"}
+]
