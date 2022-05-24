@@ -56,12 +56,7 @@ export class AppService {
               public appSettings:AppSettings,
               public translateService: TranslateService) { }  
 
-  /* public getMenuItems2(): Observable<MenuItem[]>{
-    return this.http.get<MenuItem[]>(this.url2 + 'cus');
-  }  */
- /*  public getMenuItems(): Observable<MenuItem[]>{
-    return this.http.get<MenuItem[]>(this.url + 'menu-items.json');
-  }  */
+
   public getMenuItems(): Observable<MenuItem[]>{
     return this.http.get<MenuItem[]>(this.url2 + 'cus');
   } 
@@ -71,12 +66,7 @@ export class AppService {
   public getMenuItemssucalta(id:any, idsuc:any): Observable<MenuItem[]>{
     return this.http.get<MenuItem[]>(this.url2 + 'succ/' + id + '/' + idsuc );
   } 
-  /* public getMenuItems(id:number): Observable<MenuItem>{
-    return this.http.get<MenuItem>(this.url2 + 'cus/' + id );
-  } */
-  /*  insertarplatos(datoss: {}) {
-    return this.http.post(this.url2 + 'add', JSON.stringify(datoss));
-  } */
+  
   insertarplatos(idtienda:any,idsucursal:any,datoss: any) {
     return this.http.post(this.url2 + 'addplatillos/' +idtienda + '/' + idsucursal , datoss);
   }
@@ -115,18 +105,11 @@ export class AppService {
   enviarcorreo(archivo: any){ 
     return this.http.post(this.url2 + 'enviar',archivo);
   }
-  /* public update(id:number): Observable<MenuItem>{
-    return this.http.post<MenuItem>(this.url2 + 'cuse/' + id );
-  } */
+
   editUser(user: any): Observable<any>{
     return this.http.post(this.url2 + 'cuse/', user);
   }
-  /* public getMenuItems2(): Observable<any>{
-    return this.http.get(this.url2 + 'cus' );
-  }  */
- /*  getMenuItems() {
-    return this.http.get(`${this.url2}cus`);
-  } */
+  
   public getMenuItemById(id:number): Observable<MenuItem>{
     return this.http.get<MenuItem>(this.url2 + 'cuse/' + id );
   }
@@ -135,10 +118,7 @@ export class AppService {
     return this.http.get<MenuItem[]>(this.url + 'special-menu-items.json');
   } 
 
-  /* public getBestMenuItems(): Observable<MenuItem[]>{
-    return this.http.get<MenuItem[]>(this.url + 'best-menu-items.json');
-  }  */
-
+  
   public getBestMenuItems(): Observable<MenuItem[]>{
     return this.http.get<MenuItem[]>(this.url + 'best-menu-items.json');
   } 
@@ -208,9 +188,6 @@ export class AppService {
     return this.http.get<any[]>(this.url + 'reservations.json');
   }
 
- /*  public getOrders(){
-    return this.http.get<any[]>(this.url + 'orders.json');
-  } */
 
   public getOrderss(idtienda:any,idsucursal:any){
     return this.http.get<any[]>(this.url2 + 'mostpedidos/'+ idtienda + '/' + idsucursal);
@@ -832,18 +809,18 @@ export class AppService {
 
   public getDeliveryMethods(){
     return [
-        //{ value: 'free', name: 'Free Delivery', desc: '$0.00 / Delivery in 7 to 14 business Days' },
+        
         { value: 'Normal', name: 'Envio Normal', desc: '$20 / Envio Normal' },
-        //{ value: 'Rapdido', name: 'Envio Rapido', desc: '$29.99 / Delivery in 1 business Days' }
+       
     ]
   }
 
   public getpaymentmethods(){
     return [
-        //{ value: 'free', name: 'Free Delivery', desc: '$0.00 / Delivery in 7 to 14 business Days' },
+        
         { value: 'Efectivo', name: 'Pago Efectivo', desc: 'Solicite pago en efectivo' },
         { value: 'Tarjeta', name: 'Pago Con Tarjeta', desc: 'Ingrese tarjeta' },
-        //{ value: 'Rapdido', name: 'Envio Rapido', desc: '$29.99 / Delivery in 1 business Days' }
+        
     ]
   }
 
