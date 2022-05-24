@@ -46,7 +46,7 @@ export class AppService {
   )
 
   
-  API: string = 'http://localhost/proyecto-grupal-backend/public/';
+  API: string = 'http://localhost:8888/';
   public url = environment.url + '/assets/data/'; 
   public url2 = environment.url + 'http://localhost:8888/'; 
   //public url3 = environment.url + 'http://localhost/Slim/slim2/'; 
