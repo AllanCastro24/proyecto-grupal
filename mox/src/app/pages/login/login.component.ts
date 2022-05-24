@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       if(l){
         this.router.navigate(['/']);
       }else{
-        alert('Su contraseña es incorrecta');
+        alert('Su contraseña es incorrecto');
         this.router.navigate(['/login']);
       }
     });
