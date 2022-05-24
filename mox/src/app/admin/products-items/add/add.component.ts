@@ -99,7 +99,7 @@ export class AddComponent implements OnInit {
 
       this.form.patchValue(menuItem); 
       if (isPlatformBrowser(this.platformId)) {
-        this.appService.convertImgToBase64(menuItem.image.medium, (dataUrl:string) => { 
+        this.appService.convertImgToBase64(menuItem.image, (dataUrl:string) => { 
            this.showImage = true;
           this.form.controls.image.patchValue("");
         }) 

@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div *ngFor="let item of appService.Data.cartList" class="mat-row">
-                    <div class="mat-cell image"><img [src]="'http://localhost/Slim/public/img/'+item.image"></div>
+                    <div class="mat-cell image"><img [src]="'http://localhost:8888/img/'+item.image"></div>
                     <div class="mat-cell"><a [routerLink]="['/menu', item.id]" class="menu-item-name">{{item.name}}</a></div>
                     <div class="mat-cell price">  
                         <span *ngIf="!item.discount" class="primary-color py-3"> 
