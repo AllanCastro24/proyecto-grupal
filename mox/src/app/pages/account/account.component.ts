@@ -15,13 +15,13 @@ export class AccountComponent implements OnInit {
   public sidenavOpen:boolean = true;
   public links = [ 
     { name: 'Dashboard', href: 'dashboard', icon: 'dashboard' }, 
-    { name: 'Profile', href: 'profile', icon: 'person' },
-    { name: 'Password Change', href: 'password-change', icon: 'vpn_key' },  
-    { name: 'Addresses', href: 'addresses', icon: 'location_on' }, 
-    { name: 'Favorites', href: 'favorites', icon: 'favorite' }, 
-    { name: 'Reservations', href: 'reservations', icon: 'event' },
-    { name: 'Orders', href: 'orders', icon: 'list_alt' },  
-    { name: 'Logout', href: '/login', icon: 'power_settings_new' },    
+    { name: 'Perfil', href: 'profile', icon: 'person' },
+    { name: 'Cambiar contraseña', href: 'password-change', icon: 'vpn_key' },  
+    { name: 'Direcciones', href: 'addresses', icon: 'location_on' }, 
+    { name: 'Favoritos', href: 'favorites', icon: 'favorite' }, 
+    { name: 'Reservaciones', href: 'reservations', icon: 'event' },
+    { name: 'Ordenes', href: 'orders', icon: 'list_alt' },  
+    { name: 'Cerrar sesión', href: '/login', icon: 'power_settings_new' },    
   ]; 
   constructor(public router:Router) { }
 

@@ -27,8 +27,8 @@ export class FavoritesComponent implements OnInit {
   public remove(menuItem:MenuItem) {
     const index: number = this.dataSource.data.indexOf(menuItem);    
     if (index !== -1) { 
-      const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE');
-			let dialogRef = this.appService.openConfirmDialog('', message!);
+      const message = this.appService.getTranslateValue('Seguro desea quitar de favoritos?');
+			let dialogRef = this.appService.openConfirmDialog('Mensaje del sistema', message!);
 			dialogRef.afterClosed().subscribe(dialogResult => {
 				if(dialogResult){ 
           this.dataSource.data.splice(index,1);

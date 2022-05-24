@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { User, UserProfile, UserWork, UserContacts, UserSocial, UserSettings } from '../user.model';
+import { User } from '../user.model';
 
 @Component({
   selector: 'app-user-dialog',
@@ -14,39 +14,39 @@ export class UserDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<UserDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public user: User,
               public fb: FormBuilder) {
-    this.form = this.fb.group({
-      id: null,
-      username: [null, Validators.compose([Validators.required, Validators.minLength(5)])],
-      password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],       
-      profile: this.fb.group({
-        name: null,
-        surname: null,  
-        birthday: null,
-        gender: null,
-        image: null
-      }),
-      work: this.fb.group({
-        company: null,
-        position: null,
-        salary: null
-      }),
-      contacts: this.fb.group({
-        email: null,
-        phone: null,
-        address: null          
-      }),
-      social: this.fb.group({
-        facebook: null,
-        twitter: null,
-        google: null
-      }),
-      settings: this.fb.group({
-        isActive: null,
-        isDeleted: null,
-        registrationDate: null,
-        joinedDate: null
-      })
-    });
+                if(user){
+                  this.form = this.fb.group({
+                    ID_empleado: this.user.ID_empleado,
+                    Nombre: this.user.Nombre,
+                    Apellidos: this.user.Apellidos,  
+                    Genero: this.user.Genero,
+                    ID_tienda: this.user.ID_tienda,
+                    ID_tipo_pago: this.user.ID_tipo_pago,
+                    ID_puesto: this.user.ID_puesto,
+                    ID_sucursal: this.user.ID_sucursal,
+                    Sueldo: this.user.Sueldo,
+                    Telefono: this.user.Telefono,
+                    Direccion: this.user.Direccion,    
+                    Fecha_registro: this.user.Fecha_registro,
+                    Ultimo_ingreso: this.user.Ultimo_ingreso,
+                  });
+                }else{
+                  this.form = this.fb.group({
+                    ID_empleado: null,
+                    Nombre: null,
+                    Apellidos: null,  
+                    Genero: null,
+                    ID_tienda: null,
+                    ID_tipo_pago: null,
+                    ID_puesto: null,
+                    ID_sucursal: null,
+                    Sueldo: null,
+                    Telefono: null,
+                    Direccion: null,    
+                    Fecha_registro: null,
+                    Ultimo_ingreso: null,
+                  });
+                }
   }
 
   ngOnInit() {
@@ -55,11 +55,6 @@ export class UserDialogComponent implements OnInit {
     } 
     else{
       this.user = new User();
-      this.user.profile = new UserProfile();
-      this.user.work = new UserWork();
-      this.user.contacts = new UserContacts();
-      this.user.social = new UserSocial();
-      this.user.settings = new UserSettings();
     } 
   }
 

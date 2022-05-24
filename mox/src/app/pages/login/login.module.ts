@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { LoginComponent } from './login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 export const routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' }
@@ -13,7 +14,8 @@ export const routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    HttpClientModule,
   ]
 })
 export class LoginModule { }
