@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module'; 
+import { SharedModule } from '../shared/shared.module';
 import { AdminComponent } from './admin.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
-import { FullScreenComponent } from './components/fullscreen/fullscreen.component'; 
+import { FullScreenComponent } from './components/fullscreen/fullscreen.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
-export const routes = [ 
-  { 
-    path: '', 
+export const routes = [
+  {
+    path: '',
     component: AdminComponent, children: [
-      { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }, 
+      { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'menu-items', loadChildren: () => import('./menu-items/menu-items.module').then(m => m.MenuItemsModule) },
       { path: 'products-items', loadChildren: () => import('./products-items/products-items.module').then(m => m.ProductsItemsModule) },
       { path: 'sales', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule) },
@@ -26,10 +26,14 @@ export const routes = [
       { path: 'refund', loadChildren: () => import('./refund/refund.module').then(m => m.RefundModule), data: { breadcrumb: 'Refund Requests' } },
       { path: 'followers', loadChildren: () => import('./followers/followers.module').then(m => m.FollowersModule), data: { breadcrumb: 'Followers' } },
       { path: 'support', loadChildren: () => import('./support/support.module').then(m => m.SupportModule), data: { breadcrumb: 'Support' } },
-      { path: 'reviews', loadChildren: () => import('./reviews/reviews.module').then(m => m.ReviewsModule), data: { breadcrumb: 'Reviews' } },  
+      { path: 'reviews', loadChildren: () => import('./reviews/reviews.module').then(m => m.ReviewsModule), data: { breadcrumb: 'Reviews' } },
+      { path: 'fixed-costs', loadChildren: () => import('./fixed-costs/fixed-costs.module').then(m => m.FixedCostsModule) },
+      { path: 'types-fixed-costs', loadChildren: () => import('./types-fixed-costs/types-fixed-costs.module').then(m => m.TypesFixedCostsModule) },
+      { path: 'scheduled-fixed-expenses', loadChildren: () => import('./scheduled-fixed-expenses/scheduled-fixed-expenses.module').then(m => m.ScheduledFixedExpensesModule) },
+      { path: 'reports', loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule) },
       { path: 'tiendas-sucursales', loadChildren: () => import('./tiendas-sucursales/tiendas-sucursales.module').then(m => m.TiendasSucursalesModule) },
     ]
-  } 
+  }
 ];
 
 

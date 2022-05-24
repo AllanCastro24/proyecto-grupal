@@ -23,7 +23,8 @@ const routes: Routes = [
         { path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule) },
         { path: 'faq', loadChildren: () => import('./pages/faq/faq.module').then(m => m.FaqModule) },
         { path: 'terms-conditions', loadChildren: () => import('./pages/terms-conditions/terms-conditions.module').then(m => m.TermsConditionsModule) },
-    ] 
+        
+    ]
   },
   { path: 'landing', loadChildren: () => import('./pages/landing/landing.module').then(m => m.LandingModule) },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
