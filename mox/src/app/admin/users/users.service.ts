@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User, usuario } from './user.model';
+import { puesto, User, usuario, tienda, sucursal } from './user.model';
 
 @Injectable()
 export class UsersService {
@@ -55,5 +55,20 @@ export class UsersService {
     //Login
     login(user:any){	    
         return this.http.post(this.api + "api/usuarios/login", user);
+    }
+    buscarUser(user:any){
+        return this.http.post(this.api + "api/usuarios/buscarUser", user);
+    }
+    //Puesto
+    getPuesto(): Observable<puesto[]> {
+        return this.http.get<puesto[]>(this.api+"api/usuarios/puesto");
+    }
+    //Tienda
+    getTienda(): Observable<tienda[]> {
+        return this.http.get<tienda[]>(this.api+"api/usuarios/tienda");
+    }
+    //Sucursal
+    getSucursal(): Observable<sucursal[]> {
+        return this.http.get<sucursal[]>(this.api+"api/usuarios/sucursal");
     }
 } 

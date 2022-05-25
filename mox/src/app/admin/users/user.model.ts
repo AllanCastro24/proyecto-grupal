@@ -32,3 +32,23 @@ export class usuario{
   Correo: string = '';
   image: string = '';
 }
+
+export class puesto{
+  ID_puesto:number = 0;
+  Nombre:string = '';
+  Status:number = 0;
+  ID_tienda:number = 0;
+}
+
+export class tienda{
+  ID_tienda:number=0;
+  Nombre:string='';
+  Telefono:string='';
+  Correo:string='';
+  Fecha!: Date;
+}
+
+export class sucursal{
+  ID_sucursal:number=0;
+  Pseudonimo:string='';
+}

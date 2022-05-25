@@ -41,7 +41,14 @@ export class LoginComponent implements OnInit {
     this.usersService.login(user).subscribe(l =>{
       console.log(l);
       if(l != "Usuario o contraseña incorrecto"){
-        this.router.navigate(['/']);
+        this.usersService.buscarUser(l).subscribe(u =>{
+          console.log(u);
+          if(u!="No es empleado"){
+            this.router.navigate(['/admin']);
+          }else{
+            this.router.navigate(['/']);
+          }
+        });
       }else{
         alert('Su contraseña es incorrecto');
         this.router.navigate(['/login']);

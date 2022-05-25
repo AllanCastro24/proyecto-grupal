@@ -1,19 +1,25 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { User } from '../user.model';
+import { User, usuario, puesto, tienda, sucursal } from '../user.model';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-user-dialog',
   templateUrl: './user-dialog.component.html',
-  styleUrls: ['./user-dialog.component.scss']
+  styleUrls: ['./user-dialog.component.scss'],
+  providers: [ UsersService ]
 })
 export class UserDialogComponent implements OnInit {
   public form:FormGroup;
+  public usuarios: usuario[] = [];
+  public puestos: puesto[] = [];
+  public tienda: tienda[] = [];
+  public sucursales: sucursal[] = [];
   public passwordHide:boolean = true;
   constructor(public dialogRef: MatDialogRef<UserDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public user: User,
-              public fb: FormBuilder) {
+              public fb: FormBuilder, public usersService:UsersService) {
                 if(user){
                   this.form = this.fb.group({
                     ID_empleado: this.user.ID_empleado,
@@ -56,10 +62,25 @@ export class UserDialogComponent implements OnInit {
     else{
       this.user = new User();
     } 
+    this.getPuesto();
+    this.getSucursar();
+    this.getTienda();
   }
 
   close(): void {
     this.dialogRef.close();
   }
 
+  public getPuesto(): void {
+    this.puestos = [];
+    this.usersService.getPuesto().subscribe(puesto => this.puestos = puesto);    
+  }
+  public getTienda(): void {
+    this.tienda = [];
+    this.usersService.getTienda().subscribe(tienda => this.tienda = tienda);    
+  }
+  public getSucursar(): void {
+    this.sucursales = [];
+    this.usersService.getSucursal().subscribe(sucursal => this.sucursales = sucursal);    
+  }
 }
