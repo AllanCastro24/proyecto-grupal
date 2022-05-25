@@ -1,0 +1,15 @@
+[
+  { "id": 1, "name": "Breakfast", "description": "Breakfast category description", "image": "https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg" },
+  { "id": 2, "name": "Lunch", "description": "Lunch category description", "image": "https://www.themealdb.com/images/media/meals/nv5lf31628771380.jpg" },
+  { "id": 3, "name": "Dinner", "description": "Dinner category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" },
+  { "id": 4, "name": "Dessert", "description": "Dessert category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" },
+  { "id": 5, "name": "Drinks", "description": "Drinks category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" },
+  { "id": 6, "name": "Appetizers", "description": "Appetizers category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" },
+  { "id": 7, "name": "Salads", "description": "Salads category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" },
+  { "id": 8, "name": "Soups", "description": "Soups category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" },
+  { "id": 9, "name": "Main Dishes", "description": "Main Dishes category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" },
+  { "id": 10, "name": "Side Dishes", "description": "Side Dishes category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" },
+  { "id": 11, "name": "Snacks", "description": "Snacks category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" },
+  { "id": 12, "name": "Salads", "description": "Salads category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" },
+  { "id": 13, "name": "Soups", "description": "Soups category description", "image": "https://www.themealdb.com/images/media/meals/pn59o51628769837.jpg" }
+]

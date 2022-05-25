@@ -1,0 +1,107 @@
+.header {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  width: 100%;
+  height: 150px;
+}
+
+.back {
+  background-color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: relative;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info {
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.info h1 {
+  font-size: 25px;
+  line-height: 25px;
+}
+
+.separator {
+  border: 1px solid #e6e6e6;
+}
+
+.tag {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  line-height: 20px;
+  text-align: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px 15px;
+}
+
+.item .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item span {
+  width: calc(100% - 39px);
+  margin-left: 15px;
+}
+
+.action {
+  position: absolute;
+  right: 15px;
+}
+
+.delivery span,
+.delivery .action {
+  border-bottom: 1px solid;
+}
+
+.item div {
+  display: flex;
+}
+
+.tag span:nth-child(2n) {
+  font-size: 10px;
+  margin: 0 5px;
+}
+
+.schedule {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px;
+}
+
+.day {
+  display: flex;
+  padding: 5px;
+  align-items: center;
+}
+
+.day > span,
+.day > div {
+  width: 50%;
+}
+
+.day > span {
+  text-transform: capitalize;
+}
+
+.day > div {
+  display: flex;
+  flex-direction: column;
+}

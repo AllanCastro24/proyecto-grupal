@@ -1,0 +1,71 @@
+<div fxLayout="row wrap" fxLayoutAlign="end center" ngClass.xs="mb-3">
+  <button mat-raised-button type="button" color="warn" (click)="deletePayment()" class="mx-1">
+    <mat-icon fxHide="false" fxHide.gt-xs="true">delete</mat-icon>
+    <span fxShow="false" fxShow.gt-xs="true">Delete Address</span>
+  </button>
+  <button mat-raised-button type="button" color="primary" (click)="addPayment()">
+    <mat-icon fxHide="false" fxHide.gt-xs="true">add</mat-icon>
+    <span fxShow="false" fxShow.gt-xs="true">Add New Address</span>
+  </button>
+</div>
+<mat-tab-group [selectedIndex]="selected" (selectedIndexChange)="onTabIndexChanged($event)" animationDuration="0">
+  <mat-tab *ngFor="let payment of payments.controls; let i = index">
+    <ng-template mat-tab-label>
+      <div>
+        <span>Tarjeta de pago</span>
+        <span class="mx-2">({{ i + 1 }}) </span>
+      </div>
+    </ng-template>
+    <div class="o-hidden mt-4">
+      <div [formGroup]="$any(payment)" fxLayout="row wrap" class="flex-wrapper">
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" formControlName="name" required />
+            <mat-error *ngIf="payment.get('name')!.errors?.required">El nombre es obligatorio</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Número de tarjeta</mat-label>
+            <input matInput placeholder="Número de tarjeta" formControlName="cardNumber" required />
+            <mat-error *ngIf="payment.get('cardNumber')!.errors?.required">Número de tarjeta obligatorio</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Mes de expiración</mat-label>
+            <mat-select placeholder="Mes de expiración" formControlName="expiryMonth" required>
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                {{ month.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="payment.get('expiryMonth')!.errors?.required">Mes requerido</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Año de expiración</mat-label>
+            <mat-select placeholder="Año de expiración" formControlName="expiryYear" required>
+              <mat-option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="payment.get('expiryYear')!.errors?.required">Año requerido</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>CVV</mat-label>
+            <input matInput placeholder="CVV" formControlName="cvv" required />
+            <mat-error *ngIf="payment.get('cvv')!.errors?.required">El lugar es necesario</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<div class="text-center">
+  <button type="button" mat-raised-button color="primary" (click)="save()"><span class="px-3 uppercase">Guardar</span></button>
+</div>
