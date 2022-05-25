@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Repartidor</string>
+    <string name="title_activity_main">Repartidor</string>
+    <string name="package_name">com.repartidor.app</string>
+    <string name="custom_url_scheme">com.repartidor.app</string>
+</resources>
