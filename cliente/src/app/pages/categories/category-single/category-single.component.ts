@@ -12,8 +12,8 @@ import { CategoriesService } from '../categories.service';
 export class CategorySingleComponent implements OnInit {
   private sub: any;
 
-  public companyId: number = 1;
-  public restaurants!: Restaurant[];
+  public categoryId!: number;
+  public restaurants: Restaurant[] = [];
 
   public totalResults: number = 0;
 
@@ -28,8 +28,10 @@ export class CategorySingleComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
-      this.getRestaurantsByCategory(params['id']);
-      this.getCategory(params['id']);
+      this.categoryId = Number(params.id);
+
+      this.getCategory();
+      this.getRestaurantsByCategory();
     });
   }
 
@@ -37,22 +39,27 @@ export class CategorySingleComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public getCategory(categoryId: number) {
+  public getCategory() {
     this.categoriesService.getCategories().subscribe((categories) => {
       this.currentCategory = categories.find((category) => {
-        return category.id === Number(categoryId);
+        return category.id === this.categoryId;
       });
     });
   }
 
-  public getRestaurantsByCategory(categoryId: number) {
-    this.restaurantService.getRestaurantsByCompany(this.companyId).subscribe((restaurants) => {
-      this.restaurants = restaurants.filter((restaurant) => {
-        return restaurant.categoryId.includes(Number(categoryId));
+  public async getRestaurantsByCategory() {
+    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+
+    for (let i = 1; i <= totalCompanies; i++) {
+      const restaurants = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
+      const filteredRestaurants = restaurants.filter((restaurant) => {
+        return restaurant.categoryId.includes(this.categoryId);
       });
 
-      this.totalResults = this.restaurants.length;
-    });
+      this.restaurants = [...this.restaurants, ...filteredRestaurants];
+    }
+
+    this.totalResults = this.restaurants.length;
   }
 
   public onReturn() {

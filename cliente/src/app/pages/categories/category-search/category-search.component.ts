@@ -49,9 +49,9 @@ export class CategorySearchComponent implements OnInit {
     const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
 
     for (let i = 1; i <= totalCompanies; i++) {
-      const restaurant = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
+      const restaurants = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
 
-      this.restaurants = [...this.restaurants, ...restaurant];
+      this.restaurants = [...this.restaurants, ...restaurants];
     }
   }
 

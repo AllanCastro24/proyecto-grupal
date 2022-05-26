@@ -17,8 +17,6 @@ export class TagSingleComponent implements OnInit {
   public tagId!: number;
   public currentTag!: Tag;
 
-  public companyId: number = 1;
-
   public restaurants: Restaurant[] = [];
 
   public totalResults: number = 0;
