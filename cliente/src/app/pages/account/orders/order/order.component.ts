@@ -162,6 +162,12 @@ export class OrderComponent implements OnInit {
     return this.payment.cardNumber.replace(/\d{4}$/, '****');
   }
 
+  public openLink(link: any) {
+    this.menuService.toggleMenu(true);
+
+    this.router.navigate(link);
+  }
+
   public onReturn() {
     this._location.back();
   }

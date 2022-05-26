@@ -1,23 +1,29 @@
 .content {
-    display: flex;
-    overflow-x: auto;
-  }
-  
-  .content .item {
-    text-align: center;
-    height: 120px;
-  }
-  
-  .content img {
-    width: 90px !important;
-  }
-  
-  .title {
-    font-size: 15px;
-    font-weight: bold;
-  }
-  
-  .content a {
-    white-space: nowrap;
-  }
-  
+  display: flex;
+  overflow-x: auto;
+}
+
+.content .item {
+  text-align: center;
+  height: 120px;
+}
+
+.content img {
+  width: 90px !important;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.content a {
+  white-space: nowrap;
+}
+
+.content .title {
+  width: 90px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

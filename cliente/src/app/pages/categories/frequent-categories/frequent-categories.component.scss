@@ -20,3 +20,10 @@
 .content a {
   white-space: nowrap;
 }
+
+.content .title {
+  width: 90px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
