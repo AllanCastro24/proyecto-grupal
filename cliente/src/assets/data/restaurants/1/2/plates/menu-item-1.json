@@ -1,21 +1,22 @@
 {
   "id": 1,
-  "name": "Snack Set",
-  "description": "Butter, cream, honey, salty cottage cheese, white cheese.",
-  "price": 8.2,
+  "name": "Pizza forma de Batman",
+  "description": "Queso, Pepperoni, Salsa, Ajo.",
+  "price": 150,
   "image": {
-    "small": "assets/images/foods/breakfast/1/small.jpg",
-    "medium": "assets/images/foods/breakfast/1/medium.jpg",
-    "big": "assets/images/foods/breakfast/1/big.jpg"
+    "small": "assets/images/foods/6-1/pizza_batman.jpg",
+    "medium": "assets/images/foods/6-1/pizza_batman.jpg",
+    "big": "assets/images/foods/6-1/pizza_batman.jpg"
   },
   "discount": 0,
-  "ratingsCount": 4,
-  "ratingsValue": 350,
-  "availibilityCount": 5,
+  "ratingsCount": 4.5,
+  "ratingsValue": 400,
+  "availibilityCount": 3,
   "cartCount": 0,
-  "weight": 160,
+  "weight": 280,
   "isVegetarian": false,
   "branchId": 2,
-  "companyId":  1,
-  "menuId": 1
+  "companyId": 1,
+  "menuId": 1,
+  "tagId": [1]
 }

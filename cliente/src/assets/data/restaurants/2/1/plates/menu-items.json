@@ -1,0 +1,108 @@
+[
+  {
+    "id": 1,
+    "name": "Hamburguesa La Clásica",
+    "description": "res, papas, Lechuga, tomate, cebolla, mostaza, pepinillos, chile, mayonesa, queso americano",
+    "price": 130,
+    "image": {
+      "small": "assets/images/foods/2-1/hamburguesa.webp",
+      "medium": "assets/images/foods/2-1/hamburguesa.webp",
+      "big": "assets/images/foods/2-1/hamburguesa.webp"
+    },
+    "discount": 0,
+    "ratingsCount": 4,
+    "ratingsValue": 350,
+    "availibilityCount": 5,
+    "cartCount": 0,
+    "weight": 160,
+    "isVegetarian": false,
+    "branchId": 1,
+    "companyId": 2,
+    "menuId": 1
+  },
+  {
+    "id": 2,
+    "name": "Baguette Pollo",
+    "description": "res, papas, Lechuga, tomate, cebolla, mostaza, pepinillos, chile, mayonesa, queso americano",
+    "price": 80,
+    "image": {
+      "small": "assets/images/foods/2-1/baguette.webp",
+      "medium": "assets/images/foods/2-1/baguette.webp",
+      "big": "assets/images/foods/2-1/baguette.webp"
+    },
+    "discount": 10,
+    "ratingsCount": 4.8,
+    "ratingsValue": 210,
+    "availibilityCount": 7,
+    "cartCount": 0,
+    "weight": 180,
+    "isVegetarian": false,
+    "branchId": 1,
+    "companyId": 2,
+    "menuId": 3
+  },
+  {
+    "id": 3,
+    "name": "Boneless",
+    "description": "Pollo, pechuga, salsa picante, frito",
+    "price": 340,
+    "image": {
+      "small": "assets/images/foods/2-1/boneless.webp",
+      "medium": "assets/images/foods/2-1/boneless.webp",
+      "big": "assets/images/foods/2-1/boneless.webp"
+    },
+    "discount": 0,
+    "ratingsCount": 4.9,
+    "ratingsValue": 90,
+    "availibilityCount": 5,
+    "cartCount": 0,
+    "weight": 125,
+    "isVegetarian": false,
+    "branchId": 1,
+    "companyId": 2,
+    "menuId": 4
+  },
+  {
+    "id": 4,
+    "name": "Torta Jumbo Especial",
+    "description": "Pierna, jamón, queso, mozzarella, Lechuga, tomate, aguacate, cebolla, chile, mayonesa, cebolla frita",
+    "price": 130,
+    "image": {
+      "small": "assets/images/foods/2-1/torta.webp",
+      "medium": "assets/images/foods/2-1/torta.webp",
+      "big": "assets/images/foods/2-1/torta.webp"
+    },
+    "discount": 0,
+    "ratingsCount": 3.5,
+    "ratingsValue": 40,
+    "availibilityCount": 7,
+    "cartCount": 0,
+    "weight": 110,
+    "isVegetarian": false,
+    "branchId": 1,
+    "companyId": 2,
+    "menuId": 2
+  },
+  {
+    "id": 5,
+    "name": "Cheese Sandwich",
+    "description": "Toasted bread, Cheddar cheese, Gouda cheese, butter, arugula, carrot, cucumber, radish.",
+    "price": 7.3,
+    "image": {
+      "small": "assets/images/foods/breakfast/5/small.jpg",
+      "medium": "assets/images/foods/breakfast/5/medium.jpg",
+      "big": "assets/images/foods/breakfast/5/big.jpg"
+    },
+    "discount": 0,
+    "ratingsCount": 5,
+    "ratingsValue": 480,
+    "availibilityCount": 7,
+    "cartCount": 0,
+    "weight": 110,
+    "isVegetarian": false,
+    "branchId": 1,
+    "companyId": 2,
+    "menuId": 3,
+    "tagId": [1, 3, 5, 6]
+  }
+]

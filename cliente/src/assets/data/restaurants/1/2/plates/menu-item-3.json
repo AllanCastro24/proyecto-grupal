@@ -1,22 +1,22 @@
 {
-    "id": 3,
-    "name": "Croque Madame", 
-    "description": "Toasted bread, veal salami, eggs, butter, Gouda cheese, arugula, carrot, cucumber, radish.",
-    "price": 9.50,
-    "image": {
-        "small": "assets/images/foods/breakfast/3/small.jpg",
-        "medium": "assets/images/foods/breakfast/3/medium.jpg",
-        "big": "assets/images/foods/breakfast/3/big.jpg"
-    },
-    "discount": 0,
-    "ratingsCount": 4,
-    "ratingsValue": 370, 
-    "availibilityCount": 5,
-    "cartCount": 0,
-    "weight": 125,
-    "isVegetarian": false,
+  "id": 3,
+  "name": "Pizza deep dish",
+  "description": "Queso, Salsa extra, Mantequilla.",
+  "price": 150,
+  "image": {
+    "small": "assets/images/foods/6-1/pizza_deep_dish.jpg",
+    "medium": "assets/images/foods/6-1/pizza_deep_dish.jpg",
+    "big": "assets/images/foods/6-1/pizza_deep_dish.jpg"
+  },
+  "discount": 0,
+  "ratingsCount": 4.3,
+  "ratingsValue": 130,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 300,
+  "isVegetarian": false,
   "branchId": 2,
-  "companyId":  1,
-    "menuId": 1, 
-  "tagId": [1, 3, 5, 6]
+  "companyId": 1,
+  "menuId": 1,
+  "tagId": [1]
 }

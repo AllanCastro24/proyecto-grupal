@@ -1,13 +1,13 @@
 {
-  "id": "2",
-  "companyId": 1,
-  "categoryId": [1, 6],
-  "tagId": [1],
-  "name": "Little Caesars (Plaza Punto)",
-  "description": "Pizzas a buen precio",
-  "address": "Blvd. Antonio Rosales 985, America, 81240 Los Mochis, Sin.",
-  "latitude": "25.7846063",
-  "longitude": "-109.0027504",
+  "id": "1",
+  "companyId": 5,
+  "categoryId": [2, 13],
+  "tagId": [1, 2, 4, 5],
+  "name": "Chinaloa",
+  "description": "Restaurante de comida oriental",
+  "address": "ALVARO OBREGON MERCADO JUAREZ Z L-16, Centro, 81200 Los Mochis, Sin.",
+  "latitude": "25.7876151",
+  "longitude": "-108.9941582",
   "schedule": {
     "lunes": [
       {
@@ -40,17 +40,17 @@
       }
     ]
   },
-  "image": "assets/images/restaurantes/6/little_caesar.webp",
+  "image": "assets/images/restaurantes/5/chinaloa.jpg",
   "rating": {
     "average": 4.3,
-    "count": 323
+    "count": 325
   },
   "delivery": {
-    "price": 35,
-    "time": 1100
+    "price": 45,
+    "time": 1200
   },
   "pickup": {
     "price": 0,
-    "time": 750
+    "time": 900
   }
 }

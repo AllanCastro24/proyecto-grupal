@@ -1,13 +1,13 @@
 {
   "id": "1",
-  "companyId": 1,
-  "categoryId": [1, 6],
-  "tagId": [1],
-  "name": "Little Caesars (Centenario)",
-  "description": "Pizzas a buen precio",
-  "address": "Blvd Centenario 660 Ote, Morelos, 81290 Los Mochis, Sin.",
-  "latitude": "25.7678167",
-  "longitude": "-108.993423",
+  "companyId": 4,
+  "categoryId": [8],
+  "tagId": [10],
+  "name": "Al Chile Ceviches",
+  "description": "Somos jovenes emprendedores Sinaloenses con un gusto increíble por los mariscos y el picante, te gusta esa idea? A nosotros también, visitanos!!",
+  "address": "Serdan, Libramiento Pte. 568, Centro, 81200 Los Mochis, Sin.",
+  "latitude": "25.7957324",
+  "longitude": "-108.9930509",
   "schedule": {
     "lunes": [
       {
@@ -40,17 +40,17 @@
       }
     ]
   },
-  "image": "assets/images/restaurantes/1/little_caesars.png",
+  "image": "assets/images/restaurantes/4/falchileceviches.jpg",
   "rating": {
-    "average": 4.5,
-    "count": 200
+    "average": 4.34,
+    "count": 342
   },
   "delivery": {
-    "price": 30,
-    "time": 900
+    "price": 40,
+    "time": 720
   },
   "pickup": {
-    "price": 0,
-    "time": 600
+    "price": 20,
+    "time": 900
   }
 }
