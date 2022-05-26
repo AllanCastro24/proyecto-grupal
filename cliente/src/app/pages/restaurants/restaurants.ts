@@ -6,7 +6,7 @@ export interface Restaurant {
   companyId: number;
   name: string;
   image: string;
-  // description: string;
+  description: string;
   address: string;
   // phone: string;
   // email: string;

@@ -8,6 +8,7 @@
   <div class="tag">
     <span *ngFor="let item of tags">{{ item.name }}</span>
   </div>
+  <span class="description">{{ restaurant?.description }}</span>
 </div>
 <div class="separator"></div>
 <div (click)="openAddress(restaurant.latitude, restaurant.longitude)" class="item location">
