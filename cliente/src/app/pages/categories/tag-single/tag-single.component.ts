@@ -18,7 +18,6 @@ export class TagSingleComponent implements OnInit {
   public currentTag!: Tag;
 
   public companyId: number = 1;
-  public totalCompany: number = 1;
 
   public restaurants: Restaurant[] = [];
 
@@ -27,7 +26,6 @@ export class TagSingleComponent implements OnInit {
   constructor(
     public categoriesService: CategoriesService,
     public restaurantService: RestaurantService,
-    public restaurantsService: RestaurantService,
     private activatedRoute: ActivatedRoute,
     public router: Router
   ) {}
@@ -55,8 +53,10 @@ export class TagSingleComponent implements OnInit {
   }
 
   public async getRestaurantsByTag(id: number) {
-    for (let i = 0; i < this.totalCompany; i++) {
-      const restaurants = (await this.restaurantsService.getRestaurants(i + 1).toPromise()) || [];
+    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+
+    for (let i = 1; i <= totalCompanies; i++) {
+      const restaurants = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
 
       for (const restaurant of restaurants) {
         const hasTag = restaurant.tagId.find((tagId) => tagId == id);

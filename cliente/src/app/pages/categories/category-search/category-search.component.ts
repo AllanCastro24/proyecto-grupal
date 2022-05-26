@@ -27,11 +27,7 @@ export class CategorySearchComponent implements OnInit {
   public searchResultsRestaurants: Restaurant[] = [];
   public searchResultsTag: Tag[] = [];
 
-  // TODO: getRestaurants() debería retornar todos los restaurantes de cualquier tipo,
-  //       pero no hay BD para hacer esto.
-  public totalCompany: number = 1;
-
-  constructor(private categoriesService: CategoriesService, public restaurantsService: RestaurantService, public router: Router) {}
+  constructor(private categoriesService: CategoriesService, public restaurantService: RestaurantService, public router: Router) {}
 
   ngOnInit() {
     this.getCategories();
@@ -50,8 +46,10 @@ export class CategorySearchComponent implements OnInit {
   }
 
   public async getRestaurants() {
-    for (let i = 0; i < this.totalCompany; i++) {
-      const restaurant = (await this.restaurantsService.getRestaurants(i + 1).toPromise()) || [];
+    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+
+    for (let i = 1; i <= totalCompanies; i++) {
+      const restaurant = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
 
       this.restaurants = [...this.restaurants, ...restaurant];
     }

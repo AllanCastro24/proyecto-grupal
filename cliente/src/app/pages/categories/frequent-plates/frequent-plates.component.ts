@@ -11,7 +11,7 @@ import { Restaurant } from '../../restaurants/restaurants';
 export class FrequentPlatesComponent implements OnInit {
   public plates: Plate[] = [];
 
-  constructor(public restaurantsService: RestaurantService) {}
+  constructor(public restaurantService: RestaurantService) {}
 
   ngOnInit(): void {
     this.getPlates();
@@ -22,10 +22,10 @@ export class FrequentPlatesComponent implements OnInit {
     const plates: Plate[] = [];
     const promises: any = [];
 
-    const totalCompanies = ((await this.restaurantsService.getCompanies().toPromise()) || []).length;
+    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
 
     for (let i = 1; i <= totalCompanies; i++) {
-      promises.push(this.restaurantsService.getRestaurantsByCompany(i).toPromise());
+      promises.push(this.restaurantService.getRestaurantsByCompany(i).toPromise());
     }
 
     for await (const promise of promises) {
@@ -35,7 +35,7 @@ export class FrequentPlatesComponent implements OnInit {
     promises.length = 0;
 
     for (const restaurant of restaurants) {
-      promises.push(this.restaurantsService.getPlates(restaurant.companyId, restaurant.id).toPromise());
+      promises.push(this.restaurantService.getPlates(restaurant.companyId, restaurant.id).toPromise());
     }
 
     for await (const promise of promises) {

@@ -37,15 +37,7 @@ export class RestaurantService {
     return this.http.get<Restaurant[]>(`${this.url}restaurants/companies.json`);
   }
 
-  public getRestaurants(companyId: number): Observable<Restaurant[]> {
-    return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
-  }
-
   public getRestaurantsByCompany(companyId: number): Observable<Restaurant[]> {
-    return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
-  }
-
-  public getFrequentRestaurants(companyId: number): Observable<Restaurant[]> {
     return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
   }
 

@@ -11,8 +11,6 @@ import { MenuService } from 'src/app/theme/components/menu/menu.service';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  public totalCompany: number = 1;
-
   public restaurants: Restaurant[] = [];
   public favoritesRestaurants: Restaurant[] = [];
 
@@ -31,8 +29,10 @@ export class MenuComponent implements OnInit {
   }
 
   public async getRestaurants() {
-    for (let i = 0; i < this.totalCompany; i++) {
-      const restaurant = (await this.restaurantService.getRestaurants(i + 1).toPromise()) || [];
+    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+
+    for (let i = 1; i <= totalCompanies; i++) {
+      const restaurant = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
 
       this.restaurants = [...this.restaurants, ...restaurant];
     }
