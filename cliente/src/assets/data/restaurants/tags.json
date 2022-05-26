@@ -17,10 +17,38 @@
   },
   {
     "id": "5",
-    "name": "Drink"
+    "name": "Hamburguesa"
   },
   {
     "id": "6",
-    "name": "Soup"
+    "name": "Torta"
+  },
+  {
+    "id": "7",
+    "name": "Boneless"
+  },
+  {
+    "id": "8",
+    "name": "Baguette"
+  },
+  {
+    "id": "9",
+    "name": "Cortes"
+  },
+  {
+    "id": "10",
+    "name": "Mariscos"
+  },
+  {
+    "id": "11",
+    "name": "Especiales"
+  },
+  {
+    "id": "12",
+    "name": "Bebidas"
+  },
+  {
+    "id": "13",
+    "name": "Sushi"
   }
 ]
