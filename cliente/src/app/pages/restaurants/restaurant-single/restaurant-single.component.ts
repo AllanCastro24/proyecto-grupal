@@ -181,7 +181,7 @@ export class RestaurantSingleComponent implements OnInit {
   public checkFavorite() {
     const favorites = this.usersService.getUser().favoriteRestaurants;
 
-    if (favorites && favorites.find((restaurant) => restaurant.id === this.restaurant.id)) {
+    if (favorites && favorites.find((restaurant) => restaurant.id == this.restaurant.id)) {
       this.favoriteIcon = 'favorite';
     }
   }

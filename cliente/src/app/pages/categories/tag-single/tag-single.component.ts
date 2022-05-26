@@ -30,13 +30,13 @@ export class TagSingleComponent implements OnInit {
     public router: Router
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
       this.getRestaurantsByTag(params['id']);
       this.tagId = params['id'];
     });
 
-    this.getTags();
+    await this.getTags();
     this.getTag();
   }
 
@@ -49,7 +49,7 @@ export class TagSingleComponent implements OnInit {
   }
 
   public getTag() {
-    return this.tags.find((tag) => tag.id == this.tagId);
+    this.currentTag = this.tags.find((tag) => tag.id == this.tagId) || <Tag>{};
   }
 
   public async getRestaurantsByTag(id: number) {

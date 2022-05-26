@@ -29,6 +29,8 @@ export class MenuComponent implements OnInit {
   }
 
   public async getRestaurants() {
+    this.restaurants = [];
+
     const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
 
     for (let i = 1; i <= totalCompanies; i++) {
@@ -43,12 +45,15 @@ export class MenuComponent implements OnInit {
   }
 
   public isFavorite(restaurant: Restaurant) {
-    return this.favoritesRestaurants.find((fav) => fav.id == restaurant.id) ? 'favorite' : 'favorite_border';
+    const index = this.favoritesRestaurants.findIndex((fav) => fav.companyId == restaurant.companyId && fav.id == restaurant.id);
+
+    return index !== -1 ? 'favorite' : 'favorite_border';
   }
 
   public addToFavorites(restaurant: Restaurant, event: any) {
     event.target.textContent = this.restaurantService.addToFavorites(restaurant) ? 'favorite' : 'favorite_border';
 
     this.getFavorites();
+    this.getRestaurants();
   }
 }
