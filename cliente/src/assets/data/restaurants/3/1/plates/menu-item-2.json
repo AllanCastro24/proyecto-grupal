@@ -4,9 +4,9 @@
   "description": "Salsa BBQ, cebolla, empanizada, tocino, doble, queso, papas, francesa.",
   "price": 80,
   "image": {
-    "small": "assets/images/foods/3-1/baguette.webp",
-    "medium": "assets/images/foods/3-1/baguette.webp",
-    "big": "assets/images/foods/3-1/baguette.webp"
+    "small": "assets/images/foods/3-1/hamburguesaleñador.jpg",
+    "medium": "assets/images/foods/3-1/hamburguesaleñador.jpg",
+    "big": "assets/images/foods/3-1/hamburguesaleñador.jpg"
   },
   "discount": 10,
   "ratingsCount": 4.8,

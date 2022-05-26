@@ -153,10 +153,10 @@ export class RestaurantService {
         user.cartList[indexCartList].items.push(plate);
 
         this.usersService.setUser(user);
-
-        this.calculateCartTotal(plate.branchId, plate.companyId);
       }
     }
+
+    this.calculateCartTotal(plate.branchId, plate.companyId);
 
     console.log(this.usersService.getUser(), plate);
   }
@@ -193,6 +193,5 @@ export class RestaurantService {
     user.orderList.push(order);
 
     this.usersService.setUser(user);
-    
   }
 }
