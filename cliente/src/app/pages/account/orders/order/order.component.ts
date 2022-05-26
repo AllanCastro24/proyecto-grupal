@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
@@ -56,7 +55,6 @@ export class OrderComponent implements OnInit {
   ];
 
   constructor(
-    private _location: Location,
     private activatedRoute: ActivatedRoute,
     public usersService: UsersService,
     public restaurantService: RestaurantService,
@@ -162,13 +160,8 @@ export class OrderComponent implements OnInit {
     return this.payment.cardNumber.replace(/\d{4}$/, '****');
   }
 
-  public openLink(link: any) {
-    this.menuService.toggleMenu(true);
-
-    this.router.navigate(link);
-  }
-
   public onReturn() {
-    this._location.back();
+    this.menuService.toggleMenu(true);
+    this.router.navigate(['/orders']);
   }
 }
