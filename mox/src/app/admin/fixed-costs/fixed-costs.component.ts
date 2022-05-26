@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppService } from 'src/app/app.service';
 import { FixedCostsDialogComponent } from './fixed-costs-dialog/fixed-costs-dialog.component'
-import { customers } from './customers';
+
 // import { threadId } from 'worker_threads';
 
 @Component({
@@ -14,7 +14,8 @@ import { customers } from './customers';
   styleUrls: ['./fixed-costs.component.scss']
 })
 export class FixedCostsComponent implements OnInit {
-  displayedColumns: string[] = ['tipo_gasto', 'descripcion', 'cantidad', 'fecha', 'id_sucursal', 'periodicidad', 'status', 'actions'];
+  // displayedColumns: string[] = ['tipo_gasto', 'descripcion', 'cantidad', 'fecha', 'id_sucursal', 'periodicidad', 'status', 'actions'];
+  displayedColumns: string[] = ['tipo_gasto', 'descripcion', 'cantidad', 'fecha', 'periodicidad', 'status', 'actions'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;

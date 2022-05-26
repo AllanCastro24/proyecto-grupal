@@ -13,7 +13,8 @@ import { ScheduledFixedExpensesDialogComponent } from './scheduled-fixed-expense
   styleUrls: ['./scheduled-fixed-expenses.component.scss']
 })
 export class ScheduledFixedExpensesComponent implements OnInit {
-  displayedColumns: string[] = ['tipo_gasto', 'descripcion', 'cantidad', 'fecha', 'id_sucursal', 'periodicidad', 'status', 'actions'];
+  // displayedColumns: string[] = ['tipo_gasto', 'descripcion', 'cantidad', 'fecha', 'id_sucursal', 'periodicidad', 'status', 'actions'];
+  displayedColumns: string[] = ['tipo_gasto', 'descripcion', 'cantidad', 'fecha', 'periodicidad', 'status', 'actions'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;

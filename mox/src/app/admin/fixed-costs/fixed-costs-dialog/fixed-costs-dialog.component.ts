@@ -26,7 +26,7 @@ export class FixedCostsDialogComponent implements OnInit {
       tipo_gasto: ['', Validators.required],
       cantidad: ['', Validators.required],
       fecha: ['', Validators.required],
-      id_sucursal: ['', Validators.required],
+      // id_sucursal: ['', Validators.required],
       periodicidad: ['', Validators.required],  
       status: ['', Validators.required], 
            
