@@ -33,6 +33,10 @@ export class RestaurantService {
     });
   }
 
+  public getCompanies(): Observable<Restaurant[]> {
+    return this.http.get<Restaurant[]>(`${this.url}restaurants/companies.json`);
+  }
+
   public getRestaurants(companyId: number): Observable<Restaurant[]> {
     return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
   }
