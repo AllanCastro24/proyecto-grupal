@@ -1,0 +1,22 @@
+{
+  "id": 4,
+  "name": "Torta Jumbo Especial",
+  "description": "Pierna, jamón, queso, mozzarella, Lechuga, tomate, aguacate, cebolla, chile, mayonesa, cebolla frita",
+  "price": 130,
+  "image": {
+    "small": "assets/images/foods/2-1/torta.webp",
+    "medium": "assets/images/foods/2-1/torta.webp",
+    "big": "assets/images/foods/2-1/torta.webp"
+  },
+  "discount": 0,
+  "ratingsCount": 3.5,
+  "ratingsValue": 40,
+  "availibilityCount": 7,
+  "cartCount": 0,
+  "weight": 110,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 2,
+  "menuId": 2,
+  "tagId": [6]
+}

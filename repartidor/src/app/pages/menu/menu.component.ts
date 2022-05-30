@@ -11,8 +11,6 @@ import { MenuService } from 'src/app/theme/components/menu/menu.service';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  public totalCompany: number = 1;
-
   public restaurants: Restaurant[] = [];
   public favoritesRestaurants: Restaurant[] = [];
 
@@ -31,8 +29,12 @@ export class MenuComponent implements OnInit {
   }
 
   public async getRestaurants() {
-    for (let i = 0; i < this.totalCompany; i++) {
-      const restaurant = (await this.restaurantService.getRestaurants(i + 1).toPromise()) || [];
+    this.restaurants = [];
+
+    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+
+    for (let i = 1; i <= totalCompanies; i++) {
+      const restaurant = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
 
       this.restaurants = [...this.restaurants, ...restaurant];
     }
@@ -43,12 +45,15 @@ export class MenuComponent implements OnInit {
   }
 
   public isFavorite(restaurant: Restaurant) {
-    return this.favoritesRestaurants.find((fav) => fav.id == restaurant.id) ? 'favorite' : 'favorite_border';
+    const index = this.favoritesRestaurants.findIndex((fav) => fav.companyId == restaurant.companyId && fav.id == restaurant.id);
+
+    return index !== -1 ? 'favorite' : 'favorite_border';
   }
 
   public addToFavorites(restaurant: Restaurant, event: any) {
     event.target.textContent = this.restaurantService.addToFavorites(restaurant) ? 'favorite' : 'favorite_border';
 
     this.getFavorites();
+    this.getRestaurants();
   }
 }

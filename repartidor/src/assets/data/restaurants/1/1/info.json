@@ -1,13 +1,13 @@
 {
   "id": "1",
   "companyId": 1,
-  "categoryId": [1, 3],
-  "tagId": [1, 2, 3, 4, 5, 6],
-  "name": "Celestial",
-  "description": "You are a being of the celestial sphere, a being whose body and mind are shaped by an eternal law of motion. You possess the ability to cast divine spells. You are a celestial.",
-  "address": "Av. Independencia 44, México",
-  "latitude": "25.811785",
-  "longitude": "-108.9828345",
+  "categoryId": [1, 6],
+  "tagId": [1],
+  "name": "Little Caesars (Centenario)",
+  "description": "Pizzas a buen precio",
+  "address": "Blvd Centenario 660 Ote, Morelos, 81290 Los Mochis, Sin.",
+  "latitude": "25.7678167",
+  "longitude": "-108.993423",
   "schedule": {
     "lunes": [
       {
@@ -40,17 +40,17 @@
       }
     ]
   },
-  "image": "https://10619-2.s.cdn12.com/rests/small/w285/316_509950664.jpg",
+  "image": "assets/images/restaurantes/1/little_caesars.png",
   "rating": {
     "average": 4.5,
-    "count": 190
+    "count": 200
   },
   "delivery": {
-    "price": 600,
-    "time": 300
+    "price": 30,
+    "time": 900
   },
   "pickup": {
-    "price": 100,
-    "time": 50
+    "price": 0,
+    "time": 600
   }
 }

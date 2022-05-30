@@ -179,9 +179,10 @@ export class RestaurantSingleComponent implements OnInit {
   }
 
   public checkFavorite() {
-    const favorites = this.usersService.getUser().favoriteRestaurants;
+    const favorites = this.restaurantService.getFavorites();
+    const index = favorites.findIndex((restaurant) => restaurant.companyId == this.companyId && restaurant.id == this.restaurant.id);
 
-    if (favorites && favorites.find((restaurant) => restaurant.id === this.restaurant.id)) {
+    if (index !== -1) {
       this.favoriteIcon = 'favorite';
     }
   }

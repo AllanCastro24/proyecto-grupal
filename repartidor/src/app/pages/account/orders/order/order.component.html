@@ -1,31 +1,34 @@
 <div class="details px-3">
-  <div (click)="onReturn()" class="btn-back">
-    <mat-icon>arrow_back</mat-icon>
+  <div class="btn-back">
+    <mat-icon (click)="onReturn()">arrow_back</mat-icon>
+    <mat-icon *ngIf="order.status == status[2]" (click)="cancelOrder()" class="close mat-18">close</mat-icon>
   </div>
-  <h3>Detalles de la orden ({{ order.status.name }})</h3>
-  <div class="delivery-type">
-    <div id="delivery-type-1" class="delivery-type-item delivery active">
-      <span class="label">Envío</span>
-      <div class="delivery-info">
-        <span class="time">{{ (restaurant?.delivery?.time || 0) * 1000 | date: 'mm:ss' }} min</span>
-        <span>●</span>
-        <span class="price">{{ restaurant?.delivery?.price | currency }}</span>
-      </div>
-    </div>
-    <div id="delivery-type-2" class="delivery-type-item pickup">
-      <span class="label">Recoger</span>
-      <span class="time">{{ (restaurant?.pickup?.time || 0) * 1000 | date: 'mm:ss' }} min</span>
-    </div>
-  </div>
-  <div (click)="openAddress()" class="select-address">
+  <h3>Detalles del pedido ({{ deliveryStatusTop.name }})</h3>
+  <div (click)="openRestaurantAddress()" class="restaurant-address">
     <div class="item">
       <div class="place-icon">
-        <mat-icon class="mat-18">{{ deliveryPlaceIcon }}</mat-icon>
+        <mat-icon class="mat-18">store</mat-icon>
       </div>
       <div class="content">
         <div class="address">
-          <span>{{ addressTop }}</span>
-          <span>{{ addressAction }} en {{ addressBottom }}</span>
+          <span>{{ restaurant?.name }}</span>
+          <span>Recoges en {{ restaurantAddress }}</span>
+        </div>
+        <div class="view">
+          <mat-icon>navigate_next</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div (click)="openClientAddress()" class="client-address">
+    <div class="item">
+      <div class="place-icon">
+        <mat-icon class="mat-18">person</mat-icon>
+      </div>
+      <div class="content">
+        <div class="address">
+          <span>{{ user?.username }} - {{ clientAddress?.postalCode }}</span>
+          <span>Entregas en {{ clientAddress?.address }}</span>
         </div>
         <div class="view">
           <mat-icon>navigate_next</mat-icon>
@@ -35,16 +38,10 @@
   </div>
   <div class="items">
     <div>
-      <span>Tus artículos</span>
-      <span [routerLink]="['/restaurants', restaurantId, companyId]">Mirar menú</span>
+      <span>Los artículos</span>
     </div>
     <div class="list">
-      <div
-        routerLink="/cart"
-        *ngFor="let item of cartItems"
-        [routerLink]="['/restaurants', item?.branchId, item?.companyId, 'plate', item.id]"
-        class="item"
-      >
+      <div *ngFor="let item of cartItems" class="item">
         <div class="image">
           <img [src]="item.image.medium" />
         </div>
@@ -52,9 +49,6 @@
           <div class="info">
             <span class="title">{{ item.cartCount }} - {{ item.name }}</span>
             <div class="note">{{ item.note }}</div>
-          </div>
-          <div class="view">
-            <mat-icon>navigate_next</mat-icon>
           </div>
         </div>
       </div>
@@ -65,7 +59,7 @@
       <span>Subtotal</span>
       <span>{{ subtotal | currency }}</span>
     </div>
-    <div *ngIf="deliveryType === DeliveryType.Delivery">
+    <div>
       <span>Envío</span>
       <span>{{ restaurant?.delivery?.price | currency }}</span>
     </div>
@@ -75,18 +69,14 @@
     </div>
   </div>
   <h4>Método de pago</h4>
-  <div routerLink="/account/payments" class="payment">
+  <div class="payment">
     <div class="payment-icon">
-      <mat-icon class="mat-18">credit_card</mat-icon>
+      <mat-icon class="mat-18">attach_money</mat-icon>
     </div>
     <div class="content">
-      <span *ngIf="hasPayment">{{ payment.name }} - {{ getCardNumber() }}</span>
-      <span *ngIf="!hasPayment">Agregar método de pago</span>
-      <div class="view">
-        <mat-icon>navigate_next</mat-icon>
-      </div>
+      <span>Pagarás en efectivo</span>
     </div>
   </div>
 </div>
 <div class="separator"></div>
-<div routerLink="/orders" class="place-order">Ok</div>
+<div (click)="changeStatus()" class="place-order">{{ deliveryStatusBottom.name }}</div>

@@ -24,6 +24,11 @@
   margin: 15px;
   display: flex;
   flex-direction: column;
+
+  .description {
+    margin-top: 10px;
+    font-weight: 600;
+  }
 }
 
 .info h1 {

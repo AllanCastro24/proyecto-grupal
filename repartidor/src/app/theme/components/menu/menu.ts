@@ -29,9 +29,9 @@ export const horizontalMenuItems = [
 ];
 
 export const verticalMenuItems = [
-  new Menu(2, 'NAV.HOME', 'home', '/home', null, null, false, 0),
-  new Menu(3, 'SEARCH', 'manage_search', '/categories', null, null, false, 0),
-  new Menu(4, 'CARTS', 'shopping_cart', '/cart', null, null, false, 0),
+  new Menu(2, 'NAV.HOME', 'receipt', '/orders', null, null, false, 0),
+  // new Menu(3, 'SEARCH', 'manage_search', '/categories', null, null, false, 0),
+  // new Menu(4, 'CARTS', 'shopping_cart', '/cart', null, null, false, 0),
   new Menu(5, 'ACCOUNT', 'person', '/account', null, null, false, 0),
   //   new Menu(5, 'ACCOUNT', '/menu', null, null, false, 0),
 ];

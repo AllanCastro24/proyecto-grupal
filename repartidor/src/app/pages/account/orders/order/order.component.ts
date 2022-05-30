@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
@@ -6,9 +5,11 @@ import { Plate } from 'src/app/pages/restaurants/plates';
 import { RestaurantService } from 'src/app/pages/restaurants/restaurant.service';
 import { Order, OrderStatus, Restaurant } from 'src/app/pages/restaurants/restaurants';
 import { MenuService } from 'src/app/theme/components/menu/menu.service';
+import { User } from 'src/app/users/users';
 import { UsersService } from 'src/app/users/users.service';
-import { DeliveryType, Payment } from '../../account';
-import { AccountService } from '../../account.service';
+import { DeliveryType, Payment, Address } from '../../account';
+import { DeliveryOrder } from '../delivery';
+import { DeliveryService } from '../delivery.service';
 
 @Component({
   selector: 'app-order',
@@ -22,20 +23,13 @@ export class OrderComponent implements OnInit {
   public restaurantId!: number;
   public companyId!: number;
 
+  public user!: User;
   public restaurant!: Restaurant;
-  public order!: Order;
+  public order!: DeliveryOrder;
   public cartItems: Plate[] = [];
 
-  public addressAction: string = 'Entregar';
-  public addressTop: string = '';
-  public addressBottom: string = '';
-
-  public DeliveryType = DeliveryType;
-  public deliveryPlaceIcon: string = 'place';
-  public deliveryType: number = DeliveryType.Delivery;
-
-  public payment!: Payment;
-  public hasPayment: boolean = false;
+  public restaurantAddress: string = '';
+  public clientAddress!: Address;
 
   public subtotal: number = 0;
   public total: number = 0;
@@ -43,26 +37,39 @@ export class OrderComponent implements OnInit {
   public status: OrderStatus[] = [
     {
       id: 1,
-      name: 'Pendiente',
+      name: 'Aceptar',
     },
     {
       id: 2,
-      name: 'En camino',
+      name: 'Sin aceptar',
     },
     {
       id: 3,
-      name: 'Completo',
+      name: 'Vas en camino',
+    },
+    {
+      id: 4,
+      name: 'Completar',
+    },
+    {
+      id: 5,
+      name: 'Completado',
+    },
+    {
+      id: 6,
+      name: 'Cancelado',
     },
   ];
+  public deliveryStatusTop = this.status[1];
+  public deliveryStatusBottom = this.status[0];
 
   constructor(
-    private _location: Location,
     private activatedRoute: ActivatedRoute,
     public usersService: UsersService,
     public restaurantService: RestaurantService,
     public menuService: MenuService,
-    private accountService: AccountService,
-    public router: Router
+    public router: Router,
+    private deliveryService: DeliveryService
   ) {}
 
   async ngOnInit() {
@@ -72,14 +79,14 @@ export class OrderComponent implements OnInit {
 
     this.menuService.toggleMenu(false);
 
-    this.setupOrder();
+    await this.setupOrder();
+    await this.getUser();
     await this.getRestaurant();
+    this.setStatus();
     this.getCartList();
-    this.setAddress();
+    this.setRestaurantAddress();
+    this.setClientAddress();
     this.updateTotal();
-    this.getDefaultPayment();
-    this.hasDefaultPayment();
-    this.setDelieryType();
 
     console.log(this.cartItems, this.restaurantId, this.companyId);
   }
@@ -88,23 +95,31 @@ export class OrderComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public setupOrder() {
-    this.order = this.accountService.getOrder(this.orderId);
+  public async setupOrder() {
+    const orders = (await this.deliveryService.getOrders().toPromise()) || [];
+
+    this.order = orders.find((order) => order.id == this.orderId) || <DeliveryOrder>{};
 
     this.restaurantId = this.order.items[0].branchId;
     this.companyId = this.order.items[0].companyId;
   }
 
-  public async getRestaurant() {
-    return new Promise(async (resolve, reject) => {
-      this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
-      resolve(true);
-    });
+  public async getUser() {
+    const users = (await this.deliveryService.getUsers().toPromise()) || [];
+
+    this.user = users.find((user) => user.id == this.order.accountId) || <User>{};
   }
 
-  public setAddress() {
-    this.addressTop = this.order.address.postalCode;
-    this.addressBottom = this.order.address.address;
+  public async getRestaurant() {
+    this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
+  }
+
+  public setRestaurantAddress() {
+    this.restaurantAddress = this.restaurant.address;
+  }
+
+  public setClientAddress() {
+    this.clientAddress = (this.user.addressList || [])[0] || <Address>{};
   }
 
   public getCartList() {
@@ -112,57 +127,72 @@ export class OrderComponent implements OnInit {
     this.subtotal = this.cartItems.reduce((acc, cur) => acc + cur.price * cur.cartCount, 0);
   }
 
-  public setDelieryType() {
-    const previous = document.getElementById(`delivery-type-${this.deliveryType}`);
-    previous?.classList.remove('active');
+  public openRestaurantAddress() {
+    const address = `${this.restaurant.latitude},${this.restaurant.longitude}`;
 
-    this.deliveryType = this.order.deliveryTypeId;
-
-    if (this.deliveryType === DeliveryType.Delivery) {
-      this.deliveryPlaceIcon = 'place';
-
-      this.addressAction = 'Entregar';
-      this.addressTop = this.order.address.postalCode;
-      this.addressBottom = this.order.address.address;
-    } else {
-      this.deliveryPlaceIcon = 'store';
-
-      this.addressAction = 'Recoger';
-      this.addressTop = this.restaurant.name;
-      this.addressBottom = this.restaurant.address;
-    }
-
-    const current = document.getElementById(`delivery-type-${this.deliveryType}`);
-    current?.classList.add('active');
+    Browser.open({
+      url: `https://www.google.com/maps/dir//${address}/@${address},20z`,
+    });
   }
 
-  public openAddress() {
-    if (this.deliveryType === DeliveryType.Delivery) {
-      this.router.navigate(['/account/addresses']);
-    } else {
-      Browser.open({
-        url: `https://www.google.com/maps/@${this.restaurant.latitude},${this.restaurant.longitude},20z`,
-      });
-    }
+  public openClientAddress() {
+    const address = `${this.clientAddress.latitude},${this.clientAddress.longitude}`;
+
+    Browser.open({
+      url: `https://www.google.com/maps/dir//${address}/@${address},20z`,
+    });
   }
 
   public updateTotal() {
-    this.total = this.deliveryType === DeliveryType.Delivery ? this.subtotal + this.restaurant.delivery.price : this.subtotal;
-  }
-
-  public getDefaultPayment() {
-    this.payment = this.order.payment;
-  }
-
-  public hasDefaultPayment() {
-    this.hasPayment = Object.keys(this.payment).length !== 0;
-  }
-
-  public getCardNumber() {
-    return this.payment.cardNumber.replace(/\d{4}$/, '****');
+    this.total = this.subtotal + this.restaurant.delivery.price;
   }
 
   public onReturn() {
-    this._location.back();
+    this.menuService.toggleMenu(true);
+    this.router.navigate(['/orders']);
+  }
+
+  public setStatus() {
+    if (this.deliveryService.orderAccepted(this.order)) {
+      this.order.status = this.deliveryService.getOrder(this.order.id).status;
+    }
+
+    if (this.order.status.id == 3) {
+      this.deliveryStatusTop = this.status[2];
+      this.deliveryStatusBottom = this.status[3];
+    } else if (this.order.status.id == 5) {
+      this.deliveryStatusTop = this.status[4];
+      this.deliveryStatusBottom = this.status[4];
+    } else if (this.order.status.id == 6) {
+      this.deliveryStatusTop = this.status[5];
+      this.deliveryStatusBottom = this.status[5];
+    }
+  }
+
+  public changeStatus() {
+    this.order.status = this.status[2];
+
+    if (this.deliveryStatusBottom == this.status[0]) {
+      this.deliveryService.addOrder(this.order);
+
+      this.deliveryStatusTop = this.status[2];
+      this.deliveryStatusBottom = this.status[3];
+    } else if (this.deliveryStatusBottom == this.status[3]) {
+      this.order.status = this.status[4];
+      this.deliveryService.updateOrder(this.order);
+
+      this.deliveryStatusTop = this.status[4];
+      this.deliveryStatusBottom = this.status[4];
+    } else {
+      this.onReturn();
+    }
+  }
+
+  public cancelOrder() {
+    this.order.status = this.status[5];
+    this.deliveryService.updateOrder(this.order);
+
+    this.deliveryStatusTop = this.status[5];
+    this.deliveryStatusBottom = this.status[5];
   }
 }

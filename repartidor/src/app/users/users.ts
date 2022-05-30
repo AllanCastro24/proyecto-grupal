@@ -1,4 +1,5 @@
 import { Address, Payment } from '../pages/account/account';
+import { DeliveryOrder } from '../pages/account/orders/delivery';
 import { CartList, Order, Restaurant } from '../pages/restaurants/restaurants';
 
 export class User {
@@ -15,6 +16,7 @@ export class User {
   cartList?: CartList[];
   addressList?: Address[];
   paymentList?: Payment[];
+  deliveryOrders?: DeliveryOrder[];
 }
 
 export class UserProfile {

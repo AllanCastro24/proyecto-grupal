@@ -17,9 +17,6 @@ export class TagSingleComponent implements OnInit {
   public tagId!: number;
   public currentTag!: Tag;
 
-  public companyId: number = 1;
-  public totalCompany: number = 1;
-
   public restaurants: Restaurant[] = [];
 
   public totalResults: number = 0;
@@ -27,18 +24,17 @@ export class TagSingleComponent implements OnInit {
   constructor(
     public categoriesService: CategoriesService,
     public restaurantService: RestaurantService,
-    public restaurantsService: RestaurantService,
     private activatedRoute: ActivatedRoute,
     public router: Router
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
       this.getRestaurantsByTag(params['id']);
       this.tagId = params['id'];
     });
 
-    this.getTags();
+    await this.getTags();
     this.getTag();
   }
 
@@ -51,12 +47,14 @@ export class TagSingleComponent implements OnInit {
   }
 
   public getTag() {
-    return this.tags.find((tag) => tag.id == this.tagId);
+    this.currentTag = this.tags.find((tag) => tag.id == this.tagId) || <Tag>{};
   }
 
   public async getRestaurantsByTag(id: number) {
-    for (let i = 0; i < this.totalCompany; i++) {
-      const restaurants = (await this.restaurantsService.getRestaurants(i + 1).toPromise()) || [];
+    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+
+    for (let i = 1; i <= totalCompanies; i++) {
+      const restaurants = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
 
       for (const restaurant of restaurants) {
         const hasTag = restaurant.tagId.find((tagId) => tagId == id);

@@ -9,7 +9,7 @@ import { Data, Success, User } from './users';
   providedIn: 'root',
 })
 export class UsersService {
-  private _isLoggedIn = new BehaviorSubject<boolean>(false);
+  public _isLoggedIn = new BehaviorSubject<boolean>(false);
   private readonly TOKEN_NAME = 'auth-token';
 
   public isLoggedIn = this._isLoggedIn.asObservable();

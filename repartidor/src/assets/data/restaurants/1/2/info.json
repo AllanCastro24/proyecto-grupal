@@ -1,13 +1,13 @@
 {
   "id": "2",
   "companyId": 1,
-  "categoryId": [2, 3],
-  "tagId": [1, 2, 3, 4, 5, 6],
-  "name": "Demonic",
-  "description": "You are a being of the demonic sphere, a being whose body and mind are shaped by an eternal law of motion. You possess the ability to cast demonic spells. You are a demon.",
-  "address": "Av. Independencia 44, México",
-  "latitude": "25.811785",
-  "longitude": "-108.9828345",
+  "categoryId": [1, 6],
+  "tagId": [1],
+  "name": "Little Caesars (Plaza Punto)",
+  "description": "Pizzas a buen precio",
+  "address": "Blvd. Antonio Rosales 985, America, 81240 Los Mochis, Sin.",
+  "latitude": "25.7846063",
+  "longitude": "-109.0027504",
   "schedule": {
     "lunes": [
       {
@@ -40,17 +40,17 @@
       }
     ]
   },
-  "image": "https://10619-2.s.cdn12.com/rests/small/w285/316_509950665.jpg",
+  "image": "assets/images/restaurantes/6/little_caesar.webp",
   "rating": {
-    "average": 4.5,
-    "count": 190
+    "average": 4.3,
+    "count": 323
   },
   "delivery": {
-    "price": 200,
-    "time": 100
+    "price": 35,
+    "time": 1100
   },
   "pickup": {
-    "price": 100,
-    "time": 50
+    "price": 0,
+    "time": 750
   }
 }

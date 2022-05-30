@@ -5,21 +5,31 @@ import { Restaurant } from '../../restaurants/restaurants';
 @Component({
   selector: 'app-frequent-restaurants',
   templateUrl: './frequent-restaurants.component.html',
-  styleUrls: ['./frequent-restaurants.component.scss']
+  styleUrls: ['./frequent-restaurants.component.scss'],
 })
 export class FrequentRestaurantsComponent implements OnInit {
-  public companyId: number = 1;
   public restaurants!: Restaurant[];
 
-  constructor(public restaurantsService: RestaurantService) {}
+  constructor(public restaurantService: RestaurantService) {}
 
   ngOnInit(): void {
-    this.getCategories();
+    this.getRestaurants();
   }
 
-  public getCategories() {
-    this.restaurantsService.getFrequentRestaurants(this.companyId).subscribe((restaurants) => {
-      this.restaurants = restaurants;
-    });
+  public async getRestaurants() {
+    const restaurants: Restaurant[] = [];
+    const promises: any = [];
+
+    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+
+    for (let i = 1; i <= totalCompanies; i++) {
+      promises.push(this.restaurantService.getRestaurantsByCompany(i).toPromise());
+    }
+
+    for await (const promise of promises) {
+      restaurants.push(...promise);
+    }
+
+    this.restaurants = restaurants;
   }
 }

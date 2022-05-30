@@ -33,15 +33,11 @@ export class RestaurantService {
     });
   }
 
-  public getRestaurants(companyId: number): Observable<Restaurant[]> {
-    return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
+  public getCompanies(): Observable<Restaurant[]> {
+    return this.http.get<Restaurant[]>(`${this.url}restaurants/companies.json`);
   }
 
   public getRestaurantsByCompany(companyId: number): Observable<Restaurant[]> {
-    return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
-  }
-
-  public getFrequentRestaurants(companyId: number): Observable<Restaurant[]> {
     return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
   }
 
@@ -157,10 +153,10 @@ export class RestaurantService {
         user.cartList[indexCartList].items.push(plate);
 
         this.usersService.setUser(user);
-
-        this.calculateCartTotal(plate.branchId, plate.companyId);
       }
     }
+
+    this.calculateCartTotal(plate.branchId, plate.companyId);
 
     console.log(this.usersService.getUser(), plate);
   }
@@ -197,6 +193,5 @@ export class RestaurantService {
     user.orderList.push(order);
 
     this.usersService.setUser(user);
-    
   }
 }

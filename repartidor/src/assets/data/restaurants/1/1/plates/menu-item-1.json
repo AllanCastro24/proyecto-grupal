@@ -1,12 +1,12 @@
 {
   "id": 1,
-  "name": "Snack Set",
-  "description": "Butter, cream, honey, salty cottage cheese, white cheese.",
-  "price": 8.2,
+  "name": "Pizza de pepperoni",
+  "description": "Queso, Pepperoni, Salsa.",
+  "price": 90,
   "image": {
-    "small": "assets/images/foods/breakfast/1/small.jpg",
-    "medium": "assets/images/foods/breakfast/1/medium.jpg",
-    "big": "assets/images/foods/breakfast/1/big.jpg"
+    "small": "assets/images/foods/1-1/pizza_caesar.png",
+    "medium": "assets/images/foods/1-1/pizza_caesar.png",
+    "big": "assets/images/foods/1-1/pizza_caesar.png"
   },
   "discount": 0,
   "ratingsCount": 4,
@@ -17,5 +17,6 @@
   "isVegetarian": false,
   "branchId": 1,
   "companyId":  1,
-  "menuId": 1
+  "menuId": 1, 
+  "tagId": [1]
 }

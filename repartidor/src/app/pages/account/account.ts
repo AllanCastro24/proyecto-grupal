@@ -12,6 +12,8 @@ export interface Address {
   place: string;
   postalCode: string;
   address: string;
+  latitude: string;
+  longitude: string;
 }
 
 export interface Country {
@@ -31,5 +33,5 @@ export interface Payment {
 
 export enum DeliveryType {
   Delivery = 1,
-  Pickup = 2
+  Pickup = 2,
 }
