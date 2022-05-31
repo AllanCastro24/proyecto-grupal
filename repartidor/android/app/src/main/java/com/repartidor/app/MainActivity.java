@@ -1,4 +1,4 @@
-package com.food.app;
+package com.repartidor.app;
 
 import com.getcapacitor.BridgeActivity;
 

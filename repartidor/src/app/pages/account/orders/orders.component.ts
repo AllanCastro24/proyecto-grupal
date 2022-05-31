@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { OrderDetailsDialogComponent } from 'src/app/shared/order-details-dialog/order-details-dialog.component';
-import { UsersService } from 'src/app/users/users.service';
+import { Component, OnInit } from '@angular/core';
+import { MenuService } from 'src/app/theme/components/menu/menu.service';
 import { Plate } from '../../restaurants/plates';
 import { RestaurantService } from '../../restaurants/restaurant.service';
-import { Order, Restaurant } from '../../restaurants/restaurants';
-import { AccountService } from '../account.service';
+import { Restaurant } from '../../restaurants/restaurants';
 import { DeliveryOrder, OrderStatus } from './delivery';
 import { DeliveryService } from './delivery.service';
 
@@ -45,13 +43,14 @@ export class OrdersComponent implements OnInit {
     {
       id: 6,
       name: 'Cancelado',
-    }
+    },
   ];
 
-  constructor(public restaurantService: RestaurantService, private deliveryService: DeliveryService) {}
+  constructor(public restaurantService: RestaurantService, private deliveryService: DeliveryService, public menuService: MenuService) {}
 
   ngOnInit(): void {
     this.getOrdersList();
+    this.menuService.toggleMenu(true);
   }
 
   public async getOrdersList() {

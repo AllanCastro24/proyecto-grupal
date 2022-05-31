@@ -12,7 +12,8 @@
     "serve:ssr": "node dist/server/main.js",
     "build:ssr": "ng build --configuration production && ng run food:server:production",
     "prerender": "ng run food:prerender",
-    "server": "node server"
+    "server": "node server",
+    "resources": "capacitor-resources -p android,ios" 
   },
   "private": true,
   "dependencies": {

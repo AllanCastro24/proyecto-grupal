@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
 import { Plate } from 'src/app/pages/restaurants/plates';
 import { RestaurantService } from 'src/app/pages/restaurants/restaurant.service';
-import { Order, OrderStatus, Restaurant } from 'src/app/pages/restaurants/restaurants';
+import { OrderStatus, Restaurant } from 'src/app/pages/restaurants/restaurants';
 import { MenuService } from 'src/app/theme/components/menu/menu.service';
 import { User } from 'src/app/users/users';
 import { UsersService } from 'src/app/users/users.service';
-import { DeliveryType, Payment, Address } from '../../account';
+import { Address } from '../../account';
 import { DeliveryOrder } from '../delivery';
 import { DeliveryService } from '../delivery.service';
 
@@ -69,7 +70,8 @@ export class OrderComponent implements OnInit {
     public restaurantService: RestaurantService,
     public menuService: MenuService,
     public router: Router,
-    private deliveryService: DeliveryService
+    private deliveryService: DeliveryService,
+    private snackBar: MatSnackBar
   ) {}
 
   async ngOnInit() {
@@ -128,6 +130,10 @@ export class OrderComponent implements OnInit {
   }
 
   public openRestaurantAddress() {
+    if (!this.allowActions()) {
+      return;
+    }
+
     const address = `${this.restaurant.latitude},${this.restaurant.longitude}`;
 
     Browser.open({
@@ -136,6 +142,10 @@ export class OrderComponent implements OnInit {
   }
 
   public openClientAddress() {
+    if (!this.allowActions()) {
+      return;
+    }
+
     const address = `${this.clientAddress.latitude},${this.clientAddress.longitude}`;
 
     Browser.open({
@@ -194,5 +204,20 @@ export class OrderComponent implements OnInit {
 
     this.deliveryStatusTop = this.status[5];
     this.deliveryStatusBottom = this.status[5];
+  }
+
+  public allowActions() {
+    const messages = ['Primero acepta el pedido', 'El pedido está completado', 'El pedido está cancelado'];
+    const message = this.order.status.id == 5 ? messages[1] : this.order.status.id == 6 ? messages[2] : messages[0];
+
+    if (this.order.status.id != 3) {
+      this.snackBar.open(message, '', {
+        verticalPosition: 'top',
+        duration: 1000,
+        panelClass: ['error'],
+      });
+    }
+
+    return this.deliveryService.orderAccepted(this.order) && !(this.order.status.id == 5 || this.order.status.id == 6);
   }
 }
