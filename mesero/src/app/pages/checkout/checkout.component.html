@@ -1,0 +1,87 @@
+<div class="details px-3">
+  <div (click)="onReturn()" class="btn-back">
+    <mat-icon>arrow_back</mat-icon>
+  </div>
+  <h3>Detalles</h3>
+  <div class="delivery-type">
+    <div (click)="onClickDeliveryType($event)" id="delivery-type-1" class="delivery-type-item delivery active">
+      <span class="label">Envío</span>
+      <div class="delivery-info">
+        <span class="time">{{ (restaurant?.delivery?.time || 0) * 1000 | date: 'mm:ss' }} min</span>
+        <span>●</span>
+        <span class="price">{{ restaurant?.delivery?.price | currency }}</span>
+      </div>
+    </div>
+    <div (click)="onClickDeliveryType($event)" id="delivery-type-2" class="delivery-type-item pickup">
+      <span class="label">Recoger</span>
+      <span class="time">{{ (restaurant?.pickup?.time || 0) * 1000 | date: 'mm:ss' }} min</span>
+    </div>
+  </div>
+  <div (click)="openAddress()" class="select-address">
+    <div class="item">
+      <div class="place-icon">
+        <mat-icon class="mat-18">{{ deliveryPlaceIcon }}</mat-icon>
+      </div>
+      <div class="content">
+        <div class="address">
+          <span>{{ addressTop }}</span>
+          <span>{{ addressAction }} en {{ addressBottom }}</span>
+        </div>
+        <div class="view">
+          <mat-icon>navigate_next</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="items">
+    <div>
+      <span>Tus artículos</span>
+      <span [routerLink]="['/restaurants', restaurantId, companyId]">Mirar menú</span>
+    </div>
+    <div class="list">
+      <div routerLink="/cart" *ngFor="let item of cartItems" class="item">
+        <div class="image">
+          <img [src]="item.image.medium" />
+        </div>
+        <div class="content">
+          <div class="info">
+            <span class="title">{{ item.cartCount }} - {{ item.name }}</span>
+            <div class="note">{{ item.note }}</div>
+          </div>
+          <div class="view">
+            <mat-icon>navigate_next</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="summary">
+    <div>
+      <span>Subtotal</span>
+      <span>{{ subtotal | currency }}</span>
+    </div>
+    <div *ngIf="deliveryType === DeliveryType.Delivery">
+      <span>Envío</span>
+      <span>{{ restaurant?.delivery?.price | currency }}</span>
+    </div>
+    <div class="total">
+      <span>Total</span>
+      <span>{{ total | currency }}</span>
+    </div>
+  </div>
+  <h4>Método de pago</h4>
+  <div routerLink="/account/payments" class="payment">
+    <div class="payment-icon">
+      <mat-icon class="mat-18">credit_card</mat-icon>
+    </div>
+    <div class="content">
+      <span *ngIf="hasPayment">{{ payment.name }} - {{ getCardNumber() }}</span>
+      <span *ngIf="!hasPayment">Agregar método de pago</span>
+      <div class="view">
+        <mat-icon>navigate_next</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="separator"></div>
+<div (click)="placeOrder()" class="place-order">Realizar pedido</div>

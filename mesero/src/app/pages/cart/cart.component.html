@@ -1,0 +1,116 @@
+<div class="cartsList px-3">
+  <div class="header">
+    <div routerLink="/orders" class="orders">
+      <mat-icon class="mat-18">receipt</mat-icon>
+      <span>Ordenes</span>
+    </div>
+  </div>
+  <div class="carts">
+    <h2>Carrito</h2>
+    <div *ngFor="let cartList of cartsList" (click)="openCartList(cartList)" class="item">
+      <div class="image">
+        <img [src]="cartList.image" />
+      </div>
+      <div class="content">
+        <div class="info">
+          <span class="title">{{ cartList.name }}</span>
+          <div class="more-info">
+            <span class="totalItems">{{ getTotalItems(cartList.items) }} artículos</span>
+            <span class="separator">●</span>
+            <span class="totalPrice">{{ getTotalPrice(cartList.items) | currency }}</span>
+          </div>
+          <div class="address">Entregar en {{ getDefaultAddress().address }}</div>
+        </div>
+        <div class="view">
+          <mat-icon>navigate_next</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!cartsList.length" class="empty-cart py-3 text-center">
+  <p>No tiene nada en su carrito</p>
+  <a routerLink="/categories" mat-raised-button color="primary" class="transform-none">Ver categorías</a>
+</div>
+<div *ngIf="showCart" class="preview-cart">
+  <div (click)="toggleCart()" class="hide-zone"></div>
+  <mat-list *ngIf="cartItems.length" class="cart-items">
+    <mat-list-item>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 -3">
+        <a routerLink="/cart" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none">Ver carrito</a>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button mat-icon-button (click)="toggleCart()" matTooltip="Hide">
+            <mat-icon color="primary" class="mat-icon-lg">arrow_drop_down_circle</mat-icon>
+          </button>
+          <button mat-icon-button (click)="clearCart()" matTooltip="Clear Cart List">
+            <mat-icon color="warn" class="mat-icon-lg">remove_shopping_cart</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-list-item>
+    <mat-list-item>
+      <div class="w-100 divider"></div>
+    </mat-list-item>
+    <mat-list-item *ngFor="let menuItem of cartItems" (click)="editCartItem(menuItem)">
+      <img matListAvatar [src]="menuItem.image.medium" alt="image" />
+      <h3 mat-line class="secondary-font fw-500 ml-2 title">
+        <a>{{ menuItem.cartCount }} - {{ menuItem.name }}</a>
+      </h3>
+      <span class="primary-color fw-500 mx-3">
+        {{ menuItem.price | currency }}
+      </span>
+    </mat-list-item>
+    <mat-list-item>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 pt-3 divider">
+        <a [routerLink]="['/checkout', restaurantId, companyId]" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none">Revisar</a>
+        <a [routerLink]="['/restaurants', restaurantId, companyId]" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none"
+          >Agregar</a
+        >
+        <div fxLayout="row wrap" fxLayoutAlign="end center">
+          <h2 class="fw-500 px-3">Total:</h2>
+          <h2 class="primary-color price">
+            {{ restaurantService.totalPrice | currency }}
+          </h2>
+        </div>
+      </div>
+    </mat-list-item>
+  </mat-list>
+  <div *ngIf="!cartItems.length" class="empty-cart py-3 text-center">
+    <p>No tiene nada en su carrito</p>
+    <a routerLink="/cart" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none">Ver carrito</a>
+  </div>
+</div>
+<div *ngIf="showEditCart" class="edit-cart">
+  <div class="header-cart" [style.background-image]="'url(' + currentPlate?.image?.medium + ')'">
+    <div (click)="toggleAll()">
+      <mat-icon class="back">arrow_back</mat-icon>
+    </div>
+  </div>
+  <div class="info-cart">
+    <h1 class="title">{{ currentPlate?.name }}</h1>
+    <span class="price">{{ currentPlate?.price | currency }}</span>
+    <span class="ingredients">{{ currentPlate?.description }}</span>
+  </div>
+  <div class="special-instructions">
+    <h2>Instrucciones especiales</h2>
+    <textarea [(ngModel)]="currentPlate.note" placeholder="Sin cebolla"></textarea>
+  </div>
+  <div class="counter">
+    <app-quantity-counter
+      [value]="currentPlate.cartCount"
+      [step]="1"
+      [min]="1"
+      [max]="currentPlate.availibilityCount"
+      (onCounterChange)="counterChange($event)"
+    ></app-quantity-counter>
+  </div>
+  <div (click)="deleteItem()" class="remove">
+    <div>
+      <mat-icon class="mat-18">delete</mat-icon>
+      <span>Eliminar</span>
+    </div>
+  </div>
+  <div (click)="updateCart()" class="add-cart">
+    Actualizar carrito <span>●</span> {{ (currentPlate?.price || 0) * currentPlate.cartCount | currency }}
+  </div>
+</div>

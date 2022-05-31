@@ -1,0 +1,22 @@
+{
+  "id": 2,
+  "name": "Pizza de queso doble",
+  "description": "Queso, Salsa.",
+  "price": 120,
+  "image": {
+    "small": "assets/images/foods/1-1/pizza_caesar_queso.png",
+    "medium": "assets/images/foods/1-1/pizza_caesar_queso.png",
+    "big": "assets/images/foods/1-1/pizza_caesar_queso.png"
+  },
+  "discount": 0,
+  "ratingsCount": 4.2,
+  "ratingsValue": 180,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 200,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
+  "menuId": 1, 
+  "tagId": [1]
+}

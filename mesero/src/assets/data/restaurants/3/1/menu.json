@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Cortes"
+  },
+  {
+    "id": 2,
+    "name": "Especiales"
+  },
+  {
+    "id": 3,
+    "name": "Hamburguesas"
+  },
+  {
+    "id": 4,
+    "name": "Mariscos"
+  },
+  {
+    "id": 5,
+    "name": "Bebidas"
+  }
+]

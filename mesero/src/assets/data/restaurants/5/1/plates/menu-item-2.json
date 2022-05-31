@@ -1,0 +1,22 @@
+{
+  "id": 2,
+  "name": "Arrochito",
+  "description": "Arroz, Ensalada de Tampico, Philadelphia, Camarón, Res, Pollo, Aguacate, Ajonjoí.",
+  "price": 142.99,
+  "image": {
+    "small": "assets/images/foods/5-1/arrochito.jpeg",
+    "medium": "assets/images/foods/5-1/arrochito.jpeg",
+    "big": "assets/images/foods/5-1/arrochito.jpeg"
+  },
+  "discount": 0,
+  "ratingsCount": 4.3,
+  "ratingsValue": 298,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 299,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 5,
+  "menuId": 1,
+  "tagId": [13]
+}

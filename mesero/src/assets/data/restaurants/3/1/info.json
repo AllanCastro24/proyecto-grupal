@@ -1,0 +1,56 @@
+{
+  "id": "1",
+  "companyId": 3,
+  "categoryId": [10],
+  "tagId": [1, 5, 9, 10, 12],
+  "name": "EL LEÑADOR",
+  "description": "Estamos catalogados como cocina mexicana con la especialidad de cortes y hamburguesas, la especialidad de la casa es CABRERIA LEÑADOR, también contamos con bebidas naturales como son agua de piña, melón, Jamaica, limonada natural y mineral al igual que un extenso surtido en vino tinto.",
+  "address": "Calle Guillermo Prieto 301 norte esquina con Rendón, colonia centro.",
+  "latitude": "25.7945758",
+  "longitude": "-108.9886099",
+  "schedule": {
+    "lunes": [
+      {
+        "start": "11:00",
+        "end": "13:00"
+      },
+      {
+        "start": "15:00",
+        "end": "18:00"
+      }
+    ],
+    "martes": [
+      {
+        "start": "11:00",
+        "end": "13:00"
+      },
+      {
+        "start": "15:00",
+        "end": "18:00"
+      }
+    ],
+    "miercoles": [
+      {
+        "start": "11:00",
+        "end": "13:00"
+      },
+      {
+        "start": "15:00",
+        "end": "18:00"
+      }
+    ]
+  },
+  "image": "assets/images/restaurantes/3/elleñador.jpg",
+  "rating": {
+    "average": 4.34,
+    "count": 420
+  },
+  "delivery": {
+    "price": 40,
+    "time": 720
+  },
+  "pickup": {
+    "price": 20,
+    "time": 900
+  }
+}

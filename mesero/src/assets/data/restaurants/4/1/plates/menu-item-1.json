@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "name": "Tostada ahogada",
+  "description": "camarón, crudo, cocido, pulpo, atún, clamato, salsa",
+  "price": 99,
+  "image": {
+    "small": "assets/images/foods/4-1/tostada_ahogada.jpg",
+    "medium": "assets/images/foods/4-1/tostada_ahogada.jpg",
+    "big": "assets/images/foods/4-1/tostada_ahogada.jpg"
+  },
+  "discount": 0,
+  "ratingsCount": 4,
+  "ratingsValue": 4.1,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 160,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 4,
+  "menuId": 1,
+  "tagId": [10]
+}

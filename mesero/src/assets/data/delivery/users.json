@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "username": "weroleytor",
+    "addressList": [
+      {
+        "id": 1,
+        "default": true,
+        "firstName": "Ulises",
+        "lastName": "Heraldez",
+        "middleName": "",
+        "company": "",
+        "email": "ulises@gmail.com",
+        "phone": "6682213489",
+        "country": {
+          "name": "Mexico",
+          "code": "MX"
+        },
+        "city": "Los mochis",
+        "place": "Sinaloa",
+        "postalCode": "123456",
+        "address": "Calle madero 739 poniente entre mina y, Blvd. Antonio Rosales",
+        "latitude": "25.8127617",
+        "longitude": "-108.9844326"
+      }
+    ],
+    "contacts": {
+      "email": "ulises@gmail.com",
+      "phone": "6682213489"
+    }
+  }
+]

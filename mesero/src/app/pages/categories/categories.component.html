@@ -1,0 +1,17 @@
+<div class="px-3">
+  <div class="theme-container">
+    <mat-sidenav-container class="all-menu-items mt-3">
+      <mat-sidenav-content>
+        <div fxLayout="row wrap" class="all-menu-items-wrapper mt-0">
+          <div fxFlex="100" class="px-2 pb-2 pt-0">
+            <app-category-search></app-category-search>
+          </div>
+          <h1 fxFlex="100" class="px-2">Categorías</h1>
+          <div *ngFor="let category of categories" [fxFlex]="viewCol" class="item">
+            <app-category-item [category]="category" [viewType]="viewType"></app-category-item>
+          </div>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>

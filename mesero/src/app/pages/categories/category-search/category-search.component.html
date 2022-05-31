@@ -1,0 +1,53 @@
+<div class="search">
+  <mat-icon (click)="onReturn()" class="search-icon">{{ status }}</mat-icon>
+  <input #inputSearch (click)="onSearch()" (keyup)="onInput($event)" type="text" placeholder="Platillo, bebidas, etc" class="search-input" />
+  <mat-icon (click)="onClose()" class="close-icon" [class.show]="showClose">close</mat-icon>
+</div>
+<div *ngIf="showSuggestions" class="suggestions">
+  <div *ngIf="!showSearch">
+    <div class="top-categories">
+      <div class="title">
+        <span>Categorías populares</span>
+      </div>
+      <div *ngFor="let category of categories" class="item" [routerLink]="['/categories', category.id]">
+        <mat-icon class="search-icon-item">search</mat-icon>
+        <p>{{ category.name }}</p>
+      </div>
+    </div>
+    <div class="tags">
+      <div class="title">
+        <span>Etiquetas</span>
+      </div>
+      <div *ngFor="let tag of tags" class="item" (click)="openLink(['/categories/tags', tag.id])">
+        <mat-icon class="search-icon-item">search</mat-icon>
+        <p>{{ tag.name }}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showSearch">
+    <div *ngIf="searchResultsRestaurants.length" class="restaurants">
+      <div *ngFor="let restaurant of searchResultsRestaurants" (click)="openLink(['/restaurants', restaurant.id, restaurant.companyId])" class="item">
+        <img [src]="restaurant.image" />
+        <div class="info">
+          <span class="title">{{ restaurant.name }}</span>
+          <span class="delivery">{{ restaurant.delivery.price | currency }}</span>
+          <span class="time"> {{ restaurant.delivery.time * 1000 | date: 'mm:ss' }} min</span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="searchResultsTag.length" class="tags">
+      <div class="title">
+        <span>Etiquetas</span>
+      </div>
+      <div *ngFor="let tag of searchResultsTag" (click)="openLink(['/categories/tags', tag.id])" class="item">
+        <mat-icon class="search-icon-item">search</mat-icon>
+        <p>{{ tag.name }}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showSearch && !searchResultsRestaurants.length && !searchResultsTag.length">
+    <div class="no-results">
+      <span>No se encontraron resultados</span>
+    </div>
+  </div>
+</div>

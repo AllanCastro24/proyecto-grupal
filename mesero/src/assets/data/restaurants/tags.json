@@ -1,0 +1,54 @@
+[
+  {
+    "id": "1",
+    "name": "Pizza"
+  },
+  {
+    "id": "2",
+    "name": "Mole"
+  },
+  {
+    "id": "3",
+    "name": "Tacos al pastor"
+  },
+  {
+    "id": "4",
+    "name": "Birria"
+  },
+  {
+    "id": "5",
+    "name": "Hamburguesa"
+  },
+  {
+    "id": "6",
+    "name": "Torta"
+  },
+  {
+    "id": "7",
+    "name": "Boneless"
+  },
+  {
+    "id": "8",
+    "name": "Baguette"
+  },
+  {
+    "id": "9",
+    "name": "Cortes"
+  },
+  {
+    "id": "10",
+    "name": "Mariscos"
+  },
+  {
+    "id": "11",
+    "name": "Especiales"
+  },
+  {
+    "id": "12",
+    "name": "Bebidas"
+  },
+  {
+    "id": "13",
+    "name": "Sushi"
+  }
+]

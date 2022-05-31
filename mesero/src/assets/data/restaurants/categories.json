@@ -1,0 +1,16 @@
+[
+  { "id": 1, "name": "Pizza", "description": "Breakfast category description", "image": "assets/images/categorias/pizza.jpg" },
+  { "id": 2, "name": "Sushi", "description": "Lunch category description", "image": "assets/images/categorias/sushi.jpg" },
+  { "id": 3, "name": "Alitas", "description": "Dinner category description", "image": "assets/images/categorias/alitas.jpg" },
+  { "id": 4, "name": "Hamburguesa", "description": "Dessert category description", "image": "assets/images/categorias/hamburguesa.jpg" },
+  { "id": 5, "name": "Bebida", "description": "Drinks category description", "image": "assets/images/categorias/bebidas.jpg" },
+  { "id": 6, "name": "Comida rápida", "description": "Appetizers category description", "image": "assets/images/categorias/comida_rapida.jpg" },
+  { "id": 7, "name": "Postre", "description": "Salads category description", "image": "assets/images/categorias/postre.jpg" },
+  { "id": 8, "name": "Marisco", "description": "Soups category description", "image": "assets/images/categorias/marisco.jpg" },
+  { "id": 9, "name": "Hot-Dog", "description": "Main Dishes category description", "image": "assets/images/categorias/hot_dog.jpg" },
+  { "id": 10, "name": "Comida Mexicana", "description": "Side Dishes category description", "image": "assets/images/categorias/comida_mexicana.jpg" },
+  { "id": 11, "name": "Comida Americana", "description": "Snacks category description", "image": "assets/images/categorias/comida_americana.jpg" },
+  { "id": 12, "name": "Nutritivo", "description": "Salads category description", "image": "assets/images/categorias/nutritivo.jpg" },
+  { "id": 13, "name": "Comida Japonesa", "description": "Soups category description", "image": "assets/images/categorias/comida_japonesa.jpg" },
+  { "id": 14, "name": "Taco", "description": "Soups category description", "image": "assets/images/categorias/taco.jpg" }
+]

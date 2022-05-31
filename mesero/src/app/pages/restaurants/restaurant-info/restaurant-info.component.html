@@ -1,0 +1,53 @@
+<div class="header" [style.background-image]="'url(' + restaurant?.image + ')'">
+  <div (click)="onReturn()">
+    <mat-icon class="back">arrow_back</mat-icon>
+  </div>
+</div>
+<div class="info">
+  <h1 class="title">{{ restaurant?.name }}</h1>
+  <div class="tag">
+    <span *ngFor="let item of tags">{{ item.name }}</span>
+  </div>
+  <span class="description">{{ restaurant?.description }}</span>
+</div>
+<div class="separator"></div>
+<div (click)="openAddress(restaurant.latitude, restaurant.longitude)" class="item location">
+  <div class="icon">
+    <mat-icon>place</mat-icon>
+  </div>
+  <div>
+    <span>{{ restaurant?.address }}</span>
+  </div>
+  <div class="action">
+    <mat-icon>navigate_next</mat-icon>
+  </div>
+</div>
+<div class="separator"></div>
+<div class="item">
+  <div class="icon">
+    <mat-icon>schedule</mat-icon>
+  </div>
+  <span>Abierto</span>
+</div>
+<div class="schedule">
+  <div *ngFor="let item of restaurant?.schedule | keyvalue" class="day">
+    <span>{{ item.key }}</span>
+    <div>
+      <span *ngFor="let time of $any(item).value">{{ time.start }} - {{ time.end }}</span>
+    </div>
+  </div>
+</div>
+<div class="separator"></div>
+<div class="item">
+  <div class="icon">
+    <mat-icon>delivery_dining</mat-icon>
+  </div>
+  <span>Envios de hasta {{ restaurant?.delivery?.price | currency }}</span>
+</div>
+<div class="separator"></div>
+<div class="item">
+  <div class="icon">
+    <mat-icon>star</mat-icon>
+  </div>
+  <span>{{ restaurant?.rating?.average }} ({{ restaurant?.rating?.count }} valoraciones)</span>
+</div>

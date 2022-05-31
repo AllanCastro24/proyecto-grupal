@@ -1,0 +1,22 @@
+{
+  "id": 4,
+  "name": "Pizza 3 carnes",
+  "description": "Queso Oaxaca, cheddar, mozzarella, Salsa, Peperoni.",
+  "price": 150,
+  "image": {
+    "small": "assets/images/foods/1-1/pizza_3_carnes.png",
+    "medium": "assets/images/foods/1-1/pizza_3_carnes.png",
+    "big": "assets/images/foods/1-1/pizza_3_carnes.png"
+  },
+  "discount": 0,
+  "ratingsCount": 4.1,
+  "ratingsValue": 170,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 220,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId":  1,
+  "menuId": 1, 
+  "tagId": [1]
+}

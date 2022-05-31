@@ -1,0 +1,176 @@
+<div *ngIf="showSearch" class="search-wrapper">
+  <div class="search-input">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input #inputSearch (keyup)="onInput($event)" type="text" placeholder="Coca-cola,  tacos de discada" class="search-input" />
+    <mat-icon (click)="onClear()" class="clear-icon" [class.show]="showClear">close</mat-icon>
+  </div>
+  <div (click)="closeSearchResults()" class="results" [class.showResults]="searchResultsMenu.length > 0">
+    <ng-template [ngIf]="searchResultsMenu.length > 0">
+      <div *ngFor="let menuItem of searchResultsMenu" id="restaurant-menu-search-{{ menuItem.id }}">
+        <h1>{{ menuItem.name }}</h1>
+        <ng-container *ngFor="let item of searchResultsPlate">
+          <ng-template [ngIf]="item.menuId == menuItem.id">
+            <div [routerLink]="['/restaurants', restaurant?.id, restaurant?.companyId, 'plate', item.id]" class="menu-item">
+              <div class="menu-info">
+                <h2>{{ item.name }}</h2>
+                <span class="price">{{ item.price | currency }}</span>
+                <p class="description">{{ item.description }}</p>
+              </div>
+              <img [src]="item.image.medium" [alt]="item.name" />
+            </div>
+          </ng-template>
+        </ng-container>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<div class="header">
+  <div class="head-top" [style.background-image]="'url(' + restaurant?.image + ')'">
+    <div (click)="onReturn()">
+      <mat-icon class="back">arrow_back</mat-icon>
+    </div>
+    <div class="title hide">
+      <h1>{{ restaurant?.name }}</h1>
+    </div>
+    <div (click)="addToFavorites()">
+      <mat-icon class="favorite">{{ favoriteIcon }}</mat-icon>
+    </div>
+  </div>
+  <div class="head-bottom" [class.sticky]="menuFixed">
+    <div (click)="openSearch()" class="search">
+      <mat-icon>search</mat-icon>
+    </div>
+    <div class="menu">
+      <span *ngFor="let item of menu" [class.active]="item.id == currentMenu" (click)="onClickMenu(item)">{{ item?.name }}</span>
+    </div>
+  </div>
+</div>
+<div [routerLink]="['/restaurants/info', restaurant?.id, restaurant?.companyId]" class="info">
+  <h1 class="title">{{ restaurant?.name }}</h1>
+  <div class="rating">
+    <mat-icon>star</mat-icon>
+    <span>{{ restaurant?.rating?.average }} ({{ restaurant?.rating?.count }} valoraciones)</span>
+  </div>
+  <div class="category">
+    <span *ngFor="let item of categories">{{ item.name }}</span>
+  </div>
+  <span>Presiona para más información</span>
+  <mat-icon class="more-info">navigate_next</mat-icon>
+</div>
+<div class="delivery-type">
+  <div class="delivery">
+    <span class="label">Envío</span>
+    <div class="delivery-info">
+      <span class="time">{{ (restaurant?.delivery?.time || 0) * 1000 | date: 'mm:ss' }} min</span>
+      <span>●</span>
+      <span class="price">{{ restaurant?.delivery?.price | currency }}</span>
+    </div>
+  </div>
+  <div class="pickup active">
+    <span class="label">Recoger</span>
+    <span class="time">{{ (restaurant?.pickup?.time || 0) * 1000 | date: 'mm:ss' }} min</span>
+  </div>
+</div>
+<div class="restaurant-menu">
+  <div class="head">
+    <span>Menú</span>
+    <mat-icon (click)="openSearch()" class="mat-18">search</mat-icon>
+  </div>
+  <div class="content">
+    <div *ngFor="let menuItem of menu" id="restaurant-menu-{{ menuItem.id }}">
+      <h1>{{ menuItem.name }}</h1>
+      <ng-container *ngFor="let item of plates">
+        <ng-template [ngIf]="item.menuId == menuItem.id">
+          <div [routerLink]="['/restaurants', restaurant?.id, restaurant?.companyId, 'plate', item.id]" class="menu-item">
+            <div class="menu-info">
+              <h2>{{ item.name }}</h2>
+              <span class="price">{{ item.price | currency }}</span>
+              <p class="description">{{ item.description }}</p>
+            </div>
+            <img [src]="item.image.medium" [alt]="item.name" />
+          </div>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div *ngIf="cartItems.length" (click)="toggleCart()" class="view-cart">Mirar carrito ({{ restaurantService.totalCartCount }})</div>
+<div *ngIf="showCart" class="preview-cart">
+  <div (click)="toggleCart()" class="hide-zone"></div>
+  <mat-list *ngIf="cartItems.length" class="cart-items">
+    <mat-list-item>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 -3">
+        <a routerLink="/cart" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none">Ver carrito</a>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button mat-icon-button (click)="toggleCart()" matTooltip="Hide">
+            <mat-icon color="primary" class="mat-icon-lg">arrow_drop_down_circle</mat-icon>
+          </button>
+          <button mat-icon-button (click)="clearCart()" matTooltip="Clear Cart List">
+            <mat-icon color="warn" class="mat-icon-lg">remove_shopping_cart</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-list-item>
+    <mat-list-item>
+      <div class="w-100 divider"></div>
+    </mat-list-item>
+    <mat-list-item *ngFor="let menuItem of cartItems" (click)="editCartItem(menuItem)">
+      <img matListAvatar [src]="menuItem.image.medium" alt="image" />
+      <h3 mat-line class="secondary-font fw-500 ml-2 title">
+        <a>{{ menuItem.cartCount }} - {{ menuItem.name }}</a>
+      </h3>
+      <span class="primary-color fw-500 mx-3">
+        {{ menuItem.price | currency }}
+      </span>
+    </mat-list-item>
+    <mat-list-item>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 pt-3 divider">
+        <a [routerLink]="['/checkout', restaurantId, companyId]" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none">Revisar</a>
+        <div fxLayout="row wrap" fxLayoutAlign="end center">
+          <h2 class="fw-500 px-3">Total:</h2>
+          <h2 class="primary-color price">
+            {{ restaurantService.totalPrice | currency }}
+          </h2>
+        </div>
+      </div>
+    </mat-list-item>
+  </mat-list>
+  <div *ngIf="!cartItems.length" class="empty-cart py-3 text-center">
+    <p>No tiene nada en su carrito</p>
+    <a routerLink="/cart" (click)="toggleCart()" mat-raised-button color="primary" class="transform-none">Ver carrito</a>
+  </div>
+</div>
+<div *ngIf="showEditCart" class="edit-cart">
+  <div class="header-cart" [style.background-image]="'url(' + currentPlate?.image?.medium + ')'">
+    <div (click)="toggleAll()">
+      <mat-icon class="back">arrow_back</mat-icon>
+    </div>
+  </div>
+  <div class="info-cart">
+    <h1 class="title">{{ currentPlate?.name }}</h1>
+    <span class="price">{{ currentPlate?.price | currency }}</span>
+    <span class="ingredients">{{ currentPlate?.description }}</span>
+  </div>
+  <div class="special-instructions">
+    <h2>Instrucciones especiales</h2>
+    <textarea [(ngModel)]="currentPlate.note" placeholder="Sin cebolla"></textarea>
+  </div>
+  <div class="counter">
+    <app-quantity-counter
+      [value]="currentPlate.cartCount"
+      [step]="1"
+      [min]="1"
+      [max]="currentPlate.availibilityCount"
+      (onCounterChange)="counterChange($event)"
+    ></app-quantity-counter>
+  </div>
+  <div (click)="deleteItem()" class="remove">
+    <div>
+      <mat-icon class="mat-18">delete</mat-icon>
+      <span>Eliminar</span>
+    </div>
+  </div>
+  <div (click)="updateCart()" class="add-cart">
+    Actualizar carrito <span>●</span> {{ (currentPlate?.price || 0) * currentPlate.cartCount | currency }}
+  </div>
+</div>

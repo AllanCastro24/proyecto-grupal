@@ -1,0 +1,56 @@
+{
+  "id": "1",
+  "companyId": 1,
+  "categoryId": [1, 6],
+  "tagId": [1],
+  "name": "Little Caesars (Centenario)",
+  "description": "Pizzas a buen precio",
+  "address": "Blvd Centenario 660 Ote, Morelos, 81290 Los Mochis, Sin.",
+  "latitude": "25.7678167",
+  "longitude": "-108.993423",
+  "schedule": {
+    "lunes": [
+      {
+        "start": "11:00",
+        "end": "13:00"
+      },
+      {
+        "start": "15:00",
+        "end": "18:00"
+      }
+    ],
+    "martes": [
+      {
+        "start": "11:00",
+        "end": "13:00"
+      },
+      {
+        "start": "15:00",
+        "end": "18:00"
+      }
+    ],
+    "miercoles": [
+      {
+        "start": "11:00",
+        "end": "13:00"
+      },
+      {
+        "start": "15:00",
+        "end": "18:00"
+      }
+    ]
+  },
+  "image": "assets/images/restaurantes/1/little_caesars.png",
+  "rating": {
+    "average": 4.5,
+    "count": 200
+  },
+  "delivery": {
+    "price": 30,
+    "time": 900
+  },
+  "pickup": {
+    "price": 0,
+    "time": 600
+  }
+}

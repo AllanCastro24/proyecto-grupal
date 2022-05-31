@@ -1,0 +1,63 @@
+<mat-sidenav-container class="all-menu-items mt-3 px-3">
+  <mat-sidenav-content>
+    <div fxLayout="row wrap" class="all-menu-items-wrapper mt-0">
+      <div fxFlex="100" class="px-2 pb-2 pt-0">
+        <app-frequent-plates></app-frequent-plates>
+      </div>
+
+      <div fxFlex="100" class="px-2 pb-2 pt-0">
+        <app-frequent-restaurants></app-frequent-restaurants>
+      </div>
+
+      <div fxFlex="100" class="px-2 pb-2 pt-0">
+        <app-frequent-categories></app-frequent-categories>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<div *ngIf="favoritesRestaurants.length" class="restaurants px-3">
+  <h2>Restaurantes favoritos</h2>
+  <div *ngFor="let restaurant of favoritesRestaurants" class="item">
+    <div [style.background-image]="'url(' + restaurant.image + ')'" class="header">
+      <div (click)="addToFavorites(restaurant, $event)">
+        <mat-icon class="favorite">{{ isFavorite(restaurant) }}</mat-icon>
+      </div>
+    </div>
+    <div [routerLink]="['/restaurants', restaurant.id, restaurant.companyId]" class="content">
+      <div class="info">
+        <span>{{ restaurant.name }}</span>
+        <div>
+          <span class="delivery-price">{{ restaurant.delivery.price | currency }}</span>
+          <span class="separator">●</span>
+          <span class="time">{{ (restaurant.delivery.time || 0) * 1000 | date: 'mm:ss' }} min</span>
+        </div>
+      </div>
+      <div class="rating">
+        <span>{{ restaurant.rating.average }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="restaurants px-3">
+  <h2>Restaurantes</h2>
+  <div *ngFor="let restaurant of restaurants" class="item">
+    <div [style.background-image]="'url(' + restaurant.image + ')'" class="header">
+      <div (click)="addToFavorites(restaurant, $event)">
+        <mat-icon class="favorite">{{ isFavorite(restaurant) }}</mat-icon>
+      </div>
+    </div>
+    <div [routerLink]="['/restaurants', restaurant.id, restaurant.companyId]" class="content">
+      <div class="info">
+        <span>{{ restaurant.name }}</span>
+        <div>
+          <span class="delivery-price">{{ restaurant.delivery.price | currency }}</span>
+          <span class="separator">●</span>
+          <span class="time">{{ (restaurant.delivery.time || 0) * 1000 | date: 'mm:ss' }} min</span>
+        </div>
+      </div>
+      <div class="rating">
+        <span>{{ restaurant.rating.average }}</span>
+      </div>
+    </div>
+  </div>
+</div>
