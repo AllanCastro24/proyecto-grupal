@@ -23,27 +23,25 @@
             <mat-tab label="Trabajo">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Tienda" formControlName="ID_tienda">
-                        <!--mat-label>Tienda</mat-label>
-                        <mat-select formControlName="ID_tienda">
-                            <mat-option [value]="'H'">Hombre</mat-option>
-                            <mat-option [value]="'M'">Mujer</mat-option>
-                        </mat-select-->
+                        <!--input matInput placeholder="Tienda" formControlName="ID_tienda"-->
+                        <mat-label>Tienda</mat-label>
+                        <mat-select formControlName="ID_tienda" required>
+                            <mat-option *ngFor="let t of tiendas" [value]="t.ID_tienda">{{t.Nombre}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Puesto" formControlName="ID_puesto">
-                        <!--mat-label>Puesto</mat-label>
-                        <mat-select formControlName="ID_puesto">
-                            <mat-option [value]="'H'">Hombre</mat-option>
-                            <mat-option [value]="'M'">Mujer</mat-option>
-                        </mat-select-->
+                        <!--input matInput placeholder="Puesto" formControlName="ID_puesto"-->
+                        <mat-label>Puesto</mat-label>
+                        <mat-select formControlName="ID_puesto" required>
+                            <mat-option *ngFor="let p of puestos" [value]="p.ID_puesto">{{p.Nombre}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Sucursal" formControlName="ID_sucursal">
-                        <!--mat-label>Sucursal</mat-label>
-                        <mat-select formControlName="ID_sucursal" *ngFor="let puesto of puestos">
-                            <mat-option [value]="puesto.ID_puesto">puesto.Nombre</mat-option>
-                        </mat-select-->
+                        <!--input matInput placeholder="Sucursal" formControlName="ID_sucursal"-->
+                        <mat-label>Sucursal</mat-label>
+                        <mat-select formControlName="ID_sucursal" required>
+                            <mat-option *ngFor="let s of sucursales" [value]="s.ID_sucursal">{{s.Pseudonimo}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                     <mat-form-field class="w-100">
                         <input matInput placeholder="Salario" formControlName="Sueldo">
