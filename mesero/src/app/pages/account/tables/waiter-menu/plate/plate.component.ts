@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Plate } from 'src/app/pages/restaurants/plates';
 import { RestaurantService } from 'src/app/pages/restaurants/restaurant.service';
 import { MenuService } from 'src/app/theme/components/menu/menu.service';
@@ -34,7 +34,8 @@ export class PlateComponent implements OnInit {
     private restaurantService: RestaurantService,
     public menuService: MenuService,
     private snackBar: MatSnackBar,
-    public waiterService: WaiterService
+    public waiterService: WaiterService,
+    public router: Router
   ) {}
 
   ngOnInit() {
@@ -87,6 +88,6 @@ export class PlateComponent implements OnInit {
   }
 
   public onReturn() {
-    this._location.back();
+    this.router.navigate(['/waiter-menu', this.restaurantId, this.companyId, this.tableId]);
   }
 }

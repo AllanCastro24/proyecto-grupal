@@ -186,8 +186,7 @@ export class WaiterMenuComponent implements OnInit {
 
   public onReturn() {
     this.menuService.toggleMenu(true);
-
-    this._location.back();
+    this.router.navigate(['/tables', this.tableId]);
   }
 
   public toggleMenu() {

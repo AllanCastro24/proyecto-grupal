@@ -12,6 +12,9 @@ import { UsersService } from 'src/app/users/users.service';
 import { Address } from '../../account';
 import { Status, Table, _PaymentMethod, _Status, _status } from '../waiter-menu/waiter';
 import { WaiterService } from '../waiter-menu/waiter.service';
+import { Directory, Filesystem } from '@capacitor/filesystem';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-table',
@@ -68,7 +71,7 @@ export class TableComponent implements OnInit {
     public menuService: MenuService,
     public router: Router,
     public fb: FormBuilder,
-    public waiterService: WaiterService,
+    public waiterService: WaiterService
   ) {}
 
   async ngOnInit() {
@@ -221,25 +224,50 @@ export class TableComponent implements OnInit {
 
     this.toggleInfo(elems);
 
-    html2canvas(this.pdf.nativeElement, { allowTaint: true }).then((canvas) => {
-      let HTML_Width = canvas.width;
-      let HTML_Height = canvas.height;
-      let top_left_margin = 15;
-      let PDF_Width = HTML_Width + top_left_margin * 2;
-      let PDF_Height = HTML_Height + top_left_margin * 2;
-      let canvas_image_width = HTML_Width;
-      let canvas_image_height = HTML_Height;
+    const filename = 'ticket.pdf';
+    const canvas = await html2canvas(this.pdf.nativeElement, { allowTaint: true });
 
-      canvas.getContext('2d');
+    let HTML_Width = canvas.width;
+    let HTML_Height = canvas.height;
+    let top_left_margin = 15;
+    let PDF_Width = HTML_Width + top_left_margin * 2;
+    let PDF_Height = HTML_Height + top_left_margin * 2;
+    let canvas_image_width = HTML_Width;
+    let canvas_image_height = HTML_Height;
 
-      let imgData = canvas.toDataURL('image/jpeg', 1.0);
-      let pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
-      pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+    canvas.getContext('2d');
 
-      pdf.save('ticket.pdf');
+    let imgData = canvas.toDataURL('image/jpeg', 1.0);
+    let pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
 
-      this.toggleInfo(elems);
-    });
+    pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+    pdf.save(filename);
+
+    this.toggleInfo(elems);
+
+    if (Capacitor.getPlatform() === 'web') {
+      return;
+    }
+
+    try {
+      const result = await Filesystem.writeFile({
+        path: filename,
+        data: pdf.output('datauristring'),
+        directory: Directory.Documents,
+        recursive: true,
+        
+      });
+
+      const fileOpener: FileOpener = new FileOpener();
+      fileOpener
+        .open(result.uri, 'application/pdf')
+        .then(() => console.log('File is opened'))
+        .catch((e) => console.log('Error opening file', e));
+
+      console.log('Wrote file', result.uri);
+    } catch (e) {
+      console.error('Unable to write file', e);
+    }
   }
 
   public getPaymentMethod(id: number): _PaymentMethod {

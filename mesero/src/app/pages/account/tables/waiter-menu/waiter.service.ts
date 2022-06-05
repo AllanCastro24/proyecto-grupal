@@ -13,18 +13,6 @@ export class WaiterService {
 
   constructor(public http: HttpClient, public usersService: UsersService) {}
 
-  public addTable(table: Table) {
-    const user = this.usersService.getUser();
-
-    if (!user.tableList) {
-      user.tableList = [];
-    }
-
-    user.tableList.push(table);
-
-    this.usersService.setUser(user);
-  }
-
   public getTables(): Table[] {
     const user = this.usersService.getUser();
 
@@ -64,7 +52,7 @@ export class WaiterService {
     const user = this.usersService.getUser();
 
     if (!user.tableList) {
-      return;
+      user.tableList = [];
     }
 
     const tables = this.getTables();
