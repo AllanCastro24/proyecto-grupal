@@ -21,7 +21,7 @@ export class AccountComponent implements OnInit {
     { name: 'Inicio', href: 'dashboard', icon: 'dashboard' },
     { name: 'Profile', href: 'profile', icon: 'person' },
     { name: 'Cambio de contraseña', href: 'password-change', icon: 'vpn_key' },
-    { name: 'Cerrar la sesión', href: '/logout', icon: 'power_settings_new' },
+    { name: 'Salir', href: '/pin', icon: 'power_settings_new' },
   ];
 
   public user!: User;

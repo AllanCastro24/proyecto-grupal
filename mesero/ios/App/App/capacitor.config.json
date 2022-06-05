@@ -1,6 +1,6 @@
 {
-	"appId": "com.repartidor.app",
-	"appName": "Repartidor",
+	"appId": "com.mesero.app",
+	"appName": "Mesero",
 	"webDir": "dist/browser",
 	"bundledWebRuntime": false
 }

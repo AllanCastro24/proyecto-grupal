@@ -1,0 +1,100 @@
+<div class="details px-3">
+  <div class="btn-back">
+    <mat-icon (click)="onReturn()">arrow_back</mat-icon>
+    <!-- <mat-icon *ngIf="order?.status == status[2]" (click)="cancelTable()" class="close mat-18">close</mat-icon> -->
+  </div>
+  <div #pdf>
+    <h3>Mesa #{{ tableId }} - {{ currentStatus?.name }}</h3>
+    <div class="items">
+      <div>
+        <span>Los artículos</span>
+        <span id="openMenu" [routerLink]="['/waiter-menu', restaurantId, companyId, tableId]">Abrir menú</span>
+      </div>
+      <div class="list">
+        <div *ngFor="let item of tableItems" class="item">
+          <div class="image">
+            <img [src]="item.image.medium" />
+          </div>
+          <div class="content">
+            <div class="info">
+              <span class="title"
+                >{{ item.cartCount }} - {{ item.name }} - {{ item.price | currency }} c/u - {{ getTotalItems(item) | currency }}</span
+              >
+              <div class="note">{{ item.note }}</div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="tableItems && !tableItems.length" class="no-tables">
+          <p>No hay artículos</p>
+        </div>
+      </div>
+    </div>
+    <div class="summary">
+      <div>
+        <span>Subtotal</span>
+        <span>{{ subtotal | currency }}</span>
+      </div>
+      <div>
+        <span>Propina</span>
+        <span>10%</span>
+      </div>
+      <div class="total">
+        <span>Total</span>
+        <span>{{ total | currency }}</span>
+      </div>
+    </div>
+    <h4 id="paymentMethodLabel">Método de pago</h4>
+    <div id="paymentMethod" class="payment">
+      <div *ngIf="tableForm" [formGroup]="tableForm">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Método de pago</mat-label>
+          <mat-select placeholder="Seleccione el país" formControlName="paymentMethod" required>
+            <mat-option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod.id">
+              {{ paymentMethod.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="tableForm.controls.paymentMethod.errors?.required">Se requiere el método de pago</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div id="more-info">
+      <div class="separator"></div>
+      <div>
+        <span>Mesero</span>
+        <span>{{ user?.username }}</span>
+      </div>
+      <div>
+        <span>Folio</span>
+        <span>{{ folioId }}</span>
+      </div>
+      <div>
+        <span>Fecha</span>
+        <span>{{ dateToString(table?.date || '') }}</span>
+      </div>
+      <div class="separator"></div>
+      <div>
+        <span>Compañia</span>
+        <span>{{ company?.name }}</span>
+      </div>
+      <div>
+        <span>Sucursal</span>
+        <span>{{ restaurant?.name }}</span>
+      </div>
+      <div>
+        <span>Ubicación</span>
+        <span>{{ restaurant?.address }}</span>
+      </div>
+      <div class="separator"></div>
+      <div>
+        <span>Método de pago</span>
+        <span>{{ table?.paymentMethod?.name }}</span>
+      </div>
+    </div>
+    <span id="thanks">Gracias por su preferencia</span>
+  </div>
+</div>
+<div *ngIf="currentStatus?.id == status.Paid" (click)="downloadAsPDF()" class="generate-ticket px-3">
+  <span>Generar ticket</span>
+</div>
+<div class="separator"></div>
+<div (click)="changeStatus()" class="place-order">{{ btnCurrentStatus }}</div>

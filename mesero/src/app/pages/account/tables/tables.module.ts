@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../../shared/shared.module';
-import { OrdersComponent } from './orders.component';
-import { OrderComponent } from './order/order.component';
+import { TablesComponent } from './tables.component';
+import { TableComponent } from './table/table.component';
 
 export const routes = [
-  { path: '', component: OrdersComponent, pathMatch: 'full' },
-  { path: ':id', component: OrderComponent }
+  { path: '', component: TablesComponent, pathMatch: 'full' },
+  { path: ':id', component: TableComponent }
 ];
 
 @NgModule({
@@ -17,8 +17,8 @@ export const routes = [
     SharedModule
   ],
   declarations: [
-    OrdersComponent,
-    OrderComponent
+    TablesComponent,
+    TableComponent
   ]
 })
-export class OrdersModule { }
+export class TablesModule { }

@@ -1,6 +1,11 @@
 import { Address, Payment } from '../account/account';
 import { Plate } from './plates';
 
+export interface Company {
+  id: number;
+  name: string;
+}
+
 export interface Restaurant {
   id: number;
   companyId: number;

@@ -5,6 +5,7 @@ import { PagesComponent } from './pages/pages.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
 import { IsAuthenticatedGuard } from './users/is-authenticated.guard';
+import { PinScreenComponent } from './pages/pin-screen/pin-screen.component';
 
 const routes: Routes = [
   {
@@ -19,10 +20,11 @@ const routes: Routes = [
       { path: 'reservation', loadChildren: () => import('./pages/reservation/reservation.module').then((m) => m.ReservationModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'categories', loadChildren: () => import('./pages/categories/categories.module').then((m) => m.CategoriesModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'restaurants', loadChildren: () => import('./pages/restaurants/restaurant.module').then((m) => m.RestaurantsModule), canActivate: [IsAuthenticatedGuard] },
+      { path: 'waiter-menu', loadChildren: () => import('./pages/account/tables/waiter-menu/waiter-menu.module').then((m) => m.WaiterMenuModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'account', loadChildren: () => import('./pages/account/account.module').then((m) => m.AccountModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'cart', loadChildren: () => import('./pages/cart/cart.module').then((m) => m.CartModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'checkout', loadChildren: () => import('./pages/checkout/checkout.module').then((m) => m.CheckoutModule), canActivate: [IsAuthenticatedGuard] },
-      { path: 'orders', loadChildren: () => import('./pages/account/orders/orders.module').then((m) => m.OrdersModule), canActivate: [IsAuthenticatedGuard] },
+      { path: 'tables', loadChildren: () => import('./pages/account/tables/tables.module').then((m) => m.TablesModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'login', loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginModule) },
       { path: 'register', loadChildren: () => import('./pages/register/register.module').then((m) => m.RegisterModule), canActivate: [IsAuthenticatedGuard] },
       { path: 'reset-password', loadChildren: () => import('./pages/reset-password/reset-password.module').then((m) => m.ResetPasswordModule), canActivate: [IsAuthenticatedGuard] },
@@ -33,6 +35,7 @@ const routes: Routes = [
   { path: 'landing', loadChildren: () => import('./pages/landing/landing.module').then((m) => m.LandingModule) },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule), canActivate: [IsAuthenticatedGuard] },
   { path: 'lock-screen', component: LockScreenComponent },
+  { path: 'pin', component: PinScreenComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

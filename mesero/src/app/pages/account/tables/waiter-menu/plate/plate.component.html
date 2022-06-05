@@ -1,0 +1,18 @@
+<div class="header" [style.background-image]="'url(' + plate?.image?.medium + ')'">
+  <div (click)="onReturn()">
+    <mat-icon class="back">arrow_back</mat-icon>
+  </div>
+</div>
+<div class="info">
+  <h1 class="title">{{ plate?.name }}</h1>
+  <span class="price">{{ plate?.price | currency }}</span>
+  <span class="ingredients">{{ plate?.description }}</span>
+</div>
+<div class="special-instructions">
+  <h2>Instrucciones especiales</h2>
+  <textarea [(ngModel)]="note" placeholder="Sin cebolla"></textarea>
+</div>
+<div class="counter">
+  <app-quantity-counter [value]="1" [step]="1" [min]="1" [max]="1000" (onCounterChange)="counterChange($event)"></app-quantity-counter>
+</div>
+<div (click)="addTableItem()" class="add-cart">Agregar {{ quantityCount }} al pedido <span>●</span> {{ (plate?.price || 0) * quantityCount | currency }}</div>

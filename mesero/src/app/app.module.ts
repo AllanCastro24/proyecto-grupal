@@ -38,9 +38,22 @@ import { VerticalMenuComponent } from './theme/components/menu/vertical-menu/ver
 import { FooterComponent } from './theme/components/footer/footer.component';
 import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
 import { MenuService } from './theme/components/menu/menu.service';
+import { PinScreenComponent } from './pages/pin-screen/pin-screen.component';
 
 @NgModule({
-  declarations: [AppComponent, PagesComponent, NotFoundComponent, UserMenuComponent, ContactsComponent, Toolbar1Component, HorizontalMenuComponent, VerticalMenuComponent, FooterComponent, LockScreenComponent],
+  declarations: [
+    AppComponent,
+    PagesComponent,
+    NotFoundComponent,
+    UserMenuComponent,
+    ContactsComponent,
+    Toolbar1Component,
+    HorizontalMenuComponent,
+    VerticalMenuComponent,
+    FooterComponent,
+    LockScreenComponent,
+    PinScreenComponent,
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,

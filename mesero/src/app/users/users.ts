@@ -1,5 +1,6 @@
 import { Address, Payment } from '../pages/account/account';
-import { DeliveryOrder } from '../pages/account/orders/delivery';
+import { DeliveryOrder } from '../pages/account/tables/delivery';
+import { Table } from '../pages/account/tables/waiter-menu/waiter';
 import { CartList, Order, Restaurant } from '../pages/restaurants/restaurants';
 
 export class User {
@@ -17,6 +18,7 @@ export class User {
   addressList?: Address[];
   paymentList?: Payment[];
   deliveryOrders?: DeliveryOrder[];
+  tableList?: Table[];
 }
 
 export class UserProfile {

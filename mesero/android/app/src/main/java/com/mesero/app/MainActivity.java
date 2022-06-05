@@ -1,4 +1,4 @@
-package com.repartidor.app;
+package com.mesero.app;
 
 import com.getcapacitor.BridgeActivity;
 
