@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router'; 
 import { AppSettings, Settings } from 'src/app/app.settings';
 import { UsersService } from 'src/app/admin/users/users.service';
+import { usuario, empleado } from 'src/app/admin/users/user.model';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,8 @@ import { UsersService } from 'src/app/admin/users/users.service';
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   public hide = true;
+  public user: usuario[] = [];
+  public empleado: empleado[] = [];
   public bgImage:any;
   public settings: Settings;
   constructor(public fb: FormBuilder, public router:Router, private sanitizer:DomSanitizer, public appSettings:AppSettings, public usersService:UsersService) { 
@@ -39,11 +42,13 @@ export class LoginComponent implements OnInit {
 
   public login(user:any){
     this.usersService.login(user).subscribe(l =>{
-      console.log(l);
-      if(l != "Usuario o contraseña incorrecto"){
+      if(l){
+        this.user = l;
+        //console.log(this.user);
         this.usersService.buscarUser(l).subscribe(u =>{
-          console.log(u);
-          if(u!="No es empleado"){
+          this.empleado = u;
+          //console.log(this.empleado);
+          if(u){
             this.router.navigate(['/admin']);
           }else{
             this.router.navigate(['/']);
