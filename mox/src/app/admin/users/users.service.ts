@@ -53,11 +53,11 @@ export class UsersService {
         return this.http.put(this.api + "api/usuarios/modificar/"+id, user);
     }
     //Login
-    login(user:any):Observable<usuario[]>{	    
-        return this.http.post<usuario[]>(this.api + "api/usuarios/login", user);
+    login(user:any){	    
+        return this.http.post(this.api + "api/usuarios/login", user);
     }
-    buscarUser(user:any):Observable<empleado[]>{
-        return this.http.post<empleado[]>(this.api + "api/usuarios/buscarUser", user);
+    buscarUser(user:any){
+        return this.http.post(this.api + "api/usuarios/buscarUser", user);
     }
     //Puesto
     getPuesto(): Observable<puesto[]> {

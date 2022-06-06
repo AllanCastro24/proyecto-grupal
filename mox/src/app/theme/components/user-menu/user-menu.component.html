@@ -5,7 +5,7 @@
 </a>
 <mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-menu-panel user-menu">
     <span (mouseleave)="userMenuTrigger.closeMenu()">
-        <div>
+        <div *ngIf="ExisteCookie">
             <div fxLayout="row" fxLayoutAlign="start center" class="user-info">                   
                 <img src="assets/images/others/user.jpg" alt="user-image" width="50">
                 <p class="m-0">Emilio Verdines <br> <small><i>emilio_v</i></small></p>
@@ -57,7 +57,7 @@
                 <span>Sign Out</span> 
             </a>
         </div>
-        <div>
+        <div *ngIf="!ExisteCookie">
             <a mat-menu-item routerLink="/login"> 
                 <mat-icon class="mat-icon-sm">power_settings_new</mat-icon>
                 <span>Iniciar sesión</span> 
