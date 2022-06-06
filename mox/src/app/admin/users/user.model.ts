@@ -52,3 +52,17 @@ export class sucursal{
   ID_sucursal:number=0;
   Pseudonimo:string='';
 }
+
+export class empleado{
+  ID_empleado: number = 0;
+  Nombre: string = '';
+  Apellidos: string = '';  
+  Genero: string = '';
+  ID_tienda: number = 0;
+  ID_tipo_pago: number = 0;
+  ID_puesto: number = 0;
+  ID_sucursal: number = 0;
+  Sueldo: number = 0;
+  Telefono: string = '';
+  Direccion: string = '';
+}
