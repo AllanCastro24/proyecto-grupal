@@ -7,13 +7,13 @@
     <span (mouseleave)="userMenuTrigger.closeMenu()">
         <div *ngIf="ExisteCookie">
             <div fxLayout="row" fxLayoutAlign="start center" class="user-info">                   
-                <img src="assets/images/others/user.jpg" alt="user-image" width="50">
-                <p class="m-0">Emilio Verdines <br> <small><i>emilio_v</i></small></p>
+                <img src="{{imagen}}" alt="user-image" width="50">
+                <p class="m-0">{{user}} <br> <small><i>{{correo}}</i></small></p>
             </div>
             <div class="divider"></div>
             <a mat-menu-item routerLink="/account/dashboard"> 
                 <mat-icon class="mat-icon-sm">settings</mat-icon>
-                <span>Account Settings</span> 
+                <span>Configuración</span> 
             </a>
             <!-- <a mat-menu-item routerLink="/account/my-properties"> 
                 <mat-icon class="mat-icon-sm">home</mat-icon>
@@ -25,36 +25,24 @@
                     [matBadgeHidden]="appService.Data.favorites.length == 0"
                     matBadgeSize="small" 
                     matBadgeColor="warn" 
-                    matBadgeOverlap="false">Favorites</span> 
+                    matBadgeOverlap="false">Favoritos</span> 
             </a>
-            <!-- <a mat-menu-item routerLink="/compare"> 
-                <mat-icon class="mat-icon-sm">compare_arrows</mat-icon> 
-                <span [matBadge]="appService.Data.compareList.length" 
-                    [matBadgeHidden]="appService.Data.compareList.length == 0"
-                    matBadgeSize="small" 
-                    matBadgeColor="warn" 
-                    matBadgeOverlap="false">Compare</span> 
-            </a> -->
-            <!-- <a mat-menu-item routerLink="/"> 
-                <mat-icon class="mat-icon-sm">search</mat-icon>
-                <span>Saved Searches</span> 
-            </a> -->
             <a mat-menu-item routerLink="/account/profile"> 
                 <mat-icon class="mat-icon-sm">edit</mat-icon>
-                <span>Edit Profile</span> 
+                <span>Editar perfil</span> 
             </a>
-            <a mat-menu-item routerLink="/lock-screen"> 
+            <!--a mat-menu-item routerLink="/lock-screen"> 
                 <mat-icon class="mat-icon-sm">lock</mat-icon>
                 <span>Lock screen</span> 
-            </a>
+            </a-->
             <a mat-menu-item routerLink="/faq"> 
                 <mat-icon class="mat-icon-sm">help</mat-icon>
-                <span>Help</span> 
+                <span>Ayuda</span> 
             </a>
             <div class="divider"></div>
-            <a mat-menu-item routerLink="/login"> 
+            <a mat-menu-item (click)="cerrar_sesion()"> 
                 <mat-icon class="mat-icon-sm">power_settings_new</mat-icon>
-                <span>Sign Out</span> 
+                <span>Cerrar sesión</span> 
             </a>
         </div>
         <div *ngIf="!ExisteCookie">

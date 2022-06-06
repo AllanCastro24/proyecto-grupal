@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   ExisteCookie: boolean = false;
   ngOnInit(): void {
-    this.ExisteCookie = localStorage.getItem('usuario') ? true : false;
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
     this.bgImage = this.sanitizer.bypassSecurityTrustStyle('url(assets/images/others/login.jpg)');
     this.loginForm = this.fb.group({
       username: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
@@ -48,16 +48,28 @@ export class LoginComponent implements OnInit {
   public login(user:any){
     this.usersService.login(user).subscribe((usuario:any) =>{
       if(usuario!="Usuario o contraseña incorrecto"){
-        console.log(usuario);
+        //console.log(usuario);
         localStorage.setItem("ID_usuario",JSON.stringify({'ID_usuario':usuario.ID_usuario}));
+        localStorage.setItem("Correo",JSON.stringify({'Correo':usuario.Correo}));
+        localStorage.setItem("Usuario",JSON.stringify({'Usuario':usuario.Usuario}));
+        localStorage.setItem("image",JSON.stringify({'image':usuario.image}));
+        localStorage.setItem("pass",JSON.stringify({'pass':usuario.pass}));
         this.usersService.buscarUser(usuario).subscribe((u:any) =>{
           if(u!="No es empleado"){
             console.log(u)
-            localStorage.setItem('empleado', JSON.stringify({'IdUsuario': u.ID_empleado, 'IdSucursal': u.ID_usuario}))
+            localStorage.setItem("Apellidos",JSON.stringify({'Apellidos':u.Apellidos}));
+            localStorage.setItem("Direccion",JSON.stringify({'Direccion':u.Direccion}));
+            localStorage.setItem("Genero",JSON.stringify({'Genero':u.Genero}));
+            localStorage.setItem("ID_puesto",JSON.stringify({'ID_puesto':u.ID_puesto}));
+            localStorage.setItem("ID_sucursal",JSON.stringify({'ID_sucursal':u.ID_sucursal}));
+            localStorage.setItem("ID_tienda",JSON.stringify({'ID_tienda':u.ID_tienda}));
+            localStorage.setItem("ID_tipo_pago: 0",JSON.stringify({'ID_tipo_pago: 0':u.ID_tipo_pago}));
+            localStorage.setItem("Nombre",JSON.stringify({'Nombre':u.Nombre}));
+            localStorage.setItem("Sueldo",JSON.stringify({'Sueldo':u.Sueldo}));
+            localStorage.setItem("Telefono",JSON.stringify({'Telefono':u.Telefono}));
             this.router.navigate(['/admin']);
           }else{
             location.reload();
-            //this.router.navigate(['/']);
           }
         });
       }else{
