@@ -301,3 +301,14 @@ h3 {
   font-weight: bold;
   padding-top: 10px;
 }
+
+@media only screen and (min-width: 768px) {
+  .details,
+  .separator,
+  .generate-ticket,
+  .place-order {
+    width: 400px;
+    position: relative;
+    left: calc(50% - 200px);
+  }
+}

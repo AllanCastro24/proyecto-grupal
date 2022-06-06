@@ -6,20 +6,22 @@
   </div>
   <div (click)="closeSearchResults()" class="results" [class.showResults]="searchResultsMenu.length > 0">
     <ng-template [ngIf]="searchResultsMenu.length > 0">
-      <div *ngFor="let menuItem of searchResultsMenu" id="restaurant-menu-search-{{ menuItem.id }}">
+      <div *ngFor="let menuItem of searchResultsMenu" id="restaurant-menu-search-{{ menuItem.id }}" class="menu">
         <h1>{{ menuItem.name }}</h1>
-        <ng-container *ngFor="let item of searchResultsPlate">
-          <ng-template [ngIf]="item.menuId == menuItem.id">
-            <div [routerLink]="['/restaurants', restaurant?.id, restaurant?.companyId, 'plate', item.id]" class="menu-item">
-              <div class="menu-info">
-                <h2>{{ item.name }}</h2>
-                <span class="price">{{ item.price | currency }}</span>
-                <p class="description">{{ item.description }}</p>
+        <div>
+          <ng-container *ngFor="let item of searchResultsPlate">
+            <ng-template [ngIf]="item.menuId == menuItem.id">
+              <div [routerLink]="['/restaurants', restaurant?.id, restaurant?.companyId, 'plate', item.id]" class="menu-item">
+                <div class="menu-info">
+                  <h2>{{ item.name }}</h2>
+                  <span class="price">{{ item.price | currency }}</span>
+                  <p class="description">{{ item.description }}</p>
+                </div>
+                <img [src]="item.image.medium" [alt]="item.name" />
               </div>
-              <img [src]="item.image.medium" [alt]="item.name" />
-            </div>
-          </ng-template>
-        </ng-container>
+            </ng-template>
+          </ng-container>
+        </div>
       </div>
     </ng-template>
   </div>
@@ -43,20 +45,22 @@
     <mat-icon (click)="openSearch()" class="mat-18">search</mat-icon>
   </div>
   <div class="content">
-    <div *ngFor="let menuItem of menu" id="restaurant-menu-{{ menuItem.id }}">
+    <div *ngFor="let menuItem of menu" id="restaurant-menu-{{ menuItem.id }}" class="menu">
       <h1>{{ menuItem.name }}</h1>
-      <ng-container *ngFor="let item of plates">
-        <ng-template [ngIf]="item.menuId == menuItem.id">
-          <div [routerLink]="['/waiter-menu', restaurant?.id, restaurant?.companyId, 'plate', item.id, tableId]" class="menu-item">
-            <div class="menu-info">
-              <h2>{{ item.name }}</h2>
-              <span class="price">{{ item.price | currency }}</span>
-              <p class="description">{{ item.description }}</p>
+      <div>
+        <ng-container *ngFor="let item of plates">
+          <ng-template [ngIf]="item.menuId == menuItem.id">
+            <div [routerLink]="['/waiter-menu', restaurant?.id, restaurant?.companyId, 'plate', item.id, tableId]" class="menu-item">
+              <div class="menu-info">
+                <h2>{{ item.name }}</h2>
+                <span class="price">{{ item.price | currency }}</span>
+                <p class="description">{{ item.description }}</p>
+              </div>
+              <img [src]="item.image.medium" [alt]="item.name" />
             </div>
-            <img [src]="item.image.medium" [alt]="item.name" />
-          </div>
-        </ng-template>
-      </ng-container>
+          </ng-template>
+        </ng-container>
+      </div>
     </div>
   </div>
 </div>

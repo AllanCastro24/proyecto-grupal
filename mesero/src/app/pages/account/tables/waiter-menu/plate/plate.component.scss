@@ -97,3 +97,14 @@ textarea {
 ::ng-deep .quantity-counter {
   justify-content: center;
 }
+
+@media only screen and (min-width: 768px) {
+  .header,
+  .info,
+  .special-instructions,
+  .counter {
+    width: 500px;
+    position: relative;
+    left: calc(50% - 250px);
+  }
+}

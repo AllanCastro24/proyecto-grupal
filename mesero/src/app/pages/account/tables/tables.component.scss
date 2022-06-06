@@ -105,3 +105,13 @@ button.mat-primary {
   padding: 5px 10px;
   margin-left: 10px;
 }
+
+@media only screen and (min-width: 768px) {
+  .item {
+    display: flex;
+    align-items: center;
+    width: 500px;
+    position: relative;
+    left: calc(50% - 250px);
+  }
+}

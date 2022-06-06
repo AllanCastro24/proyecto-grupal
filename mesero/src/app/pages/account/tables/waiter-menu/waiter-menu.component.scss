@@ -375,3 +375,27 @@ img {
   font-size: 15px;
   margin-left: 3px;
 }
+
+@media only screen and (min-width: 768px) {
+  .menu-item {
+    margin: 15px;
+    width: 20%;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .menu > div {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .menu-item img,
+  .menu-info {
+    width: 100%;
+  }
+
+  .preview-cart .mat-list {
+    width: 500px;
+    left: calc(50% - 250px);
+  }
+}
