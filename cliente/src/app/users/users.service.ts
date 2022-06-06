@@ -16,7 +16,7 @@ export class UsersService {
   public user!: User;
 
   // public url = environment.url + '/users/';
-  public url = 'http://localhost:3000/users/';
+  public url = 'http://localhost/proyecto-grupal-backend/';
 
   constructor(private http: HttpClient) {
     this._isLoggedIn.next(Object.keys(this.getUser()).length !== 0);
@@ -24,15 +24,19 @@ export class UsersService {
     console.log(this.getUser());
   }
 
-  login(login: User): Observable<Data> {
-    return this.http.post<Data>(this.url + 'login', login).pipe(
-      tap((res: Data) => {
-        if (res.success) {
+  login(login: User): any {
+    return this.http.post<any>(this.url + 'api/usuarios/login', login).pipe(
+      tap((res: any) => {
+        if (this._login(res)) {
           this._isLoggedIn.next(true);
-          this.setUser(res.data);
+          this.setupUser(res);
         }
       })
     );
+  }
+
+  _login(res: any): boolean {
+    return res !== 'Usuario o contraseña incorrecto' && res.Activo === 'S';
   }
 
   logout() {
@@ -52,5 +56,20 @@ export class UsersService {
 
   setUser(user: User) {
     localStorage.setItem(this.TOKEN_NAME, JSON.stringify(user));
+  }
+
+  setupUser(user: any) {
+    const userData: User = {
+      id: user.ID_usuario,
+      username: user.Usuario,
+      profile: { image: user.image },
+      contacts: { email: user.Correo },
+    };
+
+    this.setUser(userData);
+  }
+
+  public changePassword(password: any): Observable<any> {
+    return this.http.put<any>(this.url + 'api/usuarios/modificar_pass/' + this.getUser().id, password);
   }
 }

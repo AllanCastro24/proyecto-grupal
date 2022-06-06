@@ -4,7 +4,7 @@ import { CartList, Order, Restaurant } from '../pages/restaurants/restaurants';
 export class User {
   id?: number = 0;
   username: string = '';
-  password: string = '';
+  password?: string = '';
   profile?: UserProfile;
   work?: UserWork;
   contacts?: UserContacts;
@@ -18,22 +18,22 @@ export class User {
 }
 
 export class UserProfile {
-  name: string = '';
-  surname: string = '';
-  birthday!: Object;
-  gender: string = '';
+  name?: string = '';
+  surname?: string = '';
+  birthday?: Object;
+  gender?: string = '';
   image: string = '';
 }
 
 export class UserWork {
-  company: string = '';
+  company?: string = '';
   position: string = '';
-  salary: number = 0;
+  salary?: number = 0;
 }
 
 export class UserContacts {
   email: string = '';
-  phone: string = '';
+  phone?: string = '';
 }
 
 export class UserSocial {

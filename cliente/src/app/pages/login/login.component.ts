@@ -23,7 +23,14 @@ export class LoginComponent implements OnInit {
     duration: 2000,
   };
 
-  constructor(public menuService: MenuService, public fb: FormBuilder, public router: Router, public appSettings: AppSettings, private snackBar: MatSnackBar, private UsersService: UsersService) {
+  constructor(
+    public menuService: MenuService,
+    public fb: FormBuilder,
+    public router: Router,
+    public appSettings: AppSettings,
+    private snackBar: MatSnackBar,
+    private UsersService: UsersService
+  ) {
     this.settings = this.appSettings.settings;
   }
 
@@ -50,10 +57,8 @@ export class LoginComponent implements OnInit {
         password: this.loginForm.get('password')?.value,
       };
 
-      console.log(data);
-
-      this.UsersService.login(data).subscribe((res) => {
-        if (res.success) {
+      this.UsersService.login(data).subscribe((res: any) => {
+        if (this.UsersService._login(res)) {
           this.snackBar.open('Login exitoso', '', this.snackBarDefault);
 
           this.menuService.toggleMenu(true);
