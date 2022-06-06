@@ -13,14 +13,21 @@ import { CookieService } from 'ngx-cookie-service';
 export class TiendasDialogComponent implements OnInit {
 
   public form!: FormGroup;
-  public idtienda:any;
-  public idsucursal:any;
+  public idtienda:string="";
+  public idsucursal:string="";
+  ExisteCookie: boolean = false;
   @Input() idtiendaaa:any = {};
   constructor(public dialogRef: MatDialogRef<TiendasDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public tiendas: Tiendas,
               public fb: FormBuilder,public appService:AppService,private activatedRoute: ActivatedRoute,private cookieService: CookieService) { }
 
   ngOnInit(): void { 
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    //Let mi_variable = ;
+    if (this.ExisteCookie) {
+      this.idsucursal= JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+      this.idtienda=JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
+    }
     //this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
     //this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
     this.form = this.fb.group({
@@ -42,8 +49,8 @@ export class TiendasDialogComponent implements OnInit {
       console.log(this.tiendas);
     };
     
-      this.idtienda = this.cookieService.get('idtienda');
-      this.idsucursal = this.cookieService.get('idsucursal');
+      /* this.idtienda = this.cookieService.get('idtienda');
+      this.idsucursal = this.cookieService.get('idsucursal'); */
       
       console.log(this.idtienda);
       console.log(this.idsucursal);

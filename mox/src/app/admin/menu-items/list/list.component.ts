@@ -12,9 +12,10 @@ import { AppService } from 'src/app/app.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit { 
-  public idtienda:any;
-  public idsucursal:any;
+  public idtienda:string ="";
+  public idsucursal:string = "";
   public activo:any;
+  ExisteCookie: boolean = false;
   displayedColumns: string[] = ['id', 'image', 'categoryId', 'name', 'price', 'availibilityCount', 'actions'];
   dataSource!: MatTableDataSource<MenuItem>;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
@@ -23,8 +24,16 @@ export class ListComponent implements OnInit {
   constructor(public appService:AppService,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
-    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
+    /* this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
+    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc'); */
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    //Let mi_variable = ;
+    if (this.ExisteCookie) {
+      this.idsucursal= JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+      this.idtienda=JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
+    }
+    console.log(this.idsucursal);
+    console.log(this.idtienda);
     
     this.getCategories();
     this.appService.getMenuItemssuc(this.idtienda, this.idsucursal).subscribe((menuItems:MenuItem[]) => {

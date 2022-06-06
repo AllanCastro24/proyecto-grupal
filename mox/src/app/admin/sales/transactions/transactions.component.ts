@@ -18,14 +18,21 @@ export class TransactionsComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
-  public idtienda:any;
-  public idsucursal:any;
+  public idtienda:string = "";
+  public idsucursal:string ="";
+  ExisteCookie: boolean = false;
   //public artists:  Transaction[];
   constructor(public appService:AppService, public snackBar: MatSnackBar,private activatedRoute: ActivatedRoute) { } 
 
   ngOnInit(): void {
-    this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
-    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
+   /*  this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
+    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc'); */
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+//Let mi_variable = ;
+if (this.ExisteCookie) {
+  this.idsucursal= JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+  this.idtienda=JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
+}
     this.dataSource = new MatTableDataSource(transactions);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort; 

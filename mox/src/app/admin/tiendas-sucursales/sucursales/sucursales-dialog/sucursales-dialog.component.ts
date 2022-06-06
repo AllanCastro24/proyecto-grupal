@@ -13,14 +13,21 @@ import { CookieService } from 'ngx-cookie-service';
 export class SucursalesDialogComponent implements OnInit {
 
   public form!: FormGroup;
-  public idtienda:any;
-  public idsucursal:any;
+  public idtienda:string = "";
+  public idsucursal:string = "";
+  ExisteCookie: boolean = false;
   @Input() idtiendaaa:any = {};
   constructor(public dialogRef: MatDialogRef<SucursalesDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public Sucursales: Sucursales,
               public fb: FormBuilder,public appService:AppService,private activatedRoute: ActivatedRoute,private cookieService: CookieService) { }
 
   ngOnInit(): void { 
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    //Let mi_variable = ;
+    if (this.ExisteCookie) {
+      this.idsucursal= JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+      this.idtienda=JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
+    }
     //this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
     //this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
     this.form = this.fb.group({
@@ -49,8 +56,8 @@ export class SucursalesDialogComponent implements OnInit {
       console.log(this.Sucursales);
     };
     
-      this.idtienda = this.cookieService.get('idtienda');
-      this.idsucursal = this.cookieService.get('idsucursal');
+     /*  this.idtienda = this.cookieService.get('idtienda');
+      this.idsucursal = this.cookieService.get('idsucursal'); */
       
       console.log(this.idtienda);
       console.log(this.idsucursal);
@@ -104,7 +111,7 @@ export class SucursalesDialogComponent implements OnInit {
     console.log(this.Sucursales.ID_sucursal);
     console.log(this.Sucursales.ID_tienda);
     //this.idtienda, this.idsucursal,this.id,this.form.value
-    this.appService.editsucursal(this.Sucursales.ID_tienda,this.Sucursales.ID_tienda,this.form.value).subscribe (
+    this.appService.editsucursal(this.Sucursales.ID_tienda,this.Sucursales.ID_sucursal,this.form.value).subscribe (
       datos => {
         console.log('hola'+ datos);
         //this.ngOnInit();

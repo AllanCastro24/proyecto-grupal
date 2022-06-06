@@ -1,15 +1,15 @@
 <mat-card class="m-2 p-0">
     <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 p-2">
         <div></div>
-        <!-- <a mat-raised-button color="primary" routerLink="/admin/menu-items/add">
+        <a mat-raised-button color="primary" routerLink="/admin/menu-items/add">
             <mat-icon>add</mat-icon>
             Agregar nuevo elemento al menú
-        </a> -->
+        </a>
         
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
             <td mat-cell *matCellDef="let menuItem"> <a mat-raised-button color="primary" [routerLink]="['/admin/menu-items/add', menuItem.idtienda, menuItem.idsuc, menuItem.id]" matTooltip="Edit">
                 <mat-icon>edit</mat-icon>
-            </a> regg </td>
+            </a> regg </td> -->
         
     </div>
     <mat-divider></mat-divider>
@@ -69,12 +69,12 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let menuItem"> 
-                    <a mat-icon-button color="primary" [routerLink]="['/admin/menu-items/add', menuItem.idtienda, menuItem.idsuc, menuItem.id]" matTooltip="Edit">
+                    <a mat-icon-button color="primary" [routerLink]="['/admin/menu-items/add', menuItem.id]" matTooltip="Edit">
                         <mat-icon>edit</mat-icon>
                     </a> 
-                    <a mat-icon-button color="primary" [routerLink]="['/admin/menu-items/add', menuItem.idtienda, menuItem.idsuc]" matTooltip="Add">
+                   <!--  <a mat-icon-button color="primary" [routerLink]="['/admin/menu-items/add', menuItem.idtienda, menuItem.idsuc]" matTooltip="Add">
                         <mat-icon>add</mat-icon>
-                    </a> 
+                    </a>  -->
                     <!-- <a mat-icon-button color="primary" [routerLink]="['/admin/menu-items/detail', menuItem.id]" matTooltip="View">
                         <mat-icon>visibility</mat-icon>
                     </a>   -->

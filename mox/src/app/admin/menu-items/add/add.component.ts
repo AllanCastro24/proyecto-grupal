@@ -14,10 +14,11 @@ export class AddComponent implements OnInit {
   public form!: FormGroup;
   private sub: any;
   public id:any;
-  public idtienda:any;
-  public idsucursal:any;
+  public idtienda:string = "";
+  public idsucursal:string = "";
   public showImage:boolean = false;
-
+  ExisteCookie: boolean = false;
+  
   constructor(public appService:AppService, 
               public formBuilder: FormBuilder, 
               private activatedRoute: ActivatedRoute,
@@ -74,7 +75,14 @@ export class AddComponent implements OnInit {
       "isVegetarian": false,
       "categoryId": [null, Validators.required ]   
     }); 
-    
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    //Let mi_variable = ;
+    if (this.ExisteCookie) {
+      this.idsucursal= JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+      this.idtienda=JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
+    }
+    console.log(this.idsucursal);
+    console.log(this.idtienda);
     this.getUnidadespla();
     this.sub = this.activatedRoute.params.subscribe(params => {  
       if(params['id']){
@@ -86,15 +94,17 @@ export class AddComponent implements OnInit {
         this.showImage = true;
       }
     }); 
-    this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
-    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
+    //this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
+    //this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
     /* this.activatedRoute.params.subscribe(params => {  
       this.onSubmit(params['idtienda'],params['idsucursal']); 
      // this.id = this.getMenuItems(params['id']); 
     });  */
+   
     let today = new Date()
     console.log("Date = " + today.toLocaleString().split('.')[0]);
     this.getCategories();
+    
   }
 
   ngOnDestroy() {
@@ -103,7 +113,10 @@ export class AddComponent implements OnInit {
 
   public getCategories(){
     if(!this.appService.Data.categories.length){
-      this.appService.getCategoriestiendasuc(this.idtienda,this.idsucursal).subscribe(categories=>{ 
+      console.log(this.idsucursal);
+    console.log(this.idtienda);
+    
+      this.appService.getCategoriestiendasuc(this.idsucursal,this.idtienda).subscribe(categories=>{ 
         this.appService.Data.categories = categories;
       });
     } 

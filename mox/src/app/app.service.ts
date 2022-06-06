@@ -251,7 +251,7 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
   bajaplato3(idtienda:any,idsucursal:any,id: any, Proveedor: any): Observable<any> {
     return this.http.put(this.url2 + 'baja/' +idtienda + '/' + idsucursal + '/' + id, Proveedor);
   }
-  bajaoaltacatmenu(idtienda:any,idsucursal:any,id:any, catmenu: any): Observable<any> {
+  bajaoaltacatmenu(id:any,idtienda:any,idsucursal:any, catmenu: any): Observable<any> {
     return this.http.put(this.url2 + 'bajacatmenu/' + id + '/' + idtienda + '/' + idsucursal, catmenu);
   }
 
@@ -314,7 +314,7 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
     return this.http.get<Category[]>(this.url2 + 'categoriasmenu');
   } 
 
-  public getCategoriestiendasuc(idtienda:any,idsucursal:any): Observable<Category[]>{
+  public getCategoriestiendasuc(idtienda:string,idsucursal:string): Observable<Category[]>{
     return this.http.get<Category[]>(this.url2 + 'categoriasmenusuctienda/'+ idtienda + '/' + idsucursal);
   } 
 

@@ -7,8 +7,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
 
 export const routes = [ 
   { path: '', redirectTo: 'orders', pathMatch: 'full'},
-  { path: 'orders/:idtienda/:idsuc', component: OrdersComponent, data: { breadcrumb: 'Orders' } },
-  { path: 'transactions/:idtienda/:idsuc', component: TransactionsComponent, data: { breadcrumb: 'Transactions' } } 
+  { path: 'orders', component: OrdersComponent, data: { breadcrumb: 'Orders' } },
+  { path: 'transactions', component: TransactionsComponent, data: { breadcrumb: 'Transactions' } } 
 ];
 
 @NgModule({

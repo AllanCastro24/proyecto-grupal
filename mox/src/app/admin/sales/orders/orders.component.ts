@@ -25,13 +25,14 @@ export class OrdersComponent implements OnInit {
     { id: 2, name: 'Reembolsado' },
     { id: 2, name: 'Pendiente' }
   ];
-  public idtienda:any;
-  public idsucursal:any;
+  public idtienda:string = "";
+  public idsucursal:string ="";
+  ExisteCookie: boolean = false;
   constructor(public appService:AppService, public snackBar: MatSnackBar,private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
-    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
+    /* this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
+    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc'); */
     /* this.appService.getOrders().subscribe((orders:Order[]) => { 
       this.initDataSource(orders);
     });  
@@ -40,6 +41,12 @@ export class OrdersComponent implements OnInit {
   
   
 } */
+this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+//Let mi_variable = ;
+if (this.ExisteCookie) {
+  this.idsucursal= JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+  this.idtienda=JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
+}
     this.appService.getOrderss(this.idtienda,this.idsucursal).subscribe((orders:Order[]) => { 
       this.initDataSource(orders);
       console.log(orders);
