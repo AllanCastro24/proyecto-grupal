@@ -20,14 +20,26 @@ export class AdminComponent implements OnInit {
               private menuService: MenuService){        
     this.settings = this.appSettings.settings;
   }
-
+  ExisteCookie:boolean = false;
+  nombre:string = "";
+  imagen:string = "";
+  apellido:string = "";
   ngOnInit() {  
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
     if(window.innerWidth <= 960){ 
       this.settings.adminSidenavIsOpened = false;
       this.settings.adminSidenavIsPinned = false;
     };  
     this.menuItems = this.menuService.getMenuItems();    
-  }
+    if(this.ExisteCookie){
+      this.nombre = JSON.parse(localStorage.getItem("Nombre")as string).Nombre;
+      this.imagen = JSON.parse(localStorage.getItem("image")as string).image;
+      if(this.imagen == ""){
+        this.imagen = "assets/images/others/user.jpg";
+      };
+      this.apellido = JSON.parse(localStorage.getItem("Apellidos")as string).Apellidos;
+      }
+    }
 
   ngAfterViewInit(){  
     if(document.getElementById('preloader')){

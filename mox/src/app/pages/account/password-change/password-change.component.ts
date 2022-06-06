@@ -14,14 +14,19 @@ export class PasswordChangeComponent implements OnInit {
   public passwordForm!:FormGroup;
   public hide = true; 
   constructor(public formBuilder: FormBuilder, public snackBar: MatSnackBar,public usersService:UsersService) { }
-
+  ExisteCookie: boolean = false;
+  id_user: string = "";
   ngOnInit(): void {
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
     this.passwordForm = this.formBuilder.group({
       id: null,
       currentPassword: ['', Validators.required],
       newPassword: ['', Validators.required],
       confirmNewPassword: ['', Validators.required]
     },{validator: matchingPasswords('newPassword', 'confirmNewPassword')});
+    if(this.ExisteCookie){
+      this.id_user = JSON.parse(localStorage.getItem("ID_usuario")as string).ID_usuario;
+    }
   }
 
   public onPasswordFormSubmit():void {
