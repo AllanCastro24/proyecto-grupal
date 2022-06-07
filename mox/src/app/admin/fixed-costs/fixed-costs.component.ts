@@ -20,7 +20,11 @@ export class FixedCostsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   public TiposGastos: any;
-  public Sucursales:any;
+  public Sucursales: any;
+  ExisteSucursal: boolean = false;
+  ExisteTienda: boolean = false;
+  public nSucursal: any;
+  public nTienda: any;
   public stores = [
     { id: 1, name: 'Agua' },
     { id: 2, name: 'Luz' }
@@ -30,23 +34,32 @@ export class FixedCostsComponent implements OnInit {
   constructor(public appService: AppService, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.appService.ObtenerGastosFijos().subscribe(respuesta => {
-      this.initDataSource(respuesta);
-      // console.log(respuesta);
-      
-    });
-    this.countries = this.appService.getCountries();
-    // this.initDataSource(customers);
-    this.appService.ObtenerTiposGastosFijosActivos().subscribe(respuesta => {
-      // this.tipos_gastos=respuesta
-      this.TiposGastos = respuesta;
-      // console.log(this.TiposGastos);
-      // this.Equipos = respuesta;
-    });
-    this.appService.ObtenerSucursales().subscribe(respuesta =>{
-      this.Sucursales=respuesta;
-    });
-    
+    this.ExisteSucursal = localStorage.getItem('ID_sucursal') ? true : false;
+    this.ExisteTienda = localStorage.getItem('ID_tienda') ? true : false;
+    if (this.ExisteSucursal) {
+      this.nSucursal = localStorage.getItem("ID_sucursal");
+      this.nTienda = localStorage.getItem("ID_tienda");
+
+      this.appService.ObtenerGastosFijos(this.nSucursal,this.nTienda).subscribe(respuesta => {
+        this.initDataSource(respuesta);
+        // console.log(respuesta);
+
+      });
+
+
+      this.appService.ObtenerTiposGastosFijosActivos().subscribe(respuesta => {
+        // this.tipos_gastos=respuesta
+        this.TiposGastos = respuesta;
+        // console.log(this.TiposGastos);
+        // this.Equipos = respuesta;
+      });
+      this.appService.ObtenerSucursales().subscribe(respuesta => {
+        this.Sucursales = respuesta;
+      });
+
+    }
+
+
   }
 
   public initDataSource(data: any) {
@@ -66,10 +79,10 @@ export class FixedCostsComponent implements OnInit {
           // this.dataSource.data.splice(index, 1);
           // this.initDataSource(this.dataSource.data);
           this.appService.BajaGastoFijo(customer.id_gasto, customer.status).subscribe(respuesta => {
-            this.appService.ObtenerGastosFijos().subscribe(respuesta => {
+            this.appService.ObtenerGastosFijos(this.nSucursal,this.nTienda).subscribe(respuesta => {
               this.initDataSource(respuesta);
               // console.log(respuesta);
-              
+
             });
             // this.ruteador.navigateByUrl('/listar-torneo');
             // this.dataSource.data.splice(index, 1);
@@ -107,12 +120,12 @@ export class FixedCostsComponent implements OnInit {
           // cus.splice(cus, 1);
           // console.log("Modificacion " + cus);
           this.appService.EditarGastoFijo(cus.id_gasto, cus).subscribe(respuesta => {
-            this.appService.ObtenerGastosFijos().subscribe(respuesta => {
+            this.appService.ObtenerGastosFijos(this.nSucursal,this.nTienda).subscribe(respuesta => {
               this.initDataSource(respuesta);
               // console.log(respuesta);
-              
+
             });
-            
+
           });
           message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
           this.dataSource.data[index] = cus;
@@ -132,7 +145,7 @@ export class FixedCostsComponent implements OnInit {
           this.appService.InsertarGastoFijo(cus).subscribe(respuesta => {
             // console.log(respuesta);
             // this.paginator.lastPage();
-            
+
           });
           message = 'Nuevo gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' agregado exitosamente';
           // let last_customer = this.dataSource.data[this.dataSource.data.length - 1];

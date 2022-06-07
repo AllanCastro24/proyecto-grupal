@@ -7,26 +7,26 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
-import { MenuItem, Order, Category, Unidades, Tiendas, Sucursales, Horario } from 'src/app/app.models'; 
-import { AppSettings } from 'src/app/app.settings'; 
-import { environment } from 'src/environments/environment';   
+import { MenuItem, Order, Category, Unidades, Tiendas, Sucursales, Horario } from 'src/app/app.models';
+import { AppSettings } from 'src/app/app.settings';
+import { environment } from 'src/environments/environment';
 import { ConfirmDialogComponent, ConfirmDialogModel } from './shared/confirm-dialog/confirm-dialog.component';
 import { AlertDialogComponent } from './shared/alert-dialog/alert-dialog.component';
 import { map } from 'rxjs/operators';
 
 export class Data {
 
-  constructor(public categories: Category[], 
-              public cartList: MenuItem[],
-              public orderList: Order[],
-              public favorites: MenuItem[],
-              public unidades: Unidades[],  
-              public horario: Horario[],
-              public tiendas:Tiendas[],
-              public totalPrice: number,
-              public totalCartCount: number,
-              
-              ) { }
+  constructor(public categories: Category[],
+    public cartList: MenuItem[],
+    public orderList: Order[],
+    public favorites: MenuItem[],
+    public unidades: Unidades[],
+    public horario: Horario[],
+    public tiendas: Tiendas[],
+    public totalPrice: number,
+    public totalCartCount: number,
+
+  ) { }
 }
 
 @Injectable({
@@ -45,336 +45,336 @@ export class AppService {
     0 //totalCartCount
   )
 
-  
+
   API: string = 'http://localhost:8888/';
-  public url = environment.url + '/assets/data/'; 
-  public url2 = environment.url + 'http://localhost:8888/'; 
+  public url = environment.url + '/assets/data/';
+  public url2 = environment.url + 'http://localhost:8888/';
   //public url3 = environment.url + 'http://localhost/Slim/slim2/'; 
   public URL = "http://localhost/Angular/";
-  
-  public url3 = environment.url + 'http://localhost:8888/'; 
+
+  public url3 = environment.url + 'http://localhost:8888/';
   //public url3 = environment.url + 'http://localhost/api/';
 
-  constructor(public http:HttpClient, 
-              private datePipe:DatePipe,
-              private bottomSheet: MatBottomSheet, 
-              private snackBar: MatSnackBar,
-              public dialog: MatDialog,
-              public appSettings:AppSettings,
-              public translateService: TranslateService) { }  
+  constructor(public http: HttpClient,
+    private datePipe: DatePipe,
+    private bottomSheet: MatBottomSheet,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    public appSettings: AppSettings,
+    public translateService: TranslateService) { }
 
 
-//======================================= CATEGORIAS ==========================================
+  //======================================= CATEGORIAS ==========================================
 
-GetCategoriass() {
-  return this.http.get(this.url3 + 'GetCategoria');
-}
-
-CreateCategoria(Categoria: any): Observable<any> {
-  let params = JSON.stringify(Categoria);
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url3 + 'InsertarCategoria', params, { headers: headers });
-}
-
-UpdateCategoria(id: any, datosEvent: any): Observable<any> {
-  return this.http.put(this.url3 + "ActualizarCategoria/" + id, datosEvent);
-}
-
-DeleteCategoria(id: any): Observable<any> {
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.delete(this.url3 + "DeleteCategoria/" + id, { headers: headers });
-}
-//=================================================================================
-
-//======================================= TIPO DE PAGO ==========================================
-GetTipo_Pago() {
-  return this.http.get(this.url3 + 'GetTipo_Pago');
-}
-
-InsertarTipo_Pago(pago: any): Observable<any> {
-  let params = JSON.stringify(pago);
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url3 + 'InsertarTipo_Pago', params, { headers: headers });
-}
-
-UpdateTipo_Pago(id: any, pago: any): Observable<any> {
-  return this.http.put(this.url3 + "ActualizarTipo_Pago/" + id, pago);
-}
-
-DeleteTipo_Pago(id: any): Observable<any> {
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.delete(this.url3 + "DeleteTipo_Pago/" + id, { headers: headers });
-}
-
-//===================================================================================================
-
-//======================================= UNIDAD DE MEDIDA ==========================================
-GetUnidad_Medida() {
-  return this.http.get(this.url3 + 'GetUnidad-Medida');
-}
-
-InsertarUnidadMedida(UnidadMedida: any): Observable<any> {
-  let params = JSON.stringify(UnidadMedida);
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url3 + 'Insertar-Unidad-Medida', params, { headers: headers });
-}
-
-UpdateUnidadMedida(id: any, UnidadMedida: any): Observable<any> {
-  return this.http.put(this.url3 + "Actualizar-Unidad-Medida/" + id, UnidadMedida);
-}
-
-Delete_Unidad_Medida(id: any): Observable<any> {
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.delete(this.url3 + "Delete_Unidad_Medida/" + id, { headers: headers });
-}
-
-//===================================================================================================
-
-//======================================= UNIDAD DE MEDIDA ==========================================
-InsertarProveedor(Proveedor: any): Observable<any> {
-  let params = JSON.stringify(Proveedor);
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url3 + 'InsertarProveedor', params, { headers: headers });
-}
-ActualizarProveedor(id: any, Proveedor: any): Observable<any> {
-  return this.http.put(this.url3 + "ActualizarProveedor/" + id, Proveedor);
-}
-GetProveedor() {
-  return this.http.get(this.url3 + 'GetProveedor');
-}
-ActualizarEstatusProveedor(id: any, Proveedor: any): Observable<any> {
-  return this.http.put(this.url3 + "ActualizarEstatusProveedor/" + id, Proveedor);
-}
-GetProveedorByID(id: any) {
-  return this.http.get(this.url3 + 'GetProveedor/'+ id);
-}
-
-
-GetLastInsumo() {
-  return this.http.get(this.url3 + 'GetLastInsumo');
-}
-
-
-GetinsumosYDetalle() {
-  return this.http.get(this.url3 + 'GetinsumosYDetalle');
-}
-
-GetinsumosYDetalleID(id: any) {
-  return this.http.get(this.url3 + 'GetinsumosYDetalleID/'+ id);
-}
-
-
-InsertarInsumo(insumo: any): Observable<any> {
-  let params = JSON.stringify(insumo);
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url3 + 'InsertarInsumo', params, { headers: headers });
-}
-
-InsertarDetalleInsumo(insumo: any): Observable<any> {
-  let params = JSON.stringify(insumo);
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url3 + 'InsertarDetalleInsumo', params, { headers: headers });
-}
-
-ActualizarInsumo(id: any, insumo: any): Observable<any> {
-  return this.http.put(this.url3 + "ActualizarInsumo/" + id, insumo);
-}
-
-ActualizarDetalleInsumo(id: any, insumo: any): Observable<any> {
-  return this.http.put(this.url3 + "ActualizarDetalleInsumo/" + id, insumo);
-}
-
-subirarchivoimagenes(archivo: {}){ 
-  return this.http.post(this.url3 + 'subirimagen',archivo);
-}
-
-GetMermaCom() {
-  return this.http.get(this.url3 + 'GetMermaCom');
-}
-
-GetInsumoCompuesto() {
-  return this.http.get(this.url3 + 'GetInsumoCompuesto');
-}
-
-Get_Stock_Minimo() {
-  return this.http.get(this.url3 + 'Get_Stock_Minimo');
-}
-GetAlmacenCompuesto() {
-  return this.http.get(this.url3 + 'GetAlmacenCompuesto');
-}
-
-InsertarMerma(merma: any): Observable<any> {
-  let params = JSON.stringify(merma);
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.http.post(this.url3 + 'InsertarMerma', params, { headers: headers });
-}
-
-
-ActualizarMerma(id: any, merma: any): Observable<any> {
-  return this.http.put(this.url3 + "ActualizarMerma/" + id, merma);
-}
-
-ActualizarStockMinimo(id: any, sm: any): Observable<any> {
-  return this.http.put(this.url3 + "ActualizarStockMinimo/" + id, sm);
-}
-
-
-//=================================================================================
-
-
-
-  public getMenuItems(): Observable<MenuItem[]>{
-    return this.http.get<MenuItem[]>(this.url2 + 'cus');
-  } 
-  public getMenuItemssuc(id:any, idsuc:any): Observable<MenuItem[]>{
-    return this.http.get<MenuItem[]>(this.url2 + 'suc/' + id + '/' + idsuc );
-  } 
-  public getMenuItemssucalta(id:any, idsuc:any): Observable<MenuItem[]>{
-    return this.http.get<MenuItem[]>(this.url2 + 'succ/' + id + '/' + idsuc );
-  } 
-  
-  insertarplatos(idtienda:any,idsucursal:any,datoss: any) {
-    return this.http.post(this.url2 + 'addplatillos/' +idtienda + '/' + idsucursal , datoss);
+  GetCategoriass() {
+    return this.http.get(this.url3 + 'GetCategoria');
   }
-  update(idtienda:any,idsucursal:any,id:number,datoss: any) {
-    return this.http.put(this.url2 + 'mod/' +idtienda + '/' + idsucursal + '/' + id, datoss);
+
+  CreateCategoria(Categoria: any): Observable<any> {
+    let params = JSON.stringify(Categoria);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.url3 + 'InsertarCategoria', params, { headers: headers });
+  }
+
+  UpdateCategoria(id: any, datosEvent: any): Observable<any> {
+    return this.http.put(this.url3 + "ActualizarCategoria/" + id, datosEvent);
+  }
+
+  DeleteCategoria(id: any): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete(this.url3 + "DeleteCategoria/" + id, { headers: headers });
+  }
+  //=================================================================================
+
+  //======================================= TIPO DE PAGO ==========================================
+  GetTipo_Pago() {
+    return this.http.get(this.url3 + 'GetTipo_Pago');
+  }
+
+  InsertarTipo_Pago(pago: any): Observable<any> {
+    let params = JSON.stringify(pago);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.url3 + 'InsertarTipo_Pago', params, { headers: headers });
+  }
+
+  UpdateTipo_Pago(id: any, pago: any): Observable<any> {
+    return this.http.put(this.url3 + "ActualizarTipo_Pago/" + id, pago);
+  }
+
+  DeleteTipo_Pago(id: any): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete(this.url3 + "DeleteTipo_Pago/" + id, { headers: headers });
+  }
+
+  //===================================================================================================
+
+  //======================================= UNIDAD DE MEDIDA ==========================================
+  GetUnidad_Medida() {
+    return this.http.get(this.url3 + 'GetUnidad-Medida');
+  }
+
+  InsertarUnidadMedida(UnidadMedida: any): Observable<any> {
+    let params = JSON.stringify(UnidadMedida);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.url3 + 'Insertar-Unidad-Medida', params, { headers: headers });
+  }
+
+  UpdateUnidadMedida(id: any, UnidadMedida: any): Observable<any> {
+    return this.http.put(this.url3 + "Actualizar-Unidad-Medida/" + id, UnidadMedida);
+  }
+
+  Delete_Unidad_Medida(id: any): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete(this.url3 + "Delete_Unidad_Medida/" + id, { headers: headers });
+  }
+
+  //===================================================================================================
+
+  //======================================= UNIDAD DE MEDIDA ==========================================
+  InsertarProveedor(Proveedor: any): Observable<any> {
+    let params = JSON.stringify(Proveedor);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.url3 + 'InsertarProveedor', params, { headers: headers });
+  }
+  ActualizarProveedor(id: any, Proveedor: any): Observable<any> {
+    return this.http.put(this.url3 + "ActualizarProveedor/" + id, Proveedor);
+  }
+  GetProveedor() {
+    return this.http.get(this.url3 + 'GetProveedor');
+  }
+  ActualizarEstatusProveedor(id: any, Proveedor: any): Observable<any> {
+    return this.http.put(this.url3 + "ActualizarEstatusProveedor/" + id, Proveedor);
+  }
+  GetProveedorByID(id: any) {
+    return this.http.get(this.url3 + 'GetProveedor/' + id);
+  }
+
+
+  GetLastInsumo() {
+    return this.http.get(this.url3 + 'GetLastInsumo');
+  }
+
+
+  GetinsumosYDetalle() {
+    return this.http.get(this.url3 + 'GetinsumosYDetalle');
+  }
+
+  GetinsumosYDetalleID(id: any) {
+    return this.http.get(this.url3 + 'GetinsumosYDetalleID/' + id);
+  }
+
+
+  InsertarInsumo(insumo: any): Observable<any> {
+    let params = JSON.stringify(insumo);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.url3 + 'InsertarInsumo', params, { headers: headers });
+  }
+
+  InsertarDetalleInsumo(insumo: any): Observable<any> {
+    let params = JSON.stringify(insumo);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.url3 + 'InsertarDetalleInsumo', params, { headers: headers });
+  }
+
+  ActualizarInsumo(id: any, insumo: any): Observable<any> {
+    return this.http.put(this.url3 + "ActualizarInsumo/" + id, insumo);
+  }
+
+  ActualizarDetalleInsumo(id: any, insumo: any): Observable<any> {
+    return this.http.put(this.url3 + "ActualizarDetalleInsumo/" + id, insumo);
+  }
+
+  subirarchivoimagenes(archivo: {}) {
+    return this.http.post(this.url3 + 'subirimagen', archivo);
+  }
+
+  GetMermaCom() {
+    return this.http.get(this.url3 + 'GetMermaCom');
+  }
+
+  GetInsumoCompuesto() {
+    return this.http.get(this.url3 + 'GetInsumoCompuesto');
+  }
+
+  Get_Stock_Minimo() {
+    return this.http.get(this.url3 + 'Get_Stock_Minimo');
+  }
+  GetAlmacenCompuesto() {
+    return this.http.get(this.url3 + 'GetAlmacenCompuesto');
+  }
+
+  InsertarMerma(merma: any): Observable<any> {
+    let params = JSON.stringify(merma);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.url3 + 'InsertarMerma', params, { headers: headers });
+  }
+
+
+  ActualizarMerma(id: any, merma: any): Observable<any> {
+    return this.http.put(this.url3 + "ActualizarMerma/" + id, merma);
+  }
+
+  ActualizarStockMinimo(id: any, sm: any): Observable<any> {
+    return this.http.put(this.url3 + "ActualizarStockMinimo/" + id, sm);
+  }
+
+
+  //=================================================================================
+
+
+
+  public getMenuItems(): Observable<MenuItem[]> {
+    return this.http.get<MenuItem[]>(this.url2 + 'cus');
+  }
+  public getMenuItemssuc(id: any, idsuc: any): Observable<MenuItem[]> {
+    return this.http.get<MenuItem[]>(this.url2 + 'suc/' + id + '/' + idsuc);
+  }
+  public getMenuItemssucalta(id: any, idsuc: any): Observable<MenuItem[]> {
+    return this.http.get<MenuItem[]>(this.url2 + 'succ/' + id + '/' + idsuc);
+  }
+
+  insertarplatos(idtienda: any, idsucursal: any, datoss: any) {
+    return this.http.post(this.url2 + 'addplatillos/' + idtienda + '/' + idsucursal, datoss);
+  }
+  update(idtienda: any, idsucursal: any, id: number, datoss: any) {
+    return this.http.put(this.url2 + 'mod/' + idtienda + '/' + idsucursal + '/' + id, datoss);
   }
   updateespedi(datoss: any) {
-    return this.http.put(this.url2 + 'modpedido' , datoss);
+    return this.http.put(this.url2 + 'modpedido', datoss);
   }
-  bajaplato(idtienda:any,idsucursal:any,id:number,datoss: any) {
-    return this.http.put(this.url2 + 'baja/' +idtienda + '/' + idsucursal + '/' + id, datoss);
+  bajaplato(idtienda: any, idsucursal: any, id: number, datoss: any) {
+    return this.http.put(this.url2 + 'baja/' + idtienda + '/' + idsucursal + '/' + id, datoss);
   }
-  bajaplato2(idtienda:any,idsucursal:any,id:any,datoss: any) {
-    return this.http.put(this.url2 + 'baja/' +idtienda + '/' + idsucursal + '/' + id, datoss);
+  bajaplato2(idtienda: any, idsucursal: any, id: any, datoss: any) {
+    return this.http.put(this.url2 + 'baja/' + idtienda + '/' + idsucursal + '/' + id, datoss);
   }
-  bajaplato3(idtienda:any,idsucursal:any,id: any, Proveedor: any): Observable<any> {
-    return this.http.put(this.url2 + 'baja/' +idtienda + '/' + idsucursal + '/' + id, Proveedor);
+  bajaplato3(idtienda: any, idsucursal: any, id: any, Proveedor: any): Observable<any> {
+    return this.http.put(this.url2 + 'baja/' + idtienda + '/' + idsucursal + '/' + id, Proveedor);
   }
-  bajaoaltacatmenu(idtienda:any,idsucursal:any,id:any, catmenu: any): Observable<any> {
+  bajaoaltacatmenu(idtienda: any, idsucursal: any, id: any, catmenu: any): Observable<any> {
     return this.http.put(this.url2 + 'bajacatmenu/' + id + '/' + idtienda + '/' + idsucursal, catmenu);
   }
 
-  bajaoaltasucursal(id:any, catmenu: any): Observable<any> {
-    return this.http.put(this.url2 + 'bajasucursal/'  + id , catmenu);
+  bajaoaltasucursal(id: any, catmenu: any): Observable<any> {
+    return this.http.put(this.url2 + 'bajasucursal/' + id, catmenu);
   }
   insertarpedido(datoss: any) {
-    return this.http.post(this.url2 + 'addpedidos',datoss);
+    return this.http.post(this.url2 + 'addpedidos', datoss);
   }
   insertarpedidocomi(datoss: any) {
-    return this.http.post(this.url2 + 'addpedidoscomi',datoss);
+    return this.http.post(this.url2 + 'addpedidoscomi', datoss);
   }
-  subirarchivoimg(archivo: {}){ 
-    return this.http.post(this.url2 + 'subirimg',archivo);
-  }
-
-  enviarcorreo(archivo: any){ 
-    return this.http.post(this.url2 + 'enviar',archivo);
+  subirarchivoimg(archivo: {}) {
+    return this.http.post(this.url2 + 'subirimg', archivo);
   }
 
-  editUser(user: any): Observable<any>{
+  enviarcorreo(archivo: any) {
+    return this.http.post(this.url2 + 'enviar', archivo);
+  }
+
+  editUser(user: any): Observable<any> {
     return this.http.post(this.url2 + 'cuse/', user);
   }
-  
 
-  public getProveedores(): Observable<MenuItem[]>{
+
+  public getProveedores(): Observable<MenuItem[]> {
     return this.http.get<MenuItem[]>(this.url + 'proveedores.json');
-  } 
+  }
 
-  public getStockMin(): Observable<MenuItem[]>{
+  public getStockMin(): Observable<MenuItem[]> {
     return this.http.get<MenuItem[]>(this.url + 'stock-min.json');
   }
- 
-  public getMenuItemById(id:number): Observable<MenuItem>{
-    return this.http.get<MenuItem>(this.url2 + 'cuse/' + id );
+
+  public getMenuItemById(id: number): Observable<MenuItem> {
+    return this.http.get<MenuItem>(this.url2 + 'cuse/' + id);
   }
 
   public getSpecialMenuItems(): Observable<MenuItem[]> {
     return this.http.get<MenuItem[]>(this.url + 'special-menu-items.json');
   }
 
-  
-  public getBestMenuItems(): Observable<MenuItem[]>{
+
+  public getBestMenuItems(): Observable<MenuItem[]> {
     return this.http.get<MenuItem[]>(this.url + 'best-menu-items.json');
-  } 
-  
-  public gettiendas(): Observable<Tiendas[]>{
-    return this.http.get<Tiendas[]>(this.url2 + 'tiendasaltabaja');
-  } 
+  }
 
-  public gethorarios(): Observable<Horario[]>{
+  public gettiendas(): Observable<Tiendas[]> {
+    return this.http.get<Tiendas[]>(this.url2 + 'tiendasaltabaja');
+  }
+
+  public gethorarios(): Observable<Horario[]> {
     return this.http.get<Horario[]>(this.url2 + 'horariossuc');
-  } 
+  }
 
-  public getsucursales(): Observable<Sucursales[]>{
+  public getsucursales(): Observable<Sucursales[]> {
     return this.http.get<Sucursales[]>(this.url2 + 'sucursalaltabaja');
-  } 
+  }
 
-  public getCategories(): Observable<Category[]>{
+  public getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url2 + 'categoriasmenu');
-  } 
+  }
 
-  public getCategoriestiendasuc(idtienda:any,idsucursal:any): Observable<Category[]>{
-    return this.http.get<Category[]>(this.url2 + 'categoriasmenusuctienda/'+ idtienda + '/' + idsucursal);
-  } 
+  public getCategoriestiendasuc(idtienda: any, idsucursal: any): Observable<Category[]> {
+    return this.http.get<Category[]>(this.url2 + 'categoriasmenusuctienda/' + idtienda + '/' + idsucursal);
+  }
 
-  public getiendas(): Observable<Tiendas[]>{
+  public getiendas(): Observable<Tiendas[]> {
     return this.http.get<Tiendas[]>(this.url2 + 'tiendasaltabaja');
-  } 
+  }
 
-  public getCategoriesab(idtienda:any,idsucursal:any): Observable<Category[]>{
+  public getCategoriesab(idtienda: any, idsucursal: any): Observable<Category[]> {
     return this.http.get<Category[]>(this.url2 + 'categoriasmenualtabaja/' + idtienda + '/' + idsucursal);
-  } 
+  }
 
   insertartienda(datoss: any) {
-    return this.http.post(this.url2 + 'addtienda' ,datoss);
+    return this.http.post(this.url2 + 'addtienda', datoss);
   }
 
   insertarsucursal(datoss: any) {
-    return this.http.post(this.url2 + 'addsucursal' ,datoss);
+    return this.http.post(this.url2 + 'addsucursal', datoss);
   }
 
-  insertarcateogoriasmenu(idtienda:any,idsucursal:any,datoss: any) {
-    return this.http.post(this.url2 + 'addcategoriasmenu/' + idtienda + '/' + idsucursal,datoss);
+  insertarcateogoriasmenu(idtienda: any, idsucursal: any, datoss: any) {
+    return this.http.post(this.url2 + 'addcategoriasmenu/' + idtienda + '/' + idsucursal, datoss);
   }
 
-  editcateogoriasmenu(id:number,datoss: any) {
-    return this.http.put(this.url2 + 'editcategoriasmenu/'+ id,datoss);
+  editcateogoriasmenu(id: number, datoss: any) {
+    return this.http.put(this.url2 + 'editcategoriasmenu/' + id, datoss);
   }
 
-  edittienda(id:number,datoss: any) {
-    return this.http.put(this.url2 + 'edittiendas/'+ id,datoss);
+  edittienda(id: number, datoss: any) {
+    return this.http.put(this.url2 + 'edittiendas/' + id, datoss);
   }
 
-  editsucursal(idtienda:number,idsucursal:number,datoss: any) {
-    return this.http.put(this.url2 + 'editsucursal/'+ idtienda + '/' + idsucursal,datoss);
+  editsucursal(idtienda: number, idsucursal: number, datoss: any) {
+    return this.http.put(this.url2 + 'editsucursal/' + idtienda + '/' + idsucursal, datoss);
   }
-  
 
-  public getUnidadespla(): Observable<Unidades[]>{
+
+  public getUnidadespla(): Observable<Unidades[]> {
     return this.http.get<Unidades[]>(this.url + 'unidades.json');
   }
-  public getCategoriesProductos(): Observable<Category[]>{
+  public getCategoriesProductos(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url + 'categoriesProductos.json');
-  }  
+  }
 
-  public getTipoPago(): Observable<Category[]>{
+  public getTipoPago(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url + 'TipoPago.json');
-  } 
+  }
 
-  public getMerma(): Observable<Category[]>{
+  public getMerma(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url + 'Mermas.json');
-  } 
+  }
 
-  public getCategoriesUnidadMedida(): Observable<Category[]>{
+  public getCategoriesUnidadMedida(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url + 'unidadMedida.json');
   }
 
-  public precioventa(): Observable<Category[]>{
+  public precioventa(): Observable<Category[]> {
     return this.http.get<Category[]>(this.url + 'precioventa.json');
   }
 
-  public getHomeCarouselSlides(){
+  public getHomeCarouselSlides() {
     return this.http.get<any[]>(this.url + 'slides.json');
   }
 
@@ -383,31 +383,31 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
   }
 
 
-  public getOrderss(idtienda:any,idsucursal:any){
-    return this.http.get<any[]>(this.url2 + 'mostpedidos/'+ idtienda + '/' + idsucursal);
+  public getOrderss(idtienda: any, idsucursal: any) {
+    return this.http.get<any[]>(this.url2 + 'mostpedidos/' + idtienda + '/' + idsucursal);
   }
 
-  public getOrders(){
-    return this.http.get<any[]>(this.url2 );
+  public getOrders() {
+    return this.http.get<any[]>(this.url2);
   }
 
-  public getOrderscomple(idtienda:any,idsucursal:any){
-    return this.http.get<any[]>(this.url2 + 'mostpedidoscomple/' + idtienda + '/' + idsucursal );
+  public getOrderscomple(idtienda: any, idsucursal: any) {
+    return this.http.get<any[]>(this.url2 + 'mostpedidoscomple/' + idtienda + '/' + idsucursal);
   }
 
-  public getOrderscomple2(idtienda:any,idsucursal:any,id:any){
+  public getOrderscomple2(idtienda: any, idsucursal: any, id: any) {
     return this.http.get<any[]>(this.url2 + 'mostpedidoscompletick/' + idtienda + '/' + idsucursal + '/' + id);
   }
 
 
-  
-  public mostrartiesuc(){
+
+  public mostrartiesuc() {
     return this.http.get<any[]>(this.url2 + 'mostrartiesuc');
   }
-  public getGUID(){
-    let guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-        return v.toString(16);
+  public getGUID() {
+    let guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
     }).toLowerCase();
     return guid;
   }
@@ -486,17 +486,17 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
   }
 
 
-  public openDialog2(component:any, data:any, panelClass:any,idtienda:any,idsucursal:any){ 
+  public openDialog2(component: any, data: any, panelClass: any, idtienda: any, idsucursal: any) {
     return this.dialog.open(component, {
-      data: data, 
+      data: data,
       panelClass: panelClass,
       autoFocus: false,
-      direction: (this.appSettings.settings.rtl) ? 'rtl':'ltr'
-    });  
+      direction: (this.appSettings.settings.rtl) ? 'rtl' : 'ltr'
+    });
   }
 
-  public openConfirmDialog(title:string, message:string) {  
-    const dialogData = new ConfirmDialogModel(title, message); 
+  public openConfirmDialog(title: string, message: string) {
+    const dialogData = new ConfirmDialogModel(title, message);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
       data: dialogData
@@ -1004,18 +1004,18 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
 
   public getDeliveryMethods() {
     return [
-        
-        { value: 'Normal', name: 'Envio Normal', desc: '$20 / Envio Normal' },
-       
+
+      { value: 'Normal', name: 'Envio Normal', desc: '$20 / Envio Normal' },
+
     ]
   }
 
-  public getpaymentmethods(){
+  public getpaymentmethods() {
     return [
-        
-        { value: 'Efectivo', name: 'Pago Efectivo', desc: 'Solicite pago en efectivo' },
-        { value: 'Tarjeta', name: 'Pago Con Tarjeta', desc: 'Ingrese tarjeta' },
-        
+
+      { value: 'Efectivo', name: 'Pago Efectivo', desc: 'Solicite pago en efectivo' },
+      { value: 'Tarjeta', name: 'Pago Con Tarjeta', desc: 'Ingrese tarjeta' },
+
     ]
   }
 
@@ -1089,8 +1089,8 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
       )
   }
 
-  ObtenerGastosFijos() {
-    return this.http.get(this.API + "api/costos_fijos/consultar");
+  ObtenerGastosFijos(id_sucursal: any, id_tienda: any) {
+    return this.http.get(this.API + "api/costos_fijos/consultar/" + id_sucursal + "/" + id_tienda);
   }
 
   InsertarGastoFijo(datosGasto: any): Observable<any> {
@@ -1109,8 +1109,8 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
   }
   //GASTOS FIJOS PROGRAMADOS
 
-  ObtenerGastosFijosProgramados() {
-    return this.http.get(this.API + "api/costos_programados/consultar");
+  ObtenerGastosFijosProgramados(id_sucursal: any, id_tienda: any) {
+    return this.http.get(this.API + "api/costos_programados/consultar/" + id_sucursal + "/" + id_tienda);
   }
 
   InsertarGastoFijoProgramado(datosGasto: any): Observable<any> {
@@ -1154,11 +1154,11 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
     return this.http.put(this.API + "api/tipo_gastos/baja/" + id + "/" + status, { responseType: 'text' });
 
   }
-  
 
-  ObtenerVentasXMes(mes: any): Observable<any> {    
+
+  ObtenerVentasXMes(mes: any): Observable<any> {
     // return this.http.get(this.API + "api/ventas/mes/" + mes.mes + "/" + mes.ano);
-    return this.http.get(this.API + "api/producto/mas_vendido/mes/" + mes.mes + "/" + mes.ano);
+    return this.http.get(this.API + "api/producto/mas_vendido/mes/" + mes.mes + "/" + mes.ano + "/" + mes.id_sucursal + "/" + mes.id_tienda);
 
   }
 
@@ -1174,13 +1174,13 @@ ActualizarStockMinimo(id: any, sm: any): Observable<any> {
 
   ObtenerVentasXDia(fecha: any): Observable<any> {
     // return this.http.get(this.API + "api/ventas/day/" + fecha.dia);
-    return this.http.get(this.API + "api/producto/mas_vendido/day/" + fecha.dia);
+    return this.http.get(this.API + "api/producto/mas_vendido/day/" + fecha.dia + "/" + fecha.id_sucursal + "/" + fecha.id_tienda);
 
   }
 
   ObtenerVentasXRango(rango: any): Observable<any> {
     // return this.http.get(this.API + "api/ventas/range/" + rango.fecha + "/" + rango.fecha2);
-    return this.http.get(this.API + "api/producto/mas_vendido/range/" + rango.fecha + "/" + rango.fecha2);
+    return this.http.get(this.API + "api/producto/mas_vendido/range/" + rango.fecha + "/" + rango.fecha2 + "/" + rango.id_sucursal + "/" + rango.id_tienda);
     console.log(this.API + "api/ventas/range/" + rango.fecha[0] + "/" + rango.fecha2[0]);
 
   }
