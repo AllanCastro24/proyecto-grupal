@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,12 +12,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class FixedCostsDialogComponent implements OnInit {
   public form!: FormGroup;
   public form2!:FormGroup;
+  ExisteSucursal:boolean =false;
+  ExisteTienda:boolean =false;
   constructor(public dialogRef: MatDialogRef<FixedCostsDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              public fb: FormBuilder) { }
+              public fb: FormBuilder, public router:Router) { }
   
-
+              ExisteCookie:boolean = false;
   ngOnInit(): void {
+    
     this.form2 = this.fb.group({
       id_gasto: 0,            
     }); 
@@ -27,6 +31,7 @@ export class FixedCostsDialogComponent implements OnInit {
       cantidad: ['', Validators.required],
       fecha: ['', Validators.required],
       id_sucursal: ['', Validators.required],
+      id_tienda: ['', Validators.required],
       periodicidad: ['', Validators.required],  
       status: ['', Validators.required], 
            
@@ -38,6 +43,17 @@ export class FixedCostsDialogComponent implements OnInit {
       // this.form.value.id_gasto=this.data.customer;
       console.log(this.form.value.id_gasto);
     };
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    if (this.ExisteCookie){
+       let ID_sucursal = localStorage.getItem("ID_sucursal");
+       let ID_tienda = localStorage.getItem("ID_tienda");
+
+       this.form.value.id_sucursal=ID_sucursal;
+       this.form.value.id_tienda=ID_tienda;
+    }
+    else{
+      this.router.navigate(['/']);
+    }
   }
 
   public onSubmit(){ 

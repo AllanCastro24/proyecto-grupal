@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppService } from 'src/app/app.service';
 import { ScheduledFixedExpensesDialogComponent } from './scheduled-fixed-expenses-dialog/scheduled-fixed-expenses-dialog.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,37 +14,51 @@ import { ScheduledFixedExpensesDialogComponent } from './scheduled-fixed-expense
   styleUrls: ['./scheduled-fixed-expenses.component.scss']
 })
 export class ScheduledFixedExpensesComponent implements OnInit {
-  displayedColumns: string[] = ['tipo_gasto', 'descripcion', 'cantidad', 'fecha', 'id_sucursal', 'periodicidad', 'status', 'actions'];
+  // displayedColumns: string[] = ['tipo_gasto', 'descripcion', 'cantidad', 'fecha', 'id_sucursal', 'periodicidad', 'status', 'actions'];
+  displayedColumns: string[] = ['tipo_gasto', 'descripcion', 'cantidad', 'fecha', 'periodicidad', 'status', 'actions'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   public TiposGastos: any;
-  public Sucursales:any;
+  public Sucursales: any;
+  ExisteCookie:boolean = false;
+  public nSucursal:any;
+  public nTienda:any;
   public stores = [
     { id: 1, name: 'Agua' },
     { id: 2, name: 'Luz' }
   ]
   public countries: any[] = [];
 
-  constructor(public appService: AppService, public snackBar: MatSnackBar) { }
-
+  constructor(public appService: AppService, public snackBar: MatSnackBar, public router:Router) { }
+  
   ngOnInit(): void {
-    this.appService.ObtenerGastosFijosProgramados().subscribe(respuesta => {
-      this.initDataSource(respuesta);
-      console.log(respuesta);
-      
-    });
-    this.countries = this.appService.getCountries();
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    if (this.ExisteCookie) {
+      this.nSucursal = localStorage.getItem("ID_sucursal");
+      this.nTienda = localStorage.getItem("ID_tienda");
+
+      this.appService.ObtenerGastosFijosProgramados(this.nSucursal,this.nTienda).subscribe(respuesta => {
+        this.initDataSource(respuesta);
+        console.log(respuesta);
+
+      });
+      this.appService.ObtenerTiposGastosFijosActivos().subscribe(respuesta => {
+        // this.tipos_gastos=respuesta
+        this.TiposGastos = respuesta;
+        // console.log(this.TiposGastos);
+        // this.Equipos = respuesta;
+      });
+      this.appService.ObtenerSucursales().subscribe(respuesta => {
+        this.Sucursales = respuesta;
+      });
+    }
+    else{
+      this.router.navigate(['/']);
+    }
+
     // this.initDataSource(customers);
-    this.appService.ObtenerTiposGastosFijosActivos().subscribe(respuesta => {
-      // this.tipos_gastos=respuesta
-      this.TiposGastos = respuesta;
-      // console.log(this.TiposGastos);
-      // this.Equipos = respuesta;
-    });
-    this.appService.ObtenerSucursales().subscribe(respuesta =>{
-      this.Sucursales=respuesta;
-    });
+
   }
 
   public initDataSource(data: any) {
@@ -62,10 +77,10 @@ export class ScheduledFixedExpensesComponent implements OnInit {
           // this.dataSource.data.splice(index, 1);
           // this.initDataSource(this.dataSource.data);
           this.appService.BajaGastoFijoProgramado(customer.id_gasto_fijo, customer.status).subscribe(respuesta => {
-            this.appService.ObtenerGastosFijosProgramados().subscribe(respuesta => {
+            this.appService.ObtenerGastosFijosProgramados(this.nSucursal,this.nTienda).subscribe(respuesta => {
               this.initDataSource(respuesta);
               console.log(respuesta);
-              
+
             });
             // this.ruteador.navigateByUrl('/listar-torneo');
             // this.dataSource.data.splice(index, 1);
@@ -98,12 +113,12 @@ export class ScheduledFixedExpensesComponent implements OnInit {
           // cus.splice(cus, 1);
           // console.log("Modificacion " + cus);
           this.appService.EditarGastoFijoProgramado(cus.id_gasto_fijo, cus).subscribe(respuesta => {
-            this.appService.ObtenerGastosFijosProgramados().subscribe(respuesta => {
+            this.appService.ObtenerGastosFijosProgramados(this.nSucursal,this.nTienda).subscribe(respuesta => {
               this.initDataSource(respuesta);
               // console.log(respuesta);
-              
+
             });
-            
+
             // console.log(respuesta);
           });
           message = 'Gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' modificado exitosamente';
@@ -123,15 +138,15 @@ export class ScheduledFixedExpensesComponent implements OnInit {
           console.log("Datos a registrar " + cus);
           this.appService.InsertarGastoFijoProgramado(cus).subscribe(respuesta => {
             // console.log(respuesta);
-            this.appService.ObtenerGastosFijosProgramados().subscribe(respuesta => {
+            this.appService.ObtenerGastosFijosProgramados(this.nSucursal,this.nTienda).subscribe(respuesta => {
               this.initDataSource(respuesta);
               // console.log(respuesta);
-              
+
             });
             this.paginator.lastPage();
-            
+
           });
-          message = 'Nuevo gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' agregado exitosamente';                  
+          message = 'Nuevo gasto ' + cus.descripcion + ' con cantidad de ' + cus.cantidad + ' agregado exitosamente';
           // this.dataSource.data.push(cus);                    
         }
         this.initDataSource(this.dataSource.data);

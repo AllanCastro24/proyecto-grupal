@@ -10,12 +10,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ScheduledFixedExpensesDialogComponent implements OnInit {
   public form!: FormGroup;
   public form2!: FormGroup;
+  ExisteSucursal:boolean =false;
+  ExisteTienda:boolean =false;
+
+  
   constructor(public dialogRef: MatDialogRef<ScheduledFixedExpensesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public fb: FormBuilder) { }
 
 
   ngOnInit(): void {
+    
     this.form2 = this.fb.group({
       id_gasto: 0,
     });
@@ -26,15 +31,34 @@ export class ScheduledFixedExpensesDialogComponent implements OnInit {
       cantidad: ['', Validators.required],
       fecha: ['', Validators.required],
       id_sucursal: ['', Validators.required],
+      id_tienda: ['', Validators.required],
       periodicidad: ['', Validators.required],
       status: ['', Validators.required],
 
 
     });
 
+    console.log(this.form.value.id_sucursal);
+    console.log(this.form.value.id_tienda);
+    
+
+    
+
     if (this.data.customer) {
       this.form.patchValue(this.data.customer);
     };
+
+    this.ExisteSucursal = localStorage.getItem('ID_sucursal') ? true : false;
+    this.ExisteTienda = localStorage.getItem('ID_tienda') ? true : false;    
+    if (this.ExisteSucursal){
+       let ID_sucursal = localStorage.getItem("ID_sucursal");
+       let ID_tienda = localStorage.getItem("ID_tienda");
+
+       this.form.value.id_sucursal=ID_sucursal;
+       this.form.value.id_tienda=ID_tienda;
+    }
+
+
   }
 
   public onSubmit() {

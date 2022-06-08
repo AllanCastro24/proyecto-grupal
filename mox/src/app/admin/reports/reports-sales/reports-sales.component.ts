@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, PLATFORM_ID, ElementRef, ViewChild } from '@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { MenuItem } from 'src/app/app.models';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { isPlatformBrowser } from '@angular/common';
 import { analytics } from '..//dashboard.data';
 import { montly_sales } from '../dashboard.data';
+import { Router } from '@angular/router';
 
 
 
@@ -24,9 +25,12 @@ export class ReportsSalesComponent implements OnInit {
   public form2!: FormGroup;
   public form3!: FormGroup;
   public form4!: FormGroup;
+  ExisteCookie:boolean = false;
+  public nSucursal: any;
+  public nTienda: any;
   public optionValue = "";
   years: number[] = [];
-  public anio:number=0;
+  public anio: number = 0;
   displayedColumns: string[] = ['id_producto', 'cantidad', 'id_mesero', 'fecha', 'id_sucursal'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -56,15 +60,15 @@ export class ReportsSalesComponent implements OnInit {
   public previousWidthOfResizedDiv: number = 0;
 
   //GRAFICA PASTEL
-  public data: any[] = []; 
-  
-  
-  public colorScheme:any = {
+  public data: any[] = [];
+
+
+  public colorScheme: any = {
     domain: ['#2F3E9E', '#D22E2E', '#378D3B']
-  }; 
+  };
   public showLabels = true;
   public explodeSlices = true;
-  public doughnut = false; 
+  public doughnut = false;
 
 
 
@@ -72,14 +76,22 @@ export class ReportsSalesComponent implements OnInit {
   constructor(public appService: AppService,
     public formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    @Inject(PLATFORM_ID) private platformId: Object) { }
+    @Inject(PLATFORM_ID) private platformId: Object, public router:Router) { }
 
 
 
-    
+
   ngOnInit(): void {
-        
-    this.anio=new Date().getFullYear();    
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    if (this.ExisteCookie) {
+      this.nSucursal = localStorage.getItem("ID_sucursal");
+      this.nTienda = localStorage.getItem("ID_tienda");
+    }
+    else{
+      this.router.navigate(['/']);
+    }
+
+    this.anio = new Date().getFullYear();
     // this.appService.ObtenerGastosFijos().subscribe(respuesta => {
     //   this.initDataSource(respuesta);
     //   console.log(respuesta);
@@ -98,6 +110,8 @@ export class ReportsSalesComponent implements OnInit {
       // "buscarPor": [null, Validators.required],
       "mes": null,
       "ano": null,
+      "id_sucursal": null,
+      "id_tienda": null,
       // "fecha": null,
       // "fecha2": null,
       // "dia": null,
@@ -122,6 +136,8 @@ export class ReportsSalesComponent implements OnInit {
       // "buscarPor": [null, Validators.required],
       "fecha": null,
       "fecha2": null,
+      "id_sucursal": null,
+      "id_tienda": null,
 
     });
     this.form3 = this.formBuilder.group({
@@ -130,8 +146,16 @@ export class ReportsSalesComponent implements OnInit {
       // "description": null,
 
       "dia": null,
+      "id_sucursal": null,
+      "id_tienda": null,
 
     });
+    this.form4.value.id_sucursal = this.nSucursal;
+    this.form4.value.id_tienda = this.nTienda;
+    this.form2.value.id_sucursal = this.nSucursal;
+    this.form2.value.id_tienda = this.nTienda;
+    this.form3.value.id_sucursal = this.nSucursal;
+    this.form3.value.id_tienda = this.nTienda;
     // this.getCategories();
     // this.sub = this.activatedRoute.params.subscribe(params => {  
     //   if(params['id']){
@@ -169,50 +193,61 @@ export class ReportsSalesComponent implements OnInit {
 
 
   public onSubmit() {
-    if (this.optionValue == "Mes") {
-      // alert("Mes");
-      console.log(this.form4.value);
-      this.appService.ObtenerVentasXMes(this.form4.value).subscribe(respuesta => {
-        // this.initDataSource(respuesta);
-        this.data=respuesta;
-      });
-    } else if (this.optionValue == "Dia") {
-      // alert("Dia");
-      console.log(this.form3.value);
-      this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
-        // this.initDataSource(respuesta);
-        this.data=respuesta;
-        // console.log(respuesta);
-        // this.Equipos = respuesta;
-      });
-    } else if (this.optionValue == "Rango") {
-      // alert("Rango");
-      console.log(this.form2.value);
-      this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
-        // this.initDataSource(respuesta);
-        this.data=respuesta;
-        
-      });
-    } else if (this.optionValue == "Productos mas vendidos en el mes") {
-      console.log(this.form4.value);
-      this.appService.ProductosMasVendidos(this.form4.value).subscribe(respuesta => {
-        // this.initDataSource(respuesta);
-        this.analytics = [...respuesta];
-        this.data=respuesta;
-        // console.log(respuesta);
-        // this.Equipos = respuesta;
-      });
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    if (this.ExisteCookie) {
+      this.nSucursal = localStorage.getItem("ID_sucursal");
+      this.nTienda = localStorage.getItem("ID_tienda");
+
+      if (this.optionValue == "Mes") {
+        // alert("Mes");
+        console.log(this.form4.value);
+        this.appService.ObtenerVentasXMes(this.form4.value).subscribe(respuesta => {
+          // this.initDataSource(respuesta);
+          this.data = respuesta;
+        });
+      } else if (this.optionValue == "Dia") {
+        // alert("Dia");
+        console.log(this.form3.value);
+        this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
+          // this.initDataSource(respuesta);
+          this.data = respuesta;
+          // console.log(respuesta);
+          // this.Equipos = respuesta;
+        });
+      } else if (this.optionValue == "Rango") {
+        // alert("Rango");
+        console.log(this.form2.value);
+        this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
+          // this.initDataSource(respuesta);
+          this.data = respuesta;
+
+        });
+      } else if (this.optionValue == "Productos mas vendidos en el mes") {
+        console.log(this.form4.value);
+        this.appService.ProductosMasVendidos(this.form4.value).subscribe(respuesta => {
+          // this.initDataSource(respuesta);
+          this.analytics = [...respuesta];
+          this.data = respuesta;
+          // console.log(respuesta);
+          // this.Equipos = respuesta;
+        });
+      }
+      else if (this.optionValue == "Productos menos vendidos en el mes") {
+        console.log(this.form4.value);
+        this.appService.ProductosMenosVendidos(this.form4.value).subscribe(respuesta => {
+          // this.initDataSource(respuesta);
+          this.analytics = respuesta;
+          this.data = respuesta;
+          // console.log(respuesta);
+          // this.Equipos = respuesta;
+        });
+      }
+
     }
-    else if (this.optionValue == "Productos menos vendidos en el mes") {
-      console.log(this.form4.value);
-      this.appService.ProductosMenosVendidos(this.form4.value).subscribe(respuesta => {
-        // this.initDataSource(respuesta);
-        this.analytics = respuesta;
-        this.data=respuesta;
-        // console.log(respuesta);
-        // this.Equipos = respuesta;
-      });
+    else{
+      this.router.navigate(['/']);
     }
+
 
   }
   onSelect(event: any) {
@@ -223,7 +258,7 @@ export class ReportsSalesComponent implements OnInit {
     if (this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth) {
       // this.analytics = [...analytics];
     }
-    if(this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth){
+    if (this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth) {
       // setTimeout(() => this.data = [...montly_sales] );
     }
     this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
