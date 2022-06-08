@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-menu',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserMenuComponent implements OnInit {
   public userImage = 'assets/images/others/admin.jpg';
-  constructor() { }
+  constructor(public router:Router) { }
   ExisteCookie:boolean = false;
   nombre:string = "";
   imagen:string = "";
@@ -21,7 +22,10 @@ export class UserMenuComponent implements OnInit {
         this.imagen = "assets/images/others/user.jpg";
       };
       this.apellido = JSON.parse(localStorage.getItem("Apellidos")as string).Apellidos;
-      }
+    }
+    else{
+      this.router.navigate(['/']);
+    }
   }
 
   cerrar_sesion(){
