@@ -14,6 +14,8 @@ export class FixedCostsDialogComponent implements OnInit {
   public form2!:FormGroup;
   ExisteSucursal:boolean =false;
   ExisteTienda:boolean =false;
+  ID_sucursal:string = "";
+  ID_tienda:string = "";
   constructor(public dialogRef: MatDialogRef<FixedCostsDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public fb: FormBuilder, public router:Router) { }
@@ -45,11 +47,11 @@ export class FixedCostsDialogComponent implements OnInit {
     };
     this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
     if (this.ExisteCookie){
-       let ID_sucursal = JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
-       let ID_tienda = JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
+       this.ID_sucursal = JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+       this.ID_tienda = JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
 
-       this.form.value.id_sucursal=ID_sucursal;
-       this.form.value.id_tienda=ID_tienda;
+       this.form.value.id_sucursal=this.ID_sucursal;
+       this.form.value.id_tienda=this.ID_tienda;
     }
     else{
       this.router.navigate(['/']);

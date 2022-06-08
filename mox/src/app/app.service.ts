@@ -1100,6 +1100,8 @@ export class AppService {
   }
 
   EditarGastoFijo(id: any, datosGasto: any): Observable<any> {
+    console.log("PRUEBAS EDITAR");
+    console.log(datosGasto);
     return this.http.put(this.API + "api/costos_fijos/update/" + id, datosGasto, { responseType: 'text' });
 
   }

@@ -107,6 +107,18 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
+                    
+                    <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3" hidden>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Sucursal</mat-label>
+                            <input matInput required formControlName="id_sucursal" class="form-control" aria-describedby="helpId" [(ngModel)]="ID_sucursal" readonly>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>TIenda</mat-label>
+                            <input matInput required formControlName="id_tienda" class="form-control" aria-describedby="helpId" [(ngModel)]="ID_tienda" readonly>
+                        </mat-form-field>
+                    </div>
 
                     <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
                         <mat-form-field appearance="outline" class="w-100">
@@ -116,7 +128,7 @@
                                 <mat-option [value]="1">
                                     <span>Alta</span>
                                 </mat-option>
-                                <mat-option [value]="0">
+                                <mat-option [value]="2">
                                     <span>Baja</span>
                                 </mat-option>
                             </mat-select>
