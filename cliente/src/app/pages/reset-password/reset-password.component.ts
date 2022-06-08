@@ -16,13 +16,19 @@ export class ResetPasswordComponent implements OnInit {
   public hide = true;
   public settings: Settings;
 
-  constructor(public menuService: MenuService, public fb: FormBuilder, private route: ActivatedRoute, public router: Router, public appSettings: AppSettings) {
+  constructor(
+    public menuService: MenuService,
+    public fb: FormBuilder,
+    private route: ActivatedRoute,
+    public router: Router,
+    public appSettings: AppSettings
+  ) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit(): void {
     this.resetPasswordForm = this.fb.group({
-      email: ['', Validators.compose([Validators.required, emailValidator])],
+      email: ['', Validators.compose([Validators.required])],
     });
 
     this.menuService.toggleMenu(false);
@@ -30,7 +36,7 @@ export class ResetPasswordComponent implements OnInit {
 
   public onResetPasswordFormSubmit(): void {
     if (this.resetPasswordForm.valid) {
-      this.router.navigate(['form'], { relativeTo: this.route });
+      this.router.navigate(['form', { email: this.resetPasswordForm.get('email')?.value }], { relativeTo: this.route });
     }
   }
 }

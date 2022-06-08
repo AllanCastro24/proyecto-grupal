@@ -38,11 +38,21 @@ export class RegisterComponent implements OnInit {
     this.menuService.toggleMenu(false);
   }
 
-  public async onRegisterFormSubmit() {
-    if (this.registerForm.valid) {
-      await this.UsersService.signup(this.registerForm.value).toPromise();
-
-      this.snackBar.open('Registrado!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
+  public async onRegisterFormSubmit(): Promise<boolean> {
+    if (!this.registerForm.valid) {
+      return false;
     }
+
+    await this.UsersService.signup(this.registerForm.value)
+      .toPromise()
+      .catch((err) => {
+        console.log(err);
+      });
+
+    this.snackBar.open('Registrado!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
+
+    this.router.navigate(['/login']);
+
+    return true;
   }
 }

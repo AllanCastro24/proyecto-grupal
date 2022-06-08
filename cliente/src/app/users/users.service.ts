@@ -100,7 +100,7 @@ export class UsersService {
       const _user: any = user;
 
       _user.default = true;
-      
+
       for (const key in _user) {
         (users as any)[index][key] = _user[key];
       }
@@ -123,7 +123,13 @@ export class UsersService {
     this.setUser(userData, true);
   }
 
-  public changePassword(password: any): Observable<any> {
-    return this.http.put<any>(this.url + 'api/usuarios/modificar_pass/' + this.getUser().id, password);
+  public changePassword(password: any, id: number = 0): Observable<any> {
+    const userId = id || this.getUser().id;
+
+    return this.http.put<any>(this.url + 'api/usuarios/modificar_pass/' + userId, password);
+  }
+
+  public getUsersFromBd(): Observable<any> {
+    return this.http.get<any>(this.url + 'api/usuarios/consultar_usuarios');
   }
 }
