@@ -52,8 +52,8 @@ export class UsersService {
     window.location.reload();
   }
 
-  signup(user: User): Observable<Success> {
-    return this.http.post<Success>(this.url + 'add', user);
+  signup(user: User): Observable<any> {
+    return this.http.post<any>(this.url + 'api/usuarios/add', user);
   }
 
   getCurrentUser(): number {
