@@ -3,6 +3,7 @@ import { CartList, Order, Restaurant } from '../pages/restaurants/restaurants';
 
 export class User {
   id?: number = 0;
+  default?: boolean = false;
   username: string = '';
   password?: string = '';
   profile?: UserProfile;

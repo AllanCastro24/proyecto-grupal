@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Data, Success, User } from './users';
+import { Success, User } from './users';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +15,10 @@ export class UsersService {
   public isLoggedIn = this._isLoggedIn.asObservable();
   public user!: User;
 
-  // public url = environment.url + '/users/';
   public url = 'http://localhost/proyecto-grupal-backend/';
 
   constructor(private http: HttpClient) {
-    this._isLoggedIn.next(Object.keys(this.getUser()).length !== 0);
+    this._isLoggedIn.next(this.getCurrentUser() !== -1);
 
     console.log(this.getUser());
   }
@@ -41,7 +40,14 @@ export class UsersService {
 
   logout() {
     this._isLoggedIn.next(false);
-    localStorage.removeItem(this.TOKEN_NAME);
+    let users: User[] = this.getUsers();
+
+    users = users.map((u) => {
+      u.default = false;
+      return u;
+    });
+
+    localStorage.setItem(this.TOKEN_NAME, JSON.stringify(users));
 
     window.location.reload();
   }
@@ -50,23 +56,71 @@ export class UsersService {
     return this.http.post<Success>(this.url + 'add', user);
   }
 
-  getUser(): User {
-    return JSON.parse(localStorage.getItem(this.TOKEN_NAME) || '{}');
+  getCurrentUser(): number {
+    const users = this.getUsers();
+    const index = users.findIndex((u) => u.default);
+
+    if (index !== -1) {
+      this.user = users[index];
+    }
+
+    return index;
   }
 
-  setUser(user: User) {
-    localStorage.setItem(this.TOKEN_NAME, JSON.stringify(user));
+  getUser(): User {
+    return (this.user || {}).default ? this.user : <User>{};
+  }
+
+  getUsers(): User[] {
+    const users = localStorage.getItem(this.TOKEN_NAME);
+
+    if (!users) {
+      localStorage.setItem(this.TOKEN_NAME, JSON.stringify([]));
+
+      return [];
+    }
+
+    return JSON.parse(users);
+  }
+
+  setUser(user: User, setDefault: boolean = false) {
+    this.user = user;
+
+    let users: User[] = this.getUsers();
+    const index = users.findIndex((u) => u.id === user.id);
+
+    if (setDefault) {
+      users = users.map((u) => {
+        u.default = false;
+        return u;
+      });
+    }
+
+    if (index !== -1) {
+      const _user: any = user;
+
+      _user.default = true;
+      
+      for (const key in _user) {
+        (users as any)[index][key] = _user[key];
+      }
+    } else {
+      users.push(user);
+    }
+
+    localStorage.setItem(this.TOKEN_NAME, JSON.stringify(users));
   }
 
   setupUser(user: any) {
     const userData: User = {
       id: user.ID_usuario,
+      default: true,
       username: user.Usuario,
       profile: { image: user.image },
       contacts: { email: user.Correo },
     };
 
-    this.setUser(userData);
+    this.setUser(userData, true);
   }
 
   public changePassword(password: any): Observable<any> {

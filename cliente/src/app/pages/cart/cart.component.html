@@ -19,7 +19,7 @@
             <span class="separator">●</span>
             <span class="totalPrice">{{ getTotalPrice(cartList.items) | currency }}</span>
           </div>
-          <div class="address">Entregar en {{ getDefaultAddress().address }}</div>
+          <div class="address">Entregar en {{ getDefaultAddress().address || '?' }}</div>
         </div>
         <div class="view">
           <mat-icon>navigate_next</mat-icon>

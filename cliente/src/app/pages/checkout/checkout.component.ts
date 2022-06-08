@@ -95,7 +95,7 @@ export class CheckoutComponent implements OnInit {
 
   public setAddress() {
     this.addressTop = this.getDefaultAddress().postalCode;
-    this.addressBottom = this.getDefaultAddress().address;
+    this.addressBottom = this.getDefaultAddress().address || '?';
   }
 
   public getCartList() {
@@ -172,6 +172,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   public placeOrder() {
+    if (this.accountService.getDefaultPayment() === -1 || this.accountService.getDefaultAddress() === -1) {
+      return;
+    }
+    
     const order: Order = {
       id: this.restaurantService.getOrders().length + 1,
       accountId: this.usersService.getUser().id || 0,
