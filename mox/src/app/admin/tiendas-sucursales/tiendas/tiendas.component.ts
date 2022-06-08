@@ -22,23 +22,29 @@ export class TiendasComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
 
   public activo:any;
-  public idtienda:any;
-  public idsucursal:any;
-  
+  public idtienda:string="";
+  public idsucursal:string="";
+  ExisteCookie: boolean = false;
   constructor(public appService:AppService, public snackBar: MatSnackBar,private activatedRoute: ActivatedRoute,private cookieService: CookieService) { }
 
   ngOnInit(): void {
-    this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
-    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc');
+    /* this.idtienda = this.activatedRoute.snapshot.paramMap.get('idtienda');
+    this.idsucursal = this.activatedRoute.snapshot.paramMap.get('idsuc'); */
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    //Let mi_variable = ;
+    if (this.ExisteCookie) {
+      this.idsucursal= JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+      this.idtienda=JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
+    }
     this.appService.gettiendas().subscribe((categories:Tiendas[]) => {
       this.initDataSource(categories); 
       console.log(categories);
       console.log(this.idtienda);
       console.log(this.idsucursal);
-      this.cookieService.delete('idtienda');
+      /* this.cookieService.delete('idtienda');
       this.cookieService.delete('idsucursal');
       this.cookieService.set('idtienda', this.idtienda);
-      this.cookieService.set('idsucursal', this.idsucursal);
+      this.cookieService.set('idsucursal', this.idsucursal); */
        
     })
   }
@@ -71,14 +77,14 @@ export class TiendasComponent implements OnInit {
         const index: number = this.dataSource.data.findIndex(x => x.id == cat.id); 
         if(index !== -1){
           this.dataSource.data[index] = cat;
-          message = 'Tienda '+cat.name+' actualizada con éxito';
+          message = 'Tienda '+cat.Nombre+' actualizada con éxito';
         } 
         else{ 
           let last_category = this.dataSource.data[this.dataSource.data.length - 1]; 
           cat.id = last_category.id + 1; 
           this.dataSource.data.push(cat); 
           this.paginator.lastPage();
-          message = 'Nueva tinda '+cat.name+' ¡agregada exitosamente!'; 
+          message = 'Nueva tienda '+cat.Nombre+' ¡agregada exitosamente!'; 
         }  
         this.initDataSource(this.dataSource.data); 
         this.snackBar.open(message, '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });          

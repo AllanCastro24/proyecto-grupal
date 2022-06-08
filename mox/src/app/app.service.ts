@@ -251,7 +251,8 @@ export class AppService {
   bajaplato3(idtienda: any, idsucursal: any, id: any, Proveedor: any): Observable<any> {
     return this.http.put(this.url2 + 'baja/' + idtienda + '/' + idsucursal + '/' + id, Proveedor);
   }
-  bajaoaltacatmenu(idtienda: any, idsucursal: any, id: any, catmenu: any): Observable<any> {
+
+  bajaoaltacatmenu(id:any,idtienda:any,idsucursal:any, catmenu: any): Observable<any> {
     return this.http.put(this.url2 + 'bajacatmenu/' + id + '/' + idtienda + '/' + idsucursal, catmenu);
   }
 
@@ -314,9 +315,9 @@ export class AppService {
     return this.http.get<Category[]>(this.url2 + 'categoriasmenu');
   }
 
-  public getCategoriestiendasuc(idtienda: any, idsucursal: any): Observable<Category[]> {
-    return this.http.get<Category[]>(this.url2 + 'categoriasmenusuctienda/' + idtienda + '/' + idsucursal);
-  }
+  public getCategoriestiendasuc(idtienda:string,idsucursal:string): Observable<Category[]>{
+    return this.http.get<Category[]>(this.url2 + 'categoriasmenusuctienda/'+ idtienda + '/' + idsucursal);
+  } 
 
   public getiendas(): Observable<Tiendas[]> {
     return this.http.get<Tiendas[]>(this.url2 + 'tiendasaltabaja');

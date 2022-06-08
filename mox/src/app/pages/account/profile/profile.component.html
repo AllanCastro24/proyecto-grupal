@@ -12,17 +12,17 @@
     <div fxFlex="100" fxFlex.gt-sm="60" class="px-3" ngClass.sm="mt-2" ngClass.xs="mt-2"> 
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>ID</mat-label>
-            <input matInput placeholder="ID" formControlName="id" >
+            <input matInput placeholder="ID" formControlName="id" [(ngModel)]="id_user" readonly>
         </mat-form-field> 
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>Nombre de usuario</mat-label>
-            <input matInput placeholder="nombre" formControlName="name" required>
+            <input matInput placeholder="nombre" formControlName="name" [(ngModel)]="user" required>
             <mat-error *ngIf="infoForm.controls.name.errors?.required">Se requiere un nombre</mat-error>
             <mat-error *ngIf="infoForm.controls.name.hasError('minlength')">El nombre requiere minimo 3 caracteres</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="w-100">
             <mat-label>Correo electronico</mat-label>
-            <input matInput placeholder="Correo" formControlName="email" required>
+            <input matInput placeholder="Correo" formControlName="email" [(ngModel)]="correo" required>
             <mat-error *ngIf="infoForm.controls.email.errors?.required">Se requiere una direcciónd de correo</mat-error>
             <mat-error *ngIf="infoForm.controls.email.hasError('invalidEmail')">Dirección invalida</mat-error>
         </mat-form-field>

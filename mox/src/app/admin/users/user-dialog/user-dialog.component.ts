@@ -14,7 +14,7 @@ export class UserDialogComponent implements OnInit {
   public form:FormGroup;
   public usuarios: usuario[] = [];
   public puestos: puesto[] = [];
-  public tienda: tienda[] = [];
+  public tiendas: tienda[] = [];
   public sucursales: sucursal[] = [];
   public passwordHide:boolean = true;
   constructor(public dialogRef: MatDialogRef<UserDialogComponent>,
@@ -56,31 +56,18 @@ export class UserDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.usersService.getPuesto().subscribe(puesto => {this.puestos=puesto;});
+    this.usersService.getTienda().subscribe(tienda => {this.tiendas=tienda;});
+    this.usersService.getSucursal().subscribe(sucursal => {this.sucursales=sucursal;});
     if(this.user){
       this.form.setValue(this.user);
     } 
     else{
       this.user = new User();
-    } 
-    this.getPuesto();
-    this.getSucursar();
-    this.getTienda();
+    }
   }
 
   close(): void {
     this.dialogRef.close();
-  }
-
-  public getPuesto(): void {
-    this.puestos = [];
-    this.usersService.getPuesto().subscribe(puesto => this.puestos = puesto);    
-  }
-  public getTienda(): void {
-    this.tienda = [];
-    this.usersService.getTienda().subscribe(tienda => this.tienda = tienda);    
-  }
-  public getSucursar(): void {
-    this.sucursales = [];
-    this.usersService.getSucursal().subscribe(sucursal => this.sucursales = sucursal);    
   }
 }

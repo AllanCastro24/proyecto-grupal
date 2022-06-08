@@ -7,8 +7,8 @@
                         <mat-icon>close</mat-icon>
                     </button>
                     <mat-card-header fxLayoutAlign="start center">                       
-                        <img mat-card-avatar src="assets/images/others/user.jpg" alt="">
-                        <mat-card-title class="text-muted mb-0 secondary-font">Emilio Verdines</mat-card-title> 
+                        <img mat-card-avatar src="{{imagen}}" alt="">
+                        <mat-card-title class="text-muted mb-0 secondary-font">{{user}}</mat-card-title> 
                     </mat-card-header>
                     <div class="divider my-3"></div>
                     <div *ngFor="let link of links">
@@ -16,7 +16,13 @@
                             <mat-icon class="text-muted">{{link.icon}}</mat-icon>
                             <span class="mx-2">{{ link.name }}</span>
                         </a>
-                    </div>                      
+                    </div>
+                    <div>
+                        <button mat-icon-button fxLayout="row" fxLayoutAlign="start center" class="p-3" (click)="cerrar_sesion()">
+                            <mat-icon class="text-muted">power_settings_new</mat-icon>
+                            <span class="mx-2">Cerrar sesion</span>
+                        </button>
+                    </div>                     
                   </mat-card>  
             </mat-sidenav>
             <mat-sidenav-content ngClass.gt-sm="distance">

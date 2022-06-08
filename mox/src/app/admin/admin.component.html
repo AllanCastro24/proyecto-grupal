@@ -42,9 +42,9 @@
         <perfect-scrollbar>
             <div fxLayout="column" fxLayoutAlign="center center" class="user-block transition-2" [class.show]="settings.adminSidenavUserBlock"> 
                 <div fxLayout="row" fxLayoutAlign="space-around center" class="user-info-wrapper">
-                    <img [src]="userImage" alt="user-image">
+                    <img src="{{imagen}}" alt="user-image">
                     <div class="user-info">
-                        <p class="name">Allan Enrique Castro Aguilar</p>
+                        <p class="name">{{nombre}} {{apellido}}</p>
                         <p class="position">Administrador</p>
                     </div>
                 </div>
