@@ -35,8 +35,8 @@ export class ScheduledFixedExpensesComponent implements OnInit {
   ngOnInit(): void {
     this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
     if (this.ExisteCookie) {
-      this.nSucursal = localStorage.getItem("ID_sucursal");
-      this.nTienda = localStorage.getItem("ID_tienda");
+      this.nSucursal = JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+      this.nTienda = JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
 
       this.appService.ObtenerGastosFijosProgramados(this.nSucursal,this.nTienda).subscribe(respuesta => {
         this.initDataSource(respuesta);

@@ -1115,6 +1115,8 @@ export class AppService {
   }
 
   InsertarGastoFijoProgramado(datosGasto: any): Observable<any> {
+    console.log("PRUEBA")
+    console.log(datosGasto)
     return this.http.post(this.API + "api/costos_programados/add", datosGasto, { responseType: 'text' });
 
   }

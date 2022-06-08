@@ -12,6 +12,8 @@ export class ScheduledFixedExpensesDialogComponent implements OnInit {
   public form2!: FormGroup;
   ExisteSucursal:boolean =false;
   ExisteTienda:boolean =false;
+  ID_sucursal:string="";
+  ID_tienda:string="";
 
   
   constructor(public dialogRef: MatDialogRef<ScheduledFixedExpensesDialogComponent>,
@@ -38,24 +40,21 @@ export class ScheduledFixedExpensesDialogComponent implements OnInit {
 
     });
 
-    console.log(this.form.value.id_sucursal);
-    console.log(this.form.value.id_tienda);
-    
-
-    
-
     if (this.data.customer) {
       this.form.patchValue(this.data.customer);
     };
 
+    
     this.ExisteSucursal = localStorage.getItem('ID_sucursal') ? true : false;
     this.ExisteTienda = localStorage.getItem('ID_tienda') ? true : false;    
     if (this.ExisteSucursal){
-       let ID_sucursal = localStorage.getItem("ID_sucursal");
-       let ID_tienda = localStorage.getItem("ID_tienda");
+       this.ID_sucursal = JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+       this.ID_tienda = JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
 
-       this.form.value.id_sucursal=ID_sucursal;
-       this.form.value.id_tienda=ID_tienda;
+       this.form.value.id_sucursal=this.ID_sucursal;
+       this.form.value.id_tienda=this.ID_tienda;
+       console.log(this.form.value.id_sucursal);
+       console.log(this.form.value.id_tienda);
     }
 
 
@@ -63,8 +62,11 @@ export class ScheduledFixedExpensesDialogComponent implements OnInit {
 
   public onSubmit() {
     if (this.form.valid) {
+      
       this.dialogRef.close(this.form.value);
+      
     }
+    
   }
 
   public compareFunction(o1: any, o2: any) {
