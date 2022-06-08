@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,9 +16,9 @@ export class FixedCostsDialogComponent implements OnInit {
   ExisteTienda:boolean =false;
   constructor(public dialogRef: MatDialogRef<FixedCostsDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              public fb: FormBuilder) { }
+              public fb: FormBuilder, public router:Router) { }
   
-
+              ExisteCookie:boolean = false;
   ngOnInit(): void {
     
     this.form2 = this.fb.group({
@@ -42,14 +43,16 @@ export class FixedCostsDialogComponent implements OnInit {
       // this.form.value.id_gasto=this.data.customer;
       console.log(this.form.value.id_gasto);
     };
-    this.ExisteSucursal = localStorage.getItem('ID_sucursal') ? true : false;
-    this.ExisteTienda = localStorage.getItem('ID_tienda') ? true : false;    
-    if (this.ExisteSucursal){
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    if (this.ExisteCookie){
        let ID_sucursal = localStorage.getItem("ID_sucursal");
        let ID_tienda = localStorage.getItem("ID_tienda");
 
        this.form.value.id_sucursal=ID_sucursal;
        this.form.value.id_tienda=ID_tienda;
+    }
+    else{
+      this.router.navigate(['/']);
     }
   }
 

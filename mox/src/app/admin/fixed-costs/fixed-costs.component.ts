@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppService } from 'src/app/app.service';
 import { FixedCostsDialogComponent } from './fixed-costs-dialog/fixed-costs-dialog.component'
+import { Router } from '@angular/router';
 
 // import { threadId } from 'worker_threads';
 
@@ -21,8 +22,9 @@ export class FixedCostsComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   public TiposGastos: any;
   public Sucursales: any;
-  ExisteSucursal: boolean = false;
-  ExisteTienda: boolean = false;
+  //ExisteSucursal: boolean = false;
+  //ExisteTienda: boolean = false;
+  ExisteCookie:boolean = false;
   public nSucursal: any;
   public nTienda: any;
   public stores = [
@@ -31,12 +33,11 @@ export class FixedCostsComponent implements OnInit {
   ]
   public countries: any[] = [];
 
-  constructor(public appService: AppService, public snackBar: MatSnackBar) { }
+  constructor(public appService: AppService, public snackBar: MatSnackBar, public router:Router) { }
 
   ngOnInit(): void {
-    this.ExisteSucursal = localStorage.getItem('ID_sucursal') ? true : false;
-    this.ExisteTienda = localStorage.getItem('ID_tienda') ? true : false;
-    if (this.ExisteSucursal) {
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    if (this.ExisteCookie) {
       this.nSucursal = localStorage.getItem("ID_sucursal");
       this.nTienda = localStorage.getItem("ID_tienda");
 
@@ -57,6 +58,9 @@ export class FixedCostsComponent implements OnInit {
         this.Sucursales = respuesta;
       });
 
+    }
+    else{
+      this.router.navigate(['/']);
     }
 
 

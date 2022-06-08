@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, PLATFORM_ID, ElementRef, ViewChild } from '@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { MenuItem } from 'src/app/app.models';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { isPlatformBrowser } from '@angular/common';
 import { analytics } from '..//dashboard.data';
 import { montly_sales } from '../dashboard.data';
+import { Router } from '@angular/router';
 
 
 
@@ -24,8 +25,7 @@ export class ReportsSalesComponent implements OnInit {
   public form2!: FormGroup;
   public form3!: FormGroup;
   public form4!: FormGroup;
-  ExisteSucursal: boolean = false;
-  ExisteTienda: boolean = false;
+  ExisteCookie:boolean = false;
   public nSucursal: any;
   public nTienda: any;
   public optionValue = "";
@@ -76,17 +76,19 @@ export class ReportsSalesComponent implements OnInit {
   constructor(public appService: AppService,
     public formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    @Inject(PLATFORM_ID) private platformId: Object) { }
+    @Inject(PLATFORM_ID) private platformId: Object, public router:Router) { }
 
 
 
 
   ngOnInit(): void {
-    this.ExisteSucursal = localStorage.getItem('ID_sucursal') ? true : false;
-    this.ExisteTienda = localStorage.getItem('ID_tienda') ? true : false;
-    if (this.ExisteSucursal) {
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    if (this.ExisteCookie) {
       this.nSucursal = localStorage.getItem("ID_sucursal");
       this.nTienda = localStorage.getItem("ID_tienda");
+    }
+    else{
+      this.router.navigate(['/']);
     }
 
     this.anio = new Date().getFullYear();
@@ -191,9 +193,8 @@ export class ReportsSalesComponent implements OnInit {
 
 
   public onSubmit() {
-    this.ExisteSucursal = localStorage.getItem('ID_sucursal') ? true : false;
-    this.ExisteTienda = localStorage.getItem('ID_tienda') ? true : false;
-    if (this.ExisteSucursal) {
+    this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
+    if (this.ExisteCookie) {
       this.nSucursal = localStorage.getItem("ID_sucursal");
       this.nTienda = localStorage.getItem("ID_tienda");
 
@@ -242,6 +243,9 @@ export class ReportsSalesComponent implements OnInit {
         });
       }
 
+    }
+    else{
+      this.router.navigate(['/']);
     }
 
 
