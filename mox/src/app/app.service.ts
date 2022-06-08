@@ -1157,9 +1157,9 @@ export class AppService {
   }
 
 
-  ObtenerVentasXMes(mes: any): Observable<any> {
+  ObtenerVentasXMes(mes: any, sucursal:string, tienda:string): Observable<any> {
     // return this.http.get(this.API + "api/ventas/mes/" + mes.mes + "/" + mes.ano);
-    return this.http.get(this.API + "api/producto/mas_vendido/mes/" + mes.mes + "/" + mes.ano + "/" + mes.id_sucursal + "/" + mes.id_tienda);
+    return this.http.get(this.API + "api/producto/mas_vendido/mes/" + mes.mes + "/" + mes.ano + "/" + sucursal + "/" + tienda);
 
   }
 
@@ -1173,16 +1173,16 @@ export class AppService {
 
   }
 
-  ObtenerVentasXDia(fecha: any): Observable<any> {
+  ObtenerVentasXDia(fecha: any, sucursal:string, tienda:string): Observable<any> {
     // return this.http.get(this.API + "api/ventas/day/" + fecha.dia);
-    return this.http.get(this.API + "api/producto/mas_vendido/day/" + fecha.dia + "/" + fecha.id_sucursal + "/" + fecha.id_tienda);
+    return this.http.get(this.API + "api/producto/mas_vendido/day/" + fecha.dia + "/" + sucursal + "/" + tienda);
 
   }
 
-  ObtenerVentasXRango(rango: any): Observable<any> {
+  ObtenerVentasXRango(rango: any, sucursal:string, tienda:string): Observable<any> {
     // return this.http.get(this.API + "api/ventas/range/" + rango.fecha + "/" + rango.fecha2);
-    return this.http.get(this.API + "api/producto/mas_vendido/range/" + rango.fecha + "/" + rango.fecha2 + "/" + rango.id_sucursal + "/" + rango.id_tienda);
-    console.log(this.API + "api/ventas/range/" + rango.fecha[0] + "/" + rango.fecha2[0]);
+    return this.http.get(this.API + "api/producto/mas_vendido/range/" + rango.fecha + "/" + rango.fecha2 + "/" + sucursal + "/" + tienda);
+    //console.log(this.API + "api/ventas/range/" + rango.fecha[0] + "/" + rango.fecha2[0]);
 
   }
 

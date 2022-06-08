@@ -84,8 +84,8 @@ export class ReportsSalesComponent implements OnInit {
   ngOnInit(): void {
     this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
     if (this.ExisteCookie) {
-      this.nSucursal = localStorage.getItem("ID_sucursal");
-      this.nTienda = localStorage.getItem("ID_tienda");
+      this.nSucursal = JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;;
+      this.nTienda = JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
     }
     else{
       this.router.navigate(['/']);
@@ -195,20 +195,20 @@ export class ReportsSalesComponent implements OnInit {
   public onSubmit() {
     this.ExisteCookie = localStorage.getItem('ID_usuario') ? true : false;
     if (this.ExisteCookie) {
-      this.nSucursal = localStorage.getItem("ID_sucursal");
-      this.nTienda = localStorage.getItem("ID_tienda");
+      this.nSucursal = JSON.parse(localStorage.getItem("ID_sucursal")as string).ID_sucursal;
+      this.nTienda = JSON.parse(localStorage.getItem("ID_tienda")as string).ID_tienda;
 
       if (this.optionValue == "Mes") {
         // alert("Mes");
         console.log(this.form4.value);
-        this.appService.ObtenerVentasXMes(this.form4.value).subscribe(respuesta => {
+        this.appService.ObtenerVentasXMes(this.form4.value, this.nSucursal, this.nTienda).subscribe(respuesta => {
           // this.initDataSource(respuesta);
           this.data = respuesta;
         });
       } else if (this.optionValue == "Dia") {
         // alert("Dia");
         console.log(this.form3.value);
-        this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
+        this.appService.ObtenerVentasXDia(this.form3.value, this.nSucursal, this.nTienda).subscribe(respuesta => {
           // this.initDataSource(respuesta);
           this.data = respuesta;
           // console.log(respuesta);
@@ -217,7 +217,7 @@ export class ReportsSalesComponent implements OnInit {
       } else if (this.optionValue == "Rango") {
         // alert("Rango");
         console.log(this.form2.value);
-        this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
+        this.appService.ObtenerVentasXRango(this.form2.value, this.nSucursal, this.nTienda).subscribe(respuesta => {
           // this.initDataSource(respuesta);
           this.data = respuesta;
 

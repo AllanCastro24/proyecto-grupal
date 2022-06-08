@@ -156,46 +156,8 @@ export class ReportsStockComponent implements OnInit {
 
 
   public onSubmit() {
-    if (this.optionValue == "Mes") {
-      // alert("Mes");
-      console.log(this.form4.value);
-      this.appService.ObtenerVentasXMes(this.form4.value).subscribe(respuesta => {
-        this.initDataSource(respuesta);
-        // this.analytics=respuesta;
-        if (this.previousWidthOfResizedDiv != this.resizedDiv.nativeElement.clientWidth) {
-          this.analytics = [...analytics];
-        }
-        this.previousWidthOfResizedDiv = this.resizedDiv.nativeElement.clientWidth;
-        // console.log(respuesta);
-        // this.Equipos = respuesta;
-      });
-    } else if (this.optionValue == "Dia") {
-      // alert("Dia");
-      console.log(this.form3.value);
-      this.appService.ObtenerVentasXDia(this.form3.value).subscribe(respuesta => {
-        this.initDataSource(respuesta);
-        this.analytics = respuesta;
-        // console.log(respuesta);
-        // this.Equipos = respuesta;
-      });
-    } else if (this.optionValue == "Rango") {
-      // alert("Rango");
-      console.log(this.form2.value);
-      this.appService.ObtenerVentasXRango(this.form2.value).subscribe(respuesta => {
-        this.initDataSource(respuesta);
-        this.analytics = respuesta;
-        // console.log(respuesta);
-        // this.Equipos = respuesta;
-      });
-    } else if (this.optionValue == "Consultar") {
-      // alert("Rango");        
-      this.appService.ConsultarAlmacen().subscribe(respuesta => {
-        this.initDataSource(respuesta);
-        // this.analytics=respuesta;
-        // console.log(respuesta);
-        // this.Equipos = respuesta;
-      });
-    } else if (this.optionValue == "Entradas en el dia") {
+    
+    if (this.optionValue == "Entradas en el dia") {
       // alert("Rango");       
       console.log(this.form3.value);
       this.appService.EntradasAlmacenDia(this.form3.value).subscribe(respuesta => {
