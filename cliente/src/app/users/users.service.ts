@@ -34,6 +34,10 @@ export class UsersService {
     );
   }
 
+  simpleLogin(login: any): Observable<any> {
+    return this.http.post<any>(this.url + 'api/usuarios/login', login);
+  }
+
   _login(res: any): boolean {
     return res !== 'Usuario o contraseña incorrecto' && res.Activo === 'S';
   }
@@ -123,6 +127,18 @@ export class UsersService {
     this.setUser(userData, true);
   }
 
+  updateUser(user: any) {
+    const currentUser = this.getUser();
+
+    for (const key in currentUser) {
+      if (user[key]) {
+        (currentUser as any)[key] = user[key];
+      }
+    }
+
+    this.setUser(currentUser);
+  }
+
   public changePassword(password: any, id: number = 0): Observable<any> {
     const userId = id || this.getUser().id;
 
@@ -131,5 +147,9 @@ export class UsersService {
 
   public getUsersFromBd(): Observable<any> {
     return this.http.get<any>(this.url + 'api/usuarios/consultar_usuarios');
+  }
+
+  public editUser(userId: number, user: any): Observable<any> {
+    return this.http.put<any>(this.url + 'api/usuarios/modificar/' + userId, user);
   }
 }

@@ -55,14 +55,14 @@
     "SAVE": "Save",
     "SUBMIT": "Submit",
     "CANCEL": "Cancel",
-    "UPLOAD": "Upload",
-    "REMOVE": "Remove",
-    "YES": "Yes",
+    "UPLOAD": "Subir",
+    "REMOVE": "Quitar",
+    "YES": "Si",
     "NO": "No",
     "OK": "OK"
   },
   "MESSAGE": {
-    "SURE_DELETE": "Are you sure you want to delete?",
+    "SURE_DELETE": "¿Seguro quiere eliminarlo?",
     "FILE_SIZE": "The file size cannot exceed {{param}} kb."
   },
   "FIELD": { 

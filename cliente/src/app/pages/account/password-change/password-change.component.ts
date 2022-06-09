@@ -26,10 +26,28 @@ export class PasswordChangeComponent implements OnInit {
   }
 
   public async onPasswordFormSubmit() {
-    if (this.passwordForm.valid) {
-      await this.UsersService.changePassword(this.passwordForm.value).toPromise();
-
-      this.snackBar.open('Contraseña cambiada!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
+    if (!this.passwordForm.valid) {
+      return;
     }
+
+    const login = {
+      username: this.UsersService.getUser().username,
+      password: this.passwordForm.get('currentPassword')?.value,
+    };
+
+    const result = await this.UsersService.simpleLogin(login).toPromise();
+
+    if (!this.UsersService._login(result)) {
+      this.snackBar.open('Contraseña incorrecta!', '×', { panelClass: 'errpr', verticalPosition: 'top', duration: 3000 });
+      return;
+    }
+
+    await this.UsersService.changePassword(this.passwordForm.value)
+      .toPromise()
+      .catch((err) => {
+        console.log(err);
+      });
+
+    this.snackBar.open('Contraseña cambiada!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
   }
 }
