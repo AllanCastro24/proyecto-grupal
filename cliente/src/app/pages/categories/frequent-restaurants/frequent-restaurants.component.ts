@@ -20,10 +20,11 @@ export class FrequentRestaurantsComponent implements OnInit {
     const restaurants: Restaurant[] = [];
     const promises: any = [];
 
-    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+    const companies = await this.restaurantService.getCompanies();
 
-    for (let i = 1; i <= totalCompanies; i++) {
-      promises.push(this.restaurantService.getRestaurantsByCompany(i).toPromise());
+    for (const company of companies) {
+      const restaurants = (await this.restaurantService.getRestaurantsByCompany(company.id)) || [];
+      promises.push(restaurants);
     }
 
     for await (const promise of promises) {

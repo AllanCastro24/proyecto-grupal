@@ -78,8 +78,6 @@ export class OrderComponent implements OnInit {
     this.getDefaultPayment();
     this.hasDefaultPayment();
     this.setDelieryType();
-
-    console.log(this.cartItems, this.restaurantId, this.companyId);
   }
 
   ngOnDestroy() {
@@ -95,7 +93,7 @@ export class OrderComponent implements OnInit {
 
   public async getRestaurant() {
     return new Promise(async (resolve, reject) => {
-      this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
+      this.restaurant = await this.restaurantService.getRestaurant(this.restaurantId, this.companyId);
       resolve(true);
     });
   }

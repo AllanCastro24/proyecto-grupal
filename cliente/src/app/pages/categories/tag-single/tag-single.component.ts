@@ -51,10 +51,10 @@ export class TagSingleComponent implements OnInit {
   }
 
   public async getRestaurantsByTag(id: number) {
-    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+    const companies = await this.restaurantService.getCompanies();
 
-    for (let i = 1; i <= totalCompanies; i++) {
-      const restaurants = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
+    for (const company of companies) {
+      const restaurants = (await this.restaurantService.getRestaurantsByCompany(company.id)) || [];
 
       for (const restaurant of restaurants) {
         const hasTag = restaurant.tagId.find((tagId) => tagId == id);

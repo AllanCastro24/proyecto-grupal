@@ -22,10 +22,11 @@ export class FrequentPlatesComponent implements OnInit {
     const plates: Plate[] = [];
     const promises: any = [];
 
-    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+    const companies = await this.restaurantService.getCompanies();
 
-    for (let i = 1; i <= totalCompanies; i++) {
-      promises.push(this.restaurantService.getRestaurantsByCompany(i).toPromise());
+    for (const company of companies) {
+      const restaurants = (await this.restaurantService.getRestaurantsByCompany(company.id)) || [];
+      promises.push(restaurants);
     }
 
     for await (const promise of promises) {
@@ -35,12 +36,12 @@ export class FrequentPlatesComponent implements OnInit {
     promises.length = 0;
 
     for (const restaurant of restaurants) {
-      promises.push(this.restaurantService.getPlates(restaurant.companyId, restaurant.id).toPromise());
+      promises.push(this.restaurantService.getPlates(restaurant.id, restaurant.companyId));
     }
 
     for await (const promise of promises) {
       const platesList = promise as Plate[];
-      const plate = platesList[this.rand(0, platesList.length - 1)];
+      const plate = platesList[this.rand(0, platesList.length - 1)] || [];
       const index = plates.findIndex((p) => p.companyId == plate.companyId && p.id == plate.id);
 
       if (index == -1) {

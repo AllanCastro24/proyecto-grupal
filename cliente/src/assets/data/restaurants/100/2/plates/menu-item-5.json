@@ -1,0 +1,22 @@
+{
+  "id": 5,
+  "name": "Pizza Vegetariana",
+  "description": "Queso, Salsa, Aceituna, Chile, Champiñon.",
+  "price": 150,
+  "image": {
+    "small": "assets/images/foods/6-1/pizza_vegetariana.jpg",
+    "medium": "assets/images/foods/6-1/pizza_vegetariana.jpg",
+    "big": "assets/images/foods/6-1/pizza_vegetariana.jpg"
+  },
+  "discount": 0,
+  "ratingsCount": 3.7,
+  "ratingsValue": 150,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 180,
+  "isVegetarian": true,
+  "branchId": 2,
+  "companyId": 100,
+  "menuId": 1,
+  "tagId": [1]
+}

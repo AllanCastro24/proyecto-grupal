@@ -83,20 +83,12 @@ export class RestaurantSingleComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public getPlates() {
-    this.restaurantService.getPlates(this.companyId, this.restaurantId).subscribe((plates) => {
-      this.plates = plates;
-
-      console.log(this.plates);
-    });
+  public async getPlates() {
+    this.plates = (await this.restaurantService.getPlates(this.restaurantId, this.companyId)) || [];
   }
 
-  public getRestaurant() {
-    return new Promise(async (resolve, reject) => {
-      this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
-
-      resolve(true);
-    });
+  public async getRestaurant() {
+    this.restaurant = await this.restaurantService.getRestaurant(this.restaurantId, this.companyId);
   }
 
   public async getCategories() {
@@ -110,11 +102,15 @@ export class RestaurantSingleComponent implements OnInit {
   }
 
   public getMenu() {
-    this.restaurantService.getMenu(this.companyId, this.restaurantId).subscribe((menu) => {
-      this.menu = menu;
-
-      console.log(menu);
-    });
+    this.restaurantService.getMenu(this.restaurantId, this.companyId).subscribe(
+      (menu) => {
+        this.menu = menu;
+      },
+      async (err) => {
+        this.menu = (await this.restaurantService.getMenuDb(this.restaurantId, this.companyId).toPromise()) || [];
+        this.currentMenu = this.menu[0].id;
+      }
+    );
   }
 
   public getCartList() {
@@ -200,11 +196,21 @@ export class RestaurantSingleComponent implements OnInit {
       return;
     }
 
-    if (scrollTop >= topMenu.clientHeight) {
-      this.menuFixed = true;
+    const info = document.querySelector<HTMLElement>('.info')!;
+    const headBottom = document.querySelector<HTMLElement>('.head-bottom')!;
+
+    if (this.menuFixed && scrollTop <= topMenu.clientHeight) {
+      info.style.paddingTop = '0px';
+      this.menuFixed = false;
     } else {
-      if (!document.documentElement.classList.contains('cdk-global-scrollblock')) {
-        this.menuFixed = false;
+      if (scrollTop >= topMenu.clientHeight - Number(headBottom.clientHeight)) {
+        this.menuFixed = true;
+        info.style.paddingTop = '54px';
+      } else {
+        if (!document.documentElement.classList.contains('cdk-global-scrollblock')) {
+          info.style.paddingTop = '0px';
+          this.menuFixed = false;
+        }
       }
     }
   }

@@ -1,0 +1,22 @@
+{
+  "id": 3,
+  "name": "Boneless",
+  "description": "Pollo, pechuga, salsa picante, frito",
+  "price": 340,
+  "image": {
+    "small": "assets/images/foods/2-1/boneless.webp",
+    "medium": "assets/images/foods/2-1/boneless.webp",
+    "big": "assets/images/foods/2-1/boneless.webp"
+  },
+  "discount": 0,
+  "ratingsCount": 4.9,
+  "ratingsValue": 90,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 125,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 101,
+  "menuId": 4,
+  "tagId": [7]
+}

@@ -48,10 +48,10 @@ export class CategorySingleComponent implements OnInit {
   }
 
   public async getRestaurantsByCategory() {
-    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+    const companies = await this.restaurantService.getCompanies();
 
-    for (let i = 1; i <= totalCompanies; i++) {
-      const restaurants = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
+    for (const company of companies) {
+      const restaurants = (await this.restaurantService.getRestaurantsByCompany(company.id)) || [];
       const filteredRestaurants = restaurants.filter((restaurant) => {
         return restaurant.categoryId.includes(this.categoryId);
       });

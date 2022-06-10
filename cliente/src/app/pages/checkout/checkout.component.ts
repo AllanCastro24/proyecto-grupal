@@ -78,8 +78,6 @@ export class CheckoutComponent implements OnInit {
     this.updateTotal();
     this.getDefaultPayment();
     this.hasDefaultPayment();
-
-    console.log(this.cartItems, this.restaurantId, this.companyId);
   }
 
   ngOnDestroy() {
@@ -88,7 +86,7 @@ export class CheckoutComponent implements OnInit {
 
   public async getRestaurant() {
     return new Promise(async (resolve, reject) => {
-      this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
+      this.restaurant = await this.restaurantService.getRestaurant(this.restaurantId, this.companyId);
       resolve(true);
     });
   }
@@ -171,11 +169,11 @@ export class CheckoutComponent implements OnInit {
     return this.payment.cardNumber.replace(/\d{4}$/, '****');
   }
 
-  public placeOrder() {
+  public async placeOrder() {
     if (this.accountService.getDefaultPayment() === -1 || this.accountService.getDefaultAddress() === -1) {
       return;
     }
-    
+
     const order: Order = {
       id: this.restaurantService.getOrders().length + 1,
       accountId: this.usersService.getUser().id || 0,
@@ -187,11 +185,70 @@ export class CheckoutComponent implements OnInit {
       status: this.status[0],
     };
 
-    console.log(order);
+    const orderInfo: any = {
+      deliveryAddress: {
+        address: order.address.address,
+        city: order.address.city,
+        email: order.address.email,
+        firstName: order.address.firstName,
+        lastName: order.address.lastName,
+        middleName: order.address.middleName,
+        phone: order.address.phone,
+        place: order.address.place,
+        postalCode: order.address.postalCode,
+      },
+      deliveryMethod: {
+        method: {
+          desc: '',
+          name: this.deliveryType ? 'Envio Normal' : 'Pickup',
+          value: 'Normal',
+        },
+      },
+      paymentMethod: '',
+      paymentMethods: {
+        method: {
+          desc: '',
+          name: 'Pago Con Tarjeta',
+          value: 'Tarjeta',
+          method: '',
+        },
+      },
+      method: '',
+      cardHolderName: '',
+      cardNumber: '',
+      cvv: '',
+      expiredMonth: '',
+      expiredYear: '',
+    };
+
+    await this.restaurantService
+      .addOrderInfoDb(orderInfo)
+      .toPromise()
+      .catch((err) => {
+        console.log(err);
+      });
+
+    for (const orderItem of order.items) {
+      const order: any = {
+        idtienda: this.companyId,
+        idsuc: this.restaurantId,
+        id: orderItem.id,
+        name: orderItem.name,
+        description: orderItem.description,
+        price: orderItem.price,
+        cartCount: orderItem.cartCount,
+        categoryId: orderItem.menuId,
+        estatus: 'ALTA',
+      };
+
+      await this.restaurantService
+        .addOrderDb(order)
+        .toPromise()
+        .catch((err) => console.log(err));
+    }
 
     this.restaurantService.addOrder(order);
     this.restaurantService.removeCartList(this.restaurantId, this.companyId);
-
     this.restaurantService.calculateCartListTotal();
 
     this.router.navigate(['/cart']);

@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "name": "Hamburguesa La Clásica",
+  "description": "res, papas, Lechuga, tomate, cebolla, mostaza, pepinillos, chile, mayonesa, queso americano",
+  "price": 130,
+  "image": {
+    "small": "assets/images/foods/2-1/hamburguesa.webp",
+    "medium": "assets/images/foods/2-1/hamburguesa.webp",
+    "big": "assets/images/foods/2-1/hamburguesa.webp"
+  },
+  "discount": 0,
+  "ratingsCount": 4,
+  "ratingsValue": 350,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 160,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 101,
+  "menuId": 1,
+  "tagId": [5]
+}

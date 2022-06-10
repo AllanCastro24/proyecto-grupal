@@ -37,7 +37,7 @@ export class OrdersComponent implements OnInit {
 
   public async getRestaurant(plate: Plate): Promise<Restaurant> {
     return new Promise(async (resolve) => {
-      const restaurant = await this.restaurantService.getRestaurant(plate.companyId, plate.branchId);
+      const restaurant = await this.restaurantService.getRestaurant(plate.branchId, plate.companyId);
       resolve(restaurant);
     });
   }

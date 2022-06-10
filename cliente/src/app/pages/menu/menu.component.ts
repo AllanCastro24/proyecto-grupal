@@ -31,12 +31,12 @@ export class MenuComponent implements OnInit {
   public async getRestaurants() {
     this.restaurants = [];
 
-    const totalCompanies = ((await this.restaurantService.getCompanies().toPromise()) || []).length;
+    const companies = await this.restaurantService.getCompanies();
 
-    for (let i = 1; i <= totalCompanies; i++) {
-      const restaurant = (await this.restaurantService.getRestaurantsByCompany(i).toPromise()) || [];
+    for (const company of companies) {
+      const restaurants = (await this.restaurantService.getRestaurantsByCompany(company.id)) || [];
 
-      this.restaurants = [...this.restaurants, ...restaurant];
+      this.restaurants = [...this.restaurants, ...restaurants];
     }
   }
 

@@ -28,13 +28,13 @@ export class RestaurantInfoComponent implements OnInit {
     public categoriesService: CategoriesService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe((params) => {
       this.restaurantId = params['id'];
       this.companyId = params['companyId'];
     });
 
-    this.getRestaurant();
+    await this.getRestaurant();
     this.getTags();
   }
 
@@ -43,7 +43,7 @@ export class RestaurantInfoComponent implements OnInit {
   }
 
   public async getRestaurant() {
-    this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
+    this.restaurant = await this.restaurantService.getRestaurant(this.restaurantId, this.companyId);
   }
 
   public async getTags() {

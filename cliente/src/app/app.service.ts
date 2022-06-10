@@ -57,14 +57,6 @@ export class AppService {
     return this.http.get<MenuItem>(this.url + 'tmp/plates/menu-item-' + id + '.json');
   }
 
-  public getSpecialMenuItems(): Observable<MenuItem[]> {
-    return this.http.get<MenuItem[]>(this.url + 'special-menu-items.json');
-  }
-
-  public getBestMenuItems(): Observable<MenuItem[]> {
-    return this.http.get<MenuItem[]>(this.url + 'best-menu-items.json');
-  }
-
   public getHomeCarouselSlides() {
     return this.http.get<any[]>(this.url + 'slides.json');
   }
