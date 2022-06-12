@@ -1005,7 +1005,7 @@ export class AppService {
 
   public getDeliveryMethods() {
     return [
-
+      { value: 'Local', name: 'Local', desc: '$0 / Local' },
       { value: 'Normal', name: 'Envio Normal', desc: '$20 / Envio Normal' },
 
     ]

@@ -1,6 +1,8 @@
 [
     { "id":1, "name":"KG" },
     { "id":2, "name":"LB" },
-    { "id":3, "name":"G" },
-    { "id":4, "name":"OZ" }
+    { "id":3, "name":"GR" },
+    { "id":4, "name":"OZ" },
+    { "id":5, "name":"ML" },
+    { "id":6, "name":"L" }
 ]
