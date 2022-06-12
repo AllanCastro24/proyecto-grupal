@@ -150,7 +150,8 @@ export class MenuItem {
                 public cartCount: number,
                 public weight: number,
                 public isVegetarian: boolean,
-                public categoryId: number){}
+                public categoryId: number,
+                public descripcion: string){}
 }
 
 export class MenuItemImage {

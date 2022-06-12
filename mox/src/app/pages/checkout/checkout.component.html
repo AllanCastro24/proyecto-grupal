@@ -32,19 +32,21 @@
                                     <mat-error *ngIf="checkoutForm.get('deliveryAddress.firstName')!.hasError('maxNumberOfWordsExceeded')">Número máximo de palabras excedido</mat-error> 
                                 </mat-form-field> 
                             </div>
+                            
+                            <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3"> 
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Segundo nombre</mat-label>
+                                    <input matInput placeholder="Middle Name" formControlName="middleName"> 
+                                    <mat-error *ngIf="checkoutForm.get('deliveryAddress.middleName')!.hasError('maxNumberOfWordsExceeded')">Número máximo de palabras excedido</mat-error> 
+                                </mat-form-field> 
+                            </div>
+
                             <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3"> 
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Apellido</mat-label>
                                     <input matInput placeholder="Last Name" formControlName="lastName" required>
                                     <mat-error *ngIf="checkoutForm.get('deliveryAddress.lastName')!.errors?.required">Se requiere apellido</mat-error>
                                     <mat-error *ngIf="checkoutForm.get('deliveryAddress.lastName')!.hasError('maxNumberOfWordsExceeded')">Número máximo de palabras excedido</mat-error> 
-                                </mat-form-field> 
-                            </div>
-                            <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3"> 
-                                <mat-form-field appearance="outline" class="w-100">
-                                    <mat-label>Segundo nombre</mat-label>
-                                    <input matInput placeholder="Middle Name" formControlName="middleName"> 
-                                    <mat-error *ngIf="checkoutForm.get('deliveryAddress.middleName')!.hasError('maxNumberOfWordsExceeded')">Número máximo de palabras excedido</mat-error> 
                                 </mat-form-field> 
                             </div>
                             <!-- <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
@@ -96,7 +98,7 @@
                             <div fxFlex="100" fxFlex.gt-sm="25" class="px-3"> 
                                 <mat-form-field appearance="outline" class="w-100">
                                     <mat-label>Código postal</mat-label>
-                                    <input matInput placeholder="Postal Code" formControlName="postalCode" required>
+                                    <input matInput placeholder="Postal Code" formControlName="postalCode" type="number" required>
                                     <mat-error *ngIf="checkoutForm.get('deliveryAddress.postalCode')!.errors?.required">Se requiere código postal</mat-error> 
                                 </mat-form-field> 
                             </div>
@@ -400,7 +402,16 @@
                                 {{ (menuItem.price - (menuItem.price * (menuItem.discount / 100))) | currency : 'USD' : 'symbol' : '1.2-2'}}
                             </span> 
                             <small class="text-muted ws-nowrap fw-500">Qty: {{menuItem.cartCount}}</small>
+                            
                         </div>  
+                        <!-- <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3"> 
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Detalles</mat-label>
+                                <input matInput placeholder="Detalles" id="detallepedido">  
+                                 <mat-error *ngIf="checkoutForm.get('deliveryAddress.firstName')!.errors?.required">Se requiere el primer nombre</mat-error>
+                                 <mat-error *ngIf="checkoutForm.get('deliveryAddress.firstName')!.hasError('maxNumberOfWordsExceeded')">Número máximo de palabras excedido</mat-error>
+                            </mat-form-field> 
+                        </div> -->
                     </div>
                     <div *ngIf="appService.Data.cartList.length == 0" fxLayout="column" fxLayoutAlign="center center" class="text-center py-2"> 
                         <svg viewBox="0 0 24 24" class="mat-icon mat-icon-xlg primary-color">
@@ -422,7 +433,7 @@
                             <h3 class="primary-color">{{ (appService.Data.totalPrice - (appService.Data.totalPrice*0)) | currency : 'USD' : 'symbol' : '1.2-2'}}</h3> 
                         </div> 
                     </div> 
-                    <button mat-raised-button color="primary" type="button" class="mt-2 w-100" [disabled]="!appService.Data.cartList.length" (click)="placeOrder()">Place Order Now</button>           
+                    <button mat-raised-button color="primary" type="button" class="mt-2 w-100" [disabled]="!appService.Data.cartList.length" (click)="placeOrder()">Realice su orden ahora</button>           
                 </mat-card>  
             </mat-sidenav>
         </mat-sidenav-container> 
