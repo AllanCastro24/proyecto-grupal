@@ -71,6 +71,5 @@ export class LoginComponent implements OnInit {
 
     this.menuService.toggleMenu(true);
     this.router.navigate(['./orders']);
-    window.location.reload();
   }
 }

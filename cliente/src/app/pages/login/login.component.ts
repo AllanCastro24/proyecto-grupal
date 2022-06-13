@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
 
           this.menuService.toggleMenu(true);
           this.router.navigate(['./home']);
-          window.location.reload();
         } else {
           this.snackBar.open('Usuario y/o contraseña equivocados', '', this.snackBarDefault);
         }
