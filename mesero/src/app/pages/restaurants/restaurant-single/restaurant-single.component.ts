@@ -83,17 +83,13 @@ export class RestaurantSingleComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public getPlates() {
-    this.restaurantService.getPlates(this.companyId, this.restaurantId).subscribe((plates) => {
-      this.plates = plates;
-
-      console.log(this.plates);
-    });
+  public async getPlates() {
+    this.plates = await this.restaurantService.getPlates(this.restaurantId, this.companyId);
   }
 
   public getRestaurant() {
     return new Promise(async (resolve, reject) => {
-      this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
+      this.restaurant = await this.restaurantService.getRestaurant(this.restaurantId, this.companyId);
 
       resolve(true);
     });
@@ -110,7 +106,7 @@ export class RestaurantSingleComponent implements OnInit {
   }
 
   public getMenu() {
-    this.restaurantService.getMenu(this.companyId, this.restaurantId).subscribe((menu) => {
+    this.restaurantService.getMenu(this.restaurantId, this.companyId).subscribe((menu) => {
       this.menu = menu;
 
       console.log(menu);

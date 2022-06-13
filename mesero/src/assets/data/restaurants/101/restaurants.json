@@ -1,0 +1,58 @@
+[
+  {
+    "id": "1",
+    "companyId": 101,
+    "categoryId": [4],
+    "tagId": [1, 2, 3, 4],
+    "name": "FLASH BURGUER",
+    "description": "Comer en Flash Burguer te garantiza un sabor delicioso y un gran servicio ¡Visítanos en Los Mochis, Sinaloa y ven a probar nuestras alitas y hamburguesas!",
+    "address": "Ignacio Ramírez 118 Oriente, Del Parque, 81200 Los Mochis, Sin.",
+    "latitude": "25.795072",
+    "longitude": "-108.983466",
+    "schedule": {
+      "lunes": [
+        {
+          "start": "11:00",
+          "end": "13:00"
+        },
+        {
+          "start": "15:00",
+          "end": "18:00"
+        }
+      ],
+      "martes": [
+        {
+          "start": "11:00",
+          "end": "13:00"
+        },
+        {
+          "start": "15:00",
+          "end": "18:00"
+        }
+      ],
+      "miercoles": [
+        {
+          "start": "11:00",
+          "end": "13:00"
+        },
+        {
+          "start": "15:00",
+          "end": "18:00"
+        }
+      ]
+    },
+    "image": "assets/images/restaurantes/2/flashburguer.webp",
+    "rating": {
+      "average": 4.34,
+      "count": 420
+    },
+    "delivery": {
+      "price": 40,
+      "time": 720
+    },
+    "pickup": {
+      "price": 20,
+      "time": 900
+    }
+  }
+]

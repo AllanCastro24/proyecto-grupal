@@ -9,6 +9,7 @@ export interface Company {
 export interface Restaurant {
   id: number;
   companyId: number;
+  managerId: number;
   name: string;
   image: string;
   description: string;

@@ -1,0 +1,22 @@
+{
+  "id": 4,
+  "name": "Coca Cola",
+  "description": "Pierna, jamón, queso, mozzarella, Lechuga, tomate, aguacate, cebolla, chile, mayonesa, cebolla frita",
+  "price": 130,
+  "image": {
+    "small": "assets/images/foods/4-1/coca cola.jpg",
+    "medium": "assets/images/foods/4-1/coca cola.jpg",
+    "big": "assets/images/foods/4-1/coca cola.jpg"
+  },
+  "discount": 0,
+  "ratingsCount": 52,
+  "ratingsValue": 4.7,
+  "availibilityCount": 7,
+  "cartCount": 0,
+  "weight": 110,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 103,
+  "menuId": 4,
+  "tagId": [12]
+}

@@ -50,12 +50,8 @@ export class PlateComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public getPlate() {
-    this.restaurantService.getPlate(this.companyId, this.restaurantId, this.plateId).subscribe((plate) => {
-      this.plate = plate;
-
-      console.log(this.plate);
-    });
+  public async getPlate() {
+    this.plate = await this.restaurantService.getPlate(this.restaurantId, this.companyId, this.plateId) || <Plate>{};
   }
 
   public addToCart() {

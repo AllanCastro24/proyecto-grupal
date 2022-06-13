@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "name": "Rib Eye Steak (450g)",
+  "description": "Frijoles charros, nopal, chile toreado, cebollita cambray, papa al horno, ensalada.",
+  "price": 250,
+  "image": {
+    "small": "assets/images/foods/3-1/cortesribeyesteak.jpg",
+    "medium": "assets/images/foods/3-1/cortesribeyesteak.jpg",
+    "big": "assets/images/foods/3-1/cortesribeyesteak.jpg"
+  },
+  "discount": 0,
+  "ratingsCount": 4,
+  "ratingsValue": 220,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 160,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 102,
+  "menuId": 1,
+  "tagId": [9]
+}

@@ -62,7 +62,6 @@ import { QuantityCounterComponent } from './quantity-counter/quantity-counter.co
 import { RatingComponent } from './rating/rating.component';
 import { CommentsComponent } from './comments/comments.component';
 import { MenuItemsToolbarComponent } from './menu-items-toolbar/menu-items-toolbar.component';
-import { CategorySearchComponent  } from '../pages/categories/category-search/category-search.component';
 import { MenuItemHoverableComponent } from './menu-item-hoverable/menu-item-hoverable.component';
 import { OurChefsComponent } from './our-chefs/our-chefs.component';
 import { TimelineComponent } from './timeline/timeline.component';

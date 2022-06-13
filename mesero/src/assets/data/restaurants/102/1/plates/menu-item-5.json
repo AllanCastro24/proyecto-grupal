@@ -1,0 +1,22 @@
+{
+  "id": 5,
+  "name": "Vinos",
+  "description": "Vino, tinto, blanco, rosado",
+  "price": 500,
+  "image": {
+    "small": "assets/images/foods/3-1/bebidasvino.jpg",
+    "medium": "assets/images/foods/3-1/bebidasvino.jpg",
+    "big": "assets/images/foods/3-1/bebidasvino.jpg"
+  },
+  "discount": 0,
+  "ratingsCount": 4.2,
+  "ratingsValue": 330,
+  "availibilityCount": 7,
+  "cartCount": 0,
+  "weight": 110,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 102,
+  "menuId": 5,
+  "tagId": [12]
+}

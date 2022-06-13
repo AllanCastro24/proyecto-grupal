@@ -15,13 +15,22 @@ export class AccountComponent implements OnInit {
   };
 
   @ViewChild('sidenav') sidenav: any;
+  
+  public tmp: Function = new Function();
 
   public sidenavOpen: boolean = true;
   public links = [
     { name: 'Inicio', href: 'dashboard', icon: 'dashboard' },
-    { name: 'Profile', href: 'profile', icon: 'person' },
-    { name: 'Cambio de contraseña', href: 'password-change', icon: 'vpn_key' },
-    { name: 'Salir', href: '/pin', icon: 'power_settings_new' },
+    { name: 'Perfil', href: 'profile', icon: 'person' },
+    { name: 'Cambiar contraseña', href: 'password-change', icon: 'vpn_key' },
+    {
+      name: 'Cerrar sesión',
+      href: '',
+      icon: 'power_settings_new',
+      action: () => {
+        this.usersService.logout();
+      },
+    },
   ];
 
   public user!: User;

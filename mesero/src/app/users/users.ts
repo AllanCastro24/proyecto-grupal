@@ -1,12 +1,12 @@
 import { Address, Payment } from '../pages/account/account';
-import { DeliveryOrder } from '../pages/account/tables/delivery';
 import { Table } from '../pages/account/tables/waiter-menu/waiter';
 import { CartList, Order, Restaurant } from '../pages/restaurants/restaurants';
 
 export class User {
   id?: number = 0;
+  default?: boolean = false;
   username: string = '';
-  password: string = '';
+  password?: string = '';
   profile?: UserProfile;
   work?: UserWork;
   contacts?: UserContacts;
@@ -17,21 +17,21 @@ export class User {
   cartList?: CartList[];
   addressList?: Address[];
   paymentList?: Payment[];
-  deliveryOrders?: DeliveryOrder[];
   tableList?: Table[];
 }
 
 export class UserProfile {
   name: string = '';
   surname: string = '';
-  birthday!: Object;
+  birthday?: Object;
   gender: string = '';
   image: string = '';
 }
 
 export class UserWork {
-  company: string = '';
-  position: string = '';
+  companyId: string = '';
+  branchId: string = '';
+  positionId: string = '';
   salary: number = 0;
 }
 
@@ -53,11 +53,8 @@ export class UserSettings {
   joinedDate!: Date;
 }
 
-export interface Data {
-  success: Success;
-  data: User;
-}
-
-export interface Success {
-  success: boolean;
+export interface Position {
+  id: number;
+  name: string;
+  status: number;
 }

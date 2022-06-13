@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
+import { Position } from 'src/app/users/users';
 import { UsersService } from 'src/app/users/users.service';
 import { environment } from 'src/environments/environment';
 import { Plate } from './plates';
-import { CartList, Menu, Order, Restaurant } from './restaurants';
+import { CartList, Company, Menu, Order, Restaurant } from './restaurants';
 
 @Injectable({
   providedIn: 'root',
@@ -16,41 +16,256 @@ export class RestaurantService {
   public totalCartList: number = 0;
 
   public url = environment.url + '/assets/data/';
+  public urlDb = 'http://localhost/proyecto-grupal-backend/';
 
   constructor(public http: HttpClient, public usersService: UsersService) {}
 
-  public async getRestaurant(companyId: number, id: number): Promise<Restaurant> {
-    return new Promise((resolve, reject) => {
-      this.getRestaurantsByCompany(companyId).subscribe((restaurants) => {
-        for (const restaurant of restaurants) {
-          if (restaurant.id == id) {
-            resolve(restaurant);
+  public async getRestaurant(id: number, companyId: number): Promise<Restaurant> {
+    const restaurants = await this.getRestaurantsByCompany(companyId);
+
+    for (const restaurant of restaurants) {
+      if (restaurant.id == id) {
+        return restaurant;
+      }
+    }
+
+    return <Restaurant>{};
+  }
+
+  public async getCompanies(): Promise<Company[]> {
+    const url = `${this.url}restaurants/companies.json`;
+    const companies = (await this.http.get<Company[]>(url).toPromise()) || [];
+    const companiesDb = (await this.getCompaniesDb()) || [];
+    const formattedCompanies = [];
+
+    for (const company of companiesDb) {
+      const formattedCompany: Company = {
+        id: company.ID_tienda,
+        name: company.Nombre,
+      };
+
+      formattedCompanies.push(formattedCompany);
+    }
+
+    return [...companies, ...formattedCompanies];
+  }
+
+  public async getCompany(id: number): Promise<Company> {
+    const companies = await this.getCompanies();
+
+    for (const company of companies) {
+      if (company.id == id) {
+        return company;
+      }
+    }
+
+    return <Company>{};
+  }
+
+  public async getPositions() {
+    const positions = await this.http.get<any[]>(`${this.urlDb}api/usuarios/puesto`).toPromise() || [];
+    const formattedPositions = [];
+
+    for (const position of positions) {
+      const formattedPosition: Position = {
+        id: position.ID_puesto,
+        name: position.Nombre,
+        status: position.Status,
+      };
+
+      formattedPositions.push(formattedPosition);
+    }
+
+    return formattedPositions;
+  }
+
+  public async getPosition(id: number) {
+    const positions = await this.getPositions() || [];
+
+    for (const position of positions) {
+      if (position.id == id) {
+        return position;
+      }
+    }
+
+    return <Position>{};
+  }
+
+  public getCompaniesDb() {
+    return this.http.get<any[]>(`${this.urlDb}api/usuarios/tienda`).toPromise();
+  }
+
+  public async getBranchsDb() {
+    const restaurants = (await this.http.get<any[]>(`${this.urlDb}api/sucursales/consultar`).toPromise()) || [];
+
+    const formattedRestaurants = [];
+
+    for (const restaurant of restaurants) {
+      const formattedRestaurant: Restaurant = {
+        id: restaurant.ID_sucursal,
+        companyId: restaurant.ID_tienda,
+        managerId: restaurant.ID_empleado,
+        name: restaurant.Pseudonimo,
+        description: 'Sin descripción',
+        address: 'Calle 200 contra esquina de carcelCalle 200 conta',
+        latitude: 25.795072,
+        longitude: -108.983466,
+        schedule: {
+          lunes: [
+            {
+              start: '11:00',
+              end: '13:00',
+            },
+            {
+              start: '15:00',
+              end: '18:00',
+            },
+          ],
+          martes: [
+            {
+              start: '11:00',
+              end: '13:00',
+            },
+            {
+              start: '15:00',
+              end: '18:00',
+            },
+          ],
+          miercoles: [
+            {
+              start: '11:00',
+              end: '13:00',
+            },
+            {
+              start: '15:00',
+              end: '18:00',
+            },
+          ],
+        },
+        image: 'assets/images/restaurantes/default.png',
+        rating: {
+          average: 2.5,
+          count: 50,
+        },
+        categoryId: [1],
+        tagId: [1],
+        delivery: {
+          price: 40,
+          time: 720,
+        },
+        pickup: {
+          price: 20,
+          time: 900,
+        },
+      };
+
+      formattedRestaurants.push(formattedRestaurant);
+    }
+
+    return formattedRestaurants;
+  }
+
+  public async getBranchDb(id: number, companyId: number) {
+    const restaurants = await this.getBranchsDb();
+
+    for (const restaurant of restaurants) {
+      if (restaurant.companyId == companyId && restaurant.id == id) {
+        return restaurant;
+      }
+    }
+
+    return <Restaurant>{};
+  }
+
+  public async getRestaurantsByCompany(id: number) {
+    const url = `${this.url}restaurants/${id}/restaurants.json`;
+    const restaurants = await this.http
+      .get<Restaurant[]>(url)
+      .toPromise()
+      .catch(async (err) => {
+        const restaurantsDb = await this.getBranchsDb();
+        const restaurants = [];
+
+        for (const restaurant of restaurantsDb) {
+          if (restaurant.companyId == id) {
+            restaurants.push(restaurant);
           }
         }
 
-        resolve(<Restaurant>{});
+        return restaurants;
       });
-    });
+
+    return restaurants || [];
   }
 
-  public getCompanies(): Observable<Restaurant[]> {
-    return this.http.get<Restaurant[]>(`${this.url}restaurants/companies.json`);
+  public async getPlate(restaurantId: number, companyId: number, id: number) {
+    const url = `${this.url}restaurants/${companyId}/${restaurantId}/plates/menu-item-${id}.json`;
+    const plate = await this.http
+      .get<Plate>(url)
+      .toPromise()
+      .catch(async (err) => {
+        const plates = await this.getPlates(restaurantId, companyId);
+
+        for (const plateItem of plates) {
+          if (plateItem.id == id) {
+            return plateItem;
+          }
+        }
+
+        return <Plate>{};
+      });
+
+    return plate;
   }
 
-  public getRestaurantsByCompany(companyId: number): Observable<Restaurant[]> {
-    return this.http.get<Restaurant[]>(`${this.url}restaurants/${companyId}/restaurants.json`);
+  public async getPlates(restaurantId: number, companyId: number): Promise<Plate[]> {
+    const url = `${this.url}restaurants/${companyId}/${restaurantId}/plates/menu-items.json`;
+    const plates =
+      (await this.http
+        .get<Plate[]>(url)
+        .toPromise()
+        .catch(async () => {
+          return await this.getPlatesDb(restaurantId, companyId);
+        })) || [];
+
+    return plates;
   }
 
-  public getPlate(companyId: number, restaurantId: number, id: number): Observable<Plate> {
-    return this.http.get<Plate>(`${this.url}restaurants/${companyId}/${restaurantId}/plates/menu-item-${id}.json`);
+  public async getPlatesDb(restaurantId: number, companyId: number) {
+    const plates = (await this.http.get<any[]>(`${this.urlDb}succ/${companyId}/${restaurantId}`).toPromise()) || [];
+    const formattedPlates = [];
+
+    for (const plate of plates) {
+      const formattedPlate: Plate = {
+        id: plate.id,
+        companyId: plate.idtienda,
+        branchId: plate.idsuc,
+        menuId: plate.categoryId,
+        name: plate.name,
+        description: plate.description,
+        price: plate.price,
+        image: {
+          small: 'assets/images/foods/default.png',
+          medium: 'assets/images/foods/default.png',
+          big: 'assets/images/foods/default.png',
+        },
+        availibilityCount: plate.availibilityCount,
+        cartCount: 0,
+        weight: plate.weight,
+      };
+
+      formattedPlates.push(formattedPlate);
+    }
+
+    return formattedPlates;
   }
 
-  public getPlates(companyId: number, restaurantId: number): Observable<Plate[]> {
-    return this.http.get<Plate[]>(`${this.url}restaurants/${companyId}/${restaurantId}/plates/menu-items.json`);
-  }
-
-  public getMenu(companyId: number, restaurantId: number): Observable<Menu[]> {
+  public getMenu(restaurantId: number, companyId: number): Observable<Menu[]> {
     return this.http.get<Menu[]>(`${this.url}restaurants/${companyId}/${restaurantId}/menu.json`);
+  }
+
+  public getMenuDb(restaurantId: number, companyId: number): Observable<Menu[]> {
+    return this.http.get<Menu[]>(`${this.urlDb}categoriasmenu/${companyId}/${restaurantId}`);
   }
 
   public getFavorites(): Restaurant[] {
@@ -132,7 +347,7 @@ export class RestaurantService {
     const indexCartList = user.cartList.findIndex((cartList) => cartList.branchId == plate.branchId && cartList.companyId == plate.companyId);
 
     if (indexCartList === -1) {
-      const restaurant = await this.getRestaurant(plate.companyId, plate.branchId);
+      const restaurant = await this.getRestaurant(plate.branchId, plate.companyId);
 
       const cartList: CartList = {
         id: user.cartList.length + 1,
@@ -193,5 +408,13 @@ export class RestaurantService {
     user.orderList.push(order);
 
     this.usersService.setUser(user);
+  }
+
+  public addOrderInfoDb(order: any) {
+    return this.http.post(this.urlDb + 'addpedidos', order);
+  }
+
+  public addOrderDb(order: any) {
+    return this.http.post(this.urlDb + 'addpedidoscomi', order);
   }
 }

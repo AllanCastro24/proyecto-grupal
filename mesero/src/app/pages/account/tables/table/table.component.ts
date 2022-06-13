@@ -15,6 +15,7 @@ import { WaiterService } from '../waiter-menu/waiter.service';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { Capacitor } from '@capacitor/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-table',
@@ -71,7 +72,8 @@ export class TableComponent implements OnInit {
     public menuService: MenuService,
     public router: Router,
     public fb: FormBuilder,
-    public waiterService: WaiterService
+    public waiterService: WaiterService,
+    private snackBar: MatSnackBar
   ) {}
 
   async ngOnInit() {
@@ -81,10 +83,10 @@ export class TableComponent implements OnInit {
 
     this.menuService.toggleMenu(false);
 
-    await this.setData();
     await this.getRestaurant();
     await this.getCompanyName();
     this.getUser();
+    this.setData();
     this.getTableItems();
     this.updateTotal();
     this.setupForm();
@@ -99,9 +101,9 @@ export class TableComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  public async setData() {
-    this.restaurantId = 1;
-    this.companyId = 1;
+  public setData() {
+    this.restaurantId = Number(this.user.work?.branchId) || 1;
+    this.companyId = Number(this.user.work?.companyId) || 1;
     this.folioId = 1;
   }
 
@@ -110,11 +112,11 @@ export class TableComponent implements OnInit {
   }
 
   public async getRestaurant() {
-    this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
+    this.restaurant = await this.restaurantService.getRestaurant(this.restaurantId, this.companyId);
   }
 
   public async getCompanyName() {
-    const companies = (await this.restaurantService.getCompanies().toPromise()) || [];
+    const companies = await this.restaurantService.getCompanies();
 
     this.company = companies.find((company) => company.id == this.companyId) || <Company>{};
   }
@@ -166,14 +168,38 @@ export class TableComponent implements OnInit {
     }
   }
 
-  public changeStatus() {
+  public async changeStatus() {
     switch (this.currentStatus.id) {
       case this.status.TakingNote:
         if (!this.tableItems.length) {
+          this.snackBar.open('Agregue platillos', '', {
+            verticalPosition: 'top',
+            duration: 1000,
+            panelClass: ['error'],
+          });
           return;
         }
 
         this.table.status = _status[this.status.UnPaid];
+
+        for (const orderItem of this.tableItems) {
+          const order: any = {
+            idtienda: this.companyId,
+            idsuc: this.restaurantId,
+            id: orderItem.id,
+            name: orderItem.name,
+            description: orderItem.description,
+            price: orderItem.price,
+            cartCount: orderItem.cartCount,
+            categoryId: orderItem.menuId,
+            estatus: 'ALTA',
+          };
+
+          await this.restaurantService
+            .addOrderDb(order)
+            .toPromise()
+            .catch((err) => console.log(err));
+        }
         break;
       case this.status.UnPaid:
         if (!this.tableForm.valid) {
@@ -184,7 +210,6 @@ export class TableComponent implements OnInit {
         this.table.paymentMethod = this.getPaymentMethod(this.tableForm.value.paymentMethod);
         break;
       case this.status.Paid:
-        console.log(this.tableForm.get('paymentMethod')?.value);
         this.onReturn();
     }
 
@@ -255,7 +280,6 @@ export class TableComponent implements OnInit {
         data: pdf.output('datauristring'),
         directory: Directory.Documents,
         recursive: true,
-        
       });
 
       const fileOpener: FileOpener = new FileOpener();
