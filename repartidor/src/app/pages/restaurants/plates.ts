@@ -10,7 +10,6 @@ export interface Plate {
   availibilityCount: number;
   cartCount: number;
   weight: number;
-  isVegetarian: boolean;
   note?: string;
   menuId: number;
   branchId: number;

@@ -3,7 +3,7 @@ import { MenuService } from 'src/app/theme/components/menu/menu.service';
 import { Plate } from '../../restaurants/plates';
 import { RestaurantService } from '../../restaurants/restaurant.service';
 import { Restaurant } from '../../restaurants/restaurants';
-import { DeliveryOrder, OrderStatus } from './delivery';
+import { DeliveryOrder, status } from './delivery';
 import { DeliveryService } from './delivery.service';
 
 @Component({
@@ -19,33 +19,6 @@ export class OrdersComponent implements OnInit {
   public restaurantId!: number;
   public companyId!: number;
 
-  public status: OrderStatus[] = [
-    {
-      id: 1,
-      name: 'Aceptar',
-    },
-    {
-      id: 2,
-      name: 'Sin aceptar',
-    },
-    {
-      id: 3,
-      name: 'Vas en camino',
-    },
-    {
-      id: 4,
-      name: 'Completar',
-    },
-    {
-      id: 5,
-      name: 'Completado',
-    },
-    {
-      id: 6,
-      name: 'Cancelado',
-    },
-  ];
-
   constructor(public restaurantService: RestaurantService, private deliveryService: DeliveryService, public menuService: MenuService) {}
 
   ngOnInit(): void {
@@ -54,11 +27,11 @@ export class OrdersComponent implements OnInit {
   }
 
   public async getOrdersList() {
-    this.ordersList = (await this.deliveryService.getOrders().toPromise()) || [];
+    this.ordersList = await this.deliveryService.getOrders();
 
-    for (let i = 0; i < this.ordersList.length; i++) {
-      const plate = this.ordersList[i].items[0];
-      const restaurants = await this.restaurantService.getRestaurant(plate.companyId, plate.branchId);
+    for (const order of this.ordersList) {
+      const plate = order.items[0];
+      const restaurants = await this.restaurantService.getRestaurant(plate.branchId, plate.companyId);
 
       this.restaurants = [...this.restaurants, restaurants];
     }
@@ -74,9 +47,9 @@ export class OrdersComponent implements OnInit {
 
   public isOrderTaken(order: DeliveryOrder) {
     const id = this.deliveryService.getOrder(order.id)?.status?.id || -1;
-    const name = this.status.find((status) => status.id == id)?.name;
+    const name = status.find((status) => status.id == id)?.name;
 
-    return name || this.status[0].name;
+    return name || status[0].name;
   }
 
   public getRestaurant(plate: Plate) {

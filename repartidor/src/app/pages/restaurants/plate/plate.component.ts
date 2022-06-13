@@ -42,20 +42,10 @@ export class PlateComponent implements OnInit {
     });
 
     this.menuService.toggleMenu(false);
-
-    this.getPlate();
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
-  }
-
-  public getPlate() {
-    this.restaurantService.getPlate(this.companyId, this.restaurantId, this.plateId).subscribe((plate) => {
-      this.plate = plate;
-
-      console.log(this.plate);
-    });
   }
 
   public addToCart() {

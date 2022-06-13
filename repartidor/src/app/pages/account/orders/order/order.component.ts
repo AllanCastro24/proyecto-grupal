@@ -9,7 +9,7 @@ import { MenuService } from 'src/app/theme/components/menu/menu.service';
 import { User } from 'src/app/users/users';
 import { UsersService } from 'src/app/users/users.service';
 import { Address } from '../../account';
-import { DeliveryOrder } from '../delivery';
+import { DeliveryOrder, status } from '../delivery';
 import { DeliveryService } from '../delivery.service';
 
 @Component({
@@ -35,34 +35,10 @@ export class OrderComponent implements OnInit {
   public subtotal: number = 0;
   public total: number = 0;
 
-  public status: OrderStatus[] = [
-    {
-      id: 1,
-      name: 'Aceptar',
-    },
-    {
-      id: 2,
-      name: 'Sin aceptar',
-    },
-    {
-      id: 3,
-      name: 'Vas en camino',
-    },
-    {
-      id: 4,
-      name: 'Completar',
-    },
-    {
-      id: 5,
-      name: 'Completado',
-    },
-    {
-      id: 6,
-      name: 'Cancelado',
-    },
-  ];
-  public deliveryStatusTop = this.status[1];
-  public deliveryStatusBottom = this.status[0];
+  public _status: OrderStatus[] = status;
+  
+  public deliveryStatusTop = status[1];
+  public deliveryStatusBottom = status[0];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -98,7 +74,7 @@ export class OrderComponent implements OnInit {
   }
 
   public async setupOrder() {
-    const orders = (await this.deliveryService.getOrders().toPromise()) || [];
+    const orders = await this.deliveryService.getOrders();
 
     this.order = orders.find((order) => order.id == this.orderId) || <DeliveryOrder>{};
 
@@ -110,10 +86,15 @@ export class OrderComponent implements OnInit {
     const users = (await this.deliveryService.getUsers().toPromise()) || [];
 
     this.user = users.find((user) => user.id == this.order.accountId) || <User>{};
+
+    // TODO: provisional
+    if (!this.user.addressList) {
+      this.user.addressList = [this.order.address];
+    }
   }
 
   public async getRestaurant() {
-    this.restaurant = await this.restaurantService.getRestaurant(this.companyId, this.restaurantId);
+    this.restaurant = await this.restaurantService.getRestaurant(this.restaurantId, this.companyId);
   }
 
   public setRestaurantAddress() {
@@ -168,42 +149,42 @@ export class OrderComponent implements OnInit {
     }
 
     if (this.order.status.id == 3) {
-      this.deliveryStatusTop = this.status[2];
-      this.deliveryStatusBottom = this.status[3];
+      this.deliveryStatusTop = status[2];
+      this.deliveryStatusBottom = status[3];
     } else if (this.order.status.id == 5) {
-      this.deliveryStatusTop = this.status[4];
-      this.deliveryStatusBottom = this.status[4];
+      this.deliveryStatusTop = status[4];
+      this.deliveryStatusBottom = status[4];
     } else if (this.order.status.id == 6) {
-      this.deliveryStatusTop = this.status[5];
-      this.deliveryStatusBottom = this.status[5];
+      this.deliveryStatusTop = status[5];
+      this.deliveryStatusBottom = status[5];
     }
   }
 
   public changeStatus() {
-    this.order.status = this.status[2];
+    this.order.status = status[2];
 
-    if (this.deliveryStatusBottom == this.status[0]) {
+    if (this.deliveryStatusBottom == status[0]) {
       this.deliveryService.addOrder(this.order);
 
-      this.deliveryStatusTop = this.status[2];
-      this.deliveryStatusBottom = this.status[3];
-    } else if (this.deliveryStatusBottom == this.status[3]) {
-      this.order.status = this.status[4];
+      this.deliveryStatusTop = status[2];
+      this.deliveryStatusBottom = status[3];
+    } else if (this.deliveryStatusBottom == status[3]) {
+      this.order.status = status[4];
       this.deliveryService.updateOrder(this.order);
 
-      this.deliveryStatusTop = this.status[4];
-      this.deliveryStatusBottom = this.status[4];
+      this.deliveryStatusTop = status[4];
+      this.deliveryStatusBottom = status[4];
     } else {
       this.onReturn();
     }
   }
 
   public cancelOrder() {
-    this.order.status = this.status[5];
+    this.order.status = status[5];
     this.deliveryService.updateOrder(this.order);
 
-    this.deliveryStatusTop = this.status[5];
-    this.deliveryStatusBottom = this.status[5];
+    this.deliveryStatusTop = status[5];
+    this.deliveryStatusBottom = status[5];
   }
 
   public allowActions() {

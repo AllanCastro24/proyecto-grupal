@@ -1,0 +1,22 @@
+{
+  "id": 2,
+  "name": "Leñador (250g)",
+  "description": "Salsa BBQ, cebolla, empanizada, tocino, doble, queso, papas, francesa.",
+  "price": 80,
+  "image": {
+    "small": "assets/images/foods/3-1/hamburguesaleñador.jpg",
+    "medium": "assets/images/foods/3-1/hamburguesaleñador.jpg",
+    "big": "assets/images/foods/3-1/hamburguesaleñador.jpg"
+  },
+  "discount": 10,
+  "ratingsCount": 4.8,
+  "ratingsValue": 410,
+  "availibilityCount": 7,
+  "cartCount": 0,
+  "weight": 180,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 102,
+  "menuId": 3,
+  "tagId": [5]
+}

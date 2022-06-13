@@ -11,7 +11,7 @@
           </mat-card-header>
           <div class="divider my-3"></div>
           <div *ngFor="let link of links">
-            <a
+            <a (click)="(link.action || tmp)()"
               matLine
               [routerLink]="link.href"
               routerLinkActive="horizontal-active-link"

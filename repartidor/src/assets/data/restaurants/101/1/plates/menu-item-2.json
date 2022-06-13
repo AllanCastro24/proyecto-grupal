@@ -1,0 +1,22 @@
+{
+  "id": 2,
+  "name": "Baguette Pollo",
+  "description": "res, papas, Lechuga, tomate, cebolla, mostaza, pepinillos, chile, mayonesa, queso americano",
+  "price": 80,
+  "image": {
+    "small": "assets/images/foods/2-1/baguette.webp",
+    "medium": "assets/images/foods/2-1/baguette.webp",
+    "big": "assets/images/foods/2-1/baguette.webp"
+  },
+  "discount": 10,
+  "ratingsCount": 4.8,
+  "ratingsValue": 210,
+  "availibilityCount": 7,
+  "cartCount": 0,
+  "weight": 180,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 101,
+  "menuId": 3,
+  "tagId": [8]
+}

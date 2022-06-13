@@ -1,0 +1,22 @@
+{
+  "id": 3,
+  "name": "Aguachile verde en salsa de serrano",
+  "description": "serrano, salsa, aguacate, pepino, cebolla, morada, salpimentado.",
+  "price": 291,
+  "image": {
+    "small": "assets/images/foods/4-1/agua_chiles.jpg",
+    "medium": "assets/images/foods/4-1/agua_chiles.jpg",
+    "big": "assets/images/foods/4-1/agua_chiles.jpg"
+  },
+  "discount": 0,
+  "ratingsCount": 31,
+  "ratingsValue": 4.2,
+  "availibilityCount": 5,
+  "cartCount": 0,
+  "weight": 125,
+  "isVegetarian": false,
+  "branchId": 1,
+  "companyId": 103,
+  "menuId": 3,
+  "tagId": [10]
+}

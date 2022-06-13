@@ -71,7 +71,6 @@ export class RestaurantSingleComponent implements OnInit {
 
     await this.getRestaurant();
     this.getCategories();
-    this.getPlates();
     this.getMenu();
     this.checkFavorite();
     this.getCartList();
@@ -81,14 +80,6 @@ export class RestaurantSingleComponent implements OnInit {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
-  }
-
-  public getPlates() {
-    this.restaurantService.getPlates(this.companyId, this.restaurantId).subscribe((plates) => {
-      this.plates = plates;
-
-      console.log(this.plates);
-    });
   }
 
   public getRestaurant() {

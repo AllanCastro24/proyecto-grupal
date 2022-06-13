@@ -1,7 +1,7 @@
 <div class="details px-3">
   <div class="btn-back">
     <mat-icon (click)="onReturn()">arrow_back</mat-icon>
-    <mat-icon *ngIf="order?.status == status[2]" (click)="cancelOrder()" class="close mat-18">close</mat-icon>
+    <mat-icon *ngIf="order?.status == _status[2]" (click)="cancelOrder()" class="close mat-18">close</mat-icon>
   </div>
   <h3>Detalles del pedido ({{ deliveryStatusTop.name }})</h3>
   <div (click)="openRestaurantAddress()" class="restaurant-address">
@@ -27,7 +27,7 @@
       </div>
       <div class="content">
         <div class="address">
-          <span>{{ user?.username }} - {{ clientAddress?.postalCode }}</span>
+          <span>{{ clientAddress?.firstName }} - {{ clientAddress?.postalCode }}</span>
           <span>Entregas en {{ clientAddress?.address }}</span>
         </div>
         <div class="view">
