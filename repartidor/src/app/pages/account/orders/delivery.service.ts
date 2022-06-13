@@ -12,7 +12,7 @@ import { DeliveryOrder, status } from './delivery';
 })
 export class DeliveryService {
   public url = environment.url + '/assets/data/';
-  public urlDb = 'http://localhost/proyecto-grupal-backend/';
+  public urlDb = 'https://tmp02.appsdev.cyou/proyecto-grupal-backend/';
 
   constructor(public http: HttpClient, public usersService: UsersService, private restaurantService: RestaurantService) {}
 

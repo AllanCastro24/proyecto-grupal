@@ -15,7 +15,7 @@ export class UsersService {
   public isLoggedIn = this._isLoggedIn.asObservable();
   public user!: User;
 
-  public url = 'http://localhost/proyecto-grupal-backend/';
+  public url = 'https://tmp02.appsdev.cyou/proyecto-grupal-backend/';
 
   constructor(private http: HttpClient) {
     this._isLoggedIn.next(this.getCurrentUser() !== -1);

@@ -15,7 +15,7 @@ export class RestaurantService {
   public totalCartList: number = 0;
 
   public url = environment.url + '/assets/data/';
-  public urlDb = 'http://localhost/proyecto-grupal-backend/';
+  public urlDb = 'https://tmp02.appsdev.cyou/proyecto-grupal-backend/';
 
   constructor(public http: HttpClient, public usersService: UsersService) {}
 
