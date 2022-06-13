@@ -1,0 +1,75 @@
+<mat-card class="m-2 p-0">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 p-2">
+        <div></div>
+        <!-- <button mat-raised-button color="primary" (click)="openFixedCostsDialog(null)">
+            <mat-icon>add</mat-icon>
+            Agregar nuevo gasto fijo
+        </button> -->
+    </div>
+    <mat-divider></mat-divider>
+    <div class="table-wrapper"> 
+        <table mat-table [dataSource]="dataSource" matSort class="w-100">
+        
+            <!-- FullName Column -->
+            <ng-container matColumnDef="tipo_gasto">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de gasto </th>
+                <td mat-cell *matCellDef="let customer">{{customer.nom_tipo}}</td>
+            </ng-container>  
+
+            <!-- Username Column -->
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+                <td mat-cell *matCellDef="let customer">{{customer.descripcion}} </td>
+            </ng-container> 
+    
+            <!-- Email Column -->
+            <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                <td mat-cell *matCellDef="let customer">{{customer.fecha}}</td>
+            </ng-container>  
+            
+            
+            <!-- Wallet Balance Column -->
+            <ng-container matColumnDef="cantidad">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+                <td mat-cell *matCellDef="let customer">{{customer.cantidad | currency : 'USD' : 'symbol' : '1.2-2'}}</td>
+            </ng-container> 
+            
+            <!-- Revenue Column -->
+            <!-- <ng-container matColumnDef="id_sucursal">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Sucursal </th>
+                <td mat-cell *matCellDef="let customer">{{customer.nom_sucursal}} </td>
+            </ng-container>   -->
+            <!-- Store Column -->
+            <ng-container matColumnDef="periodicidad">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Periodicidad </th>
+                <td mat-cell *matCellDef="let customer">{{customer.periodicidad}} </td>
+            </ng-container>   
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let customer">{{customer.nom_status}}</td>
+                
+                    
+            </ng-container>  
+            
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let customer"> 
+                    <button mat-icon-button color="primary" (click)="openFixedCostsDialog(customer)" matTooltip="Edit">
+                        <mat-icon>edit</mat-icon>
+                    </button> 
+                    <button mat-icon-button color="warn" (click)="remove(customer)" matTooltip="Remove">
+                        <mat-icon>delete</mat-icon>
+                    </button>  
+                </td>
+            </ng-container> 
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let customer; columns: displayedColumns;"></tr>
+        </table> 
+        <p *ngIf="dataSource && dataSource.data.length === 0" class="py-5 mb-0 text-center">No data available</p> 
+    </div>
+    <mat-paginator showFirstLastButtons [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+</mat-card>

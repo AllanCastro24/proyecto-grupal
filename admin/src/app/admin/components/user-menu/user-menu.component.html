@@ -1,0 +1,35 @@
+<button mat-icon-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger" >
+    <mat-icon>account_circle</mat-icon>
+</button>
+
+<mat-menu #userMenu="matMenu" [overlapTrigger]="false" class="toolbar-dropdown-menu admin-user-menu">
+    <span (mouseleave)="userMenuTrigger.closeMenu()">
+        <mat-toolbar color="primary">
+            <div fxLayout="row" fxLayoutAlign="space-around center" class="user-info">
+                <img src="{{imagen}}" alt="user-image" width="80" class="mat-elevation-z6">
+                <p class="mb-0">{{nombre}} <br> <small>{{apellido}}</small></p>
+            </div>  
+        </mat-toolbar>
+        <a mat-menu-item routerLink="/admin"> 
+            <mat-icon>person</mat-icon>
+            <span>Perfil</span> 
+        </a>
+        <a mat-menu-item routerLink="/admin"> 
+            <mat-icon>edit</mat-icon>
+            <span>Editar perfil</span> 
+        </a>
+        <a mat-menu-item routerLink="/admin"> 
+            <mat-icon>settings</mat-icon>
+            <span>Configuraciones</span> 
+        </a>
+        <a mat-menu-item routerLink="/admin"> 
+            <mat-icon>help</mat-icon>
+            <span>Ayuda</span> 
+        </a>
+        <div class="divider"></div>
+        <button mat-icon-button fxLayout="row" fxLayoutAlign="start center" class="p-3" (click)="cerrar_sesion()">
+            <mat-icon class="text-muted">power_settings_new</mat-icon>
+            <span class="mx-2">Cerrar sesion</span>
+        </button>
+    </span>
+</mat-menu>

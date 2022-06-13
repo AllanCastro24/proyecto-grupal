@@ -1,0 +1,33 @@
+<form [formGroup]="infoForm" (ngSubmit)="onInfoFormSubmit()" autocomplete="off" fxLayout="row wrap">
+    <div fxFlex="100">
+        <h2 class="secondary-font text-center mb-3">Detalles de la cuenta</h2> 
+    </div>
+    <div fxFlex="100" fxFlex.gt-sm="40" class="px-3 mb-3">  
+        <app-image-upload [base64]="infoForm.controls.image.value"
+                        [fileSize]="400"    
+                        [acceptTypes]="'image/png, image/jpeg, image/jpg'"
+                        (onFileChange)="fileChange($event)">
+        </app-image-upload>  
+    </div> 
+    <div fxFlex="100" fxFlex.gt-sm="60" class="px-3" ngClass.sm="mt-2" ngClass.xs="mt-2"> 
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>ID</mat-label>
+            <input matInput placeholder="ID" formControlName="id" [(ngModel)]="id_user" readonly>
+        </mat-form-field> 
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nombre de usuario</mat-label>
+            <input matInput placeholder="nombre" formControlName="name" [(ngModel)]="user" required>
+            <mat-error *ngIf="infoForm.controls.name.errors?.required">Se requiere un nombre</mat-error>
+            <mat-error *ngIf="infoForm.controls.name.hasError('minlength')">El nombre requiere minimo 3 caracteres</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Correo electronico</mat-label>
+            <input matInput placeholder="Correo" formControlName="email" [(ngModel)]="correo" required>
+            <mat-error *ngIf="infoForm.controls.email.errors?.required">Se requiere una direcciónd de correo</mat-error>
+            <mat-error *ngIf="infoForm.controls.email.hasError('invalidEmail')">Dirección invalida</mat-error>
+        </mat-form-field>
+    </div> 
+    <div fxFlex="100" class="text-center mt-2">
+        <button mat-raised-button color="primary" type="submit" class="uppercase">Update profile</button>
+    </div>  
+</form> 

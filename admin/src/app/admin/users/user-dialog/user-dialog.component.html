@@ -1,0 +1,81 @@
+<h1 mat-dialog-title><span *ngIf="user.ID_empleado">Editar</span> Empleado</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" class="user-form">      
+        <mat-tab-group class="vertical-tabs">
+            <mat-tab label="Información personal">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-form-field class="w-100">
+                        <input matInput readonly placeholder="ID:" formControlName="ID_empleado">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Nombre/s" formControlName="Nombre">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Apellido/s" formControlName="Apellidos">
+                    </mat-form-field>
+                    <mat-label>Genero</mat-label>
+                    <mat-select formControlName="Genero">
+                        <mat-option [value]="'H'">Hombre</mat-option>
+                        <mat-option [value]="'M'">Mujer</mat-option>
+                    </mat-select>
+                </div>
+            </mat-tab>
+            <mat-tab label="Trabajo">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-form-field class="w-100">
+                        <!--input matInput placeholder="Tienda" formControlName="ID_tienda"-->
+                        <mat-label>Tienda</mat-label>
+                        <mat-select formControlName="ID_tienda" required>
+                            <mat-option *ngFor="let t of tiendas" [value]="t.ID_tienda">{{t.Nombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <!--input matInput placeholder="Puesto" formControlName="ID_puesto"-->
+                        <mat-label>Puesto</mat-label>
+                        <mat-select formControlName="ID_puesto" required>
+                            <mat-option *ngFor="let p of puestos" [value]="p.ID_puesto">{{p.Nombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <!--input matInput placeholder="Sucursal" formControlName="ID_sucursal"-->
+                        <mat-label>Sucursal</mat-label>
+                        <mat-select formControlName="ID_sucursal" required>
+                            <mat-option *ngFor="let s of sucursales" [value]="s.ID_sucursal">{{s.Pseudonimo}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Salario" formControlName="Sueldo">
+                        <span matPrefix>$&nbsp;</span>
+                        <span matSuffix>.00</span>
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Contacto" >
+                <div fxLayout="column" class="form-field-outer">
+                    <!--mat-form-field class="w-100">
+                        <input matInput placeholder="Correo electronico" formControlName="Correo">
+                    </mat-form-field-->
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Telefono" formControlName="Telefono">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Dirección" formControlName="Direccion">
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Información" >
+                <div fxLayout="column" class="form-field-outer">
+                    <p *ngIf="user.ID_empleado"><span>Fecha de registro:</span> <i>{{user.Fecha_registro | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
+                    <p *ngIf="user.ID_empleado"><span>Ultimo ingreso:</span> <i>{{user.Ultimo_ingreso | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
+        <button mat-raised-button color="warn" (click)="close()">Cerrar</button>
+        <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!user.ID_empleado">Guardar</span><span *ngIf="user.ID_empleado">Actualizar</span></button>
+        
+    </div> 
+</div>

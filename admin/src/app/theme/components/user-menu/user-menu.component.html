@@ -1,0 +1,55 @@
+<a mat-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger">
+    <mat-icon class="mat-icon-sm">person</mat-icon>
+    <span fxShow="false" fxShow.gt-sm class="mx-1 uppercase">{{ 'ACCOUNT' | translate }}</span> 
+    <mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>
+</a>
+<mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-menu-panel user-menu">
+    <span (mouseleave)="userMenuTrigger.closeMenu()">
+        <div *ngIf="ExisteCookie">
+            <div fxLayout="row" fxLayoutAlign="start center" class="user-info">                   
+                <img src="{{imagen}}" alt="user-image" width="50">
+                <p class="m-0">{{user}} <br> <small><i>{{correo}}</i></small></p>
+            </div>
+            <div class="divider"></div>
+            <a mat-menu-item routerLink="/account/dashboard"> 
+                <mat-icon class="mat-icon-sm">settings</mat-icon>
+                <span>Configuración</span> 
+            </a>
+            <!-- <a mat-menu-item routerLink="/account/my-properties"> 
+                <mat-icon class="mat-icon-sm">home</mat-icon>
+                <span>My Properties</span> 
+            </a> -->
+            <a mat-menu-item routerLink="/account/favorites"> 
+                <mat-icon class="mat-icon-sm">favorite_border</mat-icon>
+                <span [matBadge]="appService.Data.favorites.length" 
+                    [matBadgeHidden]="appService.Data.favorites.length == 0"
+                    matBadgeSize="small" 
+                    matBadgeColor="warn" 
+                    matBadgeOverlap="false">Favoritos</span> 
+            </a>
+            <a mat-menu-item routerLink="/account/profile"> 
+                <mat-icon class="mat-icon-sm">edit</mat-icon>
+                <span>Editar perfil</span> 
+            </a>
+            <!--a mat-menu-item routerLink="/lock-screen"> 
+                <mat-icon class="mat-icon-sm">lock</mat-icon>
+                <span>Lock screen</span> 
+            </a-->
+            <a mat-menu-item routerLink="/faq"> 
+                <mat-icon class="mat-icon-sm">help</mat-icon>
+                <span>Ayuda</span> 
+            </a>
+            <div class="divider"></div>
+            <a mat-menu-item (click)="cerrar_sesion()"> 
+                <mat-icon class="mat-icon-sm">power_settings_new</mat-icon>
+                <span>Cerrar sesión</span> 
+            </a>
+        </div>
+        <div *ngIf="!ExisteCookie">
+            <a mat-menu-item routerLink="/login"> 
+                <mat-icon class="mat-icon-sm">power_settings_new</mat-icon>
+                <span>Iniciar sesión</span> 
+            </a>
+        </div>
+    </span>
+</mat-menu>  

@@ -1,0 +1,8 @@
+[
+    { "id":1, "name":"Kg", "description": "Kilogramos" },
+    { "id":2, "name":"Gr", "description": "Gramos" },
+    { "id":3, "name":"Lb", "description": "Libras" },
+    { "id":4, "name":"Oz", "description": "Onzas" },
+    { "id":5, "name":"Lt", "description": "Litros" },
+    { "id":6, "name":"Ml", "description": "Mililitros" }
+]

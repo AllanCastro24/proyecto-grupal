@@ -1,0 +1,131 @@
+<div class="header bg-primary">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <h2 class="fw-500 secondary-font">Order #{{order.idcli}}</h2>
+        <app-dialog-header-controls [dialogRef]="dialogRef"></app-dialog-header-controls> 
+    </div>   
+</div> 
+<mat-dialog-content>  
+    <div class="pt-3"> 
+
+
+        <div fxLayout="row wrap" class="flex-wrapper"> 
+            <div fxFlex="100" class="px-3 mb-2">
+                <h2 class="secondary-font">Dirección de entrega</h2>
+            </div>
+            <div fxFlex="100" class="px-3 mb-2">
+                <div class="divider"></div>
+            </div>  
+            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+                <p class="text-muted mb-1">Nombre:</p>
+                <p>{{order.firstName}} {{order.lastName}}</p>
+            </div>
+            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+                <p class="text-muted mb-1">Correo electrónico:</p>
+                <p>{{order.email}}</p>
+            </div>
+            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+                <p class="text-muted mb-1">Teléfono:</p>
+                <p>{{order.phone}}</p>
+            </div>
+            <!-- <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+                <p class="text-muted mb-1">Country:</p>
+                <p>{{deliveryAddress.country}}</p>
+            </div> -->
+            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+                <p class="text-muted mb-1">Ciudad:</p>
+                <p>{{order.city}}</p>
+            </div>
+            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+                <p class="text-muted mb-1">Lugar:</p>
+                <p>{{order.place}}</p>
+            </div>
+            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+                <p class="text-muted mb-1">Código postal:</p>
+                <p>{{order.postalCode}}</p>
+            </div>
+            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" class="px-3">
+                <p class="text-muted mb-1">Dirección:</p>
+                <p>{{order.address}}</p>
+            </div> 
+
+
+            <div fxFlex="100" class="px-3 mb-2 mt-3">
+                <h2 class="secondary-font">Método de entrega</h2>
+            </div>
+            <div fxFlex="100" class="px-3">
+                <div class="divider"></div>
+            </div> 
+            <div fxFlex="100" class="px-3 mb-4">
+                <p class="py-1">{{order.namee}} <span class="text-muted">{{order.descr}} , {{order.valuee}}</span></p>
+            </div> 
+
+            <div fxFlex="100" class="px-3 mb-2">
+                <h2 class="secondary-font">Método de pago</h2>
+            </div>
+            <div fxFlex="100" class="px-3">
+                <div class="divider"></div>
+            </div> 
+            <div fxFlex="100" class="px-3 mb-4">
+                <p class="py-1"><span class="text-muted">{{order.nameee}}</span><span class="mx-1">{{order.descri}}</span></p>
+            </div> 
+            
+            <div fxFlex="100" class="px-3 mb-2">
+                <h2 class="secondary-font">Carro de compras</h2>
+            </div>
+            <div fxFlex="100" class="px-3 mb-5">
+                <div class="divider"></div>
+                <div class="mat-table theme-table review-order-table">
+                    <div class="mat-header-row">
+                        <div class="mat-header-cell image">Imagen</div>
+                        <div class="mat-header-cell">Nombre</div>
+                        <div class="mat-header-cell price">Precio unitario</div>      
+                        <div class="mat-header-cell quantity">Cantidad</div>
+                        <div class="mat-header-cell total">Total</div> 
+                    </div> 
+                    <div class="mat-row">
+                        <div class="mat-cell image"><img [src]="'https://tmp02.appsdev.cyou/proyecto-grupal-backend/img/'+order.image" alt="item"></div>
+                        <div class="mat-cell">{{order.name}}</div>
+                        <div class="mat-cell price">  
+                            <!-- <span class="primary-color py-3"> 
+                                {{order.name | currency : 'USD' : 'symbol' : '1.2-2'}}  
+                            </span>  -->
+                            <span  class="primary-color py-3">  
+                                {{ (order.price ) | currency : 'USD' : 'symbol' : '1.2-2'}}
+                            </span>  
+                        </div>      
+                        <div class="mat-cell quantity">{{order.cartCount}}</div>
+                        <div class="mat-cell total">
+                            <!-- <span class="primary-color py-3"> 
+                                {{order.price*order.cartCount | currency : 'USD' : 'symbol' : '1.2-2'}}  
+                            </span>  -->
+                            <span  class="primary-color py-3">   
+                                {{ (order.price )*order.cartCount | currency : 'USD' : 'symbol' : '1.2-2'}}
+                            </span>  
+                        </div> 
+                    </div> 
+                    <div class="mat-row">
+                        <div class="mat-cell image"></div>
+                        <div class="mat-cell"></div>
+                        <div class="mat-cell price"></div>
+                        <div class="mat-cell quantity text-right">
+                        <div fxLayout="column" fxLayoutAlign="center end" class="grand-total px-2">
+                            <!-- <span>SubTotal:</span>
+                            <span class="text-muted">Discount:</span -->
+                            <span>Total:</span>
+                        </div>        
+                        </div>
+                        <div class="mat-cell total">
+                            <div fxLayout="column" fxLayoutAlign="center start" class="grand-total">
+                                <!-- <span>{{ order.price | currency : 'USD' : 'symbol' : '1.2-2'}}</span>
+                                <span class="text-muted">15%</span> -->
+                                <span class="primary-color">{{ (order.price * order.cartCount ) | currency : 'USD' : 'symbol' : '1.2-2'}}</span>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div> 
+            
+        </div>   
+
+    </div>  
+</mat-dialog-content> 

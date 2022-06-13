@@ -1,0 +1,11 @@
+[
+    { "id":1, "name":"Desayuno", "description": "Breakfast category description" },
+    { "id":2, "name":"Aperitivos", "description": "Appetizers category description" },
+    { "id":3, "name":"Ensaladas", "description": "Salads category description" },
+    { "id":4, "name":"Sopas", "description": "Soups category description" },
+    { "id":5, "name":"Carne", "description": "Meat Courses category description" },
+    { "id":6, "name":"Pollo", "description": "Chicken Courses category description" }, 
+    { "id":7, "name":"Postres", "description": "Desserts category description" },
+    { "id":8, "name":"Bebidas", "description": "Drinks category description" } 
+]
+

@@ -1,0 +1,71 @@
+<div class="header bg-primary">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <h2 class="fw-500 secondary-font">{{(category) ? 'Editar' : 'Agregar'}} Merma</h2>
+        <app-dialog-header-controls [dialogRef]="dialogRef"></app-dialog-header-controls> 
+    </div>   
+</div>  
+<form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" class="pt-3">
+    <div mat-dialog-content>
+        <div fxLayout="row wrap">
+
+
+           <!--  <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Categoria</mat-label>
+                    <mat-select formControlName="id_categoria_insumos" required>
+                        <mat-option *ngFor="let uni of categories" [value]="uni.id_categoria_insumos">
+                            {{uni.categoria}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="form.controls.id_categoria_insumos.errors?.required">Category is required</mat-error>
+                </mat-form-field>
+            </div>  -->
+
+
+
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Insumo</mat-label>
+                    <select matNativeControl required formControlName="insumo" >
+                      <option *ngFor="let uni of cat" [value]="uni.id_detalle_insumo">{{uni.codigo}} - {{uni.nombre}}</option>
+                    </select>
+                </mat-form-field>
+            </div>
+
+           <!--  <mat-form-field appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker">
+                
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field> -->
+
+              
+
+
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100" >
+                    <mat-label>Fecha</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fecha" >
+                    <mat-hint>dd/mm/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </div> 
+            
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Descripcion</mat-label> 
+                    <textarea matInput placeholder="Enter description" formControlName="descripcion" rows="6"></textarea>  
+                </mat-form-field>
+            </div>   
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100"> 
+            <button mat-raised-button color="warn" type="button" mat-dialog-close>Close</button>
+            <button mat-raised-button color="primary" type="submit">Save</button>
+        </div> 
+    </div>
+</form> 
+ 

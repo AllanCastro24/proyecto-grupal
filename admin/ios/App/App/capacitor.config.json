@@ -1,0 +1,6 @@
+{
+	"appId": "com.admin.app",
+	"appName": "admin",
+	"webDir": "dist/browser",
+	"bundledWebRuntime": false
+}

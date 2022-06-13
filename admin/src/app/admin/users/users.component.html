@@ -1,0 +1,252 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="p-2">
+    <div fxLayout="row">
+        <mat-button-toggle-group #controls="matButtonToggleGroup" appearance="legacy">            
+            <mat-button-toggle value="search">
+                <mat-icon>search</mat-icon> <!--Icono-->
+            </mat-button-toggle>           
+        </mat-button-toggle-group>            
+    </div>
+    <form class="user-search" [class.show]="controls.value == 'search'">
+        <mat-form-field class="user-search-input">
+            <input matInput placeholder="Buscar usuario por nombre..." [(ngModel)]="searchText" name="search">
+        </mat-form-field>
+    </form>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-button-toggle-group #viewType="matButtonToggleGroup" appearance="legacy" value="grid">            
+            <mat-button-toggle value="grid">
+                <mat-icon>view_module</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="list">
+                <mat-icon>view_list</mat-icon>
+            </mat-button-toggle>           
+        </mat-button-toggle-group>
+    </div>
+</div>
+
+<h1>Empleados</h1>
+
+<div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">    
+    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="p-2"> 
+        <mat-card class="p-0">  
+            <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 *ngIf="user.Activo == 'S'" class="user-name">{{user.Nombre}} {{user.Apellidos}}</h3> 
+                <h3 *ngIf="user.Activo == 'N'" class="user-name">{{user.Nombre}} {{user.Apellidos}} (Bloqueado)</h3>
+                <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+            <mat-menu #menu="matMenu" xPosition="before" overlapTrigger="true">
+                <span (mouseleave)="menuTrigger.closeMenu()">
+                    <button mat-menu-item (click)="openUserDialog(user,0);">
+                        <mat-icon>mode_edit</mat-icon>
+                        <span>Editar</span>
+                    </button>
+                </span>
+            </mat-menu>
+            <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="user-img">
+                        <img *ngIf="user.image" [src]="user.image" class="transition-2">
+                        <img *ngIf="!user.image" src="assets/images/others/user.jpg" class="transition-2" >  
+                        <mat-icon *ngIf="user.Activo == 'N'" color="warn">block</mat-icon>
+                    </div>                                            
+                    <div class="user-social">
+                        <mat-slide-toggle color="primary" (change)="ActivarDesactivar(user)" [checked]="validarActivo(user)">Inactivo</mat-slide-toggle>
+                    </div>
+                </div>
+                <div fxFlex="70" fxLayout="column" class="user-details transition-2">
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="text-muted">card_membership</mat-icon>
+                        <span>{{user.ID_puesto}}</span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="text-muted">mail_outline</mat-icon>
+                        <span>{{user.Correo}}</span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="text-muted">call</mat-icon>
+                        <span>{{user.Telefono}}</span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="text-muted">location_on</mat-icon>
+                        <span>{{user.Direccion}}</span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="text-muted">date_range</mat-icon>
+                        <span>Registrado {{user.Ultimo_ingreso | date:"dd MMMM, yyyy"}}</span>
+                    </p>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<div *ngIf="viewType.value == 'list'" fxLayout="row wrap">
+    <div *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" class="p-2"> 
+        <mat-card class="p-0">  
+            <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 *ngIf="user.Activo == 'S'" class="user-name">{{user.Nombre}} {{user.Apellidos}}</h3> 
+                <h3 *ngIf="user.Activo == 'N'" class="user-name"> {{user.Nombre}} {{user.Apellidos}} (bloqueado)</h3>
+                <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+            <mat-menu #menu="matMenu" xPosition="before"  overlapTrigger="true">
+                <span (mouseleave)="menuTrigger.closeMenu()">
+                    <button mat-menu-item (click)="openUserDialog(user,0);">
+                        <mat-icon>mode_edit</mat-icon>
+                        <span>Editar</span>
+                    </button>
+                </span>
+            </mat-menu>
+            <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="20" fxFlex.xs="30" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="user-img">
+                        <img *ngIf="user.image" [src]="user.image" class="transition-2"> 
+                        <img *ngIf="!user.image" src="assets/images/others/user.jpg" class="transition-2">  
+                        <mat-icon *ngIf="user.Activo == 'N'" color="warn">block</mat-icon>   
+                    </div>                                            
+                    <div class="user-social">
+                        <mat-slide-toggle color="primary" (change)="ActivarDesactivar(user)" [checked]="validarActivo(user)">Inactivo</mat-slide-toggle>
+                    </div>
+                </div>
+                <div fxFlex="80" fxFlex.xs="70" fxLayout="row" fxLayout.xs="column" class="user-details transition-2">
+                    <div fxFlex="30" fxFlex.xs="100" fxLayout="column">
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">business</mat-icon>
+                            <span>{{user.ID_tienda}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">card_membership</mat-icon>
+                            <span>{{user.ID_puesto}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">attach_money</mat-icon>
+                            <span>{{user.Sueldo}}</span>
+                        </p>                                               
+                    </div>
+                    <div fxFlex="30" fxFlex.xs="100" fxLayout="column">
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">mail_outline</mat-icon>
+                            <span>{{user.Correo}}</span>
+                        </p> 
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">call</mat-icon>
+                            <span>{{user.Telefono}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">location_on</mat-icon>
+                            <span>{{user.Direccion}}</span>
+                        </p>                        
+                    </div>
+                    <div fxFlex="40" fxFlex.xs="100" fxLayout="column">
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">event_available</mat-icon>
+                            <span>Fecha de registro {{user.Fecha_registro | date:"dd MMMM, yyyy"}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">date_range</mat-icon>
+                            <span>Ultimo ingreso {{user.Ultimo_ingreso | date:"dd MMMM, yyyy"}}</span>
+                        </p> 
+                                             
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div> 
+
+<h1>Usuarios</h1>
+
+<div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">    
+    <div *ngFor="let usuario of usuarios | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="p-2"> 
+        <mat-card class="p-0">  
+            <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 *ngIf="usuario.Activo == 'S'" class="user-name">{{usuario.Usuario}}</h3> 
+                <h3 *ngIf="usuario.Activo == 'N'" class="user-name">{{usuario.Usuario}} (Bloqueado)</h3>    
+                <mat-button-toggle value="add" (click)="openUserDialog(usuario,usuario.ID_usuario)" class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                    Contratar<mat-icon>person_add</mat-icon><!--Icono-->
+                </mat-button-toggle>
+            </div>
+            
+            <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="user-img">
+                        <img *ngIf="usuario.image" [src]="usuario.image" class="transition-2">
+                        <img *ngIf="!usuario.image" src="assets/images/others/user.jpg" class="transition-2" >  
+                        <mat-icon *ngIf="usuario.Activo == 'N'" color="warn">block</mat-icon>
+                    </div>                                            
+                    <div class="user-social">
+                        <mat-slide-toggle color="primary" (change)="ActivarDesactivarUsuario(usuario)" [checked]="validarUsuarioActivo(usuario)">Inactivo</mat-slide-toggle>
+                    </div>
+                </div>
+                <div fxFlex="70" fxLayout="column" class="user-details transition-2">
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="text-muted">mail_outline</mat-icon>
+                        <span>{{usuario.Correo}}</span>
+                    </p> 
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="text-muted">date_range</mat-icon>
+                        <span>Ultimo ingreso {{usuario.Ultimo_ingreso | date:"dd MMMM, yyyy"}}</span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="text-muted">date_range</mat-icon>
+                        <span>Registrado {{usuario.Fecha_registro | date:"dd MMMM, yyyy"}}</span>
+                    </p>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<div *ngIf="viewType.value == 'list'" fxLayout="row wrap">
+    <div *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" class="p-2"> 
+        <mat-card class="p-0">  
+            <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 *ngIf="usuario.Activo == 'S'" class="user-name">{{usuario.Usuario}}</h3> 
+                <h3 *ngIf="usuario.Activo == 'N'" class="user-name"> {{usuario.Usuario}} (bloqueado)</h3>
+                <mat-button-toggle value="add" (click)="openUserDialog(usuario,usuario.ID_usuario)" class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                    Contratar<mat-icon>person_add</mat-icon><!--Icono-->
+                </mat-button-toggle>
+            </div>
+            
+            <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="20" fxFlex.xs="30" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="user-img">
+                        <img *ngIf="usuario.image" [src]="usuario.image" class="transition-2"> 
+                        <img *ngIf="!usuario.image" src="assets/images/others/user.jpg" class="transition-2">  
+                        <mat-icon *ngIf="usuario.Activo == 'N'" color="warn">block</mat-icon>   
+                    </div>                                            
+                    <div class="user-social">
+                        <mat-slide-toggle color="primary" (change)="ActivarDesactivarUsuario(usuario)" [checked]="validarUsuarioActivo(usuario)">Inactivo</mat-slide-toggle>
+                    </div>
+                </div>
+                <div fxFlex="80" fxFlex.xs="70" fxLayout="row" fxLayout.xs="column" class="user-details transition-2">
+                    
+                    <div fxFlex="40" fxFlex.xs="100" fxLayout="column">
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">mail_outline</mat-icon>
+                            <span>{{usuario.Correo}}</span>
+                        </p> 
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">event_available</mat-icon>
+                            <span>Fecha de registro {{usuario.Fecha_registro | date:"dd MMMM, yyyy"}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">date_range</mat-icon>
+                            <span>Ultimo ingreso {{usuario.Ultimo_ingreso | date:"dd MMMM, yyyy"}}</span>
+                        </p>                       
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div> 
+
+<div fxLayout="row wrap">
+    <div fxFlex="100" class="p-2"> 
+        <mat-card class="p-0 text-center">           
+            <pagination-controls class="theme-pagination" [autoHide]="autoHide" [maxSize]="maxSize" (pageChange)="onPageChanged($event)"></pagination-controls>
+        </mat-card>
+    </div>
+</div>
