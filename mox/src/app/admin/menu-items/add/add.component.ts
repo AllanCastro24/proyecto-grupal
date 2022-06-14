@@ -116,7 +116,7 @@ export class AddComponent implements OnInit {
       console.log(this.idsucursal);
     console.log(this.idtienda);
     
-      this.appService.getCategoriestiendasuc(this.idsucursal,this.idtienda).subscribe(categories=>{ 
+      this.appService.getCategoriestiendasuc(this.idtienda,this.idsucursal).subscribe(categories=>{ 
         this.appService.Data.categories = categories;
       });
     } 

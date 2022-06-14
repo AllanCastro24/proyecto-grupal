@@ -5,6 +5,16 @@ Si tiene problemas para levantar el ambiente pruebe instalar el npm install con 
 
 * npm install --save --legacy-peer-deps
 
+# Por hacer
+
+- Publicar app
+- Documento grupal
+
+## Sección 1
+* Agrupar por equipo, nombres completos, que funcionalidades se hicieron
+## Seccion 2
+* Agregar relaciones por equipos existentes y las que no existen
+
 # Organización de equipos
 
 ## * Equipo 1
